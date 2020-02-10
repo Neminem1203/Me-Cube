@@ -1,10 +1,24 @@
 {
+<<<<<<< HEAD
+  "name": "TVP",
+  "version": "1.0.0",
+  "description": "This README would normally document whatever steps are necessary to get the application up and running.",
+  "main": "./frontend/index.jsx",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack --watch --mode=development"
+=======
   "name": "Desktop",
   "version": "1.0.0",
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+>>>>>>> 44d01f207c39440cdc00069225fcc1c064261da8
   },
   "keywords": [],
   "author": "",
@@ -17,9 +31,14 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-redux": "^7.1.3",
+<<<<<<< HEAD
+    "react-router-dom": "^5.1.2",
+    "redux": "^4.0.5"
+=======
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10"
+>>>>>>> 44d01f207c39440cdc00069225fcc1c064261da8
   }
 }

@@ -61,7 +61,11 @@ Rails.application.configure do
 
   # Use a real queuing backend for Active Job (and separate queues per environment)
   # config.active_job.queue_adapter     = :resque
+<<<<<<< HEAD
+  # config.active_job.queue_name_prefix = "TVP_#{Rails.env}"
+=======
   # config.active_job.queue_name_prefix = "ThatVideoPlatform_#{Rails.env}"
+>>>>>>> 44d01f207c39440cdc00069225fcc1c064261da8
 
   config.action_mailer.perform_caching = false
 
