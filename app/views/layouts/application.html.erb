@@ -7,11 +7,9 @@
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
-    <% if current_user%>
-      <script id="important-info"> window.currentUser = <%=current_user%> </script>
-    <%# else %>
-      <%# This is only here to test log in functionality%>
-    <% end %>
+    <%# if current_user%>
+    <!-- <script id="important-info"> window.currentUser = <%=current_user%> </script> -->
+    <%# end %>
   </head>
 
   <body>
