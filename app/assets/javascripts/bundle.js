@@ -325,7 +325,12 @@ var Navbar = function Navbar(props) {
     // TODO: props.user.profile_pic when profile pic is working
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
       className: "navbar"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null, props.user.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      src: window.defaultProfilePicture,
+      style: {
+        width: "50px"
+      }
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null, props.user.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       onClick: props.logout
     }, "Logout")));
   }
@@ -341,11 +346,11 @@ var Navbar = function Navbar(props) {
   } else {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
       className: "navbar"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       onClick: function onClick() {
         return props.showModal(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_3__["LOGIN"]);
       }
-    }, "SIGN IN")));
+    }, "SIGN IN"));
   }
 };
 

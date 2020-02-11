@@ -68,13 +68,19 @@
 .navbar{
   float: right;
   margin-right: 25px;
-  // margin-top: -15px;
+  margin-top: -40px;
   display: flex;
   flex-direction: row;
 }
 
 .navbar > ul{
   position:absolute;
+  top: 80px;
+  right: 15px;
+}
+
+.navbar > button{
+  position: absolute;
   top: 15px;
   right: 15px;
 }
@@ -88,6 +94,7 @@ button{
   font-weight: 700;
   margin-right: 10px;
 }
+
 button:hover{
   cursor: pointer;
 }

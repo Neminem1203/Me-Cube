@@ -8,6 +8,7 @@ const Navbar = props => {
     if(props.user){
         // TODO: props.user.profile_pic when profile pic is working
         return (<nav className="navbar">
+                    <img src={window.defaultProfilePicture} style={{ width: "50px" }} />
                     <a>{props.user.username}</a>
                     <ul>
                         <button onClick={props.logout}>Logout</button>
@@ -23,9 +24,7 @@ const Navbar = props => {
     else{
         return (
             <nav className="navbar">
-                <ul>
-                    <button onClick={()=>props.showModal(LOGIN)}>SIGN IN</button>
-                </ul>
+                <button onClick={()=>props.showModal(LOGIN)}>SIGN IN</button>
             </nav>
         )
         }
