@@ -86,6 +86,80 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./frontend/actions/users_actions.js":
+/*!*******************************************!*\
+  !*** ./frontend/actions/users_actions.js ***!
+  \*******************************************/
+/*! exports provided: RECEIVE_USERS, RECEIVE_USER, LOGIN_USER, receiveUsers, receiveUser, loginUser, getUsers, getUser, createUser, login */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_USERS", function() { return RECEIVE_USERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_USER", function() { return RECEIVE_USER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOGIN_USER", function() { return LOGIN_USER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveUsers", function() { return receiveUsers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveUser", function() { return receiveUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loginUser", function() { return loginUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getUsers", function() { return getUsers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getUser", function() { return getUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createUser", function() { return createUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "login", function() { return login; });
+/* harmony import */ var _util_users_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/users_util */ "./frontend/util/users_util.js");
+
+var RECEIVE_USERS = "RECEIVE_USERS";
+var RECEIVE_USER = "RECEIVE_USER";
+var LOGIN_USER = "LOGIN_USER";
+var receiveUsers = function receiveUsers(users) {
+  return {
+    type: RECEIVE_USERS,
+    users: users
+  };
+};
+var receiveUser = function receiveUser(user) {
+  return {
+    type: RECEIVE_USER,
+    user: user
+  };
+};
+var loginUser = function loginUser(user) {
+  //works differently than receiveUser in sessionReducer
+  return {
+    type: LOGIN_USER,
+    user: user
+  };
+};
+var getUsers = function getUsers(userList) {
+  return function (dispatch) {
+    return _util_users_util__WEBPACK_IMPORTED_MODULE_0__["receiveUsers"](userList).then(function (payload) {
+      return dispatch(receiveUsers(payload));
+    });
+  };
+};
+var getUser = function getUser(userId) {
+  return function (dispatch) {
+    return _util_users_util__WEBPACK_IMPORTED_MODULE_0__["receiveUser"](userId).then(function (payload) {
+      return dispatch(receiveUser(payload));
+    });
+  };
+};
+var createUser = function createUser(user) {
+  return function (dispatch) {
+    return _util_users_util__WEBPACK_IMPORTED_MODULE_0__["createUser"](user).then(function (payload) {
+      return dispatch(receiveUser(payload));
+    });
+  };
+};
+var login = function login(user) {
+  return function (dispatch) {
+    return _util_users_util__WEBPACK_IMPORTED_MODULE_0__["login"](user).then(function (payload) {
+      return dispatch(loginUser(payload));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/components/app.jsx":
 /*!*************************************!*\
   !*** ./frontend/components/app.jsx ***!
@@ -103,7 +177,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = (function () {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Me-Cube"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "me-cube-logo"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: window.meCubeLogo,
+    style: {
+      width: "150px"
+    }
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     to: "/",
     component: _home_page__WEBPACK_IMPORTED_MODULE_2__["default"]
   }));
@@ -210,9 +291,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/store */ "./frontend/store/store.js");
 /* harmony import */ var _components_root__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/root */ "./frontend/components/root.jsx");
+/* harmony import */ var _actions_users_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./actions/users_actions */ "./frontend/actions/users_actions.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _readOnlyError(name) { throw new Error("\"" + name + "\" is read-only"); }
+
 
 
 
@@ -234,6 +317,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   var root = document.getElementById("root");
   var store = Object(_store_store__WEBPACK_IMPORTED_MODULE_2__["default"])(preloadedState);
+  window.getState = store.getState();
+  window.dispatch = store.dispatch;
+  window.getUsers = _actions_users_actions__WEBPACK_IMPORTED_MODULE_4__["getUsers"];
+  window.getUser = _actions_users_actions__WEBPACK_IMPORTED_MODULE_4__["getUser"];
+  window.createUser = _actions_users_actions__WEBPACK_IMPORTED_MODULE_4__["createUser"];
+  window.login = _actions_users_actions__WEBPACK_IMPORTED_MODULE_4__["login"];
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_root__WEBPACK_IMPORTED_MODULE_3__["default"], {
     store: store
   }), root);
@@ -292,18 +381,27 @@ var RootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _actions_users_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/users_actions */ "./frontend/actions/users_actions.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 var usersReducer = function usersReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
   Object.freeze(state);
-  var new_state = Object.assign({}, state);
+  var old_state = Object.assign({}, state);
 
   switch (action.type) {
-    case RECEIVE_USERS:
-    case RECEIVE_USER:
-      return;
+    case _actions_users_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_USERS"]:
+      return action.users;
+
+    case _actions_users_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_USER"]:
+      return Object(lodash__WEBPACK_IMPORTED_MODULE_0__["merge"])({}, old_state, _defineProperty({}, action.user.id, action.user));
+
+    case _actions_users_actions__WEBPACK_IMPORTED_MODULE_1__["LOGIN_USER"]:
+      return Object(lodash__WEBPACK_IMPORTED_MODULE_0__["merge"])({}, old_state, _defineProperty({}, action.user.id, action.user));
 
     default:
       return state;
@@ -337,6 +435,53 @@ __webpack_require__.r(__webpack_exports__);
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"], redux_logger__WEBPACK_IMPORTED_MODULE_2___default.a));
 });
+
+/***/ }),
+
+/***/ "./frontend/util/users_util.js":
+/*!*************************************!*\
+  !*** ./frontend/util/users_util.js ***!
+  \*************************************/
+/*! exports provided: receiveUsers, receiveUser, createUser, login */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveUsers", function() { return receiveUsers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveUser", function() { return receiveUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createUser", function() { return createUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "login", function() { return login; });
+var receiveUsers = function receiveUsers(userList) {
+  return $.ajax({
+    method: "GET",
+    url: "/api/users",
+    data: {
+      user_list: userList
+    }
+  });
+};
+var receiveUser = function receiveUser(id) {
+  return $.ajax({
+    method: "GET",
+    url: "/api/users/".concat(id)
+  });
+};
+var createUser = function createUser(user) {
+  return $.ajax({
+    method: "POST",
+    url: '/api/users',
+    data: {
+      user: user
+    }
+  });
+};
+var login = function login(user) {
+  return $.ajax({
+    method: "POST",
+    url: '/api/session',
+    data: user
+  });
+};
 
 /***/ }),
 

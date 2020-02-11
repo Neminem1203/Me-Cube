@@ -6,7 +6,9 @@ import HomePage from "./home_page";
 export default () =>{
     return(
         <div>
-            <h1>Me-Cube</h1>
+            <div id="me-cube-logo" >
+                <img src={window.meCubeLogo} style={{ width: "150px" }}/>
+            </div>
             <Route to="/" component={HomePage} />
         </div>
     )

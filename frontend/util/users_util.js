@@ -1,0 +1,29 @@
+export const receiveUsers = userList => {
+    return $.ajax({
+        method: "GET",
+        url: "/api/users",
+        data: {user_list: userList}
+    });
+}
+export const receiveUser = id => {
+    return $.ajax({
+        method:"GET",
+        url: `/api/users/${id}`
+    });
+}
+
+export const createUser = user => {
+    return $.ajax({
+        method: "POST",
+        url: '/api/users',
+        data: {user}
+    });
+}
+
+export const login = user => {
+    return $.ajax({
+        method: "POST",
+        url: '/api/session',
+        data: user
+    });
+}

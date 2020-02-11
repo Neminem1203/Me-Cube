@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import configureStore from "./store/store";
 import Root from "./components/root";
 
+import { getUsers, getUser, createUser, login } from "./actions/users_actions";
+
 const preloadedState = {};
 document.addEventListener("DOMContentLoaded", ()=>{
     if(window.currentUser){
@@ -18,5 +20,11 @@ document.addEventListener("DOMContentLoaded", ()=>{
     }
     const root = document.getElementById("root");
     const store = configureStore(preloadedState);
+    window.getState = store.getState();
+    window.dispatch = store.dispatch;
+    window.getUsers = getUsers;
+    window.getUser = getUser;
+    window.createUser = createUser;
+    window.login = login;
     ReactDOM.render(<Root store={store}/>, root);
 });
