@@ -7,10 +7,10 @@
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
-    <% if current_user%>
-      <script id="important-info"> window.currentUser = <%=current_user%> </script>
+    <% if logged_in? %>
+      <script id="important-info"> window.currentUser=<%= render("api/users/user.json.jbuilder", user: current_user).html_safe%> </script>
     <% else %>
-      <script></script>
+      <script>NOT LOGGED IN</script>
     <% end %>
     <script> window.meCubeLogo = "<%= image_url("mecubelogotest.png")%>" </script>
   </head>

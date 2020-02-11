@@ -7,15 +7,18 @@ class ApplicationController < ActionController::Base
     end
 
     def logged_in?
-        !!self.current_user
+        !!current_user
     end
 
-    def log_in(user)
+    def log_in!(user)
         @current_user = user
         session[:session_token] = user.reset_session_token
     end
 
-    def logout!
-        current_user.reset_session_token!
+    def log_out!
+        current_user.reset_session_token
+        session[:session_token] = nil
+        @current_user = nil
+        return true
     end
 end

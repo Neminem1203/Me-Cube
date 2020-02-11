@@ -27,3 +27,71 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+.hidden{
+  display: none !important;
+}
+
+// USER FORM
+.user-form{
+  box-sizing: border-box;
+  padding: 15px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  border: 1px solid black;
+  background-color: rgb(150, 150, 150);
+  width: 275px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border-radius: 5px;
+}
+.user-form > div{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.user-form > div > a:hover{
+  cursor: pointer;
+}
+.user-form h1{
+  width: 100%;
+  text-align: center;
+}
+.user-form input{
+  width: 100%;
+  margin-bottom: 10px;
+}
+// USER FORM
+.navbar{
+  float: right;
+  margin-right: 25px;
+  margin-top: -15px;
+  display: flex;
+  flex-direction: row;
+}
+
+.navbar > ul{
+  position:absolute;
+  top: 15px;
+  right: 15px;
+}
+
+button{
+  color: blue;
+  background-color: white;
+  border: 1px solid blue;
+  width: 90px;
+  height: 45px;
+  font-weight: 700;
+  margin-right: 10px;
+}
+button:hover{
+  cursor: pointer;
+}
+
+body{
+  background-color:gray;
+}
