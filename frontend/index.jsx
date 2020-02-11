@@ -1,9 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import configureStore from "./store/store";
+import Root from "./components/root";
 
 const preloadedState = {};
 document.addEventListener("DOMContentLoaded", ()=>{
-    const root = document.getElementById("root");
     if(window.currentUser){
         preloadedState = {
             entities:{
@@ -15,5 +16,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         }
         ReactDOM.render(<script>Nothing to see here</script>, document.getElementById("important-info"))
     }
-    ReactDOM.render(<h1>Frontend</h1>, root);
+    const root = document.getElementById("root");
+    const store = configureStore(preloadedState);
+    ReactDOM.render(<Root store={store}/>, root);
 });
