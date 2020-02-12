@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import UserForm from "./user_form";
 import { createUser } from "../../actions/users_actions";
+import { login } from "../../actions/users_actions";
 
 const mSTP = (state) => {
     return {
@@ -15,7 +16,8 @@ const mSTP = (state) => {
 
 const mDTP = (dispatch) => {
     return {
-        action: user => dispatch(createUser(user))
+        action: user => dispatch(createUser(user)),
+        demo: () => dispatch(login({ username: "Demo", password: "hunter2" }))
     }
 }
 

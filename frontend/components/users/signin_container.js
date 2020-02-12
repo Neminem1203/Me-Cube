@@ -14,7 +14,8 @@ const mSTP = (state) =>{
 
 const mDTP = (dispatch) =>{
     return{
-        action: user => dispatch(login(user))
+        action: user => dispatch(login(user)),
+        demo: () => dispatch(login({username: "Demo", password: "hunter2"}))
     }
 }
 

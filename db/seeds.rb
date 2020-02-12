@@ -11,7 +11,7 @@ Comment.delete_all
 Video.delete_all
 User.delete_all
 # Users
-User.create(username: "testing", email:"testing@testing.com", password: "hunter2")
+User.create(username: "Demo", email:"testing@testing.com", password: "hunter2")
 User.create(username: "test2", email:"second@email.com", password: "hunter2")
 User.create(username: "admin", email:"admin@admin.com", password: "hunter2")
 # Videos

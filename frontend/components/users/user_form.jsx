@@ -1,5 +1,6 @@
 import React from "react";
 import { LOGIN, SIGN_UP } from "../../actions/modal_actions";
+import { login } from "../../actions/users_actions";
 class UserForm extends React.Component{
     constructor(props){
         super(props);
@@ -31,6 +32,7 @@ class UserForm extends React.Component{
                 <div className="user-form">
                     <div>
                         <button onClick={e=>{e.preventDefault;this.props.showModal(otherForm)}}> {otherForm} </button>
+                        <a onClick={this.props.demo}>Demo</a>
                         <a onClick={()=>this.props.showModal("")}> x</a>
                     </div>
                     <form onSubmit={this.handleSubmit}>

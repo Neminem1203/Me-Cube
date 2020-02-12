@@ -90,7 +90,7 @@
 /*!*******************************************!*\
   !*** ./frontend/actions/modal_actions.js ***!
   \*******************************************/
-/*! exports provided: SHOW_MODAL, SIGN_UP, LOGIN, showModal */
+/*! exports provided: SHOW_MODAL, SIGN_UP, LOGIN, ACCOUNT_DETAILS, showModal */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -98,10 +98,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SHOW_MODAL", function() { return SHOW_MODAL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SIGN_UP", function() { return SIGN_UP; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOGIN", function() { return LOGIN; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ACCOUNT_DETAILS", function() { return ACCOUNT_DETAILS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showModal", function() { return showModal; });
 var SHOW_MODAL = "SHOW_MODAL";
 var SIGN_UP = "Sign Up";
 var LOGIN = "Login";
+var ACCOUNT_DETAILS = "ACCOUNT_DETAILS";
 var showModal = function showModal(modal_name) {
   return {
     type: SHOW_MODAL,
@@ -228,12 +230,14 @@ __webpack_require__.r(__webpack_exports__);
   // const signup_regex = /signup$/i;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "me-cube-logo"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "/#/"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     src: window.meCubeLogo,
     style: {
       width: "150px"
     }
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/",
     component: _navbar_container__WEBPACK_IMPORTED_MODULE_3__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
@@ -315,6 +319,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _users_signin_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./users/signin_container */ "./frontend/components/users/signin_container.js");
 /* harmony import */ var _users_signup_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./users/signup_container */ "./frontend/components/users/signup_container.js");
 /* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/modal_actions */ "./frontend/actions/modal_actions.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
 
 
 
@@ -322,17 +328,49 @@ __webpack_require__.r(__webpack_exports__);
 
 var Navbar = function Navbar(props) {
   if (props.user) {
-    // TODO: props.user.profile_pic when profile pic is working
+    var modal = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null);
+
+    var picture_function = function picture_function() {
+      return props.showModal(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_3__["ACCOUNT_DETAILS"]);
+    };
+
+    if (props.modal === _actions_modal_actions__WEBPACK_IMPORTED_MODULE_3__["ACCOUNT_DETAILS"]) {
+      modal = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "account-navbar"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Username: ", props.user.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, props.user.email), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
+        to: "/channel/".concat(props.user.id)
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: window.channelIcon
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Your Channel"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "https://www.github.com/neminem1203"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: window.githubIcon
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "GitHub"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "https://sg.linkedin.com/in/tpaul1203"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: window.linkedinIcon
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "LinkedIn"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#",
+        onClick: props.logout
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: window.logOutIcon
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Logout")))), " ");
+
+      picture_function = function picture_function() {
+        return props.showModal("");
+      };
+    } // TODO: props.user.profile_pic when profile pic is working
+
+
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
       className: "navbar"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
       src: window.defaultProfilePicture,
       style: {
         width: "50px"
-      }
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null, props.user.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-      onClick: props.logout
-    }, "Logout")));
+      },
+      onClick: picture_function
+    }), modal);
   }
 
   if (props.modal === _actions_modal_actions__WEBPACK_IMPORTED_MODULE_3__["SIGN_UP"]) {
@@ -456,6 +494,12 @@ var mDTP = function mDTP(dispatch) {
   return {
     action: function action(user) {
       return dispatch(Object(_actions_users_actions__WEBPACK_IMPORTED_MODULE_2__["login"])(user));
+    },
+    demo: function demo() {
+      return dispatch(Object(_actions_users_actions__WEBPACK_IMPORTED_MODULE_2__["login"])({
+        username: "Demo",
+        password: "hunter2"
+      }));
     }
   };
 };
@@ -480,6 +524,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var mSTP = function mSTP(state) {
   return {
     user: {
@@ -495,6 +540,12 @@ var mDTP = function mDTP(dispatch) {
   return {
     action: function action(user) {
       return dispatch(Object(_actions_users_actions__WEBPACK_IMPORTED_MODULE_2__["createUser"])(user));
+    },
+    demo: function demo() {
+      return dispatch(Object(_actions_users_actions__WEBPACK_IMPORTED_MODULE_2__["login"])({
+        username: "Demo",
+        password: "hunter2"
+      }));
     }
   };
 };
@@ -515,6 +566,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
+/* harmony import */ var _actions_users_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/users_actions */ "./frontend/actions/users_actions.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -534,6 +586,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -595,6 +648,8 @@ function (_React$Component) {
           _this3.props.showModal(otherForm);
         }
       }, " ", otherForm, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        onClick: this.props.demo
+      }, "Demo"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         onClick: function onClick() {
           return _this3.props.showModal("");
         }

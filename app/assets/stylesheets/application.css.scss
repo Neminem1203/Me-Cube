@@ -40,7 +40,7 @@
   top: 15px;
   right: 15px;
   border: 1px solid black;
-  background-color: rgb(150, 150, 150);
+  background-color: rgb(240, 240, 240);
   width: 275px;
   display: flex;
   flex-wrap: wrap;
@@ -51,6 +51,20 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+.user-form > div > a{
+  height: 20px;
+  border: 1px solid blue;
+  color: blue;
+}
+.user-form > div > a:last-child{
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    font-size: 25px;
+    color: black;
+    border: 0;
 }
 
 .user-form > div > a:hover{
@@ -85,6 +99,49 @@
   right: 15px;
 }
 
+.navbar > img:hover{
+  cursor: pointer;
+}
+
+.account-navbar{
+  list-style-type: none;
+  border-radius: 5px;
+  padding:0;
+  // background-color: rgb(240, 240, 240);
+  border: 1px solid darkgray;
+}
+.account-navbar a{
+  text-decoration: none;
+  color: black; 
+}
+
+.account-navbar li{
+  padding: 10px;
+}
+
+.account-navbar li:last-of-type{
+  border-radius: 0 0 5px 5px;
+}
+.account-navbar li:hover{
+  cursor: pointer;
+  background-color: rgb(220, 220, 220);
+}
+
+.account-navbar li > img{
+  width: 25px;
+  margin-right: 10px;
+}
+
+.account-navbar h4{
+  margin: 0;
+  padding: 5px;
+  font-size: 25px;
+}
+.account-navbar h4:last-of-type{
+  font-weight: 200;
+  border-bottom: 1px solid darkgray;
+}
+
 button{
   color: blue;
   background-color: white;
@@ -99,6 +156,7 @@ button:hover{
   cursor: pointer;
 }
 
-body{
-  background-color:gray;
+span{
+  vertical-align: 40%;
+  // border: 1px solid black;
 }

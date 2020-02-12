@@ -10,7 +10,7 @@ export default () => {
     return(
         <div>
             <div id="me-cube-logo" >
-                <img src={window.meCubeLogo} style={{ width: "150px" }}/>
+                <a href="/#/"><img src={window.meCubeLogo} style={{ width: "150px" }}/></a>
             </div>
             <Route path="/" component={Navbar} />
             <Route exact path="/" component={HomePage} />
