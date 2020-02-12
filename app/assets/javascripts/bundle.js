@@ -90,7 +90,7 @@
 /*!*******************************************!*\
   !*** ./frontend/actions/modal_actions.js ***!
   \*******************************************/
-/*! exports provided: SHOW_MODAL, SIGN_UP, LOGIN, ACCOUNT_DETAILS, showModal */
+/*! exports provided: SHOW_MODAL, SIGN_UP, LOGIN, ACCOUNT_DETAILS, SIDEBAR_TOGGLE, showModal, sidebarToggle */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -99,15 +99,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SIGN_UP", function() { return SIGN_UP; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOGIN", function() { return LOGIN; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ACCOUNT_DETAILS", function() { return ACCOUNT_DETAILS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SIDEBAR_TOGGLE", function() { return SIDEBAR_TOGGLE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showModal", function() { return showModal; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sidebarToggle", function() { return sidebarToggle; });
 var SHOW_MODAL = "SHOW_MODAL";
 var SIGN_UP = "Sign Up";
 var LOGIN = "Login";
 var ACCOUNT_DETAILS = "ACCOUNT_DETAILS";
+var SIDEBAR_TOGGLE = "SIDEBAR_TOGGLE";
 var showModal = function showModal(modal_name) {
   return {
     type: SHOW_MODAL,
     modal_name: modal_name
+  };
+};
+var sidebarToggle = function sidebarToggle() {
+  return {
+    type: SIDEBAR_TOGGLE
   };
 };
 
@@ -221,6 +229,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _home_page__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./home_page */ "./frontend/components/home_page.jsx");
 /* harmony import */ var _navbar_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./navbar_container */ "./frontend/components/navbar_container.js");
+/* harmony import */ var _sidebar_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./sidebar_container */ "./frontend/components/sidebar_container.js");
+
 
 
 
@@ -228,7 +238,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   // const login_regex = /login$/i;
   // const signup_regex = /signup$/i;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_sidebar_container__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "me-cube-logo"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "/#/"
@@ -240,11 +250,13 @@ __webpack_require__.r(__webpack_exports__);
   }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/",
     component: _navbar_container__WEBPACK_IMPORTED_MODULE_3__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "main-content"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/",
     component: _home_page__WEBPACK_IMPORTED_MODULE_2__["default"]
-  }));
+  })));
 });
 
 /***/ }),
@@ -461,6 +473,93 @@ __webpack_require__.r(__webpack_exports__);
     store: store
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["HashRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_app__WEBPACK_IMPORTED_MODULE_3__["default"], null)));
 });
+
+/***/ }),
+
+/***/ "./frontend/components/sidebar.jsx":
+/*!*****************************************!*\
+  !*** ./frontend/components/sidebar.jsx ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = (function (props) {
+  var sidebarClass = props.sidebar ? "sidebar" : "sidebar active";
+  var channelButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null);
+
+  if (props.channelId) {
+    channelButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      href: "/#/channel/".concat(props.channelId)
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      src: window.channelIcon,
+      style: {
+        width: "35px"
+      }
+    }), "Channel"));
+  }
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: sidebarClass
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    onClick: props.sidebarToggle
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: window.menuIcon
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, channelButton, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "https://www.github.com/neminem1203"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: window.githubIcon,
+    style: {
+      width: "35px"
+    }
+  }), "GitHub")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "https://sg.linkedin.com/in/tpaul1203"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: window.linkedinIcon,
+    style: {
+      width: "35px"
+    }
+  }), "LinkedIn"))));
+});
+
+/***/ }),
+
+/***/ "./frontend/components/sidebar_container.js":
+/*!**************************************************!*\
+  !*** ./frontend/components/sidebar_container.js ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _sidebar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./sidebar */ "./frontend/components/sidebar.jsx");
+/* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/modal_actions */ "./frontend/actions/modal_actions.js");
+
+
+
+
+var mSTP = function mSTP(state) {
+  return {
+    channelId: state.session.userId,
+    sidebar: state.ui.sidebar
+  };
+};
+
+var mDTP = function mDTP(dispatch) {
+  return {
+    sidebarToggle: function sidebarToggle() {
+      return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_2__["sidebarToggle"])());
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mSTP, mDTP)(_sidebar__WEBPACK_IMPORTED_MODULE_1__["default"]));
 
 /***/ }),
 
@@ -860,6 +959,40 @@ var UserReducer = function UserReducer() {
 
 /***/ }),
 
+/***/ "./frontend/reducers/sidebar_reducer.js":
+/*!**********************************************!*\
+  !*** ./frontend/reducers/sidebar_reducer.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/modal_actions */ "./frontend/actions/modal_actions.js");
+
+
+var sidebarReducer = function sidebarReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_modal_actions__WEBPACK_IMPORTED_MODULE_0__["SIDEBAR_TOGGLE"]:
+      if (state === true) {
+        return false;
+      } else {
+        return true;
+      }
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (sidebarReducer);
+
+/***/ }),
+
 /***/ "./frontend/reducers/ui_reducer.js":
 /*!*****************************************!*\
   !*** ./frontend/reducers/ui_reducer.js ***!
@@ -871,10 +1004,13 @@ var UserReducer = function UserReducer() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _modal_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modal_reducer */ "./frontend/reducers/modal_reducer.js");
+/* harmony import */ var _sidebar_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./sidebar_reducer */ "./frontend/reducers/sidebar_reducer.js");
+
 
 
 var uiReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  modal: _modal_reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
+  modal: _modal_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  sidebar: _sidebar_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (uiReducer);
 

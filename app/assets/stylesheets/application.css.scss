@@ -142,6 +142,77 @@
   border-bottom: 1px solid darkgray;
 }
 
+.sidebar{
+  float: left;
+  height: 98vh;
+  width: 65px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid gray;
+  padding-top: 10px;
+  margin: 0;
+}
+
+.sidebar > a{
+  width: 35px;
+  margin: 0 auto;
+}
+.sidebar > a:hover{
+  cursor: pointer;
+}
+
+.sidebar ul{
+  list-style-type: none;
+  padding: 0;
+  text-align: center;
+}
+.sidebar ul a{
+  text-decoration: none;
+  font-size: 12px;
+  text-align: center;
+}
+.sidebar ul li{
+  margin-top: 15px;
+}
+
+.sidebar.active{
+  width: 150px;
+}
+.sidebar.active > a{
+  margin: 0 auto;
+}
+.sidebar.active > a:hover{
+  cursor:pointer;
+}
+.sidebar.active > a img{
+  margin-left: -25%;
+  width: 50px;
+}
+
+.sidebar.active ul li{
+  display: flex;
+  align-items: center;
+}
+.sidebar.active ul li img{
+  margin: 0 15px;
+  // margin-right: 15px;
+}
+
+.sidebar.active ul a{
+  font-size: 15px;
+}
+
+.sidebar.active ul a:hover li{
+  background-color: lightgray;
+}
+
+.main-content{
+  margin: 20px 30px;
+}
+
+body{
+  margin: 0;
+}
 button{
   color: blue;
   background-color: white;
