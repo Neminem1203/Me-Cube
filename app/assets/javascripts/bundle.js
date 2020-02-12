@@ -897,7 +897,7 @@ function (_React$Component) {
         autoPlay: "autoplay"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("source", {
         src: this.props.video.video_url
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, this.props.video.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.props.video.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Video URL: ", this.props.video.video_url)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, this.props.video.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Make likes here"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.props.video.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Video URL: ", this.props.video.video_url)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-2-5"
       }, "RECOMMENDATIONS"));
     }
