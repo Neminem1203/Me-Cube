@@ -1,7 +1,7 @@
 import React from "react";
 import LoginModal from "./users/signin_container";
 import SignUpModal from "./users/signup_container";
-import {LOGIN, SIGN_UP, ACCOUNT_DETAILS} from "../actions/modal_actions";
+import { LOGIN, SIGN_UP, ACCOUNT_DETAILS } from "../actions/modal_actions";
 import { Link } from "react-router-dom";
 
 
