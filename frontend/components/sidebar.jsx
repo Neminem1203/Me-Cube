@@ -10,10 +10,11 @@ export default (props) =>{
     return (
         <div className={sidebarClass}>
             <a onClick={props.sidebarToggle}><img src={window.menuIcon}/></a>
-            <ul>
+            <ul>                    
+                <a href="/#/"><li><img src={window.homeIcon} />Home</li></a>
                 {channelButton}
-                <a href="https://www.github.com/neminem1203"><li><img src={window.githubIcon} style={{ width: "35px"}} />GitHub</li></a>
-                <a href="https://sg.linkedin.com/in/tpaul1203"><li><img src={window.linkedinIcon} style={{ width: "35px"}} />LinkedIn</li></a>
+                <a href="https://www.github.com/neminem1203"><li><img src={window.githubIcon}/>GitHub</li></a>
+                <a href="https://sg.linkedin.com/in/tpaul1203"><li><img src={window.linkedinIcon}/>LinkedIn</li></a>
             </ul>
         </div>
     )

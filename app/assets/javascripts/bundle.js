@@ -230,6 +230,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _home_page__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./home_page */ "./frontend/components/home_page.jsx");
 /* harmony import */ var _navbar_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./navbar_container */ "./frontend/components/navbar_container.js");
 /* harmony import */ var _sidebar_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./sidebar_container */ "./frontend/components/sidebar_container.js");
+/* harmony import */ var _videos_video_show__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./videos/video_show */ "./frontend/components/videos/video_show.jsx");
+
 
 
 
@@ -256,6 +258,10 @@ __webpack_require__.r(__webpack_exports__);
     exact: true,
     path: "/",
     component: _home_page__WEBPACK_IMPORTED_MODULE_2__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    exact: true,
+    path: "/video/:videoId",
+    component: _videos_video_show__WEBPACK_IMPORTED_MODULE_5__["default"]
   })));
 });
 
@@ -509,20 +515,18 @@ __webpack_require__.r(__webpack_exports__);
     onClick: props.sidebarToggle
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     src: window.menuIcon
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, channelButton, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "/#/"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: window.homeIcon
+  }), "Home")), channelButton, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "https://www.github.com/neminem1203"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: window.githubIcon,
-    style: {
-      width: "35px"
-    }
+    src: window.githubIcon
   }), "GitHub")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "https://sg.linkedin.com/in/tpaul1203"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: window.linkedinIcon,
-    style: {
-      width: "35px"
-    }
+    src: window.linkedinIcon
   }), "LinkedIn"))));
 });
 
@@ -772,6 +776,69 @@ function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (UserForm);
+
+/***/ }),
+
+/***/ "./frontend/components/videos/video_show.jsx":
+/*!***************************************************!*\
+  !*** ./frontend/components/videos/video_show.jsx ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var VideoShow =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(VideoShow, _React$Component);
+
+  function VideoShow(props) {
+    _classCallCheck(this, VideoShow);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(VideoShow).call(this, props));
+  }
+
+  _createClass(VideoShow, [{
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("video", {
+        preload: "auto",
+        controls: "controls",
+        autoPlay: "autoplay",
+        muted: "muted"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("source", {
+        src: "https://upload.wikimedia.org/wikipedia/commons/d/d0/Caminandes-_Llama_Drama_-_Short_Movie.ogv"
+      }));
+    }
+  }]);
+
+  return VideoShow;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (VideoShow);
 
 /***/ }),
 

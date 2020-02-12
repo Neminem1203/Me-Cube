@@ -9,16 +9,17 @@
     <%= javascript_include_tag 'application' %>
     <% if logged_in? %>
       <script id="important-info"> window.currentUser=<%= render("api/users/user.json.jbuilder", user: current_user).html_safe%> </script>
-    <% else %>
-      <script>NOT LOGGED IN</script>
     <% end %>
-    <script> window.meCubeLogo = "<%= image_url("mecubelogotest.png")%>" </script>
-    <script> window.defaultProfilePicture = "<%= image_url("userIcon.svg") %>" </script>
-    <script> window.logOutIcon = "<%= image_url("logoutIcon.svg") %>" </script>
-    <script> window.githubIcon = "<%= image_url("githubIcon.svg") %>" </script>
-    <script> window.linkedinIcon = "<%= image_url("linkedinIcon.svg") %>" </script>
-    <script> window.channelIcon = "<%= image_url("channelIcon.svg") %>" </script>
-    <script> window.menuIcon = "<%= image_url("menuIcon.svg") %>" </script>
+    <script> 
+      window.meCubeLogo = "<%= image_url("mecubelogotest.png")%>" 
+      window.defaultProfilePicture = "<%= image_url("userIcon.svg") %>" 
+      window.logOutIcon = "<%= image_url("logoutIcon.svg") %>" 
+      window.githubIcon = "<%= image_url("githubIcon.svg") %>" 
+      window.linkedinIcon = "<%= image_url("linkedinIcon.svg") %>" 
+      window.channelIcon = "<%= image_url("channelIcon.svg") %>" 
+      window.menuIcon = "<%= image_url("menuIcon.svg") %>"
+      window.homeIcon = "<%= image_url("homeIcon.svg") %>"
+    </script>
   </head>
   <body>
     <%= yield %>
