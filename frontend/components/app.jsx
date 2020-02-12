@@ -14,6 +14,7 @@ export default () => {
             </div>
             <Route path="/" component={Navbar} />
             <Route exact path="/" component={HomePage} />
+            
         </div>
     )
 }

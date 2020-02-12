@@ -6,7 +6,6 @@
 #  username        :string           not null
 #  email           :string           not null
 #  password_digest :string           not null
-#  profile_picture :string
 #  session_token   :string           not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null

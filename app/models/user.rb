@@ -6,7 +6,6 @@
 #  username        :string           not null
 #  email           :string           not null
 #  password_digest :string           not null
-#  profile_picture :string
 #  session_token   :string           not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
@@ -17,6 +16,12 @@ class User < ApplicationRecord
     validates :username, :email, :session_token, uniqueness: true
     validates :password, length: {minimum: 6, allow_nil: true}
 
+    has_many :videos,
+    class_name: "Video",
+    primary_key: :id,
+    foreign_key: :creator_id,
+    dependent: :destroy
+    
     after_initialize :ensure_session_token
     attr_reader :password
 

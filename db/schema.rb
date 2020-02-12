@@ -10,10 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_11_190506) do
+ActiveRecord::Schema.define(version: 2020_02_12_041811) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
+    t.text "comment", null: false
+    t.integer "response_to"
+    t.integer "video_id"
+    t.integer "commenter_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["commenter_id"], name: "index_comments_on_commenter_id"
+    t.index ["response_to"], name: "index_comments_on_response_to"
+    t.index ["video_id"], name: "index_comments_on_video_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.boolean "like_dislike", null: false
+    t.integer "user_id", null: false
+    t.string "likeable_type"
+    t.bigint "likeable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["likeable_type", "likeable_id"], name: "index_likes_on_likeable_type_and_likeable_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "username", null: false
@@ -25,6 +48,17 @@ ActiveRecord::Schema.define(version: 2020_02_11_190506) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["session_token"], name: "index_users_on_session_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
+  end
+
+  create_table "videos", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "video_url", null: false
+    t.text "description", null: false
+    t.integer "creator_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["creator_id"], name: "index_videos_on_creator_id"
+    t.index ["title"], name: "index_videos_on_title"
   end
 
 end
