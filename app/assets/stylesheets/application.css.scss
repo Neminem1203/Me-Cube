@@ -22,12 +22,10 @@
   height: 120px;
   animation: spin 2s linear infinite;
 }
-
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-
 .hidden{
   display: none !important;
 }
@@ -66,7 +64,6 @@
     color: black;
     border: 0;
 }
-
 .user-form > div > a:hover{
   cursor: pointer;
 }
@@ -86,24 +83,20 @@
   display: flex;
   flex-direction: row;
 }
-
 .navbar > ul{
   background-color: #f3f3f3;
   position:absolute;
   top: 60px;
   right: 15px;
 }
-
 .navbar > button{
   position: absolute;
   top: 15px;
   right: 15px;
 }
-
 .navbar > img:hover{
   cursor: pointer;
 }
-
 .account-navbar{
   list-style-type: none;
   border-radius: 5px;
@@ -115,11 +108,9 @@
   text-decoration: none;
   color: black; 
 }
-
 .account-navbar li{
   padding: 10px;
 }
-
 .account-navbar li:last-of-type{
   border-radius: 0 0 5px 5px;
 }
@@ -127,12 +118,10 @@
   cursor: pointer;
   background-color: rgb(220, 220, 220);
 }
-
 .account-navbar li > img{
   width: 25px;
   margin-right: 10px;
 }
-
 .account-navbar h4{
   margin: 0;
   padding: 5px;
@@ -142,7 +131,6 @@
   font-weight: 200;
   border-bottom: 1px solid darkgray;
 }
-
 .sidebar{
   float: left;
   height: 98vh;
@@ -154,7 +142,6 @@
   padding-top: 10px;
   margin: 0;
 }
-
 .sidebar > a{
   width: 35px;
   margin: 0 auto;
@@ -162,7 +149,6 @@
 .sidebar > a:hover{
   cursor: pointer;
 }
-
 .sidebar ul{
   list-style-type: none;
   padding: 0;
@@ -175,12 +161,18 @@
 }
 .sidebar ul li{
   margin-top: 15px;
+  color: black;
 }
-
+.sidebar ul li.active{
+  background-color: #4ecac8;
+  font-weight:900;
+}
+.sidebar ul li img{
+  color: gray;
+}
 .sidebar ul img{
   width: 35px;
 }
-
 .sidebar.active{
   width: 150px;
 }
@@ -194,7 +186,6 @@
   margin-left: -25%;
   width: 50px;
 }
-
 .sidebar.active ul li{
   display: flex;
   align-items: center;
@@ -203,15 +194,16 @@
   margin: 0 15px;
   // margin-right: 15px;
 }
-
 .sidebar.active ul a{
   font-size: 15px;
 }
-
-.sidebar.active ul a:hover li{
-  background-color: lightgray;
+.sidebar.active ul a li.active{
+  background-color: #4ecac8;
+  font-weight:900;
 }
-
+.sidebar.active ul a:hover li{
+  background-color: #10bebb;
+}
 .main-content{
   margin-left:65px;
   margin-top: 15px;
@@ -219,28 +211,22 @@
   height: 83vh;
   min-width: 1000px;
 }
-
 .main-content.active{
   margin-left: 150px;
 }
-
-
 [class^="col-"]{
   float: left;
 }
-
 .col-2-5{
   margin-left: 5%;
   min-width: 30%;
   width: 30%;
 }
-
 .col-3-5{
   min-width: 55%;
   width: 55%;
   margin-left: 25px;
 }
-
 #me-cube-logo img{
   width: 150px;
   margin-top: 15px;
@@ -249,7 +235,23 @@
 #me-cube-logo.active img{
   margin-left: 150px;
 }
-
+#error-window{
+  z-index: 2;
+  position: absolute;
+  padding: 10px;
+  width: 300px;
+  left: calc( 50% - 150px);
+  top: 15px;
+  border-radius: 5px;
+  text-align: center;
+  vertical-align: super;
+  background-color: lightcoral;
+  opacity: 0;
+  transition: opacity 1s;
+}
+#error-window.active{
+  opacity: 100%;
+}
 body{
   margin: 0;
   font-family: Roboto, Arial, sans-serif;
@@ -264,16 +266,13 @@ button{
   font-weight: 700;
   margin-right: 10px;
 }
-
 button:hover{
   cursor: pointer;
 }
-
 span{
   vertical-align: 40%;
   // border: 1px solid black;
 }
-
 video{
   min-width: 500px;
   max-width: 700px;

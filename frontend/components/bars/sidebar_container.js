@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import Sidebar from "./sidebar";
 import { sidebarToggle } from "../../actions/modal_actions";
 
-const mSTP = state =>{
+const mSTP = (state) =>{
     return {
         channelId: state.session.userId,
         sidebar: state.ui.sidebar
