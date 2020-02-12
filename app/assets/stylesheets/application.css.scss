@@ -82,7 +82,7 @@
 .navbar{
   float: right;
   margin-right: 25px;
-  margin-top: -55px;
+  margin-top: -60px;
   display: flex;
   flex-direction: row;
 }
@@ -90,7 +90,7 @@
 .navbar > ul{
   background-color: #f3f3f3;
   position:absolute;
-  top: 50px;
+  top: 60px;
   right: 15px;
 }
 
@@ -147,6 +147,7 @@
   float: left;
   height: 98vh;
   width: 65px;
+  position: fixed;
   display: flex;
   flex-direction: column;
   border-right: 1px solid gray;
@@ -215,13 +216,44 @@
   margin-left:65px;
   margin-top: 15px;
   padding: 15px;
-  background-color: #c3c3c3;
   height: 83vh;
+  min-width: 1000px;
+}
+
+.main-content.active{
+  margin-left: 150px;
+}
+
+
+[class^="col-"]{
+  float: left;
+}
+
+.col-2-5{
+  margin-left: 5%;
+  min-width: 30%;
+  width: 30%;
+}
+
+.col-3-5{
+  min-width: 55%;
+  width: 55%;
+  margin-left: 25px;
+}
+
+#me-cube-logo img{
+  width: 150px;
+  margin-top: 15px;
+  margin-left: 65px;
+}
+#me-cube-logo.active img{
+  margin-left: 150px;
 }
 
 body{
   margin: 0;
   font-family: Roboto, Arial, sans-serif;
+  background-color: #c3c3c3;
 }
 button{
   color: blue;
@@ -243,8 +275,7 @@ span{
 }
 
 video{
-  margin: 25px;
   min-width: 500px;
   max-width: 700px;
-  width: 60vw;
+  width: 100%;
 }

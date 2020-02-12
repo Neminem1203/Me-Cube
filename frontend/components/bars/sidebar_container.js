@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import Sidebar from "./sidebar";
-import { sidebarToggle } from "../actions/modal_actions";
+import { sidebarToggle } from "../../actions/modal_actions";
 
 const mSTP = state =>{
     return {

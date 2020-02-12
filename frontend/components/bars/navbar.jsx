@@ -1,7 +1,7 @@
 import React from "react";
-import LoginModal from "./users/signin_container";
-import SignUpModal from "./users/signup_container";
-import { LOGIN, SIGN_UP, ACCOUNT_DETAILS } from "../actions/modal_actions";
+import LoginModal from "../users/signin_container";
+import SignUpModal from "../users/signup_container";
+import { LOGIN, SIGN_UP, ACCOUNT_DETAILS } from "../../actions/modal_actions";
 import { Link } from "react-router-dom";
 
 
@@ -21,13 +21,13 @@ const Navbar = props => {
                             <span>Your Channel</span>
                         </li>
                     </Link>
-                    <a href="https://www.github.com/neminem1203">
+                    <a target="_blank" href="https://www.github.com/neminem1203">
                         <li>
                             <img src={window.githubIcon}/>
                             <span>GitHub</span>
                         </li>
                     </a>
-                    <a href="https://sg.linkedin.com/in/tpaul1203">
+                    <a target="_blank"  href="https://sg.linkedin.com/in/tpaul1203">
                         <li>
                             <img src={window.linkedinIcon}/>
                             <span>LinkedIn</span>

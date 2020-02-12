@@ -1,7 +1,7 @@
 import {connect} from "react-redux";
-import { showModal } from "../actions/modal_actions";
+import { showModal } from "../../actions/modal_actions";
 import Navbar from "./navbar";
-import {logout} from "../actions/users_actions";
+import {logout} from "../../actions/users_actions";
 
 const mSTP = (state) =>{
     return {
