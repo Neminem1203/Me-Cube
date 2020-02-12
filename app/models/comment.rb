@@ -13,7 +13,7 @@
 
 
 class Comment < ApplicationRecord
-    # has_many :likes, as :likeable
+    has_many :likes, as: :likeable
 
     belongs_to :commenter,
     class_name: "User",
@@ -32,6 +32,6 @@ class Comment < ApplicationRecord
 
     belongs_to :parent_response,
     class_name: "Comment",
-    primay_key: :id,
+    primary_key: :id,
     foreign_key: :response_to
 end
