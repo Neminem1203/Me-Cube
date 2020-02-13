@@ -238,7 +238,7 @@ input:focus {outline:0;}
   position: fixed;
   padding: 15px;
   padding-left: 80px;
-  height: 83vh;
+  height: calc(100% - 84.84px);
   min-width: 1000px;
   width: 100%;
   background-color: rgb(228, 228, 228);
