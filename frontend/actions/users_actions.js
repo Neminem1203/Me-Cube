@@ -1,5 +1,5 @@
 import * as UserAPIUtil from "../util/users_util";
-import { showModal, receiveError } from "./modal_actions";
+import { showModal, receiveUserError, clearError } from "./modal_actions";
 export const RECEIVE_USERS = "RECEIVE_USERS";
 export const RECEIVE_USER = "RECEIVE_USER";
 export const LOGIN_USER = "LOGIN_USER";
@@ -37,8 +37,8 @@ export const getUsers = userList => dispatch =>{
     return UserAPIUtil.receiveUsers(userList).then(
         payload => dispatch(receiveUsers(payload)),
         error => {
-            dispatch(receiveError(error.responseJSON[0]));
-            setTimeout(()=>dispatch(receiveError("")), 4000);
+            dispatch(receiveUserError(error.responseJSON[0]));
+            setTimeout(()=>dispatch(clearError()), 4000);
         });
 }
 
@@ -46,8 +46,8 @@ export const getUser = userId => dispatch =>{
     return UserAPIUtil.receiveUser(userId).then
         (payload => dispatch(receiveUser(payload)),
             error => {
-                dispatch(receiveError(error.responseJSON[0]));
-                setTimeout(() => dispatch(receiveError("")), 4000);
+                dispatch(receiveUserError(error.responseJSON[0]));
+                setTimeout(() => dispatch(clearError()), 4000);
             });
 }
 
@@ -55,11 +55,11 @@ export const createUser = user => dispatch =>{
     return UserAPIUtil.createUser(user).then(
         payload=>{
             dispatch(loginUser(payload));
-            dispatch(showModal(""));
+            dispatch(showModal(null));
         },
         error => {
-            dispatch(receiveError(error.responseJSON[0]));
-            setTimeout(() => dispatch(receiveError("")), 4000);
+            dispatch(receiveUserError(error.responseJSON[0]));
+            setTimeout(() => dispatch(clearError()), 4000);
         });
 }
 
@@ -67,11 +67,11 @@ export const login = user => dispatch =>{
     return UserAPIUtil.login(user).then(
         payload =>{
             dispatch(loginUser(payload));
-            dispatch(showModal(""));
+            dispatch(showModal(null));
         },
         error => {
-            dispatch(receiveError(error.responseJSON[0]));
-            setTimeout(() => dispatch(receiveError("")), 4000);
+            dispatch(receiveUserError(error.responseJSON[0]));
+            setTimeout(() => dispatch(clearError()), 4000);
         });
 }
 
@@ -79,7 +79,7 @@ export const logout = () => dispatch =>{
     return UserAPIUtil.logout().then(
         () => dispatch(logoutUser()),
         error => {
-            dispatch(receiveError(error.responseJSON[0]));
-            setTimeout(() => dispatch(receiveError("")), 4000);
+            dispatch(receiveUserError(error.responseJSON[0]));
+            setTimeout(() => dispatch(clearError()), 4000);
         });
 }

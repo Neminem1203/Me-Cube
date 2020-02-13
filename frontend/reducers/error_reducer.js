@@ -1,12 +1,8 @@
-import { RECEIVE_ERROR } from "../actions/modal_actions";
+import { combineReducers } from "redux";
+import errorUserReducer from "./error_user_reducer";
 
-const errorReducer = (state="", action)=>{
-    switch(action.type){
-        case RECEIVE_ERROR:
-            return action.errorMsg;
-        default: 
-            return state;
-    }
-}
+const errorReducer = combineReducers({
+    user: errorUserReducer
+});
 
 export default errorReducer;

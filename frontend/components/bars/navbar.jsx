@@ -20,7 +20,7 @@ const Navbar = props => {
                         <a style={{paddingLeft: "5px", fontSize: "18px", paddingBottom: "5px"}}>{props.user.email}</a>
                     </div>
                     <Link to={`/channel/${props.user.id}`} onClick={()=>props.showModal("")}>
-                        <li>
+                        <li style={{paddingLeft:7}}>
                             {channelIcon(30)}
                             <span>Your Channel</span>
                         </li>

@@ -25,4 +25,7 @@ class Video < ApplicationRecord
     class_name: "Comment",
     primary_key: :id,
     foreign_key: :video_id
+
+    has_one_attached :thumbnail
+    has_one_attached :video
 end

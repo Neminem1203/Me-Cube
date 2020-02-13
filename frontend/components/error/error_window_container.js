@@ -1,16 +1,16 @@
 import { connect } from "react-redux"
 import ErrorWindow from "./error_window"
-import { receiveError } from "../../actions/modal_actions"
+import { clearError } from "../../actions/modal_actions"
 
 const mSTP = state =>{
     return{
-        errorMsg: state.error
+        errors: state.error
     }
 }
 
 const mDTP = dispatch =>{
     return{
-        clearError:()=> dispatch(receiveError(""))
+        clearError:()=> dispatch(clearError)
     }
 }
 export default connect(mSTP, mDTP)(ErrorWindow);

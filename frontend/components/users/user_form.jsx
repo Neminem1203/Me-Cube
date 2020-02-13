@@ -32,7 +32,7 @@ class UserForm extends React.Component{
                 <div className="user-form">
                     <div>
                         <button onClick={()=>{this.props.showModal(otherForm)}}> {otherForm} </button>
-                        <a style={{paddingBottom: "2px" }} onClick={this.props.demo}>DEMO</a>
+                        <a style={{paddingBottom: "2px"}} onClick={this.props.demo}>DEMO</a>
                         <a onClick={()=>this.props.showModal("")}> x</a>
                     </div>
                     <form onSubmit={this.handleSubmit}>

@@ -90,7 +90,7 @@
 /*!*******************************************!*\
   !*** ./frontend/actions/modal_actions.js ***!
   \*******************************************/
-/*! exports provided: SHOW_MODAL, SIGN_UP, LOGIN, ACCOUNT_DETAILS, SIDEBAR_TOGGLE, RECEIVE_ERROR, showModal, sidebarToggle, receiveError */
+/*! exports provided: SHOW_MODAL, SIGN_UP, LOGIN, ACCOUNT_DETAILS, SIDEBAR_TOGGLE, RECEIVE_USER_ERROR, CLEAR_ERROR, showModal, sidebarToggle, receiveUserError, clearError */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -100,16 +100,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOGIN", function() { return LOGIN; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ACCOUNT_DETAILS", function() { return ACCOUNT_DETAILS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SIDEBAR_TOGGLE", function() { return SIDEBAR_TOGGLE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ERROR", function() { return RECEIVE_ERROR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_USER_ERROR", function() { return RECEIVE_USER_ERROR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_ERROR", function() { return CLEAR_ERROR; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showModal", function() { return showModal; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sidebarToggle", function() { return sidebarToggle; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveError", function() { return receiveError; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveUserError", function() { return receiveUserError; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearError", function() { return clearError; });
 var SHOW_MODAL = "SHOW_MODAL";
 var SIGN_UP = "Sign Up";
 var LOGIN = "Login";
 var ACCOUNT_DETAILS = "ACCOUNT_DETAILS";
 var SIDEBAR_TOGGLE = "SIDEBAR_TOGGLE";
-var RECEIVE_ERROR = "RECEIVE_ERROR";
+var RECEIVE_USER_ERROR = "RECEIVE_USER_ERROR";
+var CLEAR_ERROR = "CLEAR_ERROR";
 var showModal = function showModal(modal_name) {
   return {
     type: SHOW_MODAL,
@@ -121,10 +124,15 @@ var sidebarToggle = function sidebarToggle() {
     type: SIDEBAR_TOGGLE
   };
 };
-var receiveError = function receiveError(errorMsg) {
+var receiveUserError = function receiveUserError(errorMsg) {
   return {
-    type: RECEIVE_ERROR,
+    type: RECEIVE_USER_ERROR,
     errorMsg: errorMsg
+  };
+};
+var clearError = function clearError() {
+  return {
+    type: CLEAR_ERROR
   };
 };
 
@@ -189,9 +197,9 @@ var getUsers = function getUsers(userList) {
     return _util_users_util__WEBPACK_IMPORTED_MODULE_0__["receiveUsers"](userList).then(function (payload) {
       return dispatch(receiveUsers(payload));
     }, function (error) {
-      dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["receiveError"])(error.responseJSON[0]));
+      dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["receiveUserError"])(error.responseJSON[0]));
       setTimeout(function () {
-        return dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["receiveError"])(""));
+        return dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["clearError"])());
       }, 4000);
     });
   };
@@ -201,9 +209,9 @@ var getUser = function getUser(userId) {
     return _util_users_util__WEBPACK_IMPORTED_MODULE_0__["receiveUser"](userId).then(function (payload) {
       return dispatch(receiveUser(payload));
     }, function (error) {
-      dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["receiveError"])(error.responseJSON[0]));
+      dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["receiveUserError"])(error.responseJSON[0]));
       setTimeout(function () {
-        return dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["receiveError"])(""));
+        return dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["clearError"])());
       }, 4000);
     });
   };
@@ -212,11 +220,11 @@ var createUser = function createUser(user) {
   return function (dispatch) {
     return _util_users_util__WEBPACK_IMPORTED_MODULE_0__["createUser"](user).then(function (payload) {
       dispatch(loginUser(payload));
-      dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["showModal"])(""));
+      dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["showModal"])(null));
     }, function (error) {
-      dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["receiveError"])(error.responseJSON[0]));
+      dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["receiveUserError"])(error.responseJSON[0]));
       setTimeout(function () {
-        return dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["receiveError"])(""));
+        return dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["clearError"])());
       }, 4000);
     });
   };
@@ -225,11 +233,11 @@ var login = function login(user) {
   return function (dispatch) {
     return _util_users_util__WEBPACK_IMPORTED_MODULE_0__["login"](user).then(function (payload) {
       dispatch(loginUser(payload));
-      dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["showModal"])(""));
+      dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["showModal"])(null));
     }, function (error) {
-      dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["receiveError"])(error.responseJSON[0]));
+      dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["receiveUserError"])(error.responseJSON[0]));
       setTimeout(function () {
-        return dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["receiveError"])(""));
+        return dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["clearError"])());
       }, 4000);
     });
   };
@@ -239,9 +247,9 @@ var logout = function logout() {
     return _util_users_util__WEBPACK_IMPORTED_MODULE_0__["logout"]().then(function () {
       return dispatch(logoutUser());
     }, function (error) {
-      dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["receiveError"])(error.responseJSON[0]));
+      dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["receiveUserError"])(error.responseJSON[0]));
       setTimeout(function () {
-        return dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["receiveError"])(""));
+        return dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["clearError"])());
       }, 4000);
     });
   };
@@ -348,7 +356,11 @@ var Navbar = function Navbar(props) {
         onClick: function onClick() {
           return props.showModal("");
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, Object(_icons__WEBPACK_IMPORTED_MODULE_5__["channelIcon"])(30), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Your Channel"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        style: {
+          paddingLeft: 7
+        }
+      }, Object(_icons__WEBPACK_IMPORTED_MODULE_5__["channelIcon"])(30), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Your Channel"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         target: "_blank",
         href: "https://www.github.com/neminem1203",
         onClick: function onClick() {
@@ -641,7 +653,13 @@ function (_React$Component) {
   _createClass(ErrorWindow, [{
     key: "render",
     value: function render() {
-      if (this.props.errorMsg === "") {
+      var errors = Object.values(this.props.errors).map(function (error) {
+        return error !== null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, error) : null;
+      });
+
+      if (Object.values(this.props.errors).every(function (error) {
+        return error === null;
+      })) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           id: "error-window"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Closing Window"));
@@ -650,7 +668,7 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "error-window",
         className: "active"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Error: ", this.props.errorMsg));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Error:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, errors)));
     }
   }]);
 
@@ -679,14 +697,14 @@ __webpack_require__.r(__webpack_exports__);
 
 var mSTP = function mSTP(state) {
   return {
-    errorMsg: state.error
+    errors: state.error
   };
 };
 
 var mDTP = function mDTP(dispatch) {
   return {
     clearError: function clearError() {
-      return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_2__["receiveError"])(""));
+      return dispatch(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_2__["clearError"]);
     }
   };
 };
@@ -1503,23 +1521,47 @@ var entitiesReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var _error_user_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./error_user_reducer */ "./frontend/reducers/error_user_reducer.js");
+
+
+var errorReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
+  user: _error_user_reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
+});
+/* harmony default export */ __webpack_exports__["default"] = (errorReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/error_user_reducer.js":
+/*!*************************************************!*\
+  !*** ./frontend/reducers/error_user_reducer.js ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/modal_actions */ "./frontend/actions/modal_actions.js");
 
 
-var errorReducer = function errorReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
+var errorUserReducer = function errorUserReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
   var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
 
   switch (action.type) {
-    case _actions_modal_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ERROR"]:
+    case _actions_modal_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_USER_ERROR"]:
       return action.errorMsg;
+
+    case _actions_modal_actions__WEBPACK_IMPORTED_MODULE_0__["CLEAR_ERROR"]:
+      return null;
 
     default:
       return state;
   }
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (errorReducer);
+/* harmony default export */ __webpack_exports__["default"] = (errorUserReducer);
 
 /***/ }),
 

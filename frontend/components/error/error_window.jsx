@@ -6,11 +6,15 @@ class ErrorWindow extends React.Component{
 
 
     render(){
-        if(this.props.errorMsg === ""){return <div id="error-window"><span>Closing Window</span></div>}
+        const errors = Object.values(this.props.errors).map(error => (error !== null) ? <li>{error}</li> : null);
+        if(Object.values(this.props.errors).every(error => error === null)){return <div id="error-window"><span>Closing Window</span></div>}
         return(
             <div id="error-window" className="active">
                 <span>
-                    Error: {this.props.errorMsg}
+                    Error: 
+                    <ul>
+                        {errors}
+                    </ul>
                 </span>
             </div>
         )
