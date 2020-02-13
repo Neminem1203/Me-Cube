@@ -6,7 +6,7 @@ class HomePage extends React.Component{
     render(){
         return(
             <>
-                <h1>HomePage</h1>
+                <h2>Recommended</h2>
                 <a href="/#/video/1">Click here for Test Video</a>
             </>
         );

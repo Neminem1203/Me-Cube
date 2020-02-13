@@ -17,7 +17,7 @@ class VideoShow extends React.Component{
         return (
         <div>
             <div className="col-3-5">
-                <video preload="auto" controls="controls" autoPlay="autoplay">
+                <video  controls="controls" autoPlay="autoplay" muted="muted">
                     <source src={this.props.video.video_url}/>
                 </video>
                 <h2 style={{marginTop: "16px", marginBottom: "8px"}}>{this.props.video.title}</h2>

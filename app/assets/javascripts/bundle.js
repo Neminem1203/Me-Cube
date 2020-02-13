@@ -536,7 +536,8 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         onClick: function onClick() {
           return _this.sidebarToggle(_this.props.sidebarToggle);
-        }
+        },
+        className: "menu-button"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: window.menuIcon
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
@@ -739,7 +740,7 @@ function (_React$Component) {
   _createClass(HomePage, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "HomePage"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Recommended"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         href: "/#/video/1"
       }, "Click here for Test Video"));
     }
@@ -1114,9 +1115,9 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-3-5"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("video", {
-        preload: "auto",
         controls: "controls",
-        autoPlay: "autoplay"
+        autoPlay: "autoplay",
+        muted: "muted"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("source", {
         src: this.props.video.video_url
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {

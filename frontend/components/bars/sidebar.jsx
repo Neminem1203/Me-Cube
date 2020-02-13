@@ -32,7 +32,7 @@ class Sidebar extends React.Component{
         
         return (
             <div className={sidebarClass}>
-                <a onClick={() => this.sidebarToggle(this.props.sidebarToggle)}><img src={window.menuIcon}/></a>
+                <a onClick={() => this.sidebarToggle(this.props.sidebarToggle)} className="menu-button"><img src={window.menuIcon}/></a>
                 <ul>
                     <a href="/#/"><li className={homeClass}>
                         {homeIcon()}Home
