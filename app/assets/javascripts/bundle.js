@@ -326,9 +326,24 @@ var Navbar = function Navbar(props) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
           boxSizing: "border-box",
-          margin: "6px"
+          margin: "0",
+          padding: "6px",
+          borderBottom: "1px solid gray"
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Username: ", props.user.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, props.user.email)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        style: {
+          paddingLeft: "5px",
+          marginBottom: "0",
+          fontSize: "25px",
+          fontWeight: "700"
+        }
+      }, props.user.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        style: {
+          paddingLeft: "5px",
+          fontSize: "18px",
+          paddingBottom: "5px"
+        }
+      }, props.user.email)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
         to: "/channel/".concat(props.user.id),
         onClick: function onClick() {
           return props.showModal("");
