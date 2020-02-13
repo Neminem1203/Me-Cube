@@ -11,7 +11,7 @@ const mSTP = (state, ownProps) => {
         video:{
             title: "Fake Title for Fake Video",
             video_url: "https://upload.wikimedia.org/wikipedia/commons/d/d0/Caminandes-_Llama_Drama_-_Short_Movie.ogv",
-            description: "This is a Fake Description for a fake show page",
+            description: "This is a Fake Description for a fake show page. Nothing gets saved to database as of yet",
             created_at: "12 Feb 2020",
             creator_id: 1,
             liked: true

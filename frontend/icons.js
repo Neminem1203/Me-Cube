@@ -1,8 +1,8 @@
 import React from "react";
 
-export const homeIcon =(width="45px")=>(
+export const homeIcon =(dimension=45)=>(
     <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xlinkHref="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	    viewBox="0 0 512.001 512.001" style={{enableBackground:"new 0 0 512.001 512.001"}} width={width}>
+	    viewBox="0 0 512.001 512.001" style={{enableBackground:"new 0 0 512.001 512.001"}} width={dimension}>
         <g>
 	        <path d="M503.402,228.885L273.684,19.567c-10.083-9.189-25.288-9.188-35.367-0.001L8.598,228.886
                 c-8.077,7.36-10.745,18.7-6.799,28.889c3.947,10.189,13.557,16.772,24.484,16.772h36.69v209.721
@@ -16,8 +16,8 @@ export const homeIcon =(width="45px")=>(
     </svg>);
 
 
-export const channelIcon = (width="35px") =>(
-    <svg style={{ width: width, height: width }} viewBox="0 0 512.00199 512" xmlns="http://www.w3.org/2000/svg">
+export const channelIcon = (dimension=35) =>(
+    <svg style={{ width: dimension, height: dimension }} viewBox="0 0 512.00199 512" xmlns="http://www.w3.org/2000/svg">
     <path d="m334.808594 170.992188-113.113282-61.890626c-6.503906-3.558593-14.191406-3.425781-20.566406.351563-6.378906 
     3.78125-10.183594 10.460937-10.183594 17.875v122.71875c0 7.378906 3.78125 14.046875 10.117188 17.832031 3.308594 1.976563 
     6.976562 2.96875 10.652344 2.96875 3.367187 0 6.742187-.832031 9.847656-2.503906l113.117188-60.824219c6.714843-3.613281 
@@ -46,8 +46,8 @@ export const channelIcon = (width="35px") =>(
     8.464844 13.152343 30.058594 14.429687 41.75.226563 2.558594 3.636719 42.171875 3.636719 80.71875zm0 0" />
     </svg>);
 
-export const githubIcon = (width="45px")=>(
-    <svg id="Bold" enableBackground="new 0 0 24 24" viewBox="0 0 24 24" width={width} xmlns="http://www.w3.org/2000/svg">
+export const githubIcon = (dimension=45)=>(
+    <svg id="Bold" enableBackground="new 0 0 24 24" viewBox="0 0 24 24" width={dimension} xmlns="http://www.w3.org/2000/svg">
         <path d="m12 .5c-6.63 0-12 5.28-12 11.792 0 5.211 3.438 9.63 8.205 11.188.6.111.82-.254.82-.567 
         0-.28-.01-1.022-.015-2.005-3.338.711-4.042-1.582-4.042-1.582-.546-1.361-1.335-1.725-1.335-1.725-1.087-.731.084-.716.084-.716 
         1.205.082 1.838 1.215 1.838 1.215 1.07 1.803 2.809 1.282 3.495.981.108-.763.417-1.282.76-1.577-2.665-.295-5.466-1.309-5.466-5.827 
@@ -57,8 +57,8 @@ export const githubIcon = (width="45px")=>(
         8.236-11.173 0-6.512-5.373-11.792-12-11.792z" />
     </svg>);
 
-export const linkedInIcon= (width="45px")=>(
-    <svg viewBox="0 0 512 512" width={width} xmlns="http://www.w3.org/2000/svg">
+export const linkedInIcon= (dimension=45)=>(
+    <svg viewBox="0 0 512 512" width={dimension} xmlns="http://www.w3.org/2000/svg">
         <path d="m160.007812 423h-70v-226h70zm6.984376-298.003906c0-22.628906-18.359376-40.996094-40.976563-40.996094-22.703125 
         0-41.015625 18.367188-41.015625 40.996094 0 22.636718 18.3125 41.003906 41.015625 41.003906 22.617187 0 
         40.976563-18.367188 40.976563-41.003906zm255.007812 173.667968c0-60.667968-12.816406-105.664062-83.6875-105.664062-34.054688 
@@ -69,9 +69,9 @@ export const linkedInIcon= (width="45px")=>(
         20h-392c-11.027344 0-20-8.972656-20-20v-392c0-11.027344 8.972656-20 20-20zm0 0" />
     </svg>);
 
-export const exitIcon=(width="45px")=>(
+export const exitIcon=(dimension=45)=>(
     <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xlinkHref="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 512 512" style={{enableBackground: "new 0 0 512 512"}} width={width}>
+	 viewBox="0 0 512 512" style={{enableBackground: "new 0 0 512 512"}} width={dimension}>
     <g>
         <path d="M510.371,226.513c-1.088-2.603-2.645-4.971-4.629-6.955l-63.979-63.979c-8.341-8.32-21.824-8.32-30.165,0
             c-8.341,8.341-8.341,21.845,0,30.165l27.584,27.584H320.013c-11.797,0-21.333,9.557-21.333,21.333s9.536,21.333,21.333,21.333
@@ -88,8 +88,8 @@ export const exitIcon=(width="45px")=>(
     </g>
     </svg>);
 
-export const profileIcon=(width="45px")=>(
-    <svg viewBox="-42 0 512 512.002" xmlns="http://www.w3.org/2000/svg" width={width}>
+export const profileIcon=(dimension=45)=>(
+    <svg viewBox="-42 0 512 512.002" xmlns="http://www.w3.org/2000/svg" width={dimension}>
         <path d="m210.351562 246.632812c33.882813 0 63.222657-12.152343 87.195313-36.128906 23.972656-23.972656 36.125-53.304687 
         36.125-87.191406 0-33.875-12.152344-63.210938-36.128906-87.191406-23.976563-23.96875-53.3125-36.121094-87.191407-36.121094-33.886718 
         0-63.21875 12.152344-87.191406 36.125s-36.128906 53.308594-36.128906 87.1875c0 33.886719 12.15625 63.222656 36.132812 87.195312 
@@ -108,7 +108,7 @@ export const profileIcon=(width="45px")=>(
         -20.492187-1.035156-30.242187zm0 0" />
     </svg>)
 
-export const thumbsUpIcon=(dimension="45px")=>(
+export const thumbsUpIcon=(dimension=45)=>(
     <svg height={dimension} viewBox="0 0 16 16" width={dimension} xmlns="http://www.w3.org/2000/svg">
         <path d="m0 1v8c0 .552246.447693 1 1 1h3v-10h-3c-.552307 0-1 .447693-1 1z" transform="translate(0 5)"/>
         <path d="m9.15332 5.02979h-2.9541c-.258301 0-.387695-.172363-.431152-.246582-.043457-.0737305-.131348-.270508-.0063477
@@ -117,7 +117,7 @@ export const thumbsUpIcon=(dimension="45px")=>(
         1.67236v5.23242c0 1.37842 1.12158 2.5 2.5 2.5l4.97412-.0004883c1.12305 0 2.11475-.756348 2.41113-1.83887l1.06738-4.89844c.03125
         -.13623.0473633-.275879.0473633-.415527 0-1.01807-.828613-1.84668-1.84668-1.84668z" transform="translate(5 .97)"/>
     </svg>)
-export const thumbsDownIcon=(dimension="45px")=>(
+export const thumbsDownIcon=(dimension=45)=>(
     <svg style={{transform: "rotate(180deg)"}} height={dimension} viewBox="0 0 16 16" width={dimension} xmlns="http://www.w3.org/2000/svg">
         <path d="m0 1v8c0 .552246.447693 1 1 1h3v-10h-3c-.552307 0-1 .447693-1 1z" transform="translate(0 5)"/>
         <path d="m9.15332 5.02979h-2.9541c-.258301 0-.387695-.172363-.431152-.246582-.043457-.0737305-.131348-.270508-.0063477
@@ -125,4 +125,11 @@ export const thumbsDownIcon=(dimension="45px")=>(
         -.734375-.183594c-.178711-.0449219-.368164.0122071-.492676.150391l-3.9873 4.42969c-.413574.460449-.641113 1.0542-.641113 
         1.67236v5.23242c0 1.37842 1.12158 2.5 2.5 2.5l4.97412-.0004883c1.12305 0 2.11475-.756348 2.41113-1.83887l1.06738-4.89844c.03125
         -.13623.0473633-.275879.0473633-.415527 0-1.01807-.828613-1.84668-1.84668-1.84668z" transform="translate(5 .97)"/>
+    </svg>)
+
+export const shareIcon=(dimension=40)=>(
+    <svg viewBox="0 -22 512 511" style={{width: 40, height: dimension}} xmlns="http://www.w3.org/2000/svg">
+        <path d="m512 233.820312-212.777344-233.320312v139.203125h-45.238281c-140.273437 0-253.984375 
+        113.710937-253.984375 253.984375v73.769531l20.09375-22.019531c68.316406-74.851562 164.980469-117.5 
+        266.324219-117.5h12.804687v139.203125zm0 0" />
     </svg>)

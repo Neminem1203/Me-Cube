@@ -1,5 +1,5 @@
 import React from "react";
-import {profileIcon, thumbsUpIcon, thumbsDownIcon} from "../../icons";
+import {profileIcon, thumbsUpIcon, thumbsDownIcon, shareIcon} from "../../icons";
 class VideoShow extends React.Component{
     constructor(props){
         super(props);
@@ -30,12 +30,12 @@ class VideoShow extends React.Component{
     }
 
     render(){
-        const thumbsUpClass = (this.state.liked === true) ? "active like" : "like";
-        const thumbsDownClass = (this.state.liked === false) ? "active dislike" : "dislike";
+        const thumbsUpClass = (this.state.liked === true) ? "active like vid-info-btn" : "like vid-info-btn";
+        const thumbsDownClass = (this.state.liked === false) ? "active dislike vid-info-btn" : "dislike vid-info-btn";
         return (
         <div>
             <div className="col-3-5">
-                <video preload="auto" controls="controls" autoPlay="autoplay" muted="muted">
+                <video preload="auto" controls="controls" autoPlay="autoplay">
                     <source src={this.props.video.video_url}/>
                 </video>
                 <h2 style={{marginTop: "16px", marginBottom: "8px"}}>{this.props.video.title}</h2>
@@ -43,9 +43,18 @@ class VideoShow extends React.Component{
                 <ul className="video-info">
                     <li style={{color:"gray"}}>9001 views • {this.props.video.created_at}</li>
                     <li>
-                        <div onClick={this.thumbAction(true)} className={thumbsUpClass}>{thumbsUpIcon(20)}{this.state.likes}</div>
-                        <div onClick={this.thumbAction(false)} className={thumbsDownClass}>{thumbsDownIcon(20)}{this.state.dislikes}</div>
-                        <button onClick={this.copyShareUrl}>Share</button>
+                        <div onClick={this.thumbAction(true)} className={thumbsUpClass}>
+                            {thumbsUpIcon(20)}
+                            <span>{this.state.likes}</span>
+                        </div>
+                        <div onClick={this.thumbAction(false)} className={thumbsDownClass}>
+                            {thumbsDownIcon(20)}
+                            <span>{this.state.dislikes}</span>
+                        </div>
+                        <div onClick={this.copyShareUrl} className="vid-info-btn">
+                            {shareIcon(20)}
+                            <span>Share</span>
+                        </div>
                     </li>
                 </ul>
                     <div className="profile-pic">

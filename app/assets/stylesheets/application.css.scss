@@ -254,11 +254,16 @@ input:focus {outline:0;}
   float: left;
   margin-top: 14px;
 }
-.like, .dislike{
+.vid-info-btn{
   float: left;
-  width: 45px;
+  width: 75px;
   text-align:center;
   font-size: 10px;
+  vertical-align: center;
+}
+.vid-info-btn:hover{
+  cursor: pointer;
+  fill: lightgray;
 }
 .dislike{margin: 0 15px}
 .like.active, .dislike.active{

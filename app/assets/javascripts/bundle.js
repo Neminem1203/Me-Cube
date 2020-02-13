@@ -1148,15 +1148,14 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var thumbsUpClass = this.state.liked === true ? "active like" : "like";
-      var thumbsDownClass = this.state.liked === false ? "active dislike" : "dislike";
+      var thumbsUpClass = this.state.liked === true ? "active like vid-info-btn" : "like vid-info-btn";
+      var thumbsDownClass = this.state.liked === false ? "active dislike vid-info-btn" : "dislike vid-info-btn";
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-3-5"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("video", {
         preload: "auto",
         controls: "controls",
-        autoPlay: "autoplay",
-        muted: "muted"
+        autoPlay: "autoplay"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("source", {
         src: this.props.video.video_url
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
@@ -1177,12 +1176,13 @@ function (_React$Component) {
       }, "9001 views \u2022 ", this.props.video.created_at), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onClick: this.thumbAction(true),
         className: thumbsUpClass
-      }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["thumbsUpIcon"])(20), this.state.likes), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["thumbsUpIcon"])(20), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, this.state.likes)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onClick: this.thumbAction(false),
         className: thumbsDownClass
-      }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["thumbsDownIcon"])(20), this.state.dislikes), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.copyShareUrl
-      }, "Share"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["thumbsDownIcon"])(20), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, this.state.dislikes)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        onClick: this.copyShareUrl,
+        className: "vid-info-btn"
+      }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["shareIcon"])(20), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Share")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "profile-pic"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         href: "/#/channel/".concat(this.props.video.creator_id)
@@ -1239,7 +1239,7 @@ var mSTP = function mSTP(state, ownProps) {
     video: {
       title: "Fake Title for Fake Video",
       video_url: "https://upload.wikimedia.org/wikipedia/commons/d/d0/Caminandes-_Llama_Drama_-_Short_Movie.ogv",
-      description: "This is a Fake Description for a fake show page",
+      description: "This is a Fake Description for a fake show page. Nothing gets saved to database as of yet",
       created_at: "12 Feb 2020",
       creator_id: 1,
       liked: true // creator: state.entities.users[state.entities.video.creator_id]
@@ -1264,7 +1264,7 @@ var mSTP = function mSTP(state, ownProps) {
 /*!***************************!*\
   !*** ./frontend/icons.js ***!
   \***************************/
-/*! exports provided: homeIcon, channelIcon, githubIcon, linkedInIcon, exitIcon, profileIcon, thumbsUpIcon, thumbsDownIcon */
+/*! exports provided: homeIcon, channelIcon, githubIcon, linkedInIcon, exitIcon, profileIcon, thumbsUpIcon, thumbsDownIcon, shareIcon */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1277,11 +1277,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "profileIcon", function() { return profileIcon; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "thumbsUpIcon", function() { return thumbsUpIcon; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "thumbsDownIcon", function() { return thumbsDownIcon; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "shareIcon", function() { return shareIcon; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
 var homeIcon = function homeIcon() {
-  var width = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "45px";
+  var dimension = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 45;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
     version: "1.1",
     id: "Capa_1",
@@ -1293,7 +1294,7 @@ var homeIcon = function homeIcon() {
     style: {
       enableBackground: "new 0 0 512.001 512.001"
     },
-    width: width
+    width: dimension
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("g", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     d: "M503.402,228.885L273.684,19.567c-10.083-9.189-25.288-9.188-35.367-0.001L8.598,228.886 c-8.077,7.36-10.745,18.7-6.799,28.889c3.947,10.189,13.557,16.772,24.484,16.772h36.69v209.721 c0,8.315,6.742,15.057,15.057,15.057h125.914c8.315,0,15.057-6.741,15.057-15.057V356.932h74.002v127.337 c0,8.315,6.742,15.057,15.057,15.057h125.908c8.315,0,15.057-6.741,15.057-15.057V274.547h36.697 c10.926,0,20.537-6.584,24.484-16.772C514.147,247.585,511.479,236.246,503.402,228.885z"
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("g", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
@@ -1301,11 +1302,11 @@ var homeIcon = function homeIcon() {
   })));
 };
 var channelIcon = function channelIcon() {
-  var width = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "35px";
+  var dimension = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 35;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
     style: {
-      width: width,
-      height: width
+      width: dimension,
+      height: dimension
     },
     viewBox: "0 0 512.00199 512",
     xmlns: "http://www.w3.org/2000/svg"
@@ -1316,29 +1317,29 @@ var channelIcon = function channelIcon() {
   }));
 };
 var githubIcon = function githubIcon() {
-  var width = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "45px";
+  var dimension = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 45;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
     id: "Bold",
     enableBackground: "new 0 0 24 24",
     viewBox: "0 0 24 24",
-    width: width,
+    width: dimension,
     xmlns: "http://www.w3.org/2000/svg"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     d: "m12 .5c-6.63 0-12 5.28-12 11.792 0 5.211 3.438 9.63 8.205 11.188.6.111.82-.254.82-.567  0-.28-.01-1.022-.015-2.005-3.338.711-4.042-1.582-4.042-1.582-.546-1.361-1.335-1.725-1.335-1.725-1.087-.731.084-.716.084-.716  1.205.082 1.838 1.215 1.838 1.215 1.07 1.803 2.809 1.282 3.495.981.108-.763.417-1.282.76-1.577-2.665-.295-5.466-1.309-5.466-5.827  0-1.287.465-2.339 1.235-3.164-.135-.298-.54-1.497.105-3.121 0 0 1.005-.316 3.3 1.209.96-.262 1.98-.392 3-.398 1.02.006  2.04.136 3 .398 2.28-1.525 3.285-1.209 3.285-1.209.645 1.624.24 2.823.12 3.121.765.825 1.23 1.877 1.23 3.164 0 4.53-2.805  5.527-5.475 5.817.42.354.81 1.077.81 2.182 0 1.578-.015 2.846-.015 3.229 0 .309.21.678.825.56 4.801-1.548 8.236-5.97  8.236-11.173 0-6.512-5.373-11.792-12-11.792z"
   }));
 };
 var linkedInIcon = function linkedInIcon() {
-  var width = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "45px";
+  var dimension = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 45;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
     viewBox: "0 0 512 512",
-    width: width,
+    width: dimension,
     xmlns: "http://www.w3.org/2000/svg"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     d: "m160.007812 423h-70v-226h70zm6.984376-298.003906c0-22.628906-18.359376-40.996094-40.976563-40.996094-22.703125  0-41.015625 18.367188-41.015625 40.996094 0 22.636718 18.3125 41.003906 41.015625 41.003906 22.617187 0  40.976563-18.367188 40.976563-41.003906zm255.007812 173.667968c0-60.667968-12.816406-105.664062-83.6875-105.664062-34.054688  0-56.914062 17.03125-66.246094 34.742188h-.066406v-30.742188h-68v226h68v-112.210938c0-29.386718 7.480469-57.855468  43.90625-57.855468 35.929688 0 37.09375 33.605468 37.09375 59.722656v110.34375h69zm90  153.335938v-392c0-33.085938-26.914062-60-60-60h-392c-33.085938 0-60 26.914062-60 60v392c0 33.085938 26.914062 60 60  60h392c33.085938 0 60-26.914062 60-60zm-60-412c11.027344 0 20 8.972656 20 20v392c0 11.027344-8.972656 20-20  20h-392c-11.027344 0-20-8.972656-20-20v-392c0-11.027344 8.972656-20 20-20zm0 0"
   }));
 };
 var exitIcon = function exitIcon() {
-  var width = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "45px";
+  var dimension = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 45;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
     version: "1.1",
     id: "Capa_1",
@@ -1350,7 +1351,7 @@ var exitIcon = function exitIcon() {
     style: {
       enableBackground: "new 0 0 512 512"
     },
-    width: width
+    width: dimension
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("g", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     d: "M510.371,226.513c-1.088-2.603-2.645-4.971-4.629-6.955l-63.979-63.979c-8.341-8.32-21.824-8.32-30.165,0 c-8.341,8.341-8.341,21.845,0,30.165l27.584,27.584H320.013c-11.797,0-21.333,9.557-21.333,21.333s9.536,21.333,21.333,21.333 h119.168l-27.584,27.584c-8.341,8.341-8.341,21.845,0,30.165c4.16,4.181,9.621,6.251,15.083,6.251s10.923-2.069,15.083-6.251 l63.979-63.979c1.984-1.963,3.541-4.331,4.629-6.955C512.525,237.606,512.525,231.718,510.371,226.513z"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
@@ -1358,11 +1359,11 @@ var exitIcon = function exitIcon() {
   })));
 };
 var profileIcon = function profileIcon() {
-  var width = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "45px";
+  var dimension = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 45;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
     viewBox: "-42 0 512 512.002",
     xmlns: "http://www.w3.org/2000/svg",
-    width: width
+    width: dimension
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     d: "m210.351562 246.632812c33.882813 0 63.222657-12.152343 87.195313-36.128906 23.972656-23.972656 36.125-53.304687  36.125-87.191406 0-33.875-12.152344-63.210938-36.128906-87.191406-23.976563-23.96875-53.3125-36.121094-87.191407-36.121094-33.886718  0-63.21875 12.152344-87.191406 36.125s-36.128906 53.308594-36.128906 87.1875c0 33.886719 12.15625 63.222656 36.132812 87.195312  23.976563 23.96875 53.3125 36.125 87.1875 36.125zm0 0"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
@@ -1370,7 +1371,7 @@ var profileIcon = function profileIcon() {
   }));
 };
 var thumbsUpIcon = function thumbsUpIcon() {
-  var dimension = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "45px";
+  var dimension = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 45;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
     height: dimension,
     viewBox: "0 0 16 16",
@@ -1385,7 +1386,7 @@ var thumbsUpIcon = function thumbsUpIcon() {
   }));
 };
 var thumbsDownIcon = function thumbsDownIcon() {
-  var dimension = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "45px";
+  var dimension = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 45;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
     style: {
       transform: "rotate(180deg)"
@@ -1400,6 +1401,19 @@ var thumbsDownIcon = function thumbsDownIcon() {
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     d: "m9.15332 5.02979h-2.9541c-.258301 0-.387695-.172363-.431152-.246582-.043457-.0737305-.131348-.270508-.0063477 -.496094l1.0415-1.87549c.228516-.410645.251953-.893555.0649414-1.32471-.187012-.43164-.556152-.744629-1.0127-.858398l -.734375-.183594c-.178711-.0449219-.368164.0122071-.492676.150391l-3.9873 4.42969c-.413574.460449-.641113 1.0542-.641113  1.67236v5.23242c0 1.37842 1.12158 2.5 2.5 2.5l4.97412-.0004883c1.12305 0 2.11475-.756348 2.41113-1.83887l1.06738-4.89844c.03125 -.13623.0473633-.275879.0473633-.415527 0-1.01807-.828613-1.84668-1.84668-1.84668z",
     transform: "translate(5 .97)"
+  }));
+};
+var shareIcon = function shareIcon() {
+  var dimension = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 40;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    viewBox: "0 -22 512 511",
+    style: {
+      width: 40,
+      height: dimension
+    },
+    xmlns: "http://www.w3.org/2000/svg"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "m512 233.820312-212.777344-233.320312v139.203125h-45.238281c-140.273437 0-253.984375  113.710937-253.984375 253.984375v73.769531l20.09375-22.019531c68.316406-74.851562 164.980469-117.5  266.324219-117.5h12.804687v139.203125zm0 0"
   }));
 };
 
