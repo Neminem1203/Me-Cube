@@ -34,7 +34,7 @@ class VideoShow extends React.Component{
         const thumbsDownClass = (this.state.liked === false) ? "active dislike vid-info-btn" : "dislike vid-info-btn";
         return (
         <div>
-            <div className="col-3-5">
+            <div className="video-container">
                 <video preload="auto" controls="controls" autoPlay="autoplay">
                     <source src={this.props.video.video_url}/>
                 </video>
@@ -67,8 +67,8 @@ class VideoShow extends React.Component{
                     <h5 style={{fontWeight: "400"}}>{this.props.video.description}</h5>
                 </div>
             </div>
-            <div className="col-2-5">
-                RECOMMENDATIONS
+            <div className="video-recommendations">
+                <span>Recommendation</span>
             </div>
         </div>
         )

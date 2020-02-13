@@ -1151,7 +1151,7 @@ function (_React$Component) {
       var thumbsUpClass = this.state.liked === true ? "active like vid-info-btn" : "like vid-info-btn";
       var thumbsDownClass = this.state.liked === false ? "active dislike vid-info-btn" : "dislike vid-info-btn";
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-3-5"
+        className: "video-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("video", {
         preload: "auto",
         controls: "controls",
@@ -1203,8 +1203,8 @@ function (_React$Component) {
           fontWeight: "400"
         }
       }, this.props.video.description))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-2-5"
-      }, "RECOMMENDATIONS"));
+        className: "video-recommendations"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Recommendation")));
     }
   }]);
 
