@@ -38,7 +38,7 @@ export const getUsers = userList => dispatch =>{
         payload => dispatch(receiveUsers(payload)),
         error => {
             dispatch(receiveError(error.responseJSON[0]));
-            setInterval(()=>dispatch(receiveError("")), 4000);
+            setTimeout(()=>dispatch(receiveError("")), 4000);
         });
 }
 
@@ -47,7 +47,7 @@ export const getUser = userId => dispatch =>{
         (payload => dispatch(receiveUser(payload)),
             error => {
                 dispatch(receiveError(error.responseJSON[0]));
-                setInterval(() => dispatch(receiveError("")), 4000);
+                setTimeout(() => dispatch(receiveError("")), 4000);
             });
 }
 
@@ -59,7 +59,7 @@ export const createUser = user => dispatch =>{
         },
         error => {
             dispatch(receiveError(error.responseJSON[0]));
-            setInterval(() => dispatch(receiveError("")), 4000);
+            setTimeout(() => dispatch(receiveError("")), 4000);
         });
 }
 
@@ -71,7 +71,7 @@ export const login = user => dispatch =>{
         },
         error => {
             dispatch(receiveError(error.responseJSON[0]));
-            setInterval(() => dispatch(receiveError("")), 4000);
+            setTimeout(() => dispatch(receiveError("")), 4000);
         });
 }
 
@@ -80,6 +80,6 @@ export const logout = () => dispatch =>{
         () => dispatch(logoutUser()),
         error => {
             dispatch(receiveError(error.responseJSON[0]));
-            setInterval(() => dispatch(receiveError("")), 4000);
+            setTimeout(() => dispatch(receiveError("")), 4000);
         });
 }

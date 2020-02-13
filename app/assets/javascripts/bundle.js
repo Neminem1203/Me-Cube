@@ -190,7 +190,7 @@ var getUsers = function getUsers(userList) {
       return dispatch(receiveUsers(payload));
     }, function (error) {
       dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["receiveError"])(error.responseJSON[0]));
-      setInterval(function () {
+      setTimeout(function () {
         return dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["receiveError"])(""));
       }, 4000);
     });
@@ -202,7 +202,7 @@ var getUser = function getUser(userId) {
       return dispatch(receiveUser(payload));
     }, function (error) {
       dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["receiveError"])(error.responseJSON[0]));
-      setInterval(function () {
+      setTimeout(function () {
         return dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["receiveError"])(""));
       }, 4000);
     });
@@ -215,7 +215,7 @@ var createUser = function createUser(user) {
       dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["showModal"])(""));
     }, function (error) {
       dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["receiveError"])(error.responseJSON[0]));
-      setInterval(function () {
+      setTimeout(function () {
         return dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["receiveError"])(""));
       }, 4000);
     });
@@ -228,7 +228,7 @@ var login = function login(user) {
       dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["showModal"])(""));
     }, function (error) {
       dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["receiveError"])(error.responseJSON[0]));
-      setInterval(function () {
+      setTimeout(function () {
         return dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["receiveError"])(""));
       }, 4000);
     });
@@ -240,7 +240,7 @@ var logout = function logout() {
       return dispatch(logoutUser());
     }, function (error) {
       dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["receiveError"])(error.responseJSON[0]));
-      setInterval(function () {
+      setTimeout(function () {
         return dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["receiveError"])(""));
       }, 4000);
     });

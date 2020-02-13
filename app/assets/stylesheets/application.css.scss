@@ -26,10 +26,9 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-.hidden{
-  display: none !important;
-}
-
+.hidden{display: none !important;}
+button:focus {outline:0;}
+input:focus {outline:0;}
 // USER FORM
 .user-form{
   box-sizing: border-box;
@@ -294,7 +293,6 @@ body{
   font-family: Roboto, Arial, sans-serif;
   // background-color: #c3c3c3;
 }
-button:focus {outline:0;}
 button{
   color: white;
   background-color: #1a73e8;
