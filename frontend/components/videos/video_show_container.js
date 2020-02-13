@@ -8,6 +8,7 @@ const mSTP = (state, ownProps) => {
             title: "Fake Title for Fake Video",
             video_url: "https://upload.wikimedia.org/wikipedia/commons/d/d0/Caminandes-_Llama_Drama_-_Short_Movie.ogv",
             description: "Fake Description",
+            created_at: "12 Feb 2020",
         },
         sidebar: state.ui.sidebar
     }

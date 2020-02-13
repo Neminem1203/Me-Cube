@@ -3,6 +3,7 @@ import LoginModal from "../users/signin_container";
 import SignUpModal from "../users/signup_container";
 import { LOGIN, SIGN_UP, ACCOUNT_DETAILS } from "../../actions/modal_actions";
 import { Link } from "react-router-dom";
+import { channelIcon, githubIcon, linkedInIcon, exitIcon } from "../../icons";
 
 
 const Navbar = props => {
@@ -15,27 +16,30 @@ const Navbar = props => {
                 <ul className="account-navbar">
                     <h4>Username: {props.user.username}</h4>
                     <h4>{props.user.email}</h4>
-                    <Link to={`/channel/${props.user.id}`}>
+                    <Link to={`/channel/${props.user.id}`} onClick={()=>props.showModal("")}>
                         <li>
-                            <img src={window.channelIcon} />
+                            {channelIcon}
                             <span>Your Channel</span>
                         </li>
                     </Link>
-                    <a target="_blank" href="https://www.github.com/neminem1203">
+                        <a target="_blank" href="https://www.github.com/neminem1203" onClick={() => props.showModal("")}>
                         <li>
-                            <img src={window.githubIcon}/>
+                            {githubIcon}
                             <span>GitHub</span>
                         </li>
                     </a>
-                    <a target="_blank"  href="https://sg.linkedin.com/in/tpaul1203">
+                        <a target="_blank" href="https://sg.linkedin.com/in/tpaul1203" onClick={() => props.showModal("")}>
                         <li>
-                            <img src={window.linkedinIcon}/>
+                            {linkedInIcon}
                             <span>LinkedIn</span>
                         </li>
                     </a>
-                    <a href="#" onClick={props.logout}>
+                    <a href="#" onClick={()=> {
+                        props.showModal("");
+                        props.logout
+                    }}>
                         <li>
-                            <img src={window.logOutIcon}/>
+                            {exitIcon}
                             <span>Logout</span>
                         </li>
                     </a>

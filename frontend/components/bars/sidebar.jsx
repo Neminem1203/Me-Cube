@@ -1,5 +1,5 @@
 import React from "react";
-
+import {homeIcon, channelIcon, githubIcon, linkedInIcon} from "../../icons";
 
 
 class Sidebar extends React.Component{
@@ -28,16 +28,18 @@ class Sidebar extends React.Component{
 
         let channelButton = <></>;
         if (this.props.channelId)
-            {channelButton = <a href={`/#/channel/${this.props.channelId}`}><li className={channelClass}><img src={window.channelIcon}/>Channel</li></a>}
+            {channelButton = <a href={`/#/channel/${this.props.channelId}`}><li className={channelClass}>{channelIcon()} Channel</li></a>}
         
         return (
             <div className={sidebarClass}>
                 <a onClick={() => this.sidebarToggle(this.props.sidebarToggle)}><img src={window.menuIcon}/></a>
                 <ul>
-                    <a href="/#/"><li className={homeClass}><img src={window.homeIcon}/>Home</li></a>
+                    <a href="/#/"><li className={homeClass}>
+                        {homeIcon()}Home
+                    </li></a>
                     {channelButton}
-                    <a target="_blank" href="https://www.github.com/neminem1203"><li><img src={window.githubIcon}/>GitHub</li></a>
-                    <a target="_blank" href="https://sg.linkedin.com/in/tpaul1203"><li><img src={window.linkedinIcon}/>LinkedIn</li></a>
+                    <a target="_blank" href="https://www.github.com/neminem1203"><li>{githubIcon()}GitHub</li></a>
+                    <a target="_blank" href="https://sg.linkedin.com/in/tpaul1203"><li>{linkedInIcon()}LinkedIn</li></a>
                 </ul>
             </div>
         )
