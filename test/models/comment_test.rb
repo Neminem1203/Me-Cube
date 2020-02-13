@@ -2,13 +2,13 @@
 #
 # Table name: comments
 #
-#  id           :bigint           not null, primary key
-#  comment      :text             not null
-#  response_to  :integer
-#  video_id     :integer
-#  commenter_id :integer          not null
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
+#  id               :bigint           not null, primary key
+#  comment          :text             not null
+#  commenter_id     :integer          not null
+#  commentable_type :string
+#  commentable_id   :bigint
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
 #
 
 require 'test_helper'

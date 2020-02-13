@@ -31,7 +31,7 @@ class UserForm extends React.Component{
             <>
                 <div className="user-form">
                     <div>
-                        <button onClick={e=>{e.preventDefault;this.props.showModal(otherForm)}}> {otherForm} </button>
+                        <button onClick={()=>{this.props.showModal(otherForm)}}> {otherForm} </button>
                         <a onClick={this.props.demo}>Demo</a>
                         <a onClick={()=>this.props.showModal("")}> x</a>
                     </div>
@@ -42,7 +42,7 @@ class UserForm extends React.Component{
                         <br />
                         <input placeholder="Password" type="password" onChange={this.updateField("password")} value={this.state.password} />
                         <br />
-                        <button>{this.props.formType}</button>
+                        <button className="user-submit-btn">{this.props.formType}</button>
                     </form>
                 </div>
             </>

@@ -17,14 +17,13 @@ ActiveRecord::Schema.define(version: 2020_02_12_041811) do
 
   create_table "comments", force: :cascade do |t|
     t.text "comment", null: false
-    t.integer "response_to"
-    t.integer "video_id"
     t.integer "commenter_id", null: false
+    t.string "commentable_type"
+    t.bigint "commentable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
     t.index ["commenter_id"], name: "index_comments_on_commenter_id"
-    t.index ["response_to"], name: "index_comments_on_response_to"
-    t.index ["video_id"], name: "index_comments_on_video_id"
   end
 
   create_table "likes", force: :cascade do |t|

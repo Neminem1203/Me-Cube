@@ -18,19 +18,19 @@ const Navbar = props => {
                     <h4>{props.user.email}</h4>
                     <Link to={`/channel/${props.user.id}`} onClick={()=>props.showModal("")}>
                         <li>
-                            {channelIcon}
+                            {channelIcon()}
                             <span>Your Channel</span>
                         </li>
                     </Link>
                         <a target="_blank" href="https://www.github.com/neminem1203" onClick={() => props.showModal("")}>
                         <li>
-                            {githubIcon}
+                            {githubIcon()}
                             <span>GitHub</span>
                         </li>
                     </a>
                         <a target="_blank" href="https://sg.linkedin.com/in/tpaul1203" onClick={() => props.showModal("")}>
                         <li>
-                            {linkedInIcon}
+                            {linkedInIcon()}
                             <span>LinkedIn</span>
                         </li>
                     </a>
@@ -39,7 +39,7 @@ const Navbar = props => {
                         props.logout();
                     }}>
                         <li>
-                            {exitIcon}
+                            {exitIcon()}
                             <span>Logout</span>
                         </li>
                     </a>

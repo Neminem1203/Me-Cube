@@ -328,25 +328,25 @@ var Navbar = function Navbar(props) {
         onClick: function onClick() {
           return props.showModal("");
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, _icons__WEBPACK_IMPORTED_MODULE_5__["channelIcon"], react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Your Channel"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, Object(_icons__WEBPACK_IMPORTED_MODULE_5__["channelIcon"])(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Your Channel"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         target: "_blank",
         href: "https://www.github.com/neminem1203",
         onClick: function onClick() {
           return props.showModal("");
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, _icons__WEBPACK_IMPORTED_MODULE_5__["githubIcon"], react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "GitHub"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, Object(_icons__WEBPACK_IMPORTED_MODULE_5__["githubIcon"])(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "GitHub"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         target: "_blank",
         href: "https://sg.linkedin.com/in/tpaul1203",
         onClick: function onClick() {
           return props.showModal("");
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, _icons__WEBPACK_IMPORTED_MODULE_5__["linkedInIcon"], react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "LinkedIn"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, Object(_icons__WEBPACK_IMPORTED_MODULE_5__["linkedInIcon"])(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "LinkedIn"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         href: "#",
         onClick: function onClick() {
           props.showModal("");
           props.logout();
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, _icons__WEBPACK_IMPORTED_MODULE_5__["exitIcon"], react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Logout")))), " ");
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, Object(_icons__WEBPACK_IMPORTED_MODULE_5__["exitIcon"])(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Logout")))), " ");
 
       picture_function = function picture_function() {
         return props.showModal("");
@@ -1000,9 +1000,7 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "user-form"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: function onClick(e) {
-          e.preventDefault;
-
+        onClick: function onClick() {
           _this3.props.showModal(otherForm);
         }
       }, " ", otherForm, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
@@ -1023,7 +1021,9 @@ function (_React$Component) {
         type: "password",
         onChange: this.updateField("password"),
         value: this.state.password
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, this.props.formType))));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "user-submit-btn"
+      }, this.props.formType))));
     }
   }]);
 
