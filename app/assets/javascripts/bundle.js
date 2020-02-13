@@ -372,7 +372,6 @@ var Navbar = function Navbar(props) {
           return props.showModal("");
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, Object(_icons__WEBPACK_IMPORTED_MODULE_5__["linkedInIcon"])(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "LinkedIn"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "#",
         onClick: function onClick() {
           props.showModal("");
           props.logout();

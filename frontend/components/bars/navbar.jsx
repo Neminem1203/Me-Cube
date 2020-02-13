@@ -37,7 +37,7 @@ const Navbar = props => {
                             <span>LinkedIn</span>
                         </li>
                     </a>
-                    <a href="#" onClick={()=> {
+                    <a onClick={()=> {
                         props.showModal("");
                         props.logout();
                     }}>
