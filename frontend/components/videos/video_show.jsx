@@ -1,4 +1,5 @@
 import React from "react";
+import {profileIcon} from "../../icons";
 class VideoShow extends React.Component{
     constructor(props){
         super(props);
@@ -19,18 +20,25 @@ class VideoShow extends React.Component{
                 <video preload="auto" controls="controls" autoPlay="autoplay">
                     <source src={this.props.video.video_url}/>
                 </video>
-                <h1 style={{margin: 0}}>{this.props.video.title}</h1>
+                <h2 style={{marginTop: "16px", marginBottom: "8px"}}>{this.props.video.title}</h2>
                 <textarea id="current-video-url" className="hidden" defaultValue={window.location.href}/>
                 <ul className="video-info">
-                    <li>9001 views • {this.props.video.created_at}</li>
+                    <li style={{color:"gray"}}>9001 views • {this.props.video.created_at}</li>
                     <li>
                         <button>Like</button>
                         <button>Dislike</button>
                         <button onClick={this.copyShareUrl}>Share</button>
                     </li>
                 </ul>
-                <h3>{this.props.video.description}</h3>
-                <h3>Video URL: {this.props.video.video_url}</h3>
+                    <div className="profile-pic">
+                        <a href={`/#/channel/${this.props.video.creator_id}`}>{profileIcon("30px")}</a>
+                </div>
+                <div className="col-4-5">
+                    <a href={`/#/channel/${this.props.video.creator_id}`} style={{textDecoration: "none", color:"black"}}>
+                        <h3 style={{fontSize: "18px"}}>{this.props.creator.username}</h3>
+                    </a>
+                    <h5 style={{fontWeight: "400"}}>{this.props.video.description}</h5>
+                </div>
             </div>
             <div className="col-2-5">
                 RECOMMENDATIONS

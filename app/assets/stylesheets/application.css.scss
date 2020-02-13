@@ -147,6 +147,8 @@ input:focus {outline:0;}
   margin-right: 0;
 }
 .sidebar{
+  z-index: 2;
+  background-color: white;
   float: left;
   height: 98vh;
   width: 65px;
@@ -246,12 +248,21 @@ input:focus {outline:0;}
   flex-direction: row;
   list-style-type: none;
   justify-content: space-between;
-  align-items: center;
+  // align-items: center;
   border-bottom: 1px solid lightgray;
   padding-bottom: 7px;
 }
+.profile-pic{
+  float: left;
+  margin-top: 14px;
+}
 [class^="col-"]{
   float: left;
+}
+.col-1-5{
+  margin-right: 8px;
+  min-width: 15%;
+  width: 15%;
 }
 .col-2-5{
   margin-left: 5%;
@@ -259,9 +270,14 @@ input:focus {outline:0;}
   width: 30%;
 }
 .col-3-5{
+  margin-left: 25px;
   min-width: 55%;
   width: 55%;
-  margin-left: 25px;
+}
+.col-4-5{
+  margin-left: 12px;
+  min-width: 75%;
+  width: 75%;
 }
 #me-cube-logo img{
   width: 150px;

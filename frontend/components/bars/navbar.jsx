@@ -14,8 +14,10 @@ const Navbar = props => {
             modal = (
             <>
                 <ul className="account-navbar">
-                    <h4>Username: {props.user.username}</h4>
-                    <h4>{props.user.email}</h4>
+                    <div style={{boxSizing: "border-box", margin: "6px"}}>
+                        <h4>Username: {props.user.username}</h4>
+                        <h4>{props.user.email}</h4>
+                    </div>
                     <Link to={`/channel/${props.user.id}`} onClick={()=>props.showModal("")}>
                         <li>
                             {channelIcon()}

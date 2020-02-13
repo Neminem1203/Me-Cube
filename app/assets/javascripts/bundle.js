@@ -323,7 +323,12 @@ var Navbar = function Navbar(props) {
     if (props.modal === _actions_modal_actions__WEBPACK_IMPORTED_MODULE_3__["ACCOUNT_DETAILS"]) {
       modal = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "account-navbar"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Username: ", props.user.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, props.user.email), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: {
+          boxSizing: "border-box",
+          margin: "6px"
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Username: ", props.user.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, props.user.email)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
         to: "/channel/".concat(props.user.id),
         onClick: function onClick() {
           return props.showModal("");
@@ -1045,6 +1050,7 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../icons */ "./frontend/icons.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1062,6 +1068,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -1097,9 +1104,10 @@ function (_React$Component) {
         autoPlay: "autoplay"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("source", {
         src: this.props.video.video_url
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
         style: {
-          margin: 0
+          marginTop: "16px",
+          marginBottom: "8px"
         }
       }, this.props.video.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
         id: "current-video-url",
@@ -1107,9 +1115,33 @@ function (_React$Component) {
         defaultValue: window.location.href
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "video-info"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "9001 views \u2022 ", this.props.video.created_at), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Like"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Dislike"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        style: {
+          color: "gray"
+        }
+      }, "9001 views \u2022 ", this.props.video.created_at), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Like"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Dislike"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.copyShareUrl
-      }, "Share"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.props.video.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Video URL: ", this.props.video.video_url)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Share"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "profile-pic"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "/#/channel/".concat(this.props.video.creator_id)
+      }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["profileIcon"])("30px"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-4-5"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "/#/channel/".concat(this.props.video.creator_id),
+        style: {
+          textDecoration: "none",
+          color: "black"
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        style: {
+          fontSize: "18px"
+        }
+      }, this.props.creator.username)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+        style: {
+          fontWeight: "400"
+        }
+      }, this.props.video.description))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-2-5"
       }, "RECOMMENDATIONS"));
     }
@@ -1137,13 +1169,24 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mSTP = function mSTP(state, ownProps) {
+  /*
+  const videoProp = state.entities.videos[ownProps.match.params.video_id]
+  */
   return {
-    // video: state.entities.videos[ownProps.match.params.video_id]
+    // video: videoProp
+    // creator: state.entities.users[videoProp.creator_id]
     video: {
       title: "Fake Title for Fake Video",
       video_url: "https://upload.wikimedia.org/wikipedia/commons/d/d0/Caminandes-_Llama_Drama_-_Short_Movie.ogv",
-      description: "Fake Description",
-      created_at: "12 Feb 2020"
+      description: "This is a Fake Description for a fake show page",
+      created_at: "12 Feb 2020",
+      creator_id: 1 // creator: state.entities.users[state.entities.video.creator_id]
+
+    },
+    creator: {
+      id: 1,
+      username: "Test Username",
+      video_id: [1]
     },
     sidebar: state.ui.sidebar
   };
