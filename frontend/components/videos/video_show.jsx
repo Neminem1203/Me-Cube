@@ -13,8 +13,6 @@ class VideoShow extends React.Component{
         video_url.classList.add("hidden");
     }
     render(){
-        debugger
-        
         return (
         <div>
             <div className="col-3-5">

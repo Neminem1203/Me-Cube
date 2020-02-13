@@ -16,7 +16,7 @@ export const homeIcon =(width="45px")=>(
     </svg>);
 
 
-export const channelIcon =(width="35px")=>(
+export const channelIcon =(width="35_px")=>(
     <svg viewBox="0 0 512.00199 512" xmlns="http://www.w3.org/2000/svg" style={{width: width}}>
     <path d="m334.808594 170.992188-113.113282-61.890626c-6.503906-3.558593-14.191406-3.425781-20.566406.351563-6.378906 
     3.78125-10.183594 10.460937-10.183594 17.875v122.71875c0 7.378906 3.78125 14.046875 10.117188 17.832031 3.308594 1.976563 

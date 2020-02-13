@@ -1089,7 +1089,6 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      debugger;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-3-5"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("video", {
@@ -1193,7 +1192,7 @@ var homeIcon = function homeIcon() {
   })));
 };
 var channelIcon = function channelIcon() {
-  var width = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "35px";
+  var width = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "35_px";
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
     viewBox: "0 0 512.00199 512",
     xmlns: "http://www.w3.org/2000/svg",
