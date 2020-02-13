@@ -28,7 +28,7 @@ class UserForm extends React.Component{
             </>;
         }
         return (
-            <>
+            <div className="user-form-background">
                 <div className="user-form">
                     <div>
                         <button onClick={()=>{this.props.showModal(otherForm)}}> {otherForm} </button>
@@ -45,7 +45,7 @@ class UserForm extends React.Component{
                         <button className="user-submit-btn">{this.props.formType}</button>
                     </form>
                 </div>
-            </>
+            </div>
         );
     }
 }

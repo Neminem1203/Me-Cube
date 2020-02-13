@@ -35,20 +35,45 @@
 button:focus {outline:0;}
 input:focus {outline:0;}
 // USER FORM
+// .user-form{
+//   z-index: 2;
+//   box-sizing: border-box;
+//   padding: 15px;
+//   position: absolute;
+//   top: 15px;
+//   right: 15px;
+//   border: 1px solid black;
+//   background-color: rgb(240, 240, 240);
+//   width: 275px;
+//   display: flex;
+//   flex-wrap: wrap;
+//   justify-content: center;
+//   border-radius: 5px;
+// }
 .user-form{
-  z-index: 2;
+  z-index: 3;
   box-sizing: border-box;
   padding: 15px;
   position: absolute;
-  top: 15px;
-  right: 15px;
   border: 1px solid black;
-  background-color: rgb(240, 240, 240);
+  background-color: rgb(240,240,240);
   width: 275px;
+  // height: 300px;
+  top: calc(50vh - 165px);
+  left: calc(50vw - 137.5px);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   border-radius: 5px;
+}
+.user-form-background{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: white;
+  z-index: 2;
 }
 .user-form > div{
   width: 100%;
@@ -233,11 +258,11 @@ input:focus {outline:0;}
 .main-content{
   box-sizing: border-box;
   margin-left: 0;
-  margin-top: 5.5px;
+  margin-top: 8.5px;
   position: fixed;
   padding: 15px;
-  padding-left: 80px;
-  height: calc(100% - 84.84px);
+  padding-left: 80px;     //img height + margin-top
+  height: calc(100% - calc(76.34px + 8.5px));
   min-width: 1000px;
   width: 100%;
   background-color: rgb(228, 228, 228);
@@ -317,13 +342,15 @@ input:focus {outline:0;}
   min-width: 75%;
   width: 75%;
 }
-#me-cube-logo img{
-  width: 150px;
-  margin-top: 15px;
+#me-cube-logo{
   margin-left: 75px;
 }
-#me-cube-logo.active img{
+#me-cube-logo.active{
   margin-left: 150px;
+}
+#me-cube-logo img{
+  margin-top: 12px;
+  width: 150px;
 }
 #error-window{
   z-index: 2;

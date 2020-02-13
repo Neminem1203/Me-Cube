@@ -12,8 +12,10 @@ export default () => {
     return(
         <div>
             <Route path="/" component={Sidebar}/>
-            <div id="me-cube-logo">
-                <a href="/#/"><img src={window.meCubeLogo}/></a>
+            <div >
+                <a id="me-cube-logo" href="/#/">
+                    <img src={window.meCubeLogo}/>
+                </a>
                 <ErrorWindow />
             </div>
             <Route path="/" component={Navbar} />
