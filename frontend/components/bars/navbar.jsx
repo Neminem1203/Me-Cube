@@ -21,7 +21,7 @@ const Navbar = props => {
                     </div>
                     <Link to={`/channel/${props.user.id}`} onClick={()=>props.showModal("")}>
                         <li>
-                            {channelIcon()}
+                            {channelIcon(30)}
                             <span>Your Channel</span>
                         </li>
                     </Link>

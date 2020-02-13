@@ -27,10 +27,17 @@
   100% { transform: rotate(360deg); }
 }
 .hidden{display: none !important;}
+:focus{
+  outline-style: outset;
+  outline-width: 2px;
+  outline-color: #4ecac8;;
+  outline-offset: 2px;
+}
 button:focus {outline:0;}
 input:focus {outline:0;}
 // USER FORM
 .user-form{
+  z-index: 2;
   box-sizing: border-box;
   padding: 15px;
   position: absolute;
@@ -106,6 +113,7 @@ input:focus {outline:0;}
   cursor: pointer;
 }
 .account-navbar{
+  z-index: 2;
   list-style-type: none;
   border-radius: 5px;
   padding:0;
@@ -224,13 +232,15 @@ input:focus {outline:0;}
   color: #00fdf9
 }
 .main-content{
-  margin-left:65px;
+  box-sizing: border-box;
+  margin-left: 0;
   margin-top: 5.5px;
   position: fixed;
   padding: 15px;
+  padding-left: 80px;
   height: 83vh;
   min-width: 1000px;
-  width: auto;
+  width: 100%;
   background-color: rgb(228, 228, 228);
   overflow-y: scroll;
 }
@@ -339,18 +349,18 @@ body{
   // background-color: #c3c3c3;
 }
 button{
-  color: white;
-  background-color: #1a73e8;
-  // border: 1px solid blue;
-  border-radius: 8px;
+  color: #1a73e8;
+  background-color: white;
+  border: 1px solid #1a73e8;
+  border-radius: 2px;
   width: 90px;
   height: 45px;
-  font-weight: 700;
+  font-weight: 900;
   margin-right: 10px;
 }
 button:hover{
   cursor: pointer;
-  background-color: rgb(40, 122, 230);
+  // background-color: rgb(40, 122, 230);
 }
 span{
   vertical-align: 40%;

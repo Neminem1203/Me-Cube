@@ -17,7 +17,7 @@ export const homeIcon =(dimension=45)=>(
 
 
 export const channelIcon = (dimension=35) =>(
-    <svg style={{ width: dimension, height: dimension }} viewBox="0 0 512.00199 512" xmlns="http://www.w3.org/2000/svg">
+    <svg style={{ width: dimension, height: dimension }} viewBox="0 0 512.00199 300" xmlns="http://www.w3.org/2000/svg">
     <path d="m334.808594 170.992188-113.113282-61.890626c-6.503906-3.558593-14.191406-3.425781-20.566406.351563-6.378906 
     3.78125-10.183594 10.460937-10.183594 17.875v122.71875c0 7.378906 3.78125 14.046875 10.117188 17.832031 3.308594 1.976563 
     6.976562 2.96875 10.652344 2.96875 3.367187 0 6.742187-.832031 9.847656-2.503906l113.117188-60.824219c6.714843-3.613281 
