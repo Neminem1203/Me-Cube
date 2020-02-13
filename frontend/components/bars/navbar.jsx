@@ -36,7 +36,7 @@ const Navbar = props => {
                     </a>
                     <a href="#" onClick={()=> {
                         props.showModal("");
-                        props.logout
+                        props.logout();
                     }}>
                         <li>
                             {exitIcon}

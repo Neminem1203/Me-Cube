@@ -344,7 +344,7 @@ var Navbar = function Navbar(props) {
         href: "#",
         onClick: function onClick() {
           props.showModal("");
-          props.logout;
+          props.logout();
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, _icons__WEBPACK_IMPORTED_MODULE_5__["exitIcon"], react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Logout")))), " ");
 
