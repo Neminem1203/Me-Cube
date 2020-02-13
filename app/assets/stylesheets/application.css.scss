@@ -230,8 +230,9 @@ input:focus {outline:0;}
   padding: 15px;
   height: 83vh;
   min-width: 1000px;
+  width: auto;
   background-color: rgb(228, 228, 228);
-  overflow: scroll;
+  overflow-y: scroll;
 }
 .main-content.active{
   margin-left: 150px;
