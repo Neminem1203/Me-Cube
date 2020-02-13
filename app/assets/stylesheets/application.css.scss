@@ -153,7 +153,8 @@ input:focus {outline:0;}
 .sidebar > .menu-button{
   width: 35px;
   margin-left: 15px;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
+  margin-top: 15px;
   // margin: 0 auto;
   float: left;
 }
@@ -204,9 +205,6 @@ input:focus {outline:0;}
   justify-content:space-between;
   align-items: center;
 }
-.sidebar.active ul li svg{
-  margin-right: 15px;
-}
 .sidebar.active ul a{
   font-size: 15px;
 }
@@ -227,7 +225,7 @@ input:focus {outline:0;}
 }
 .main-content{
   margin-left:65px;
-  margin-top: 15px;
+  margin-top: 5.5px;
   padding: 15px;
   height: 83vh;
   min-width: 1000px;
@@ -248,9 +246,23 @@ input:focus {outline:0;}
   border-bottom: 1px solid lightgray;
   padding-bottom: 7px;
 }
+.video-info li:last-of-type{
+  display: flex;
+  align-items: center;
+}
 .profile-pic{
   float: left;
   margin-top: 14px;
+}
+.like, .dislike{
+  float: left;
+  width: 45px;
+  text-align:center;
+  font-size: 10px;
+}
+.dislike{margin: 0 15px}
+.like.active, .dislike.active{
+  fill: blue;
 }
 [class^="col-"]{
   float: left;

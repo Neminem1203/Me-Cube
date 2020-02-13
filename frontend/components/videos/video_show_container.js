@@ -13,7 +13,8 @@ const mSTP = (state, ownProps) => {
             video_url: "https://upload.wikimedia.org/wikipedia/commons/d/d0/Caminandes-_Llama_Drama_-_Short_Movie.ogv",
             description: "This is a Fake Description for a fake show page",
             created_at: "12 Feb 2020",
-            creator_id: 1
+            creator_id: 1,
+            liked: true
             // creator: state.entities.users[state.entities.video.creator_id]
         },
         creator:{
@@ -21,6 +22,8 @@ const mSTP = (state, ownProps) => {
             username: "Test Username",
             video_id: [1]
         },
+        likes: 547,
+        dislikes: 246,
         sidebar: state.ui.sidebar
     }
 }

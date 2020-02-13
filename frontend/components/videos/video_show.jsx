@@ -1,8 +1,13 @@
 import React from "react";
-import {profileIcon} from "../../icons";
+import {profileIcon, thumbsUpIcon, thumbsDownIcon} from "../../icons";
 class VideoShow extends React.Component{
     constructor(props){
         super(props);
+        this.state = {
+            liked: this.props.video.liked,
+            likes: this.props.likes,
+            dislikes: this.props.dislikes
+        }
     }
 
     copyShareUrl(e){
@@ -13,11 +18,24 @@ class VideoShow extends React.Component{
         document.execCommand("copy");
         video_url.classList.add("hidden");
     }
+
+    thumbAction(bool){
+        return e=>{
+            e.preventDefault();
+            console.log(bool);
+            const field = (bool) ? "likes" : "dislikes";
+            if(this.state.liked === bool){this.setState({liked: null, [field]: this.state[field]-1})} //Destroy the like/dislike
+            else { this.setState({ liked: bool, [field]: this.state[field] + 1})} //Create or Set Like/Dislike
+        }
+    }
+
     render(){
+        const thumbsUpClass = (this.state.liked === true) ? "active like" : "like";
+        const thumbsDownClass = (this.state.liked === false) ? "active dislike" : "dislike";
         return (
         <div>
             <div className="col-3-5">
-                <video  controls="controls" autoPlay="autoplay" muted="muted">
+                <video preload="auto" controls="controls" autoPlay="autoplay" muted="muted">
                     <source src={this.props.video.video_url}/>
                 </video>
                 <h2 style={{marginTop: "16px", marginBottom: "8px"}}>{this.props.video.title}</h2>
@@ -25,8 +43,8 @@ class VideoShow extends React.Component{
                 <ul className="video-info">
                     <li style={{color:"gray"}}>9001 views • {this.props.video.created_at}</li>
                     <li>
-                        <button>Like</button>
-                        <button>Dislike</button>
+                        <div onClick={this.thumbAction(true)} className={thumbsUpClass}>{thumbsUpIcon(20)}{this.state.likes}</div>
+                        <div onClick={this.thumbAction(false)} className={thumbsDownClass}>{thumbsDownIcon(20)}{this.state.dislikes}</div>
                         <button onClick={this.copyShareUrl}>Share</button>
                     </li>
                 </ul>

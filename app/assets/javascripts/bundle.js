@@ -1025,8 +1025,11 @@ function (_React$Component) {
           _this3.props.showModal(otherForm);
         }
       }, " ", otherForm, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        style: {
+          paddingBottom: "2px"
+        },
         onClick: this.props.demo
-      }, "Demo"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      }, "DEMO"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         onClick: function onClick() {
           return _this3.props.showModal("");
         }
@@ -1069,6 +1072,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../icons */ "./frontend/icons.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -1094,9 +1099,17 @@ function (_React$Component) {
   _inherits(VideoShow, _React$Component);
 
   function VideoShow(props) {
+    var _this;
+
     _classCallCheck(this, VideoShow);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(VideoShow).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(VideoShow).call(this, props));
+    _this.state = {
+      liked: _this.props.video.liked,
+      likes: _this.props.likes,
+      dislikes: _this.props.dislikes
+    };
+    return _this;
   }
 
   _createClass(VideoShow, [{
@@ -1110,11 +1123,37 @@ function (_React$Component) {
       video_url.classList.add("hidden");
     }
   }, {
+    key: "thumbAction",
+    value: function thumbAction(bool) {
+      var _this2 = this;
+
+      return function (e) {
+        e.preventDefault();
+        console.log(bool);
+        var field = bool ? "likes" : "dislikes";
+
+        if (_this2.state.liked === bool) {
+          _this2.setState(_defineProperty({
+            liked: null
+          }, field, _this2.state[field] - 1));
+        } //Destroy the like/dislike
+        else {
+            _this2.setState(_defineProperty({
+              liked: bool
+            }, field, _this2.state[field] + 1));
+          } //Create or Set Like/Dislike
+
+      };
+    }
+  }, {
     key: "render",
     value: function render() {
+      var thumbsUpClass = this.state.liked === true ? "active like" : "like";
+      var thumbsDownClass = this.state.liked === false ? "active dislike" : "dislike";
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-3-5"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("video", {
+        preload: "auto",
         controls: "controls",
         autoPlay: "autoplay",
         muted: "muted"
@@ -1135,7 +1174,13 @@ function (_React$Component) {
         style: {
           color: "gray"
         }
-      }, "9001 views \u2022 ", this.props.video.created_at), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Like"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Dislike"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, "9001 views \u2022 ", this.props.video.created_at), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        onClick: this.thumbAction(true),
+        className: thumbsUpClass
+      }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["thumbsUpIcon"])(20), this.state.likes), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        onClick: this.thumbAction(false),
+        className: thumbsDownClass
+      }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["thumbsDownIcon"])(20), this.state.dislikes), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.copyShareUrl
       }, "Share"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "profile-pic"
@@ -1196,7 +1241,8 @@ var mSTP = function mSTP(state, ownProps) {
       video_url: "https://upload.wikimedia.org/wikipedia/commons/d/d0/Caminandes-_Llama_Drama_-_Short_Movie.ogv",
       description: "This is a Fake Description for a fake show page",
       created_at: "12 Feb 2020",
-      creator_id: 1 // creator: state.entities.users[state.entities.video.creator_id]
+      creator_id: 1,
+      liked: true // creator: state.entities.users[state.entities.video.creator_id]
 
     },
     creator: {
@@ -1204,6 +1250,8 @@ var mSTP = function mSTP(state, ownProps) {
       username: "Test Username",
       video_id: [1]
     },
+    likes: 547,
+    dislikes: 246,
     sidebar: state.ui.sidebar
   };
 };
@@ -1216,7 +1264,7 @@ var mSTP = function mSTP(state, ownProps) {
 /*!***************************!*\
   !*** ./frontend/icons.js ***!
   \***************************/
-/*! exports provided: homeIcon, channelIcon, githubIcon, linkedInIcon, exitIcon, profileIcon */
+/*! exports provided: homeIcon, channelIcon, githubIcon, linkedInIcon, exitIcon, profileIcon, thumbsUpIcon, thumbsDownIcon */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1227,6 +1275,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "linkedInIcon", function() { return linkedInIcon; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "exitIcon", function() { return exitIcon; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "profileIcon", function() { return profileIcon; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "thumbsUpIcon", function() { return thumbsUpIcon; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "thumbsDownIcon", function() { return thumbsDownIcon; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
@@ -1251,13 +1301,14 @@ var homeIcon = function homeIcon() {
   })));
 };
 var channelIcon = function channelIcon() {
-  var width = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "35_px";
+  var width = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "35px";
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
-    viewBox: "0 0 512.00199 512",
-    xmlns: "http://www.w3.org/2000/svg",
     style: {
-      width: width
-    }
+      width: width,
+      height: width
+    },
+    viewBox: "0 0 512.00199 512",
+    xmlns: "http://www.w3.org/2000/svg"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     d: "m334.808594 170.992188-113.113282-61.890626c-6.503906-3.558593-14.191406-3.425781-20.566406.351563-6.378906  3.78125-10.183594 10.460937-10.183594 17.875v122.71875c0 7.378906 3.78125 14.046875 10.117188 17.832031 3.308594 1.976563  6.976562 2.96875 10.652344 2.96875 3.367187 0 6.742187-.832031 9.847656-2.503906l113.117188-60.824219c6.714843-3.613281  10.90625-10.59375 10.9375-18.222656.027343-7.628906-4.113282-14.640625-10.808594-18.304687zm-113.859375 63.617187v-91.71875l84.539062  46.257813zm0 0"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
@@ -1316,6 +1367,39 @@ var profileIcon = function profileIcon() {
     d: "m210.351562 246.632812c33.882813 0 63.222657-12.152343 87.195313-36.128906 23.972656-23.972656 36.125-53.304687  36.125-87.191406 0-33.875-12.152344-63.210938-36.128906-87.191406-23.976563-23.96875-53.3125-36.121094-87.191407-36.121094-33.886718  0-63.21875 12.152344-87.191406 36.125s-36.128906 53.308594-36.128906 87.1875c0 33.886719 12.15625 63.222656 36.132812 87.195312  23.976563 23.96875 53.3125 36.125 87.1875 36.125zm0 0"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     d: "m426.128906 393.703125c-.691406-9.976563-2.089844-20.859375-4.148437-32.351563-2.078125-11.578124-4.753907-22.523437-7.957031 -32.527343-3.308594-10.339844-7.808594-20.550781-13.371094-30.335938-5.773438-10.15625-12.554688-19-20.164063-26.277343-7.957031 -7.613282-17.699219-13.734376-28.964843-18.199219-11.226563-4.441407-23.667969-6.691407-36.976563-6.691407-5.226563 0-10.28125  2.144532-20.042969 8.5-6.007812 3.917969-13.035156 8.449219-20.878906 13.460938-6.707031 4.273438-15.792969 8.277344-27.015625  11.902344-10.949219 3.542968-22.066406 5.339844-33.039063 5.339844-10.972656 0-22.085937-1.796876-33.046874-5.339844-11.210938 -3.621094-20.296876-7.625-26.996094-11.898438-7.769532-4.964844-14.800782-9.496094-20.898438-13.46875-9.75-6.355468-14.808594 -8.5-20.035156-8.5-13.3125 0-25.75 2.253906-36.972656 6.699219-11.257813 4.457031-21.003906 10.578125-28.96875 18.199219-7.605469  7.28125-14.390625 16.121094-20.15625 26.273437-5.558594 9.785157-10.058594 19.992188-13.371094 30.339844-3.199219 10.003906-5.875  20.945313-7.953125 32.523437-2.058594 11.476563-3.457031 22.363282-4.148437 32.363282-.679688 9.796875-1.023438 19.964844-1.023438  30.234375 0 26.726562 8.496094 48.363281 25.25 64.320312 16.546875 15.746094 38.441406 23.734375 65.066406 23.734375h246.53125c26.625  0 48.511719-7.984375 65.0625-23.734375 16.757813-15.945312 25.253906-37.585937 25.253906-64.324219-.003906-10.316406-.351562 -20.492187-1.035156-30.242187zm0 0"
+  }));
+};
+var thumbsUpIcon = function thumbsUpIcon() {
+  var dimension = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "45px";
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    height: dimension,
+    viewBox: "0 0 16 16",
+    width: dimension,
+    xmlns: "http://www.w3.org/2000/svg"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "m0 1v8c0 .552246.447693 1 1 1h3v-10h-3c-.552307 0-1 .447693-1 1z",
+    transform: "translate(0 5)"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "m9.15332 5.02979h-2.9541c-.258301 0-.387695-.172363-.431152-.246582-.043457-.0737305-.131348-.270508-.0063477 -.496094l1.0415-1.87549c.228516-.410645.251953-.893555.0649414-1.32471-.187012-.43164-.556152-.744629-1.0127-.858398l -.734375-.183594c-.178711-.0449219-.368164.0122071-.492676.150391l-3.9873 4.42969c-.413574.460449-.641113 1.0542-.641113  1.67236v5.23242c0 1.37842 1.12158 2.5 2.5 2.5l4.97412-.0004883c1.12305 0 2.11475-.756348 2.41113-1.83887l1.06738-4.89844c.03125 -.13623.0473633-.275879.0473633-.415527 0-1.01807-.828613-1.84668-1.84668-1.84668z",
+    transform: "translate(5 .97)"
+  }));
+};
+var thumbsDownIcon = function thumbsDownIcon() {
+  var dimension = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "45px";
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    style: {
+      transform: "rotate(180deg)"
+    },
+    height: dimension,
+    viewBox: "0 0 16 16",
+    width: dimension,
+    xmlns: "http://www.w3.org/2000/svg"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "m0 1v8c0 .552246.447693 1 1 1h3v-10h-3c-.552307 0-1 .447693-1 1z",
+    transform: "translate(0 5)"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "m9.15332 5.02979h-2.9541c-.258301 0-.387695-.172363-.431152-.246582-.043457-.0737305-.131348-.270508-.0063477 -.496094l1.0415-1.87549c.228516-.410645.251953-.893555.0649414-1.32471-.187012-.43164-.556152-.744629-1.0127-.858398l -.734375-.183594c-.178711-.0449219-.368164.0122071-.492676.150391l-3.9873 4.42969c-.413574.460449-.641113 1.0542-.641113  1.67236v5.23242c0 1.37842 1.12158 2.5 2.5 2.5l4.97412-.0004883c1.12305 0 2.11475-.756348 2.41113-1.83887l1.06738-4.89844c.03125 -.13623.0473633-.275879.0473633-.415527 0-1.01807-.828613-1.84668-1.84668-1.84668z",
+    transform: "translate(5 .97)"
   }));
 };
 
