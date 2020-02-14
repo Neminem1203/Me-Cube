@@ -58,8 +58,10 @@ const Navbar = props => {
             picture_function = () => props.showModal("");
         }
         // TODO: props.user.profile_pic when profile pic is working
+        let imgSrc = window.defaultProfilePicture;
+        if(props.user.profile_picture){imgSrc = props.user.profile_picture}
         return (<nav className="navbar">
-                    <img src={window.defaultProfilePicture} style={{ width: "60px", height: "60px"}} onClick={picture_function}/>
+                    <img src={imgSrc} style={{ width: "60px", height: "60px" }} onClick={picture_function} />
                     {modal}
                 </nav>)
     }

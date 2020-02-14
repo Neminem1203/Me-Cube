@@ -15,11 +15,16 @@ class EditUser extends React.Component{
 
     handleSubmit(e){
         e.preventDefault();
-        const formData = new FormData();
-        formData.append('username', this.state.username)
+        e.target.textContent = "Saving";
+        e.target.setAttribute("disabled", "true");
+
+        const userData = new FormData();
+        userData["id"] = this.props.user.id;
+        userData.append('username', this.state.username);
         if(this.state.profilePicFile){
-            formData.append('profilePicFile', this.state.profilePicFile);
+            userData.append('profilePicFile', this.state.profilePicFile);
         }
+        this.props.updateUser(userData);
         // ajax request here
         // this.props.updateUser(formData);
     }
@@ -61,7 +66,8 @@ class EditUser extends React.Component{
 
 
         let usernameField = <input type="text" value={this.state.username} placeholder="Username" onChange={this.updateUsername}/>;
-        if(this.props.user && this.props.user.email === "testing@testing.com"){
+        if(this.props.user && (this.props.user.email === "testing@testing.com" || //local demo  
+                               this.props.user.email === "demo@email.com")){ //server demo
             profileInput = null;
             usernameField = <input type="text" disabled defaultValue={this.props.user.username} />
         }
@@ -76,17 +82,12 @@ class EditUser extends React.Component{
             </div>
             <div>
                 <h2>User Information</h2>
-                <form style={{width: "30%"}}onSubmit={this.handleSubmit}>
+                <form style={{width: "30%"}}>
                     <label>
                         Username: {usernameField}
                     </label>
                     <br />
-                    <button style={{marginTop: "10px", float: "right"}} onClick={(e)=>{
-                        const btn = e.target;
-                        btn.textContent = "Saving";
-                        btn.setAttribute("disabled", "true")
-                        debugger
-                    }}>Save</button>
+                    <button style={{ marginTop: "10px", float: "right" }} onClick={this.handleSubmit}>Save</button>
                 </form>
             </div>
         </div>)

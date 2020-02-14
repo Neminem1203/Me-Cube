@@ -66,11 +66,11 @@ export const createUser = user => dispatch =>{
 export const updateUser = user => dispatch =>{
     return UserAPIUtil.updateUser(user).then(
         payload=>{
-            window.location.href = "/#/";
             dispatch(receiveUser(payload));
+            window.location.href = "/#/";
         },
         error=>{
-            dispatch(receiveUserError(error.responseJSON[0]));
+            dispatch(receiveUserError(error.responseJSON));
             setTimeout(() => dispatch(clearError()), 4000);
         }
     )

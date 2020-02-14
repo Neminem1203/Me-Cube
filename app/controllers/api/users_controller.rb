@@ -20,9 +20,12 @@ class Api::UsersController < ApplicationController
     end
 
     def update
+        @user = current_user
         if current_user.username == params[:username] || current_user.update(username: params[:username])
-            current_user.profile_picure.attach(io: params[:profilePicFile], filename: "profile-pic-"+current_user.id+".jpg")
-            render :show, @user=current_user
+            if(params[:profilePicFile])
+                @user.profile_picture.attach(io: params[:profilePicFile], filename: "profile-pic-"+current_user.id.to_s+".jpg")
+            end
+            render :show
         else
             render json: current_user.errors.full_messages
         end

@@ -35,10 +35,10 @@ export const logout = () =>{
     });
 }
 
-export const updateUser = user =>{
-    return $ajax({
+export const updateUser = (user) =>{
+    return $.ajax({
         method: "PATCH",
-        url: `api/user/${user.id}`,
+        url: `api/users/${user.id}`,
         data: user,
         contentType: false,
         processData: false
