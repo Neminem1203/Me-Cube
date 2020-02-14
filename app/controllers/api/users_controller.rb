@@ -21,14 +21,11 @@ class Api::UsersController < ApplicationController
 
     def update
         if current_user.username == params[:username] || current_user.update(username: params[:username])
-            debugger
-            current_user.profile_pic.attach(io: params[:profilePicFile], filename: "profile-pic-"+current_user.id)
-
+            current_user.profile_picure.attach(io: params[:profilePicFile], filename: "profile-pic-"+current_user.id+".jpg")
+            render :show, @user=current_user
         else
             render json: current_user.errors.full_messages
         end
-
-        return json: [], status: 200
     end
 
     def destroy

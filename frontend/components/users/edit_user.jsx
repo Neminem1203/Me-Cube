@@ -15,17 +15,13 @@ class EditUser extends React.Component{
 
     handleSubmit(e){
         e.preventDefault();
-        debugger
+        const formData = new FormData();
+        formData.append('username', this.state.username)
         if(this.state.profilePicFile){
-            debugger
-            const formData = new FormData();
-            formData.append('username', this.state.username)
-            formData.append('profilePicURL', this.state.profilePic);
             formData.append('profilePicFile', this.state.profilePicFile);
-            debugger
-            // ajax request here
         }
-        
+        // ajax request here
+        // this.props.updateUser(formData);
     }
 
     updateUsername(e){
@@ -36,11 +32,10 @@ class EditUser extends React.Component{
         // e.preventDefault();
         const reader = new FileReader();
         const file =  e.currentTarget.files[0];
-        debugger
         if (file) {
             reader.onloadend = () => this.setState({ profilePicURL: reader.result, profilePicFile: file });
-            reader.readAsDataURL(file);
-        } 
+            reader.readAsDataURL(file); 
+        }
         else {
              this.setState({profilePicURL: window.defaultProfilePicture, imageFile: null});
         } 
@@ -86,7 +81,12 @@ class EditUser extends React.Component{
                         Username: {usernameField}
                     </label>
                     <br />
-                    <button style={{marginTop: "10px", float: "right"}}>Save</button>
+                    <button style={{marginTop: "10px", float: "right"}} onClick={(e)=>{
+                        const btn = e.target;
+                        btn.textContent = "Saving";
+                        btn.setAttribute("disabled", "true")
+                        debugger
+                    }}>Save</button>
                 </form>
             </div>
         </div>)

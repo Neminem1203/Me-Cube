@@ -233,8 +233,8 @@ var createUser = function createUser(user) {
 var updateUser = function updateUser(user) {
   return function (dispatch) {
     return _util_users_util__WEBPACK_IMPORTED_MODULE_0__["updateUser"](user).then(function (payload) {
-      dispatch(receiveUser(payload));
       window.location.href = "/#/";
+      dispatch(receiveUser(payload));
     }, function (error) {
       dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["receiveUserError"])(error.responseJSON[0]));
       setTimeout(function () {
@@ -945,16 +945,14 @@ function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
-      debugger;
+      var formData = new FormData();
+      formData.append('username', this.state.username);
 
       if (this.state.profilePicFile) {
-        debugger;
-        var formData = new FormData();
-        formData.append('username', this.state.username);
-        formData.append('profilePicURL', this.state.profilePic);
         formData.append('profilePicFile', this.state.profilePicFile);
-        debugger; // ajax request here
-      }
+      } // ajax request here
+      // this.props.updateUser(formData);
+
     }
   }, {
     key: "updateUsername",
@@ -971,7 +969,6 @@ function (_React$Component) {
       // e.preventDefault();
       var reader = new FileReader();
       var file = e.currentTarget.files[0];
-      debugger;
 
       if (file) {
         reader.onloadend = function () {
@@ -1044,6 +1041,12 @@ function (_React$Component) {
         style: {
           marginTop: "10px",
           "float": "right"
+        },
+        onClick: function onClick(e) {
+          var btn = e.target;
+          btn.textContent = "Saving";
+          btn.setAttribute("disabled", "true");
+          debugger;
         }
       }, "Save"))));
     }
