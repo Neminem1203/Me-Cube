@@ -34,3 +34,13 @@ export const logout = () =>{
         url: '/api/session/'
     });
 }
+
+export const updateUser = user =>{
+    return $ajax({
+        method: "PATCH",
+        url: `api/user/${user.id}`,
+        data: user,
+        contentType: false,
+        processData: false
+    })
+}

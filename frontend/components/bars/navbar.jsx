@@ -3,7 +3,7 @@ import LoginModal from "../users/signin_container";
 import SignUpModal from "../users/signup_container";
 import { LOGIN, SIGN_UP, ACCOUNT_DETAILS } from "../../actions/modal_actions";
 import { Link } from "react-router-dom";
-import { channelIcon, githubIcon, linkedInIcon, exitIcon } from "../../icons";
+import { channelIcon, githubIcon, linkedInIcon, exitIcon, profileIcon } from "../../icons";
 
 
 const Navbar = props => {
@@ -25,7 +25,14 @@ const Navbar = props => {
                             <span>Your Channel</span>
                         </li>
                     </Link>
-                        <a target="_blank" href="https://www.github.com/neminem1203" onClick={() => props.showModal("")}>
+                    <a href="/#/user/edit" onClick={() => props.showModal("")}>
+                        <li>
+                            {/* <img width="25px" height="25px" src={window.defaultProfilePicture} style={{marginRight: 10}}/> */}
+                            {profileIcon(25)}
+                            <span>Your Account</span>
+                        </li>
+                    </a>
+                    <a target="_blank" href="https://www.github.com/neminem1203" onClick={() => props.showModal("")}>
                         <li>
                             {githubIcon()}
                             <span>GitHub</span>
@@ -52,7 +59,7 @@ const Navbar = props => {
         }
         // TODO: props.user.profile_pic when profile pic is working
         return (<nav className="navbar">
-                    <img src={window.defaultProfilePicture} style={{ width: "50px" }} onClick={picture_function}/>
+                    <img src={window.defaultProfilePicture} style={{ width: "60px", height: "60px"}} onClick={picture_function}/>
                     {modal}
                 </nav>)
     }
