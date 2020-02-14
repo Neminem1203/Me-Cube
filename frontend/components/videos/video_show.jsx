@@ -24,8 +24,8 @@ class VideoShow extends React.Component{
             e.preventDefault();
             console.log(bool);
             const field = (bool) ? "likes" : "dislikes";
-            if(this.state.liked === bool){this.setState({liked: null, [field]: this.state[field]-1})} //Destroy the like/dislike
-            else { this.setState({ liked: bool, [field]: this.state[field] + 1})} //Create or Set Like/Dislike
+            if(this.state.liked === bool){this.setState(state => ({liked: null, [field]: this.state[field]-1}))} //Destroy the like/dislike
+            else { this.setState(state => ({ liked: bool, [field]: this.state[field] + 1}))} //Create or Set Like/Dislike
         }
     }
 
@@ -35,7 +35,7 @@ class VideoShow extends React.Component{
         return (
         <div>
             <div className="video-container">
-                <video preload="auto" controls="controls" autoPlay="autoplay">
+                <video className="video-show" preload="auto" controls="controls" autoPlay="autoplay">
                     <source src={this.props.video.video_url}/>
                 </video>
                 <h2 style={{marginTop: "16px", marginBottom: "8px"}}>{this.props.video.title}</h2>

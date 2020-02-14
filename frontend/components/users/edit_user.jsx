@@ -35,14 +35,20 @@ class EditUser extends React.Component{
 
     picturePreview(e){
         // e.preventDefault();
+        const fileSizeLimit = 500000;
         const reader = new FileReader();
         const file =  e.currentTarget.files[0];
-        if (file) {
+        // console.log(file.size);
+        if(file.size > fileSizeLimit){
+            e.currentTarget.value = "";
+            alert(`Filesize can't be greater than ${fileSizeLimit} bytes`)
+        }
+        else if (file && file.size < fileSizeLimit) {
             reader.onloadend = () => this.setState({ profilePicURL: reader.result, profilePicFile: file });
             reader.readAsDataURL(file); 
         }
         else {
-             this.setState({profilePicURL: window.defaultProfilePicture, imageFile: null});
+            this.setState({ profilePicURL: window.defaultProfilePicture, profilePicFile: null});
         } 
     }
     componentDidMount() {

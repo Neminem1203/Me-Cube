@@ -16,6 +16,8 @@ User.delete_all
 user1 = User.create(username: "Demo", email:"demo@email.com", password: "hunter2")
 user2 = User.create(username: "test2", email:"second@email.com", password: "hunter2")
 user3 = User.create(username: "admin", email:"admin@admin.com", password: "hunter2")
+funny_profile_pic = open("https://me-cube-seeds.s3-us-east-2.amazonaws.com/funnyProfilePic.jpg")
+user3.profile_picture.attach(io: funny_profile_pic, filename:"profile-pic-"+user3.id.to_s+".jpg")
 # Videos
 video1 = Video.create(title: "test video", video_url:"test_url", description:"first video of the site", creator_id: user3.id)
 video2 = Video.create(title: "another video", video_url:"second_test_url", description:"testing videos and their descriptions", creator_id: user3.id)

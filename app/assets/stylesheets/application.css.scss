@@ -321,6 +321,48 @@ input:focus {outline:0;}
 .like.active, .dislike.active{
   fill: blue;
 }
+.video-form{
+  min-width: 800px;
+  width: 100%;
+}
+.publish-btns {
+  width: 96%;
+  margin: 0 auto;
+  margin-bottom: 15px;
+  padding: 10px;
+  border-bottom: 1px solid lightgray;
+}
+.publish-btns button{
+  float: right;
+}
+.blue-btn{
+  background-color: #1a73e8;
+  color: white;
+}
+.publish-btns::after{
+  content: "";
+  display: block;
+  clear: both;
+}
+.video-form video{
+  min-width: 350px;
+  width: 58%;
+}
+.video-form  input, .video-form  textarea{
+  font-family: Roboto, Arial, sans-serif;
+  border-radius: 5px;
+  min-width: 350px;
+  width: 35%;
+  margin-bottom: 15px;
+}
+.video-form input{
+  height: 25px;
+}
+.video-show{
+  min-width: 500px;
+  // max-width: 700px;
+  width: 100%;
+}
 [class^="col-"]{
   float: left;
 }
@@ -396,9 +438,4 @@ span{
 }
 svg{
   width:50px;
-}
-video{
-  min-width: 500px;
-  // max-width: 700px;
-  width: 100%;
 }
