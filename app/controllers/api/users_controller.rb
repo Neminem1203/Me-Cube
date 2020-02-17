@@ -1,7 +1,8 @@
 class Api::UsersController < ApplicationController
     def index
         # params[:user_list] is array of users
-        @users = User.find(params[:user_list])
+        # @users = User.find(params[:user_list])
+        @users = User.all
     end
 
     def create

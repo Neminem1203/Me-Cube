@@ -20,11 +20,7 @@ class Video < ApplicationRecord
     foreign_key: :creator_id
 
     has_many :likes, as: :likeable
-
-    has_many :comments,
-    class_name: "Comment",
-    primary_key: :id,
-    foreign_key: :video_id
+    has_many :comments, as: :commentable
 
     has_one_attached :thumbnail
     has_one_attached :video

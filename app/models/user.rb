@@ -17,6 +17,16 @@ class User < ApplicationRecord
     validates :password, length: {minimum: 6, allow_nil: true}
 
     has_one_attached :profile_picture
+
+    has_many :likes, 
+        class_name: "Like",
+        primary_key: :id,
+        foreign_key: :user_id
+    
+    has_many :comments,
+        class_name: "Comment",
+        primary_key: :id,
+        foreign_key: :commenter_id
     
     has_many :videos,
     class_name: "Video",

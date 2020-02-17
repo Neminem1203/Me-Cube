@@ -16,15 +16,10 @@
 class Comment < ApplicationRecord
     has_many :likes, as: :likeable
     belongs_to :commentable, polymorphic: true
-    
+    has_many :comments, as: :commentable
+
     belongs_to :commenter,
-    class_name: "User",
-    primary_key: :id,
-    foreign_key: :commenter_id
-
-
-    belongs_to :parent_response,
-    class_name: "Comment",
-    primary_key: :id,
-    foreign_key: :response_to
+        class_name: "User",
+        primary_key: :id,
+        foreign_key: :commenter_id
 end

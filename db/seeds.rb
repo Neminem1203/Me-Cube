@@ -16,20 +16,20 @@ User.delete_all
 user1 = User.create(username: "Demo", email:"demo@email.com", password: "hunter2")
 user2 = User.create(username: "test2", email:"second@email.com", password: "hunter2")
 user3 = User.create(username: "admin", email:"admin@admin.com", password: "hunter2")
-funny_profile_pic = open("https://me-cube-seeds.s3-us-east-2.amazonaws.com/funnyProfilePic.jpg")
-user3.profile_picture.attach(io: funny_profile_pic, filename:"profile-pic-"+user3.id.to_s+".jpg")
+# funny_profile_pic = open("https://me-cube-seeds.s3-us-east-2.amazonaws.com/funnyProfilePic.jpg")
+# user3.profile_picture.attach(io: funny_profile_pic, filename:"profile-pic-"+user3.id.to_s+".jpg")
 # Videos
 video1 = Video.create(title: "test video", video_url:"test_url", description:"first video of the site", creator_id: user3.id)
 video2 = Video.create(title: "another video", video_url:"second_test_url", description:"testing videos and their descriptions", creator_id: user3.id)
 video3 = Video.create(title: "fake video", video_url:"fake_url", description:"testing videos and their descriptions", creator_id: user2.id)
 video4 = Video.create(title: "more videos", video_url:"more urls", description:"with more descriptions", creator_id: user3.id)
 # Comments on videos
-comment1 = Comment.create(comment:"first comment on test site", video_id:video1.id, commenter_id: user3.id)
-comment2 = Comment.create(comment:"testing more comments", video_id: video1.id, commenter_id: user3.id)
-comment3 = Comment.create(comment:"we require more minerals", video_id: video2.id, commenter_id: user1.id)
+comment1 = Comment.create(comment:"first comment on test site", commentable_type: "Video", commentable_id: video1.id, commenter_id: user3.id)
+comment2 = Comment.create(comment:"testing more comments", commentable_type: "Video", commentable_id: video1.id, commenter_id: user3.id)
+comment3 = Comment.create(comment:"we require more minerals", commentable_type: "Video", commentable_id: video2.id, commenter_id: user1.id)
 # Comment responses to another comment
-comment4 = Comment.create(comment:"first response to a comment", response_to: comment1.id, commenter_id: user3.id)
-comment5 = Comment.create(comment:"we require more vespian gas", response_to: comment1.id, commenter_id: user2.id)
+comment4 = Comment.create(comment:"first response to a comment", commentable_type: "Comment", commentable_id: comment1.id, commenter_id: user3.id)
+comment5 = Comment.create(comment:"we require more vespian gas", commentable_type: "Comment", commentable_id: comment1.id, commenter_id: user2.id)
 # Likes on Videos
 like1 = Like.create(like_dislike: true,  user_id:user2.id, likeable_type:"Video", likeable_id:video1.id)
 like2 = Like.create(like_dislike: true,  user_id:user3.id, likeable_type:"Video", likeable_id:video1.id)

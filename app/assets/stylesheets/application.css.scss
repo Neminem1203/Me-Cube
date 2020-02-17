@@ -34,6 +34,7 @@
 }
 button:focus {outline:0;}
 input:focus {outline:0;}
+text:area:focus{outline:0;}
 // USER FORM
 // // Version 1: (Top Right with no white background)
 // .user-form{
@@ -408,10 +409,16 @@ input:focus {outline:0;}
   vertical-align: super;
   background-color: lightcoral;
   opacity: 0;
-  transition: opacity 1s;
+  transition: all 1s;
 }
 #error-window.active{
   opacity: 100%;
+}
+.error-window-close-btn{
+  float: right;
+}
+.error-window-close-btn:hover{
+  cursor: pointer;
 }
 body{
   margin: 0;

@@ -4,6 +4,12 @@ class VideoCreate extends React.Component{
         super(props);
         this.state=this.props.video;
         this.videoPreview = this.videoPreview.bind(this);
+        this.clearForm = this.clearForm.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    updateField(field) {
+        return e => this.setState({ [field]: e.target.value })
     }
 
     videoPreview(e) {
@@ -25,19 +31,25 @@ class VideoCreate extends React.Component{
         }
     }
 
-    updateField(field){
-        return e => this.setState({[field]: e.target.value})
+    clearForm(e){
+        e.preventDefault();
+        this.setState({ videoURL: "", videoFile: null });
+        document.getElementById("video-upload").value = null;
     }
 
+    handleSubmit(e){
+        e.preventDefault();
+        this.props.action(this.state);
+    }
+    
     render(){
         let videoForm = <></>
         if(this.state.id || this.state.videoURL){
-            console.log("test");
             videoForm = (
             <>
                 <div className="publish-btns">
                     <button className="blue-btn"> Publish </button>
-                    <form action="/#/"><button>Cancel</button></form>
+                    <button onClick={this.clearForm}>Cancel</button>
                 </div>
                 <div>
                     <video preload="auto" controls="controls" autoPlay="autoplay" style={{ float: "right" }}>
@@ -55,8 +67,8 @@ class VideoCreate extends React.Component{
         return (
         <div>
             <h1>Create New Video</h1>
-            <form className="video-form">
-                <input type="file" onChange={this.videoPreview} style={{float: 'left'}}/>
+            <form className="video-form" onSubmit={this.handleSubmit}>
+                <input id="video-upload" type="file" onChange={this.videoPreview} style={{float: 'left'}}/>
                 {videoForm}
             </form>
         </div>
