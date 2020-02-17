@@ -22,6 +22,13 @@ export const getVideos = () => dispatch =>{
         error =>  dispatch(receiveVideoError(error.responseJSON)))
 }
 
+export const getVideo = videoId => dispatch =>{
+    return VideoAPIUtil.getVideo(videoId).then(payload=>{
+            dispatch(receiveVideo(payload));
+            dispatch(getUser(payload.creator_id));
+        },error => dispatch(receiveVideoError(error.responseJSON)))
+}
+
 export const createVideo = video => dispatch =>{
     return VideoAPIUtil.uploadVideo(video).then(payload=> dispatch(receiveVideo(payload)),
         error => dispatch(receiveVideoError(error.responseJSON)));

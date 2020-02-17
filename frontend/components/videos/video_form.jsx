@@ -14,7 +14,7 @@ class VideoCreate extends React.Component{
 
     videoPreview(e) {
         // e.preventDefault();
-        const fileSizeLimit = 5000000;
+        const fileSizeLimit = 50000000;
         const reader = new FileReader();
         const file = e.currentTarget.files[0];
         // console.log(file.size);

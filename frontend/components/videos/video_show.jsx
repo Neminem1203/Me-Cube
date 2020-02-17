@@ -3,11 +3,19 @@ import {profileIcon, thumbsUpIcon, thumbsDownIcon, shareIcon} from "../../icons"
 class VideoShow extends React.Component{
     constructor(props){
         super(props);
-        this.state = {
-            liked: this.props.video.liked,
-            likes: this.props.likes,
-            dislikes: this.props.dislikes
+        this.state={
+            videoId: props.video.video.id,
+            video: props.video,
+            like_dislike: props.video.like_dislike,
+            likes: props.video.likes,
+            dislikes: props.video.dislikes
         }
+        // this.state = {
+        //     liked: this.props.video.liked,
+        //     likes: this.props.likes,
+        //     dislikes: this.props.dislikes
+        // }
+        this.finishSetup = this.finishSetup.bind(this);
     }
 
     copyShareUrl(e){
@@ -22,26 +30,60 @@ class VideoShow extends React.Component{
     thumbAction(bool){
         return e=>{
             e.preventDefault();
-            console.log(bool);
             const field = (bool) ? "likes" : "dislikes";
-            if(this.state.liked === bool){this.setState(state => ({liked: null, [field]: this.state[field]-1}))} //Destroy the like/dislike
-            else { this.setState(state => ({ liked: bool, [field]: this.state[field] + 1}))} //Create or Set Like/Dislike
+            const fieldVal = this.state[field];
+            const otherField = (bool) ? "dislikes" : "likes";
+            const otherFieldVal = this.state[otherField];
+            if (this.state.like_dislike === bool) { //Destroy the like/dislike
+                this.setState({ like_dislike: undefined, [field]: (fieldVal-1)})
+                // Call Destroy on like_dislike where video_id is this video and user_id is current_user.id
+
+            } 
+            else { // Increment field the decrement otherField
+                if (this.state.like_dislike !== undefined) { //Decrement otherField
+                    this.setState({ [otherField]: otherFieldVal - 1  });
+                }
+                this.setState({ like_dislike: bool, [field]: fieldVal + 1 })
+                // likeable_type: "Video", likeable_id: video.id, like_dislike = bool, user_id: current_user.id
+                // sets value at where likeable_id+type = video_id+type and user_id is current_user.id
+            } 
         }
     }
+    finishSetup(){
+        this.props.getUser(this.props.video.video.creator_id);
+        this.setState({ videoId: this.props.match.params.videoId, video: this.props.video, 
+            like_dislike: this.props.video.like_dislike, likes: this.props.video.likes, dislikes: this.props.video.dislikes});
+    }
+    componentDidUpdate() {
+        if (this.state.videoId != this.props.match.params.videoId){
+            this.props.getVideo(this.props.match.params.videoId).then(this.finishSetup);
+            debugger
+        }
+    }
+    componentDidMount(){
+        this.props.getVideo(this.props.match.params.videoId).then(this.finishSetup);
+    }
 
-    render(){
-        const thumbsUpClass = (this.state.liked === true) ? "active like vid-info-btn" : "like vid-info-btn";
-        const thumbsDownClass = (this.state.liked === false) ? "active dislike vid-info-btn" : "dislike vid-info-btn";
+    render() {
+        if(this.props.video.creator === null){
+            return null;
+        }
+        let thumbsUpClass = "like vid-info-btn";
+        let thumbsDownClass = "dislike vid-info-btn";
+        if (this.state.like_dislike != undefined){
+            thumbsUpClass = (this.state.like_dislike === true) ? "active like vid-info-btn" : "like vid-info-btn";
+            thumbsDownClass = (this.state.like_dislike === false) ? "active dislike vid-info-btn" : "dislike vid-info-btn";
+        }
         return (
         <div>
             <div className="video-container">
                 <video className="video-show" preload="auto" controls="controls" autoPlay="autoplay">
-                    <source src={this.props.video.video_url}/>
+                    <source src={this.props.video.video.videoUrl}/>
                 </video>
-                <h2 style={{marginTop: "16px", marginBottom: "8px"}}>{this.props.video.title}</h2>
+                <h2 style={{marginTop: "16px", marginBottom: "8px"}}>{this.props.video.video.title}</h2>
                 <textarea id="current-video-url" className="hidden" defaultValue={window.location.href}/>
                 <ul className="video-info">
-                    <li style={{color:"gray"}}>9001 views • {this.props.video.created_at}</li>
+                    <li style={{color:"gray"}}>9001(fake) views • {this.props.video.video.created_at}</li>
                     <li>
                         <div onClick={this.thumbAction(true)} className={thumbsUpClass}>
                             {thumbsUpIcon(20)}
@@ -58,13 +100,13 @@ class VideoShow extends React.Component{
                     </li>
                 </ul>
                     <div className="profile-pic">
-                        <a href={`/#/channel/${this.props.video.creator_id}`}>{profileIcon("30px")}</a>
+                        <a href={`/#/channel/${this.props.video.video.creator_id}`}>{profileIcon("30px")}</a>
                 </div>
-                <div className="col-4-5">
-                    <a href={`/#/channel/${this.props.video.creator_id}`} style={{textDecoration: "none", color:"black"}}>
-                        <h3 style={{fontSize: "18px"}}>{this.props.creator.username}</h3>
+                <div className="col-4-5" style={{marginTop: "14px"}}>
+                    <a href={`/#/channel/${this.props.video.video.creator_id}`} style={{ textDecoration: "none", color: "black"}}>
+                        <h3 style={{fontSize: "18px", display: "inline"}}>{this.props.video.creator.username}</h3>
                     </a>
-                    <h5 style={{fontWeight: "400"}}>{this.props.video.description}</h5>
+                    <h5 style={{fontWeight: "400", marginTop: 10}}>{this.props.video.video.description}</h5>
                 </div>
             </div>
             <div className="video-recommendations">

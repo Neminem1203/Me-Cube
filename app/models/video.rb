@@ -12,7 +12,7 @@
 #
 
 class Video < ApplicationRecord
-    validates :title, :video_url, :description, :creator_id, presence: true
+    validates :title, :description, :creator_id, presence: true
 
     belongs_to :creator,
     class_name: "User",
