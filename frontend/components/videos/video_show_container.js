@@ -15,8 +15,9 @@ const mSTP = (state, ownProps) => {
             creator: creator,
             like_dislike: video.like_dislike,
             likes: video.likes,
-            dislikes: video.dislikes
-        }
+            dislikes: video.dislikes,
+        },
+        error: state.error.video
     }
     const sample_return = {
         // video:{

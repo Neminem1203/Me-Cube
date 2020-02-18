@@ -1,5 +1,6 @@
 import { connect } from "react-redux"
 import MainContent from "./main_content"
+import { getVideos } from "../actions/video_actions"
 
 const mSTP = state => {
     return{
@@ -7,4 +8,10 @@ const mSTP = state => {
     }
 }
 
-export default connect(mSTP, null)(MainContent);
+const mDTP = dispatch =>{
+    return{
+        getVideos: () => dispatch(getVideos())
+    }
+}
+
+export default connect(mSTP, mDTP)(MainContent);

@@ -20,7 +20,8 @@ const mSTP = state =>{
 
 const mDTP = dispatch =>{
     return{
-        action: video => dispatch(createVideo(video))
+        action: video => dispatch(createVideo(video)),
+        clearError: ()=>dispatch(clearError())
     }
 }
 export default connect(mSTP, mDTP)(VideoForm);

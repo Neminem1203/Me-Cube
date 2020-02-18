@@ -42,7 +42,7 @@ export const getUsers = userList => dispatch =>{
 export const getUser = userId => dispatch =>{
     return UserAPIUtil.receiveUser(userId).then(
         payload => dispatch(receiveUser(payload)),
-        error => dispatch(receiveUserError(error.responseJSON)));
+        () => dispatch(receiveUserError(["Channel not found"])));
 }
 
 export const createUser = user => dispatch =>{

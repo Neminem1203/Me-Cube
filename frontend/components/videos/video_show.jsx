@@ -49,21 +49,23 @@ class VideoShow extends React.Component{
             } 
         }
     }
-    finishSetup(){
+    finishSetup() {
+
+        if(!this.props.video){return;}
+        const video = document.getElementById('video-player')
+        const video_src = document.getElementById('video-src')
+        video.pause();
         this.props.getUser(this.props.video.video.creator_id);
-        this.setState({ videoId: this.props.match.params.videoId, video: this.props.video, 
+        this.setState({ video: this.props.video, 
             like_dislike: this.props.video.like_dislike, likes: this.props.video.likes, dislikes: this.props.video.dislikes});
+        video_src.setAttribute('src', this.props.video.video.videoUrl);
         video.load();
         video.play();
     }
     componentDidUpdate() {
-        const video = document.getElementById('video-player')
-        const video_src = document.getElementById('video-src')
         if (this.state.videoId != this.props.match.params.videoId){
-            video.pause();
+            this.setState({videoId: this.props.match.params.videoId})
             this.props.getVideo(this.props.match.params.videoId).then(this.finishSetup);
-            video_src.setAttribute('src', this.props.video.video.videoUrl);
-            // debugger
         }
     }
     componentDidMount(){
@@ -71,6 +73,7 @@ class VideoShow extends React.Component{
     }
 
     render() {
+        if(this.props.error !== null){this.props.history.push("/")}
         if(this.props.video.creator === null){
             return null;
         }
@@ -79,6 +82,10 @@ class VideoShow extends React.Component{
         if (this.state.like_dislike != undefined){
             thumbsUpClass = (this.state.like_dislike === true) ? "active like vid-info-btn" : "like vid-info-btn";
             thumbsDownClass = (this.state.like_dislike === false) ? "active dislike vid-info-btn" : "dislike vid-info-btn";
+        }
+        let editButton = <></>
+        if (this.props.video.creatorId === this.props.currentUser){
+            editButton = <a href={`/#/videos/${this.props.video.video.id}/edit`} style={{marginLeft: 10}}><button>Edit</button></a>
         }
         return (
         <div>
@@ -105,13 +112,14 @@ class VideoShow extends React.Component{
                         </div>
                     </li>
                 </ul>
-                    <div className="profile-pic">
-                        <a href={`/#/channel/${this.props.video.video.creator_id}`}>{profileIcon("30px")}</a>
+                <div className="profile-pic">
+                    <a href={`/#/channel/${this.props.video.video.creator_id}`}>{profileIcon("30px")}</a>
                 </div>
                 <div className="col-4-5" style={{marginTop: "14px"}}>
                     <a href={`/#/channel/${this.props.video.video.creator_id}`} style={{ textDecoration: "none", color: "black"}}>
                         <h3 style={{fontSize: "18px", display: "inline"}}>{this.props.video.creator.username}</h3>
                     </a>
+                    {editButton}
                     <h5 style={{fontWeight: "400", marginTop: 10}}>{this.props.video.video.description}</h5>
                 </div>
             </div>

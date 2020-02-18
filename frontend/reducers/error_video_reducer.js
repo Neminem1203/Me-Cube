@@ -8,6 +8,8 @@ const errorVideoReducer = (state = null, action) => {
             return action.errorMsgs;
         case CLEAR_ERROR:
             return null;
+        case RECEIVE_VIDEOS:
+            return null;
         case RECEIVE_VIDEO:
             return null;
         default:

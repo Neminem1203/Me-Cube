@@ -1,5 +1,4 @@
 export const uploadVideo = video =>{
-    debugger
     return $.ajax({
         method: "POST",
         url: "/api/videos",
@@ -9,10 +8,11 @@ export const uploadVideo = video =>{
     })
 }
 
-export const getVideos = () =>{
+export const getVideos = videoList =>{
     return $.ajax({
         method: "GET",
-        url: "/api/videos"
+        url: "/api/videos",
+        data: {video_list: videoList}
     })
 }
 

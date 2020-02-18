@@ -8,17 +8,23 @@ import VideoShow from "./videos/video_show_container";
 import VideoCreate from "./videos/video_create_container";
 import Channel from "./users/channel_container";
 
-const MainContent = props =>{
-    let mainClass = (props.sidebar) ? "main-content" : "main-content active";
-    return (
-        <div className={mainClass}>
-            <Route exact path="/" component={HomePage} />
-            <ProtectedRoute exact path="/user/edit" component={EditUser} />
-            <Route exact path="/channel/:channelId" component={Channel}/>
-            <Route exact path="/video/new" component={VideoCreate} />
-            <Route exact path="/videos/:videoId" component={VideoShow} />
-        </div>
-    )
-}
+class MainContent extends React.Component{
 
+    componentDidMount(){
+        this.props.getVideos();
+    }
+
+    render(){
+        let mainClass = (this.props.sidebar) ? "main-content" : "main-content active";
+        return (
+            <div className={mainClass}>
+                <Route exact path="/" component={HomePage} />
+                <ProtectedRoute exact path="/user/edit" component={EditUser} />
+                <Route exact path="/channel/:channelId" component={Channel}/>
+                <Route exact path="/video/new" component={VideoCreate} />
+                <Route exact path="/videos/:videoId" component={VideoShow} />
+            </div>
+        )
+    }
+}
 export default MainContent;

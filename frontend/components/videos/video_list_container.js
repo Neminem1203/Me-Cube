@@ -2,9 +2,9 @@ import { getVideos } from "../../actions/video_actions"
 import { connect } from "react-redux"
 import VideoList from "./video_list"
 
-const mSTP = state => {
+const mSTP = (state, ownProps) => {
     return{
-        videos: Object.values(state.entities.videos)
+        videos: state.entities.videos
     }
 }
 

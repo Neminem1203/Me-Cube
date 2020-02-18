@@ -3,6 +3,7 @@ class Api::UsersController < ApplicationController
         # params[:user_list] is array of users
         # @users = User.find(params[:user_list])
         @users = User.all
+        render :index
     end
 
     def create

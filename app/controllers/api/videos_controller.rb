@@ -1,5 +1,10 @@
 class Api::VideosController < ApplicationController
     def index
+        # if(params[:video_list] === "all")
+        #     @videos = Video.all
+        # else
+        #     @videos = Video.find(params[:video_list])
+        # end
         @videos = Video.all
         render :index
     end

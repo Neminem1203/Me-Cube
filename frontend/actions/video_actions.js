@@ -26,10 +26,10 @@ export const getVideo = videoId => dispatch =>{
     return VideoAPIUtil.getVideo(videoId).then(payload=>{
             dispatch(receiveVideo(payload));
             dispatch(getUser(payload.creator_id));
-        },error => dispatch(receiveVideoError(error.responseJSON)))
+        },() => dispatch(receiveVideoError(["Video Not Found"])))
 }
 
 export const createVideo = video => dispatch =>{
     return VideoAPIUtil.uploadVideo(video).then(payload=> dispatch(receiveVideo(payload)),
-        error => dispatch(receiveVideoError(error.responseJSON)));
+        () => dispatch(receiveVideoError(["Error occured when creating Video"])));
 };
