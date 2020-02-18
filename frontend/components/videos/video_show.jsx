@@ -31,6 +31,7 @@ class VideoShow extends React.Component{
     thumbAction(bool){
         return e=>{
             e.preventDefault();
+            const like =(bool) => ({ likeable_type: "Video", likeable_id: this.state.videoId, user_id: this.props.currentUser , like_dislike: bool});
             const field = (bool) ? "likes" : "dislikes";
             const fieldVal = this.state[field];
             const otherField = (bool) ? "dislikes" : "likes";
@@ -38,13 +39,20 @@ class VideoShow extends React.Component{
             if (this.state.like_dislike === bool) { //Destroy the like/dislike
                 this.setState({ like_dislike: undefined, [field]: (fieldVal-1)})
                 // Call Destroy on like_dislike where video_id is this video and user_id is current_user.id
-
+                this.props.destroyLike(like())
             } 
             else { // Increment field the decrement otherField
+                let method = "create";
                 if (this.state.like_dislike !== undefined) { //Decrement otherField
                     this.setState({ [otherField]: otherFieldVal - 1  });
+                    method = "update";// UPDATE
                 }
                 this.setState({ like_dislike: bool, [field]: fieldVal + 1 })
+                if(method === "create"){
+                    this.props.createLike(like(bool))
+                } else {
+                    this.props.updateLike(like(bool))
+                }
                 // likeable_type: "Video", likeable_id: video.id, like_dislike = bool, user_id: current_user.id
                 // sets value at where likeable_id+type = video_id+type and user_id is current_user.id
             } 
@@ -60,12 +68,16 @@ class VideoShow extends React.Component{
     }
     saveChanges(e){
         e.preventDefault();
-        this.props.updateVideo({
-            id: this.state.videoId, 
-            title: this.state.editTitle,
-            description: this.state.editDescription
-        });
-        this.toggleEdit(e);
+        this.setState({ editMode: false });
+        debugger
+        if(this.props.video.creator.id !== this.props.currentUser){return;}
+        else {
+            this.props.updateVideo({
+                id: this.state.videoId,
+                title: this.state.editTitle,
+                description: this.state.editDescription
+            });
+        }
     }
     finishSetup() {
         if(!this.props.video){return;}
@@ -73,10 +85,12 @@ class VideoShow extends React.Component{
         const video_src = document.getElementById('video-src')
         video.pause();
         this.props.getUser(this.props.video.video.creator_id);
-        this.setState({ video: this.props.video, 
+        this.setState({ 
+            video: this.props.video, 
             like_dislike: this.props.video.like_dislike, 
             likes: this.props.video.likes, 
-            dislikes: this.props.video.dislikes
+            dislikes: this.props.video.dislikes,
+            editMode: false
         });
         video_src.setAttribute('src', this.props.video.video.videoUrl);
         video.load();
@@ -117,7 +131,7 @@ class VideoShow extends React.Component{
                     <button onClick={this.toggleEdit} style={{marginLeft: 10}}>Cancel</button>
                     <button onClick={this.saveChanges} style={{marginLeft: 10}}>Save</button>
             </>)
-            title = <input style={{ marginTop: "16px", marginBottom: "8px", fontSize: "1.5em" }} value={this.state.editTitle} onChange={this.editField("editTitle")}/>
+            title = <input style={{ marginTop: "16px", marginBottom: "8px", fontSize: "1.5em", width: "100%" }} value={this.state.editTitle} onChange={this.editField("editTitle")}/>
             description = <textarea style={{ fontWeight: "400", marginTop: 10, display: "block", width: "100%", height: 50}} value={this.state.editDescription} onChange={this.editField("editDescription")} />
         }
         return (
@@ -129,7 +143,7 @@ class VideoShow extends React.Component{
                 {title}
                 <textarea id="current-video-url" className="hidden" defaultValue={window.location.href}/>
                 <ul className="video-info">
-                    <li style={{color:"gray"}}>9001(fake) views • {this.props.video.video.created_at}</li>
+                    <li style={{color:"gray"}}>9.1M(fake) views • {this.props.video.video.created_at}</li>
                     <li>
                         <div onClick={this.thumbAction(true)} className={thumbsUpClass}>
                             {thumbsUpIcon(20)}

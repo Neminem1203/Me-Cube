@@ -86,6 +86,38 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./frontend/actions/like_actions.js":
+/*!******************************************!*\
+  !*** ./frontend/actions/like_actions.js ***!
+  \******************************************/
+/*! exports provided: createLike, updateLike, destroyLike */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createLike", function() { return createLike; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateLike", function() { return updateLike; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "destroyLike", function() { return destroyLike; });
+/* harmony import */ var _util_like_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/like_util */ "./frontend/util/like_util.js");
+
+var createLike = function createLike(like) {
+  return function (dispatch) {
+    return _util_like_util__WEBPACK_IMPORTED_MODULE_0__["createLike"](like);
+  };
+};
+var updateLike = function updateLike(like) {
+  return function (dispatch) {
+    return _util_like_util__WEBPACK_IMPORTED_MODULE_0__["updateLike"](like);
+  };
+};
+var destroyLike = function destroyLike(like) {
+  return function (dispatch) {
+    return _util_like_util__WEBPACK_IMPORTED_MODULE_0__["destroyLike"](like);
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/modal_actions.js":
 /*!*******************************************!*\
   !*** ./frontend/actions/modal_actions.js ***!
@@ -2120,6 +2152,16 @@ function (_React$Component) {
 
       return function (e) {
         e.preventDefault();
+
+        var like = function like(bool) {
+          return {
+            likeable_type: "Video",
+            likeable_id: _this2.state.videoId,
+            user_id: _this2.props.currentUser,
+            like_dislike: bool
+          };
+        };
+
         var field = bool ? "likes" : "dislikes";
         var fieldVal = _this2.state[field];
         var otherField = bool ? "dislikes" : "likes";
@@ -2131,16 +2173,28 @@ function (_React$Component) {
             like_dislike: undefined
           }, field, fieldVal - 1)); // Call Destroy on like_dislike where video_id is this video and user_id is current_user.id
 
+
+          _this2.props.destroyLike(like());
         } else {
           // Increment field the decrement otherField
+          var method = "create";
+
           if (_this2.state.like_dislike !== undefined) {
             //Decrement otherField
             _this2.setState(_defineProperty({}, otherField, otherFieldVal - 1));
+
+            method = "update"; // UPDATE
           }
 
           _this2.setState(_defineProperty({
             like_dislike: bool
-          }, field, fieldVal + 1)); // likeable_type: "Video", likeable_id: video.id, like_dislike = bool, user_id: current_user.id
+          }, field, fieldVal + 1));
+
+          if (method === "create") {
+            _this2.props.createLike(like(bool));
+          } else {
+            _this2.props.updateLike(like(bool));
+          } // likeable_type: "Video", likeable_id: video.id, like_dislike = bool, user_id: current_user.id
           // sets value at where likeable_id+type = video_id+type and user_id is current_user.id
 
         }
@@ -2170,12 +2224,20 @@ function (_React$Component) {
     key: "saveChanges",
     value: function saveChanges(e) {
       e.preventDefault();
-      this.props.updateVideo({
-        id: this.state.videoId,
-        title: this.state.editTitle,
-        description: this.state.editDescription
+      this.setState({
+        editMode: false
       });
-      this.toggleEdit(e);
+      debugger;
+
+      if (this.props.video.creator.id !== this.props.currentUser) {
+        return;
+      } else {
+        this.props.updateVideo({
+          id: this.state.videoId,
+          title: this.state.editTitle,
+          description: this.state.editDescription
+        });
+      }
     }
   }, {
     key: "finishSetup",
@@ -2192,7 +2254,8 @@ function (_React$Component) {
         video: this.props.video,
         like_dislike: this.props.video.like_dislike,
         likes: this.props.video.likes,
-        dislikes: this.props.video.dislikes
+        dislikes: this.props.video.dislikes,
+        editMode: false
       });
       video_src.setAttribute('src', this.props.video.video.videoUrl);
       video.load();
@@ -2269,7 +2332,8 @@ function (_React$Component) {
           style: {
             marginTop: "16px",
             marginBottom: "8px",
-            fontSize: "1.5em"
+            fontSize: "1.5em",
+            width: "100%"
           },
           value: this.state.editTitle,
           onChange: this.editField("editTitle")
@@ -2308,7 +2372,7 @@ function (_React$Component) {
         style: {
           color: "gray"
         }
-      }, "9001(fake) views \u2022 ", this.props.video.video.created_at), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "9.1M(fake) views \u2022 ", this.props.video.video.created_at), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onClick: this.thumbAction(true),
         className: thumbsUpClass
       }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["thumbsUpIcon"])(20), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, this.state.likes)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2363,6 +2427,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _video_show__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./video_show */ "./frontend/components/videos/video_show.jsx");
 /* harmony import */ var _actions_video_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/video_actions */ "./frontend/actions/video_actions.js");
 /* harmony import */ var _actions_users_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/users_actions */ "./frontend/actions/users_actions.js");
+/* harmony import */ var _actions_like_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/like_actions */ "./frontend/actions/like_actions.js");
+
 
 
 
@@ -2419,6 +2485,15 @@ var mDTP = function mDTP(dispatch) {
     },
     updateVideo: function updateVideo(video) {
       return dispatch(Object(_actions_video_actions__WEBPACK_IMPORTED_MODULE_2__["updateVideo"])(video));
+    },
+    createLike: function createLike(like) {
+      return dispatch(Object(_actions_like_actions__WEBPACK_IMPORTED_MODULE_4__["createLike"])(like));
+    },
+    updateLike: function updateLike(like) {
+      return dispatch(Object(_actions_like_actions__WEBPACK_IMPORTED_MODULE_4__["updateLike"])(like));
+    },
+    destroyLike: function destroyLike(like) {
+      return dispatch(Object(_actions_like_actions__WEBPACK_IMPORTED_MODULE_4__["destroyLike"])(like));
     }
   };
 };
@@ -3056,6 +3131,42 @@ __webpack_require__.r(__webpack_exports__);
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"], redux_logger__WEBPACK_IMPORTED_MODULE_2___default.a));
 });
+
+/***/ }),
+
+/***/ "./frontend/util/like_util.js":
+/*!************************************!*\
+  !*** ./frontend/util/like_util.js ***!
+  \************************************/
+/*! exports provided: createLike, updateLike, destroyLike */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createLike", function() { return createLike; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateLike", function() { return updateLike; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "destroyLike", function() { return destroyLike; });
+var createLike = function createLike(like) {
+  return $.ajax({
+    method: "POST",
+    url: "/api/likes",
+    data: like
+  });
+};
+var updateLike = function updateLike(like) {
+  return $.ajax({
+    method: "PATCH",
+    url: "/api/likes",
+    data: like
+  });
+};
+var destroyLike = function destroyLike(like) {
+  return $.ajax({
+    method: "DELETE",
+    url: "/api/likes",
+    data: like
+  });
+};
 
 /***/ }),
 

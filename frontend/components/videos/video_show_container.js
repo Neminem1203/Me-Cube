@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import VideoShow from "./video_show";
 import { getVideo, updateVideo } from "../../actions/video_actions";
 import { getUser } from "../../actions/users_actions";
+import {createLike, updateLike, destroyLike} from "../../actions/like_actions";
 
 const mSTP = (state, ownProps) => {
     let video = state.entities.videos[ownProps.match.params.videoId];
@@ -46,7 +47,10 @@ const mDTP = dispatch =>{
     return{
         getUser: userId => dispatch(getUser(userId)),
         getVideo: videoId => dispatch(getVideo(videoId)),
-        updateVideo: video => dispatch(updateVideo(video))
+        updateVideo: video => dispatch(updateVideo(video)),
+        createLike: like => dispatch(createLike(like)),
+        updateLike: like => dispatch(updateLike(like)),
+        destroyLike: like => dispatch(destroyLike(like)),
     }
 }
 
