@@ -111,7 +111,9 @@ class VideoShow extends React.Component{
         if(this.props.video.creator === null){
             return null;
         }
-
+        if (this.state.likes === undefined && this.props.video.likes){
+            this.setState({ likes: this.props.video.likes, dislikes: this.props.video.dislikes})
+        }
         let thumbsUpClass = "like vid-info-btn";
         let thumbsDownClass = "dislike vid-info-btn";
         if (this.state.like_dislike != undefined){

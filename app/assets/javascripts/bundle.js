@@ -1330,7 +1330,7 @@ function (_React$Component) {
       // e.preventDefault();
       var fileSizeLimit = 500000;
       var reader = new FileReader();
-      var file = e.currentTarget.files[0]; // console.log(file.size);
+      var file = e.currentTarget.files[0];
 
       if (file.size > fileSizeLimit) {
         e.currentTarget.value = "";
@@ -1797,7 +1797,7 @@ function (_React$Component) {
       // e.preventDefault();
       var fileSizeLimit = 50000000;
       var reader = new FileReader();
-      var file = e.currentTarget.files[0]; // console.log(file.size);
+      var file = e.currentTarget.files[0];
 
       if (file.size > fileSizeLimit) {
         e.currentTarget.value = "";
@@ -2282,6 +2282,13 @@ function (_React$Component) {
       // if(this.props.error[0] === "Video Not Found"){this.props.history.push("/")}
       if (this.props.video.creator === null) {
         return null;
+      }
+
+      if (this.state.likes === undefined && this.props.video.likes) {
+        this.setState({
+          likes: this.props.video.likes,
+          dislikes: this.props.video.dislikes
+        });
       }
 
       var thumbsUpClass = "like vid-info-btn";

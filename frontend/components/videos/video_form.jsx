@@ -18,7 +18,6 @@ class VideoCreate extends React.Component{
         const fileSizeLimit = 50000000;
         const reader = new FileReader();
         const file = e.currentTarget.files[0];
-        // console.log(file.size);
         if (file.size > fileSizeLimit) {
             e.currentTarget.value = "";
             alert(`Filesize can't be greater than ${fileSizeLimit} bytes`);
