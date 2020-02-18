@@ -53,6 +53,8 @@ class VideoShow extends React.Component{
         this.props.getUser(this.props.video.video.creator_id);
         this.setState({ videoId: this.props.match.params.videoId, video: this.props.video, 
             like_dislike: this.props.video.like_dislike, likes: this.props.video.likes, dislikes: this.props.video.dislikes});
+        video.load();
+        video.play();
     }
     componentDidUpdate() {
         const video = document.getElementById('video-player')
@@ -61,8 +63,6 @@ class VideoShow extends React.Component{
             video.pause();
             this.props.getVideo(this.props.match.params.videoId).then(this.finishSetup);
             video_src.setAttribute('src', this.props.video.video.videoUrl);
-            video.load();
-            video.play();
             // debugger
         }
     }

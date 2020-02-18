@@ -1917,6 +1917,8 @@ function (_React$Component) {
         likes: this.props.video.likes,
         dislikes: this.props.video.dislikes
       });
+      video.load();
+      video.play();
     }
   }, {
     key: "componentDidUpdate",
@@ -1927,9 +1929,7 @@ function (_React$Component) {
       if (this.state.videoId != this.props.match.params.videoId) {
         video.pause();
         this.props.getVideo(this.props.match.params.videoId).then(this.finishSetup);
-        video_src.setAttribute('src', this.props.video.video.videoUrl);
-        video.load();
-        video.play(); // debugger
+        video_src.setAttribute('src', this.props.video.video.videoUrl); // debugger
       }
     }
   }, {
