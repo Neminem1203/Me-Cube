@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import VideoShow from "./video_show";
-import { getVideo } from "../../actions/video_actions";
+import { getVideo, updateVideo } from "../../actions/video_actions";
 import { getUser } from "../../actions/users_actions";
 
 const mSTP = (state, ownProps) => {
@@ -17,7 +17,8 @@ const mSTP = (state, ownProps) => {
             likes: video.likes,
             dislikes: video.dislikes,
         },
-        error: state.error.video
+        error: state.error.video,
+        currentUser: state.session.userId
     }
     const sample_return = {
         // video:{
@@ -45,6 +46,7 @@ const mDTP = dispatch =>{
     return{
         getUser: userId => dispatch(getUser(userId)),
         getVideo: videoId => dispatch(getVideo(videoId)),
+        updateVideo: video => dispatch(updateVideo(video))
     }
 }
 

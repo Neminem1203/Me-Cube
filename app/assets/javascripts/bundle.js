@@ -266,7 +266,7 @@ var logout = function logout() {
 /*!*******************************************!*\
   !*** ./frontend/actions/video_actions.js ***!
   \*******************************************/
-/*! exports provided: RECEIVE_VIDEOS, RECEIVE_VIDEO, receiveVideos, receiveVideo, getVideos, getVideo, createVideo */
+/*! exports provided: RECEIVE_VIDEOS, RECEIVE_VIDEO, receiveVideos, receiveVideo, getVideos, getVideo, createVideo, updateVideo */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -278,6 +278,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getVideos", function() { return getVideos; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getVideo", function() { return getVideo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createVideo", function() { return createVideo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateVideo", function() { return updateVideo; });
 /* harmony import */ var _util_video_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/video_util */ "./frontend/util/video_util.js");
 /* harmony import */ var _modal_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modal_actions */ "./frontend/actions/modal_actions.js");
 var RECEIVE_VIDEOS = "RECEIVE_VIDEOS";
@@ -321,6 +322,15 @@ var createVideo = function createVideo(video) {
       return dispatch(receiveVideo(payload));
     }, function () {
       return dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["receiveVideoError"])(["Error occured when creating Video"]));
+    });
+  };
+};
+var updateVideo = function updateVideo(video) {
+  return function (dispatch) {
+    return _util_video_util__WEBPACK_IMPORTED_MODULE_0__["updateVideo"](video).then(function (payload) {
+      return dispatch(receiveVideo(payload));
+    }, function () {
+      return dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["receiveVideoError"])(["Error occured when attempting to save"]));
     });
   };
 };
@@ -1967,7 +1977,6 @@ function (_React$Component) {
       }
 
       if (this.props.filter === undefined) {
-        debugger;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
           className: "video-list"
         }, Object.values(this.props.videos).map(function (vid) {
@@ -2082,14 +2091,15 @@ function (_React$Component) {
       video: props.video,
       like_dislike: props.video.like_dislike,
       likes: props.video.likes,
-      dislikes: props.video.dislikes
-    }; // this.state = {
-    //     liked: this.props.video.liked,
-    //     likes: this.props.likes,
-    //     dislikes: this.props.dislikes
-    // }
-
+      dislikes: props.video.dislikes,
+      editMode: false,
+      editTitle: "",
+      editDescription: ""
+    };
     _this.finishSetup = _this.finishSetup.bind(_assertThisInitialized(_this));
+    _this.editField = _this.editField.bind(_assertThisInitialized(_this));
+    _this.toggleEdit = _this.toggleEdit.bind(_assertThisInitialized(_this));
+    _this.saveChanges = _this.saveChanges.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -2137,6 +2147,37 @@ function (_React$Component) {
       };
     }
   }, {
+    key: "toggleEdit",
+    value: function toggleEdit(e) {
+      e.preventDefault();
+      var newState = this.state.editMode ? false : true;
+      this.setState({
+        editMode: newState,
+        editTitle: this.props.video.video.title,
+        editDescription: this.props.video.video.description
+      });
+    }
+  }, {
+    key: "editField",
+    value: function editField(field) {
+      var _this3 = this;
+
+      return function (e) {
+        return _this3.setState(_defineProperty({}, field, e.target.value));
+      };
+    }
+  }, {
+    key: "saveChanges",
+    value: function saveChanges(e) {
+      e.preventDefault();
+      this.props.updateVideo({
+        id: this.state.videoId,
+        title: this.state.editTitle,
+        description: this.state.editDescription
+      });
+      this.toggleEdit(e);
+    }
+  }, {
     key: "finishSetup",
     value: function finishSetup() {
       if (!this.props.video) {
@@ -2175,10 +2216,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      if (this.props.error !== null) {
-        this.props.history.push("/");
-      }
-
+      // if(this.props.error[0] === "Video Not Found"){this.props.history.push("/")}
       if (this.props.video.creator === null) {
         return null;
       }
@@ -2193,13 +2231,60 @@ function (_React$Component) {
 
       var editButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null);
 
-      if (this.props.video.creatorId === this.props.currentUser) {
-        editButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-          href: "/#/videos/".concat(this.props.video.video.id, "/edit"),
+      if (this.props.video.creator.id === this.props.currentUser) {
+        editButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: this.toggleEdit,
           style: {
             marginLeft: 10
           }
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Edit"));
+        }, "Edit");
+      }
+
+      var title = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        style: {
+          marginTop: "16px",
+          marginBottom: "8px"
+        }
+      }, this.props.video.video.title);
+      var description = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+        style: {
+          fontWeight: "400",
+          marginTop: 10
+        }
+      }, this.props.video.video.description);
+
+      if (this.state.editMode) {
+        editButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: this.toggleEdit,
+          style: {
+            marginLeft: 10
+          }
+        }, "Cancel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: this.saveChanges,
+          style: {
+            marginLeft: 10
+          }
+        }, "Save"));
+        title = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          style: {
+            marginTop: "16px",
+            marginBottom: "8px",
+            fontSize: "1.5em"
+          },
+          value: this.state.editTitle,
+          onChange: this.editField("editTitle")
+        });
+        description = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+          style: {
+            fontWeight: "400",
+            marginTop: 10,
+            display: "block",
+            width: "100%",
+            height: 50
+          },
+          value: this.state.editDescription,
+          onChange: this.editField("editDescription")
+        });
       }
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2213,12 +2298,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("source", {
         id: "video-src",
         src: this.props.video.video.videoUrl
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-        style: {
-          marginTop: "16px",
-          marginBottom: "8px"
-        }
-      }, this.props.video.video.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+      })), title, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
         id: "current-video-url",
         className: "hidden",
         defaultValue: window.location.href
@@ -2257,12 +2337,7 @@ function (_React$Component) {
           fontSize: "18px",
           display: "inline"
         }
-      }, this.props.video.creator.username)), editButton, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-        style: {
-          fontWeight: "400",
-          marginTop: 10
-        }
-      }, this.props.video.video.description))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, this.props.video.creator.username)), editButton, description)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "video-recommendations"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Recommendation")));
     }
@@ -2309,7 +2384,8 @@ var mSTP = function mSTP(state, ownProps) {
       likes: video.likes,
       dislikes: video.dislikes
     },
-    error: state.error.video
+    error: state.error.video,
+    currentUser: state.session.userId
   };
   var sample_return = {
     // video:{
@@ -2340,6 +2416,9 @@ var mDTP = function mDTP(dispatch) {
     },
     getVideo: function getVideo(videoId) {
       return dispatch(Object(_actions_video_actions__WEBPACK_IMPORTED_MODULE_2__["getVideo"])(videoId));
+    },
+    updateVideo: function updateVideo(video) {
+      return dispatch(Object(_actions_video_actions__WEBPACK_IMPORTED_MODULE_2__["updateVideo"])(video));
     }
   };
 };

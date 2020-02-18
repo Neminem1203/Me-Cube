@@ -8,14 +8,15 @@ class VideoShow extends React.Component{
             video: props.video,
             like_dislike: props.video.like_dislike,
             likes: props.video.likes,
-            dislikes: props.video.dislikes
+            dislikes: props.video.dislikes,
+            editMode: false,
+            editTitle: "",
+            editDescription: "",
         }
-        // this.state = {
-        //     liked: this.props.video.liked,
-        //     likes: this.props.likes,
-        //     dislikes: this.props.dislikes
-        // }
         this.finishSetup = this.finishSetup.bind(this);
+        this.editField = this.editField.bind(this);
+        this.toggleEdit = this.toggleEdit.bind(this);
+        this.saveChanges = this.saveChanges.bind(this);
     }
 
     copyShareUrl(e){
@@ -49,15 +50,34 @@ class VideoShow extends React.Component{
             } 
         }
     }
+    toggleEdit(e){
+        e.preventDefault();
+        const newState = (this.state.editMode) ? false : true
+        this.setState({editMode: newState, editTitle: this.props.video.video.title, editDescription: this.props.video.video.description})
+    }
+    editField(field){
+        return e => this.setState({[field]: e.target.value});
+    }
+    saveChanges(e){
+        e.preventDefault();
+        this.props.updateVideo({
+            id: this.state.videoId, 
+            title: this.state.editTitle,
+            description: this.state.editDescription
+        });
+        this.toggleEdit(e);
+    }
     finishSetup() {
-
         if(!this.props.video){return;}
         const video = document.getElementById('video-player')
         const video_src = document.getElementById('video-src')
         video.pause();
         this.props.getUser(this.props.video.video.creator_id);
         this.setState({ video: this.props.video, 
-            like_dislike: this.props.video.like_dislike, likes: this.props.video.likes, dislikes: this.props.video.dislikes});
+            like_dislike: this.props.video.like_dislike, 
+            likes: this.props.video.likes, 
+            dislikes: this.props.video.dislikes
+        });
         video_src.setAttribute('src', this.props.video.video.videoUrl);
         video.load();
         video.play();
@@ -73,19 +93,32 @@ class VideoShow extends React.Component{
     }
 
     render() {
-        if(this.props.error !== null){this.props.history.push("/")}
+        // if(this.props.error[0] === "Video Not Found"){this.props.history.push("/")}
         if(this.props.video.creator === null){
             return null;
         }
+
         let thumbsUpClass = "like vid-info-btn";
         let thumbsDownClass = "dislike vid-info-btn";
         if (this.state.like_dislike != undefined){
             thumbsUpClass = (this.state.like_dislike === true) ? "active like vid-info-btn" : "like vid-info-btn";
             thumbsDownClass = (this.state.like_dislike === false) ? "active dislike vid-info-btn" : "dislike vid-info-btn";
         }
+
         let editButton = <></>
-        if (this.props.video.creatorId === this.props.currentUser){
-            editButton = <a href={`/#/videos/${this.props.video.video.id}/edit`} style={{marginLeft: 10}}><button>Edit</button></a>
+        if (this.props.video.creator.id === this.props.currentUser){
+            editButton = <button onClick={this.toggleEdit} style={{ marginLeft: 10 }}>Edit</button>
+        }
+
+        let title = <h2 style={{ marginTop: "16px", marginBottom: "8px" }}>{this.props.video.video.title}</h2>;
+        let description = <h5 style={{ fontWeight: "400", marginTop: 10 }}>{this.props.video.video.description}</h5>;
+        if(this.state.editMode){
+            editButton = (<>
+                    <button onClick={this.toggleEdit} style={{marginLeft: 10}}>Cancel</button>
+                    <button onClick={this.saveChanges} style={{marginLeft: 10}}>Save</button>
+            </>)
+            title = <input style={{ marginTop: "16px", marginBottom: "8px", fontSize: "1.5em" }} value={this.state.editTitle} onChange={this.editField("editTitle")}/>
+            description = <textarea style={{ fontWeight: "400", marginTop: 10, display: "block", width: "100%", height: 50}} value={this.state.editDescription} onChange={this.editField("editDescription")} />
         }
         return (
         <div>
@@ -93,7 +126,7 @@ class VideoShow extends React.Component{
                 <video id='video-player' className="video-show" preload="auto" controls="controls" autoPlay="autoplay">
                     <source id='video-src' src={this.props.video.video.videoUrl}/>
                 </video>
-                <h2 style={{marginTop: "16px", marginBottom: "8px"}}>{this.props.video.video.title}</h2>
+                {title}
                 <textarea id="current-video-url" className="hidden" defaultValue={window.location.href}/>
                 <ul className="video-info">
                     <li style={{color:"gray"}}>9001(fake) views • {this.props.video.video.created_at}</li>
@@ -120,7 +153,7 @@ class VideoShow extends React.Component{
                         <h3 style={{fontSize: "18px", display: "inline"}}>{this.props.video.creator.username}</h3>
                     </a>
                     {editButton}
-                    <h5 style={{fontWeight: "400", marginTop: 10}}>{this.props.video.video.description}</h5>
+                    {description}
                 </div>
             </div>
             <div className="video-recommendations">

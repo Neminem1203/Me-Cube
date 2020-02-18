@@ -33,3 +33,8 @@ export const createVideo = video => dispatch =>{
     return VideoAPIUtil.uploadVideo(video).then(payload=> dispatch(receiveVideo(payload)),
         () => dispatch(receiveVideoError(["Error occured when creating Video"])));
 };
+
+export const updateVideo = video => dispatch =>{
+    return VideoAPIUtil.updateVideo(video).then(payload => dispatch(receiveVideo(payload)),
+        () => dispatch(receiveVideoError(["Error occured when attempting to save"])))
+}

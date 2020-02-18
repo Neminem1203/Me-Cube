@@ -22,7 +22,6 @@ class VideoList extends React.Component{
     render(){
         if(this.props.videos.length === 0){return null;}
         if(this.props.filter === undefined){
-            debugger
             return(
                 <ul className="video-list">
                     {Object.values(this.props.videos).map(vid => <VideoThumb vid={vid} key={`video-${vid.id}`}/>)}
