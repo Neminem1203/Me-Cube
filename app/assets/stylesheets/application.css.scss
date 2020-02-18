@@ -29,7 +29,7 @@
 .hidden{display: none !important;}
 :focus{
   outline-style: outset;
-  outline-width: 2px;
+  // outline-width: 2px;
   outline-color: #4ecac8;;
 }
 button:focus {outline:0;}
@@ -303,6 +303,22 @@ text:area:focus{outline:0;}
   display: flex;
   align-items: center;
 }
+.video-list{
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+.video-list img{
+  width: 175px;
+  height: 100px;
+  margin: 7.5px;
+  background-size: cover;
+}
+.video-list a{
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+}
 .profile-pic{
   float: left;
   margin-top: 14px;
@@ -328,6 +344,7 @@ text:area:focus{outline:0;}
 }
 .publish-btns {
   width: 96%;
+  min-width: 910px;
   margin: 0 auto;
   margin-bottom: 15px;
   padding: 10px;
@@ -363,6 +380,11 @@ text:area:focus{outline:0;}
   min-width: 500px;
   // max-width: 700px;
   width: 100%;
+}
+.upload-video-btn{
+  margin-right: 25px;
+  text-decoration: none;
+  color: black;
 }
 [class^="col-"]{
   float: left;

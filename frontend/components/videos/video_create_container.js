@@ -9,6 +9,8 @@ const mSTP = state =>{
             title: "",
             videoURL: "",
             videoFile: "",
+            thumbnailURL: "",
+            thumbnailFile: "",
             description: "",
             creatorId: state.session.userId
         },

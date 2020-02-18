@@ -9,7 +9,6 @@ class HomePage extends React.Component{
             <>
                 <h2>Recommended</h2>
                 <VideoList />
-                <a href="/#/video/new">Upload Video</a>
                 <br />
                 </>
         );

@@ -23,9 +23,20 @@ video3 = Video.create(title: "Caminandes", description:"testing videos and their
 friendsVideo = open("https://me-cube-seeds.s3.us-east-2.amazonaws.com/FriendsReboot.mp4")
 koiVideo = open("https://me-cube-seeds.s3.us-east-2.amazonaws.com/Source_out.mp4")
 caminandes = open("https://me-cube-seeds.s3.us-east-2.amazonaws.com/caminandes-1-llama-drama-av1-opus-480p.webm")
+
+friendsThumbnail = open("https://me-cube-seeds.s3.us-east-2.amazonaws.com/FriendsRebootThumbnail.png")
+koiThumbnail = open("https://me-cube-seeds.s3.us-east-2.amazonaws.com/KoiThumbnail.png")
+caminandesThumbnail = open("https://me-cube-seeds.s3.us-east-2.amazonaws.com/CaminandesThumbnail.png")
+
 video1.video.attach(io: friendsVideo, filename: "friends-video-1")
+video1.thumbnail.attach(io: friendsThumbnail, filename: "friends-thumbnail-1")
+
 video2.video.attach(io: koiVideo, filename: "koi-video-2")
-video3.video.attach(io: caminandes, filename: "caminandes-video-1")
+video2.thumbnail.attach(io: koiThumbnail, filename: "koi-thumbnail-2")
+
+video3.video.attach(io: caminandes, filename: "caminandes-video-3")
+video3.thumbnail.attach(io: caminandesThumbnail, filename: "caminandes-thumbnail-3")
+
 # Comments on videos
 comment1 = Comment.create(comment:"first comment on test site", commentable_type: "Video", commentable_id: video1.id, commenter_id: user3.id)
 comment2 = Comment.create(comment:"testing more comments", commentable_type: "Video", commentable_id: video1.id, commenter_id: user3.id)

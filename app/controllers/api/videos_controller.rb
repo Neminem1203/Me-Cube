@@ -8,8 +8,10 @@ class Api::VideosController < ApplicationController
         @video = Video.new(video_params)
         @video.creator_id = current_user.id
         if @video.save
-            video_file = params[:videoFile]
-            @video.attach(io: video_file, filename: "video-"+@video.id.to_s)
+            video_file = params[:video][:videoFile]
+            thumbnail = params[:video][:thumbnailFile]
+            @video.video.attach(io: video_file, filename: "video-"+@video.id.to_s)
+            @video.thumbnail.attach(io: thumbnail, filename: "thumbnail-"+@video.id.to_s)
             render :show
         else
             render json: @video.errors.full_messages

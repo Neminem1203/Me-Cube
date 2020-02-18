@@ -3,7 +3,7 @@ import LoginModal from "../users/signin_container";
 import SignUpModal from "../users/signup_container";
 import { LOGIN, SIGN_UP, ACCOUNT_DETAILS } from "../../actions/modal_actions";
 import { Link } from "react-router-dom";
-import { channelIcon, githubIcon, linkedInIcon, exitIcon, profileIcon } from "../../icons";
+import { channelIcon, githubIcon, linkedInIcon, exitIcon, profileIcon, uploadIcon } from "../../icons";
 
 
 const Navbar = props => {
@@ -61,6 +61,7 @@ const Navbar = props => {
         let imgSrc = window.defaultProfilePicture;
         if(props.user.profile_picture){imgSrc = props.user.profile_picture}
         return (<nav className="navbar">
+                    <a href="/#/video/new" className="upload-video-btn">{uploadIcon()}<br/>Upload</a>
                     <img src={imgSrc} style={{ width: "60px", height: "60px" }} onClick={picture_function} />
                     {modal}
                 </nav>)
@@ -73,9 +74,11 @@ const Navbar = props => {
     }
     else{
         return (
+            <>
             <nav className="navbar">
                 <button onClick={()=>props.showModal(LOGIN)}>SIGN IN</button>
             </nav>
+            </>
         )
         }
 }

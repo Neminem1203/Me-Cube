@@ -1,7 +1,7 @@
 import { RECEIVE_VIDEO_ERROR, CLEAR_ERROR } from "../actions/modal_actions";
 import { RECEIVE_VIDEO, RECEIVE_VIDEOS } from "../actions/video_actions";
 
-const errorUserReducer = (state = null, action) => {
+const errorVideoReducer = (state = null, action) => {
     Object.freeze(state);
     switch (action.type) {
         case RECEIVE_VIDEO_ERROR:
@@ -14,4 +14,4 @@ const errorUserReducer = (state = null, action) => {
             return state;
     }
 }
-export default errorUserReducer;
+export default errorVideoReducer;
