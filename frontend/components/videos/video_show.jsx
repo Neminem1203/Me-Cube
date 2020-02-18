@@ -55,9 +55,15 @@ class VideoShow extends React.Component{
             like_dislike: this.props.video.like_dislike, likes: this.props.video.likes, dislikes: this.props.video.dislikes});
     }
     componentDidUpdate() {
+        const video = document.getElementById('video-player')
+        const video_src = document.getElementById('video-src')
         if (this.state.videoId != this.props.match.params.videoId){
+            video.pause();
             this.props.getVideo(this.props.match.params.videoId).then(this.finishSetup);
-            debugger
+            video_src.setAttribute('src', this.props.video.video.videoUrl);
+            video.load();
+            video.play();
+            // debugger
         }
     }
     componentDidMount(){
@@ -77,8 +83,8 @@ class VideoShow extends React.Component{
         return (
         <div>
             <div className="video-container">
-                <video className="video-show" preload="auto" controls="controls" autoPlay="autoplay">
-                    <source src={this.props.video.video.videoUrl}/>
+                <video id='video-player' className="video-show" preload="auto" controls="controls" autoPlay="autoplay">
+                    <source id='video-src' src={this.props.video.video.videoUrl}/>
                 </video>
                 <h2 style={{marginTop: "16px", marginBottom: "8px"}}>{this.props.video.video.title}</h2>
                 <textarea id="current-video-url" className="hidden" defaultValue={window.location.href}/>

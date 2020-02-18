@@ -1628,7 +1628,9 @@ function (_React$Component) {
       e.preventDefault();
       this.setState({
         videoURL: "",
-        videoFile: null
+        videoFile: null,
+        title: "",
+        description: ""
       });
       document.getElementById("video-upload").value = null;
     }
@@ -1919,9 +1921,15 @@ function (_React$Component) {
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
+      var video = document.getElementById('video-player');
+      var video_src = document.getElementById('video-src');
+
       if (this.state.videoId != this.props.match.params.videoId) {
+        video.pause();
         this.props.getVideo(this.props.match.params.videoId).then(this.finishSetup);
-        debugger;
+        video_src.setAttribute('src', this.props.video.video.videoUrl);
+        video.load();
+        video.play(); // debugger
       }
     }
   }, {
@@ -1947,11 +1955,13 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "video-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("video", {
+        id: "video-player",
         className: "video-show",
         preload: "auto",
         controls: "controls",
         autoPlay: "autoplay"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("source", {
+        id: "video-src",
         src: this.props.video.video.videoUrl
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
         style: {

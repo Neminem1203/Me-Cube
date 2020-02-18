@@ -33,7 +33,7 @@ class VideoCreate extends React.Component{
 
     clearForm(e){
         e.preventDefault();
-        this.setState({ videoURL: "", videoFile: null });
+        this.setState({ videoURL: "", videoFile: null, title: "", description: "" });
         document.getElementById("video-upload").value = null;
     }
 
