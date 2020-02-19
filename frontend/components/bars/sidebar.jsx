@@ -1,5 +1,5 @@
 import React from "react";
-import {homeIcon, channelIcon, githubIcon, linkedInIcon} from "../../icons";
+import {homeIcon, channelIcon, githubIcon, linkedInIcon, menuIcon} from "../../icons";
 
 
 class Sidebar extends React.Component{
@@ -32,7 +32,7 @@ class Sidebar extends React.Component{
         
         return (
             <div className={sidebarClass}>
-                <a onClick={() => this.sidebarToggle(this.props.sidebarToggle)} className="menu-button"><img src={window.menuIcon}/></a>
+                <a onClick={() => this.sidebarToggle(this.props.sidebarToggle)} className="menu-button">{menuIcon()}</a>
                 <ul>
                     <a href="/#/"><li className={homeClass}>
                         {homeIcon()}Home

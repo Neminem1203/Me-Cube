@@ -94,7 +94,6 @@ class VideoShow extends React.Component{
                     // ajax request to get comments
                     // on dismount, should clear comments
                 }
-
                 console.log(this.state.video.video.comments)
                 this.setState({showComments: true});
             }

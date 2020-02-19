@@ -137,8 +137,9 @@ a:focus{outline:0;}
   top: 15px;
   right: 15px;
 }
-.navbar > img:hover{
+.navbar > #profile-btn:hover{
   cursor: pointer;
+  fill: #4ecac8;
 }
 .account-navbar{
   z-index: 2;
@@ -196,6 +197,7 @@ a:focus{outline:0;}
 }
 .sidebar > .menu-button:hover{
   cursor: pointer;
+  fill: #4ecac8;
 }
 .sidebar ul{
   list-style-type: none;
@@ -228,13 +230,6 @@ a:focus{outline:0;}
 
 .sidebar.active{
   width: 150px;
-}
-.sidebar.active > a:hover{
-  cursor:pointer;
-}
-.sidebar.active > a svg{
-  margin-left: -25%;
-  width: 50px;
 }
 .sidebar.active ul li{
   display: flex;

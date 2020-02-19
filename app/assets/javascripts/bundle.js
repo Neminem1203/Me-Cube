@@ -598,10 +598,20 @@ var Navbar = function Navbar(props) {
       };
     }
 
-    var imgSrc = window.defaultProfilePicture;
+    var imgSrc = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      id: "profile-btn",
+      onClick: picture_function
+    }, Object(_icons__WEBPACK_IMPORTED_MODULE_5__["profileIcon"])());
 
     if (props.user.profile_picture) {
-      imgSrc = props.user.profile_picture;
+      imgSrc = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: props.user.profile_picture,
+        style: {
+          width: 60,
+          height: 60
+        },
+        onClick: picture_function
+      });
     }
 
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
@@ -609,14 +619,7 @@ var Navbar = function Navbar(props) {
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
       href: "/#/video/new",
       className: "upload-video-btn"
-    }, Object(_icons__WEBPACK_IMPORTED_MODULE_5__["uploadIcon"])(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Upload"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-      src: imgSrc,
-      style: {
-        width: "60px",
-        height: "60px"
-      },
-      onClick: picture_function
-    }), modal);
+    }, Object(_icons__WEBPACK_IMPORTED_MODULE_5__["uploadIcon"])(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Upload"), imgSrc, modal);
   }
 
   if (props.modal === _actions_modal_actions__WEBPACK_IMPORTED_MODULE_3__["SIGN_UP"]) {
@@ -772,9 +775,7 @@ function (_React$Component) {
           return _this.sidebarToggle(_this.props.sidebarToggle);
         },
         className: "menu-button"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: window.menuIcon
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["menuIcon"])()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         href: "/#/"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: homeClass
@@ -1352,6 +1353,7 @@ var mDTP = function mDTP(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../icons */ "./frontend/icons.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1369,6 +1371,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -1443,7 +1446,7 @@ function (_React$Component) {
         reader.readAsDataURL(file);
       } else {
         this.setState({
-          profilePicURL: window.defaultProfilePicture,
+          profilePicURL: null,
           profilePicFile: null
         });
       }
@@ -1458,11 +1461,15 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var profilePic = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        height: "60px",
-        width: "60px",
-        src: this.props.user.profilePicURL ? this.props.user.profilePicURL : window.defaultProfilePicture
-      }));
+      var profilePic = Object(_icons__WEBPACK_IMPORTED_MODULE_1__["profileIcon"])();
+
+      if (this.props.user.profilePicURL) {
+        profilePic = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          height: "60px",
+          width: "60px",
+          src: this.props.user.profilePicURL
+        }));
+      }
 
       if (this.state.profilePicFile) {
         profilePic = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
@@ -2691,7 +2698,7 @@ var mDTP = function mDTP(dispatch) {
 /*!***************************!*\
   !*** ./frontend/icons.js ***!
   \***************************/
-/*! exports provided: homeIcon, channelIcon, githubIcon, linkedInIcon, exitIcon, profileIcon, thumbsUpIcon, thumbsDownIcon, shareIcon, uploadIcon */
+/*! exports provided: homeIcon, channelIcon, githubIcon, linkedInIcon, exitIcon, profileIcon, thumbsUpIcon, thumbsDownIcon, shareIcon, uploadIcon, menuIcon */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2706,6 +2713,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "thumbsDownIcon", function() { return thumbsDownIcon; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "shareIcon", function() { return shareIcon; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "uploadIcon", function() { return uploadIcon; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "menuIcon", function() { return menuIcon; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -2789,11 +2797,14 @@ var exitIcon = function exitIcon() {
   })));
 };
 var profileIcon = function profileIcon() {
-  var dimension = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 45;
+  var dimension = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 60;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
     viewBox: "-42 0 512 512.002",
     xmlns: "http://www.w3.org/2000/svg",
-    width: dimension
+    style: {
+      width: dimension,
+      height: dimension
+    }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     d: "m210.351562 246.632812c33.882813 0 63.222657-12.152343 87.195313-36.128906 23.972656-23.972656 36.125-53.304687  36.125-87.191406 0-33.875-12.152344-63.210938-36.128906-87.191406-23.976563-23.96875-53.3125-36.121094-87.191407-36.121094-33.886718  0-63.21875 12.152344-87.191406 36.125s-36.128906 53.308594-36.128906 87.1875c0 33.886719 12.15625 63.222656 36.132812 87.195312  23.976563 23.96875 53.3125 36.125 87.1875 36.125zm0 0"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
@@ -2859,6 +2870,28 @@ var uploadIcon = function uploadIcon() {
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     d: "m328.90625 169.800781 103.09375 56.285157v-194.105469l-103.09375 56.285156zm0 0"
   }));
+};
+var menuIcon = function menuIcon() {
+  var dimension = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 35;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    version: "1.1",
+    id: "Capa_1",
+    style: {
+      width: dimension,
+      enableBackground: "new 0 0 469.333 469.333"
+    },
+    xmlns: "http://www.w3.org/2000/svg",
+    x: "0px",
+    y: "0px",
+    viewBox: "0 0 469.333 469.333",
+    xmlSpace: "preserve"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("g", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "M53.333,106.667H416c29.417,0,53.333-23.927,53.333-53.333S445.417,0,416,0H53.333C23.917,0,0,23.927,0,53.333 S23.917,106.667,53.333,106.667z"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "M416,181.333H53.333C23.917,181.333,0,205.26,0,234.667S23.917,288,53.333,288H416c29.417,0,53.333-23.927,53.333-53.333 S445.417,181.333,416,181.333z"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "M416,362.667H53.333C23.917,362.667,0,386.594,0,416s23.917,53.333,53.333,53.333H416 c29.417,0,53.333-23.927,53.333-53.333S445.417,362.667,416,362.667z"
+  })));
 };
 
 /***/ }),

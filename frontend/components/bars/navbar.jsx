@@ -27,7 +27,6 @@ const Navbar = props => {
                     </Link>
                     <a href="/#/user/edit" onClick={() => props.showModal("")}>
                         <li>
-                            {/* <img width="25px" height="25px" src={window.defaultProfilePicture} style={{marginRight: 10}}/> */}
                             {profileIcon(25)}
                             <span>Your Account</span>
                         </li>
@@ -57,11 +56,12 @@ const Navbar = props => {
                 </ul> </>)
             picture_function = () => props.showModal("");
         }
-        let imgSrc = window.defaultProfilePicture;
-        if(props.user.profile_picture){imgSrc = props.user.profile_picture}
+        let imgSrc = <a id="profile-btn" onClick={picture_function}>{profileIcon()}</a>
+        if(props.user.profile_picture){imgSrc = <img src={props.user.profile_picture} style={{width: 60, height: 60}} onClick={picture_function}/>}
         return (<nav className="navbar">
                     <a href="/#/video/new" className="upload-video-btn">{uploadIcon()}<br/>Upload</a>
-                    <img src={imgSrc} style={{ width: "60px", height: "60px" }} onClick={picture_function} />
+                    {/* <img src={imgSrc} style={{ width: "60px", height: "60px" }} onClick={picture_function} /> */}
+                    {imgSrc}
                     {modal}
                 </nav>)
     }

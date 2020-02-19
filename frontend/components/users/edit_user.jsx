@@ -1,4 +1,5 @@
 import React from "react";
+import { profileIcon } from "../../icons";
 class EditUser extends React.Component{
     constructor(props){
         super(props);
@@ -47,7 +48,7 @@ class EditUser extends React.Component{
             reader.readAsDataURL(file); 
         }
         else {
-            this.setState({ profilePicURL: window.defaultProfilePicture, profilePicFile: null});
+            this.setState({ profilePicURL: null, profilePicFile: null});
         } 
     }
     componentDidMount() {
@@ -55,10 +56,13 @@ class EditUser extends React.Component{
     }
 
     render() {
-        let profilePic = <div>
-            <img height="60px" width="60px" 
-            src={(this.props.user.profilePicURL) ? this.props.user.profilePicURL  :window.defaultProfilePicture} >
-                                </img></div>;
+        let profilePic = profileIcon();
+        if (this.props.user.profilePicURL){
+            profilePic = (
+            <div>
+                <img height="60px" width="60px" src={this.props.user.profilePicURL} />
+            </div>);
+        }
         if (this.state.profilePicFile) { 
             profilePic = (
             <div>
