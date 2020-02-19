@@ -30,11 +30,12 @@
 :focus{
   outline-style: outset;
   // outline-width: 2px;
-  outline-color: #4ecac8;;
+  outline-color: #4ecac8;
 }
 button:focus {outline:0;}
 input:focus {outline:0;}
 text:area:focus{outline:0;}
+a:focus{outline:0;}
 // USER FORM
 // // Version 1: (Top Right with no white background)
 // .user-form{
@@ -266,20 +267,63 @@ text:area:focus{outline:0;}
   padding: 15px;
   padding-left: 80px;     //img height + margin-top
   height: calc(100% - calc(76.34px + 8.5px));
-  min-width: 1000px;
   width: 100%;
   background-color: rgb(250, 250, 250);
   overflow-y: scroll;
 }
+.main-content.video-page{
+  min-width: 910px;
+}
 .main-content.active{
   padding: 25px;
-  padding-left: 170px;
+  padding-left: 160px;
 }
-.main-content.active .video-list img{
-  width: 16vw;
-  height: 9vw;
+.main-content.active .video-list{
+  padding: 10px;
+}
+.main-content .video-list div{
+  width: 20vw;
   min-width: 165px;
-  min-height: 90px;
+  min-height: 210px;
+  max-width: 24vw;
+  max-height: 25vw;
+  // margin-right: calc( 15px + 1vw );
+}
+.main-content .video-list li{
+  margin-right: 15px;
+}
+.video-list{
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  // justify-content: space-around;
+}
+.video-list img{
+  min-width: 170px;
+  min-height: 100px;
+  width: 20vw;
+  height: 12vw;
+}
+.video-list a{
+  text-decoration: none;
+  color: gray;
+  font-weight: 200;
+  font-size: 15px;
+}
+.video-title-span{
+  display: inline-block;
+  color: black;
+  font-weight: 600;
+  font-size: 20px;
+  overflow: hidden;
+  height: 45px;
+  // word-wrap: break-word;
+}
+.video-title-span:hover{
+  color: gray;
+}
+.video-creator-span:hover{
+  color: black;
 }
 .video-container{
   float: left;
@@ -308,34 +352,6 @@ text:area:focus{outline:0;}
 .video-info li:last-of-type{
   display: flex;
   align-items: center;
-}
-.video-list{
-  list-style-type: none;
-  display: flex;
-  flex-wrap: wrap;
-  // justify-content: space-around;
-}
-.video-list.vertical{
-  flex-direction: column;
-}
-.video-list img{
-  width: 18vw;
-  height: 10vw;
-  min-width: 180px;
-  min-height: 100px;
-  margin: 7.5px;
-}
-.video-list a{
-  text-decoration: none;
-  color: gray;
-  font-weight: 200;
-  font-size: 15px;
-  padding: 5px;
-}
-.video-title-span{
-  color: black;
-  font-weight: 600;
-  font-size: 20px;
 }
 .profile-pic{
   float: left;

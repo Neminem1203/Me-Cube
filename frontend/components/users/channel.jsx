@@ -47,6 +47,7 @@ class Channel extends React.Component{
         return (
             <div>
                 <h1>{this.state.creator.username}</h1>
+                <h2>Videos</h2>
                 <ul>
                     <VideoList filter={this.state.creator.videos}/>
                 </ul>

@@ -1,5 +1,6 @@
 import React from "react";
 import {profileIcon, thumbsUpIcon, thumbsDownIcon, shareIcon} from "../../icons";
+import VideoList from "./video_list_container";
 class VideoShow extends React.Component{
     constructor(props){
         super(props);
@@ -12,11 +13,14 @@ class VideoShow extends React.Component{
             editMode: false,
             editTitle: "",
             editDescription: "",
+            showComments: false,
+            commentsLoaded: false,
         }
         this.finishSetup = this.finishSetup.bind(this);
         this.editField = this.editField.bind(this);
         this.toggleEdit = this.toggleEdit.bind(this);
         this.saveChanges = this.saveChanges.bind(this);
+        this.showComments = this.showComments.bind(this);
     }
 
     copyShareUrl(e){
@@ -69,7 +73,6 @@ class VideoShow extends React.Component{
     saveChanges(e){
         e.preventDefault();
         this.setState({ editMode: false });
-        debugger
         if(this.props.video.creator.id !== this.props.currentUser){return;}
         else {
             this.props.updateVideo({
@@ -79,44 +82,78 @@ class VideoShow extends React.Component{
             });
         }
     }
+    showComments(e){
+        // console.log(e.target.scrollTop);
+        // console.log(commentSection.offsetParent.offsetHeight);
+        // console.log(commentSection.offsetTop);
+        if(!this.state.showComments){
+            const commentSection = document.getElementById("comment-section");
+            if (e.target.scrollTop + commentSection.offsetParent.offsetHeight
+                > commentSection.offsetTop) {
+                if(this.state.video.video.comments !== undefined){
+                    // ajax request to get comments
+                    // on dismount, should clear comments
+                }
+
+                console.log(this.state.video.video.comments)
+                this.setState({showComments: true});
+            }
+        }
+    }
     finishSetup() {
         if(!this.props.video){return;}
         const video = document.getElementById('video-player')
         const video_src = document.getElementById('video-src')
-        video.pause();
+        if(video !== null){video.pause();}
         this.props.getUser(this.props.video.video.creator_id);
         this.setState({ 
             video: this.props.video, 
             like_dislike: this.props.video.like_dislike, 
             likes: this.props.video.likes, 
             dislikes: this.props.video.dislikes,
-            editMode: false
         });
-        video_src.setAttribute('src', this.props.video.video.videoUrl);
-        video.load();
-        video.play();
+        if (video !== null) {
+            video_src.setAttribute('src', this.props.video.video.videoUrl);
+            video.load();
+            video.play();
+        }
     }
     componentDidUpdate() {
         if (this.state.videoId != this.props.match.params.videoId){
-            this.setState({videoId: this.props.match.params.videoId})
+            this.setState({
+                videoId: this.props.match.params.videoId, 
+                editMode: false, 
+                showComments: false,
+                commentsLoaded: false,
+            })
             this.props.getVideo(this.props.match.params.videoId).then(this.finishSetup);
         }
     }
     componentDidMount(){
         this.props.getVideo(this.props.match.params.videoId).then(this.finishSetup);
+        const mainContent = document.getElementsByClassName("main-content")[0];
+        mainContent.classList.add("video-page");
+        mainContent.addEventListener("scroll", this.showComments);
+
+    }
+
+    componentWillUnmount(){
+        document.getElementsByClassName("main-content")[0].classList.remove("video-page")
     }
 
     render() {
         // if(this.props.error[0] === "Video Not Found"){this.props.history.push("/")}
+        // return null if video doesn't have a creator (meaning video doesn't exist)
         if(this.props.video.creator === null){
             return null;
         }
+        // video likes and dislikes
         if (this.state.likes === undefined && this.props.video.likes){
-            this.setState({ likes: this.props.video.likes, dislikes: this.props.video.dislikes})
+            this.setState({ likes: this.props.video.likes, dislikes: this.props.video.dislikes, like_dislike: this.props.video.like_dislike})
         }
         let thumbsUpClass = "like vid-info-btn";
         let thumbsDownClass = "dislike vid-info-btn";
-        if (this.state.like_dislike != undefined){
+        if (this.state.like_dislike != undefined && this.props.currentUser){
             thumbsUpClass = (this.state.like_dislike === true) ? "active like vid-info-btn" : "like vid-info-btn";
             thumbsDownClass = (this.state.like_dislike === false) ? "active dislike vid-info-btn" : "dislike vid-info-btn";
         }
@@ -134,8 +171,19 @@ class VideoShow extends React.Component{
                     <button onClick={this.saveChanges} style={{marginLeft: 10}}>Save</button>
             </>)
             title = <input style={{ marginTop: "16px", marginBottom: "8px", fontSize: "1.5em", width: "100%" }} value={this.state.editTitle} onChange={this.editField("editTitle")}/>
-            description = <textarea style={{ fontWeight: "400", marginTop: 10, display: "block", width: "100%", height: 50}} value={this.state.editDescription} onChange={this.editField("editDescription")} />
+            description = <textarea style={{ fontWeight: "400", marginTop: 10, display: "block", width: "100%", height: 50, resize: "vertical"}} value={this.state.editDescription} onChange={this.editField("editDescription")} />
         }
+
+        
+        let likeFnc = this.thumbAction(true);
+        let dislikeFnc = this.thumbAction(false);
+        // TODO: once add comment btn is done
+        // const commentFnc =
+        if (this.props.currentUser === null){
+            likeFnc = this.props.showSignup;
+            dislikeFnc = this.props.showSignup;
+        }
+
         return (
         <div>
             <div className="video-container">
@@ -147,11 +195,11 @@ class VideoShow extends React.Component{
                 <ul className="video-info">
                     <li style={{color:"gray"}}>9.1M(fake) views • {this.props.video.video.created_at}</li>
                     <li>
-                        <div onClick={this.thumbAction(true)} className={thumbsUpClass}>
+                        <div onClick={likeFnc} className={thumbsUpClass}>
                             {thumbsUpIcon(20)}
                             <span>{this.state.likes}</span>
                         </div>
-                        <div onClick={this.thumbAction(false)} className={thumbsDownClass}>
+                        <div onClick={dislikeFnc} className={thumbsDownClass}>
                             {thumbsDownIcon(20)}
                             <span>{this.state.dislikes}</span>
                         </div>
@@ -170,10 +218,16 @@ class VideoShow extends React.Component{
                     </a>
                     {editButton}
                     {description}
+                    <br />
+                    <div style={{width: "100%", borderBottom: "1px solid black"}}></div>
+                    <div id="comment-section" className="comment">
+
+                    </div>
                 </div>
             </div>
             <div className="video-recommendations">
                 <span>Recommendation</span>
+                <VideoList currentVideo={this.state.videoId}/>
             </div>
         </div>
         )

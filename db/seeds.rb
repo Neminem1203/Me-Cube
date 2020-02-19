@@ -20,6 +20,7 @@ user3 = User.create(username: "admin", email:"admin@admin.com", password: "hunte
 video1 = Video.create(title: "Friends Reboot Video", description:"first video of the site", creator_id: user3.id)
 video2 = Video.create(title: "Koi Video", description:"A Video about a Koi Pond with Koi Fish", creator_id: user3.id)
 video3 = Video.create(title: "Caminandes", description:"testing videos and their descriptions", creator_id: user2.id)
+# Attachments to Videos
 friendsVideo = open("https://me-cube-seeds.s3.us-east-2.amazonaws.com/FriendsReboot.mp4")
 koiVideo = open("https://me-cube-seeds.s3.us-east-2.amazonaws.com/Source_out.mp4")
 caminandes = open("https://me-cube-seeds.s3.us-east-2.amazonaws.com/caminandes-1-llama-drama-av1-opus-480p.webm")
@@ -36,14 +37,14 @@ video2.thumbnail.attach(io: koiThumbnail, filename: "koi-thumbnail-2")
 
 video3.video.attach(io: caminandes, filename: "caminandes-video-3")
 video3.thumbnail.attach(io: caminandesThumbnail, filename: "caminandes-thumbnail-3")
-
 # Comments on videos
 comment1 = Comment.create(comment:"first comment on test site", commentable_type: "Video", commentable_id: video1.id, commenter_id: user3.id)
 comment2 = Comment.create(comment:"testing more comments", commentable_type: "Video", commentable_id: video1.id, commenter_id: user3.id)
 comment3 = Comment.create(comment:"we require more minerals", commentable_type: "Video", commentable_id: video2.id, commenter_id: user1.id)
 # Comment responses to another comment
 comment4 = Comment.create(comment:"first response to a comment", commentable_type: "Comment", commentable_id: comment1.id, commenter_id: user3.id)
-comment5 = Comment.create(comment:"we require more vespian gas", commentable_type: "Comment", commentable_id: comment1.id, commenter_id: user2.id)
+comment4 = Comment.create(comment:"another response to the first comment", commentable_type: "Comment", commentable_id: comment1.id, commenter_id: user3.id)
+comment5 = Comment.create(comment:"we require more vespian gas", commentable_type: "Comment", commentable_id: comment3.id, commenter_id: user2.id)
 # Likes on Videos
 like1 = Like.create(like_dislike: true,  user_id:user2.id, likeable_type:"Video", likeable_id:video1.id)
 like2 = Like.create(like_dislike: true,  user_id:user3.id, likeable_type:"Video", likeable_id:video1.id)

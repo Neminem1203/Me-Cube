@@ -57,7 +57,6 @@ const Navbar = props => {
                 </ul> </>)
             picture_function = () => props.showModal("");
         }
-        // TODO: props.user.profile_pic when profile pic is working
         let imgSrc = window.defaultProfilePicture;
         if(props.user.profile_picture){imgSrc = props.user.profile_picture}
         return (<nav className="navbar">

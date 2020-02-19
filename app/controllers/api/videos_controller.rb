@@ -1,11 +1,19 @@
 class Api::VideosController < ApplicationController
     def index
-        # if(params[:video_list] === "all")
-        #     @videos = Video.all
-        # else
-        #     @videos = Video.find(params[:video_list])
-        # end
-        @videos = Video.all
+        # @videos = Video.all
+        if(params[:video_list] && params[:video_list].class == Array)
+            @videos = Video.find(params[:video_list]).limit(8)
+        else
+            # TODO: Experimental Random Videos
+            vid_count = Video.count
+            random_videos = Video.all.map{|vid| vid.id}
+            if(vid_count > 8)
+                random_videos = random_videos.shuffle
+                @videos = Video.find(random_videos[0..7])
+            else
+                @videos = Video.find(random_videos)
+            end
+        end
         render :index
     end
 
@@ -33,8 +41,12 @@ class Api::VideosController < ApplicationController
     end
 
     def show
-        @video = Video.find(params[:id])
-        render :show
+        @video = Video.find_by(id: params[:id])
+        if @video
+            render :show
+        else
+            render json: ["Error. Video not found"], status: 404
+        end
     end
     private
     def video_params
