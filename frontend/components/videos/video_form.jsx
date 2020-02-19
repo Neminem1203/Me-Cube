@@ -66,6 +66,7 @@ class VideoCreate extends React.Component{
         formData.append('video[videoFile]', this.state.videoFile);
         formData.append('video[thumbnailFile]', this.state.thumbnailFile);
         this.props.action(formData);
+        window.location.href = "/#/";
     }
     
     render(){
