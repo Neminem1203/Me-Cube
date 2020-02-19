@@ -21,8 +21,10 @@ class VideoCreate extends React.Component{
         if (file.size > fileSizeLimit) {
             e.currentTarget.value = "";
             alert(`Filesize can't be greater than ${fileSizeLimit} bytes`);
-        }
-        else if (file) {
+        } else if (!file.type.match(/^video/)){
+            e.currentTarget.value = "";
+            alert("Invalid File Type");
+        } else if (file) {
             reader.onloadend = () => this.setState({ videoURL: reader.result, videoFile: file });
             reader.readAsDataURL(file);
         }
@@ -37,6 +39,9 @@ class VideoCreate extends React.Component{
         if (file.size > fileSizeLimit) {
             e.currentTarget.value = "";
             alert(`Filesize can't be greater than ${fileSizeLimit} bytes`);
+        } else if (!file.type.match(/^image/)) {
+            e.currentTarget.value = "";
+            alert("Invalid File Type");
         } else if (file) {
             reader.onloadend = () => this.setState({ thumbnailURL: reader.result, thumbnailFile: file });
             reader.readAsDataURL(file);

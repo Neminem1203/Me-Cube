@@ -1899,6 +1899,9 @@ function (_React$Component) {
       if (file.size > fileSizeLimit) {
         e.currentTarget.value = "";
         alert("Filesize can't be greater than ".concat(fileSizeLimit, " bytes"));
+      } else if (!file.type.match(/^video/)) {
+        e.currentTarget.value = "";
+        alert("Invalid File Type");
       } else if (file) {
         reader.onloadend = function () {
           return _this3.setState({
@@ -1927,6 +1930,9 @@ function (_React$Component) {
       if (file.size > fileSizeLimit) {
         e.currentTarget.value = "";
         alert("Filesize can't be greater than ".concat(fileSizeLimit, " bytes"));
+      } else if (!file.type.match(/^image/)) {
+        e.currentTarget.value = "";
+        alert("Invalid File Type");
       } else if (file) {
         reader.onloadend = function () {
           return _this4.setState({
