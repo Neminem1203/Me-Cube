@@ -34,13 +34,13 @@ const Navbar = props => {
                             <span>Your Account</span>
                         </li>
                     </a>
-                    <a target="_blank" href="https://www.github.com/neminem1203" onClick={() => props.showModal("")}>
+                        <a target="_blank" href="https://github.com/Neminem1203/Me-Cube" onClick={() => props.showModal("")}>
                         <li>
                             {githubIcon()}
                             <span>GitHub</span>
                         </li>
                     </a>
-                        <a target="_blank" href="https://sg.linkedin.com/in/tpaul1203" onClick={() => props.showModal("")}>
+                        <a target="_blank" href="https://linkedin.com/in/tpaul1203" onClick={() => props.showModal("")}>
                         <li>
                             {linkedInIcon()}
                             <span>LinkedIn</span>

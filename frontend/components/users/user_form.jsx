@@ -36,7 +36,10 @@ class UserForm extends React.Component{
                         <a onClick={()=>this.props.showModal("")}> x</a>
                     </div>
                     <form onSubmit={this.handleSubmit}>
-                        <h1>User {this.props.formType}</h1>
+                        <div style={{ textAlign: "center" }}>
+                            <h2 style={{fontWeight: 400}}>{this.props.formType}</h2>
+                            <h4>to continue to MeCube</h4>
+                        </div>
                         {extraField}
                         <input placeholder="Username" type="text" onChange={this.updateField("username")} value={this.state.username} />
                         <br />

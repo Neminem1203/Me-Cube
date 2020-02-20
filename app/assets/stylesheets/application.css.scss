@@ -36,39 +36,21 @@ button:focus {outline:0;}
 input:focus {outline:0;}
 text:area:focus{outline:0;}
 a:focus{outline:0;}
-// USER FORM
-// // Version 1: (Top Right with no white background)
-// .user-form{
-//   z-index: 2;
-//   box-sizing: border-box;
-//   padding: 15px;
-//   position: absolute;
-//   top: 15px;
-//   right: 15px;
-//   border: 1px solid black;
-//   background-color: rgb(240, 240, 240);
-//   width: 275px;
-//   display: flex;
-//   flex-wrap: wrap;
-//   justify-content: center;
-//   border-radius: 5px;
-// }
-// Version 2: (Window in the middle with white background)
 .user-form{
   z-index: 3;
   box-sizing: border-box;
   padding: 15px;
   position: absolute;
-  border: 1px solid black;
-  background-color: rgb(240,240,240);
-  width: 275px;
-  // height: 300px;
-  top: calc(50vh - 165px);
-  left: calc(50vw - 137.5px);
+  border: 1px solid lightgray;
+  // background-color: rgb(240,240,240);
+  width: 400px;
+  height: 450px;
+  top: calc(50vh - 225px);
+  left: calc(50vw - 200px);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 .user-form-background, .navbar-background{
   position: fixed;
@@ -87,10 +69,14 @@ a:focus{outline:0;}
 }
 .user-form > div > a{
   height: 20px;
-  border: 1px solid indigo;
-  color: indigo;
+  border: 1px solid #1A73E8;
+  color: #1A73E8;
   padding: 5px;
   border-radius: 10px;
+}
+.user-form > div > a:hover{
+  border: 1px solid rgb(1, 54, 122);
+  color: rgb(1, 54, 122);
 }
 .user-form > div > a:last-child{
     width: 25px;
@@ -103,10 +89,6 @@ a:focus{outline:0;}
 .user-form > div > a:hover{
   cursor: pointer;
 }
-.user-form h1{
-  width: 100%;
-  text-align: center;
-}
 .user-form input{
   box-sizing: border-box;
   width: 100%;
@@ -118,7 +100,6 @@ a:focus{outline:0;}
   width: 300px;
   margin: 0 auto;
 }
-// USER FORM
 .navbar{
   float: right;
   margin-right: 35px;
@@ -140,6 +121,9 @@ a:focus{outline:0;}
 .navbar > #profile-btn:hover{
   cursor: pointer;
   fill: #4ecac8;
+}
+.account-info{
+  padding: 30px;
 }
 .account-navbar{
   z-index: 2;
@@ -260,14 +244,14 @@ a:focus{outline:0;}
   margin-top: 8.5px;
   position: fixed;
   padding: 15px;
-  padding-left: 80px;     //img height + margin-top
+  padding-left: 90px;     //img height + margin-top
   height: calc(100% - calc(76.34px + 8.5px));
   width: 100%;
   background-color: rgb(250, 250, 250);
   overflow-y: scroll;
 }
 .main-content.video-page{
-  min-width: 910px;
+  min-width: 920px;
 }
 .main-content.active{
   padding: 25px;
@@ -508,10 +492,11 @@ a:focus{outline:0;}
 }
 #searchbar button{
   height: 31px;
-  fill: gray;
+  fill: rgb(129, 129, 129);
+  background-color: #F3F3F3;
 }
 #searchbar button:hover{
-  fill: black;
+  background-color: #e0e0e0;
 }
 #search-result .video-list{
   flex-direction: column;
@@ -532,8 +517,8 @@ body{
   // background-color: #c3c3c3;
 }
 button{
-  color: #1a73e8;
-  background-color: white;
+  color: white;
+  background-color: #1a73e8;
   border: 1px solid #1a73e8;
   border-radius: 2px;
   width: 90px;
@@ -543,7 +528,9 @@ button{
 }
 button:hover{
   cursor: pointer;
-  // background-color: rgb(40, 122, 230);
+  // opacity: 80%;
+  // box-shadow: 1px 1px #166aa1;
+  background-color: #0063e6;
 }
 span{
   vertical-align: 40%;
@@ -553,7 +540,7 @@ svg{
   width:50px;
 }
 
-@media (max-width: 700px){
+@media only screen and (max-width: 700px){
   #me-cube-logo img{
     display: none;
   }
@@ -594,5 +581,8 @@ svg{
   }
   .video-container{
     width: 80vw;
+  }
+  .navbar{
+    margin-top: 0;
   }
 }

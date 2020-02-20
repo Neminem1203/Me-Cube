@@ -198,7 +198,7 @@ class VideoShow extends React.Component{
         // comment section
         let commentSection = (
             <>
-                <h1> Comments </h1>
+                <h3> Comments </h3>
                 <div id="comment-section" className="comment">
                     <h1>Loading . . .</h1>
                 </div>
@@ -212,9 +212,10 @@ class VideoShow extends React.Component{
                     </li>
                 )
             })
+            const numComments = this.state.video.video.comments.length;
             commentSection = (
             <>
-                <h1> Comments </h1>
+                    <h3>{numComments+` Comment${(numComments === 1) ? "" : "s"}`}</h3>
                 <div id="comment-section" className="comment">
                     <ul style={{listStyle: "none"}}>
                         {comments}

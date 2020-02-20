@@ -601,13 +601,13 @@ var Navbar = function Navbar(props) {
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, Object(_icons__WEBPACK_IMPORTED_MODULE_5__["profileIcon"])(25), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Your Account"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         target: "_blank",
-        href: "https://www.github.com/neminem1203",
+        href: "https://github.com/Neminem1203/Me-Cube",
         onClick: function onClick() {
           return props.showModal("");
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, Object(_icons__WEBPACK_IMPORTED_MODULE_5__["githubIcon"])(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "GitHub"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         target: "_blank",
-        href: "https://sg.linkedin.com/in/tpaul1203",
+        href: "https://linkedin.com/in/tpaul1203",
         onClick: function onClick() {
           return props.showModal("");
         }
@@ -897,10 +897,10 @@ function (_React$Component) {
         className: homeClass
       }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["homeIcon"])(), "Home")), channelButton, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         target: "_blank",
-        href: "https://www.github.com/neminem1203"
+        href: "https://github.com/Neminem1203/Me-Cube"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["githubIcon"])(), "GitHub")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         target: "_blank",
-        href: "https://sg.linkedin.com/in/tpaul1203"
+        href: "https://linkedin.com/in/tpaul1203"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["linkedInIcon"])(), "LinkedIn"))));
     }
   }]);
@@ -1869,7 +1869,15 @@ function (_React$Component) {
         }
       }, " x")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "User ", this.props.formType), extraField, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: {
+          textAlign: "center"
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        style: {
+          fontWeight: 400
+        }
+      }, this.props.formType), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "to continue to MeCube")), extraField, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         placeholder: "Username",
         type: "text",
         onChange: this.updateField("username"),
@@ -2860,7 +2868,7 @@ function (_React$Component) {
       } // comment section
 
 
-      var commentSection = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, " Comments "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      var commentSection = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Comments "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "comment-section",
         className: "comment"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Loading . . .")));
@@ -2871,7 +2879,8 @@ function (_React$Component) {
             key: "comment-".concat(comment.id)
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, _this5.props.users[comment.commenter_id].username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, comment.comment));
         });
-        commentSection = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, " Comments "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        var numComments = this.state.video.video.comments.length;
+        commentSection = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, numComments + " Comment".concat(numComments === 1 ? "" : "s")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           id: "comment-section",
           className: "comment"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {

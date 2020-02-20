@@ -38,8 +38,8 @@ class Sidebar extends React.Component{
                         {homeIcon()}Home
                     </li></a>
                     {channelButton}
-                    <a target="_blank" href="https://www.github.com/neminem1203"><li>{githubIcon()}GitHub</li></a>
-                    <a target="_blank" href="https://sg.linkedin.com/in/tpaul1203"><li>{linkedInIcon()}LinkedIn</li></a>
+                    <a target="_blank" href="https://github.com/Neminem1203/Me-Cube"><li>{githubIcon()}GitHub</li></a>
+                    <a target="_blank" href="https://linkedin.com/in/tpaul1203"><li>{linkedInIcon()}LinkedIn</li></a>
                 </ul>
             </div>
         )
