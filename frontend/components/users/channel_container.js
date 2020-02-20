@@ -1,6 +1,8 @@
 import { connect } from "react-redux";
 import Channel from "./channel";
 import { getVideo } from "../../actions/video_actions";
+import { getUser } from "../../actions/users_actions";
+
 
 const mSTP = (state, ownProps)=> {
     return {
