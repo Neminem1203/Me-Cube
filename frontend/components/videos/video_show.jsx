@@ -202,10 +202,9 @@ class VideoShow extends React.Component{
                 </div>
             </>)
         if(this.state.commentsLoaded){
-            debugger
             const comments = Object.values(this.props.comments).map(comment=>{
                 return (
-                    <li>
+                    <li key={comment}>
                         <h3>{this.props.users[comment.commenter_id].username}</h3>
                         <h5>{comment.comment}</h5>
                     </li>

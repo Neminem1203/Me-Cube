@@ -474,14 +474,6 @@ a:focus{outline:0;}
 .error-window-close-btn:hover{
   cursor: pointer;
 }
-@media only screen and (max-width: 800px){
-  #searchbar{
-    display: none !important;
-  }
-  #search-result .video-list li div a{
-    margin-left: 200px !important;
-  }
-}
 #searchbar{
   position: absolute;
   top: 15px;
@@ -539,4 +531,48 @@ span{
 }
 svg{
   width:50px;
+}
+
+@media (max-width: 700px){
+  #me-cube-logo img{
+    display: none;
+  }
+  #search-result .video-list li div a{
+    margin-left: 200px;
+  }
+  .video-list{
+    flex-direction: column;
+  }
+  .video-list img{
+    width: 60vw;
+    height: 36vw;
+  }
+  .main-content{
+    margin-top: 50px;
+  }
+  .main-content .video-list div{
+    max-width: none;
+    max-height: none;
+    height: 60vw;
+  }
+  #searchbar{
+  position: absolute;
+  top: 15px;
+  left: 85px;
+  display: flex;
+  flex-wrap: nowrap;
+  }
+  #searchbar input, #searchbar{
+    width: 50vw;
+  }
+  .video-title-span{
+    width: 60vw;
+  }
+
+  .video-recommendations{
+    display:none;
+  }
+  .video-container{
+    width: 80vw;
+  }
 }

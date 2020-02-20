@@ -2838,9 +2838,10 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Loading . . .")));
 
       if (this.state.commentsLoaded) {
-        debugger;
         var comments = Object.values(this.props.comments).map(function (comment) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, _this5.props.users[comment.commenter_id].username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, comment.comment));
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+            key: comment
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, _this5.props.users[comment.commenter_id].username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, comment.comment));
         });
         commentSection = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, " Comments "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           id: "comment-section",
