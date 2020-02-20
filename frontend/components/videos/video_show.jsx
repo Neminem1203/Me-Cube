@@ -21,6 +21,7 @@ class VideoShow extends React.Component{
         this.toggleEdit = this.toggleEdit.bind(this);
         this.saveChanges = this.saveChanges.bind(this);
         this.showComments = this.showComments.bind(this);
+        this.commentsLoaded = this.commentsLoaded.bind(this);
     }
 
     copyShareUrl(e){
@@ -86,18 +87,25 @@ class VideoShow extends React.Component{
         // console.log(e.target.scrollTop);
         // console.log(commentSection.offsetParent.offsetHeight);
         // console.log(commentSection.offsetTop);
-        if(!this.state.showComments){
+        if (!this.state.showComments) {
             const commentSection = document.getElementById("comment-section");
             if (e.target.scrollTop + commentSection.offsetParent.offsetHeight
                 > commentSection.offsetTop) {
                 if(this.state.video.video.comments !== undefined){
                     // ajax request to get comments
                     // on dismount, should clear comments
+                    this.props.getComments(this.state.video.video.comments).then(payload=>{
+                        this.props.getUsers(Object.values(payload.comments).map(comment => comment.commenter_id)).then(
+                            () => this.commentsLoaded()
+                        )
+                    });
                 }
-                console.log(this.state.video.video.comments)
                 this.setState({showComments: true});
             }
         }
+    }
+    commentsLoaded(){
+        this.setState({commentsLoaded: true});
     }
     finishSetup() {
         if(!this.props.video){return;}
@@ -138,6 +146,7 @@ class VideoShow extends React.Component{
 
     componentWillUnmount(){
         document.getElementsByClassName("main-content")[0].classList.remove("video-page")
+        this.props.clearComments();
     }
 
     render() {
@@ -156,12 +165,12 @@ class VideoShow extends React.Component{
             thumbsUpClass = (this.state.like_dislike === true) ? "active like vid-info-btn" : "like vid-info-btn";
             thumbsDownClass = (this.state.like_dislike === false) ? "active dislike vid-info-btn" : "dislike vid-info-btn";
         }
-
+        // edit mode only valid for creator
         let editButton = <></>
         if (this.props.video.creator.id === this.props.currentUser){
             editButton = <button onClick={this.toggleEdit} style={{ marginLeft: 10 }}>Edit</button>
         }
-
+    
         let title = <h2 style={{ marginTop: "16px", marginBottom: "8px" }}>{this.props.video.video.title}</h2>;
         let description = <h5 style={{ fontWeight: "400", marginTop: 10 }}>{this.props.video.video.description}</h5>;
         if(this.state.editMode){
@@ -173,16 +182,38 @@ class VideoShow extends React.Component{
             description = <textarea style={{ fontWeight: "400", marginTop: 10, display: "block", width: "100%", height: 50, resize: "vertical"}} value={this.state.editDescription} onChange={this.editField("editDescription")} />
         }
 
-        
+        // like and comment functionality for signed in users
         let likeFnc = this.thumbAction(true);
         let dislikeFnc = this.thumbAction(false);
+        // const commentFnc = this.createComment;
         // TODO: once add comment btn is done
-        // const commentFnc =
         if (this.props.currentUser === null){
             likeFnc = this.props.showSignup;
             dislikeFnc = this.props.showSignup;
+            // const commentFnc = this.props.showSignup;
         }
 
+        // comment section
+        let commentSection = (
+            <>
+                <h3> Comments </h3>
+                <div id="comment-section" className="comment">
+                    <h1>Loading . . .</h1>
+                </div>
+            </>)
+        if(this.state.commentsLoaded){
+            // const comments 
+            debugger
+            const comments = Object.values(this.props.comments).map
+            commentSection = (
+            <>
+                <h3> Comments </h3>
+                <div id="comment-section" className="comment">
+
+                </div>
+            </>
+            )
+        }
         return (
         <div>
             <div className="video-container">
@@ -219,9 +250,7 @@ class VideoShow extends React.Component{
                     {description}
                     <br />
                     <div style={{width: "100%", borderBottom: "1px solid black"}}></div>
-                    <div id="comment-section" className="comment">
-
-                    </div>
+                    {commentSection}
                 </div>
             </div>
             <div className="video-recommendations">

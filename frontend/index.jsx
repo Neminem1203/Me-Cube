@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import configureStore from "./store/store";
 import Root from "./components/root";
-import { searchVideos } from "./util/video_util";
 
 let preloadedState = {};
 document.addEventListener("DOMContentLoaded", ()=>{
@@ -21,6 +20,5 @@ document.addEventListener("DOMContentLoaded", ()=>{
     const store = configureStore(preloadedState);
     window.getState = store.getState();
     window.dispatch = store.dispatch;
-    window.searchVideos = searchVideos;
     ReactDOM.render(<Root store={store}/>, root);
 });

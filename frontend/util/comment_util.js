@@ -2,7 +2,7 @@ export const getComments = comments =>{
     return $.ajax({
         method: "GET",
         url: "/api/comments",
-        data: comments
+        data: {comments}
     })
 }
 

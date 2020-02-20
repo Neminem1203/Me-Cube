@@ -2383,7 +2383,6 @@ function (_React$Component) {
       this.props.searchVideos(this.props.search_query).then(function (payload) {
         _this2.getVideos(payload.videos);
       });
-      console.log(this.props.search_query);
     }
   }, {
     key: "getVideos",
@@ -2404,7 +2403,6 @@ function (_React$Component) {
         this.props.searchVideos(this.props.search_query).then(function (payload) {
           _this3.getVideos(payload.videos);
         });
-        console.log(this.props.search_query);
       }
     }
   }, {
@@ -2535,6 +2533,7 @@ function (_React$Component) {
     _this.toggleEdit = _this.toggleEdit.bind(_assertThisInitialized(_this));
     _this.saveChanges = _this.saveChanges.bind(_assertThisInitialized(_this));
     _this.showComments = _this.showComments.bind(_assertThisInitialized(_this));
+    _this.commentsLoaded = _this.commentsLoaded.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -2644,6 +2643,8 @@ function (_React$Component) {
   }, {
     key: "showComments",
     value: function showComments(e) {
+      var _this4 = this;
+
       // console.log(e.target.scrollTop);
       // console.log(commentSection.offsetParent.offsetHeight);
       // console.log(commentSection.offsetTop);
@@ -2651,16 +2652,30 @@ function (_React$Component) {
         var commentSection = document.getElementById("comment-section");
 
         if (e.target.scrollTop + commentSection.offsetParent.offsetHeight > commentSection.offsetTop) {
-          if (this.state.video.video.comments !== undefined) {// ajax request to get comments
+          if (this.state.video.video.comments !== undefined) {
+            // ajax request to get comments
             // on dismount, should clear comments
+            this.props.getComments(this.state.video.video.comments).then(function (payload) {
+              _this4.props.getUsers(Object.values(payload.comments).map(function (comment) {
+                return comment.commenter_id;
+              })).then(function () {
+                return _this4.commentsLoaded();
+              });
+            });
           }
 
-          console.log(this.state.video.video.comments);
           this.setState({
             showComments: true
           });
         }
       }
+    }
+  }, {
+    key: "commentsLoaded",
+    value: function commentsLoaded() {
+      this.setState({
+        commentsLoaded: true
+      });
     }
   }, {
     key: "finishSetup",
@@ -2715,6 +2730,7 @@ function (_React$Component) {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
       document.getElementsByClassName("main-content")[0].classList.remove("video-page");
+      this.props.clearComments();
     }
   }, {
     key: "render",
@@ -2740,7 +2756,8 @@ function (_React$Component) {
       if (this.state.like_dislike != undefined && this.props.currentUser) {
         thumbsUpClass = this.state.like_dislike === true ? "active like vid-info-btn" : "like vid-info-btn";
         thumbsDownClass = this.state.like_dislike === false ? "active dislike vid-info-btn" : "dislike vid-info-btn";
-      }
+      } // edit mode only valid for creator
+
 
       var editButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null);
 
@@ -2800,15 +2817,32 @@ function (_React$Component) {
           value: this.state.editDescription,
           onChange: this.editField("editDescription")
         });
-      }
+      } // like and comment functionality for signed in users
+
 
       var likeFnc = this.thumbAction(true);
-      var dislikeFnc = this.thumbAction(false); // TODO: once add comment btn is done
-      // const commentFnc =
+      var dislikeFnc = this.thumbAction(false); // const commentFnc = this.createComment;
+      // TODO: once add comment btn is done
 
       if (this.props.currentUser === null) {
         likeFnc = this.props.showSignup;
-        dislikeFnc = this.props.showSignup;
+        dislikeFnc = this.props.showSignup; // const commentFnc = this.props.showSignup;
+      } // comment section
+
+
+      var commentSection = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Comments "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "comment-section",
+        className: "comment"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Loading . . .")));
+
+      if (this.state.commentsLoaded) {
+        // const comments 
+        debugger;
+        var comments = Object.values(this.props.comments).map;
+        commentSection = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Comments "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          id: "comment-section",
+          className: "comment"
+        }));
       }
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2866,10 +2900,7 @@ function (_React$Component) {
           width: "100%",
           borderBottom: "1px solid black"
         }
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "comment-section",
-        className: "comment"
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }), commentSection)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "video-recommendations"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Recommendation"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_video_list_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
         currentVideo: this.state.videoId
@@ -2899,6 +2930,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_users_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/users_actions */ "./frontend/actions/users_actions.js");
 /* harmony import */ var _actions_like_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/like_actions */ "./frontend/actions/like_actions.js");
 /* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
+/* harmony import */ var _actions_comment_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../actions/comment_actions */ "./frontend/actions/comment_actions.js");
+
 
 
 
@@ -2934,6 +2967,9 @@ var mDTP = function mDTP(dispatch) {
     getUser: function getUser(userId) {
       return dispatch(Object(_actions_users_actions__WEBPACK_IMPORTED_MODULE_3__["getUser"])(userId));
     },
+    getUsers: function getUsers(userList) {
+      return dispatch(Object(_actions_users_actions__WEBPACK_IMPORTED_MODULE_3__["getUsers"])(userList));
+    },
     getVideo: function getVideo(videoId) {
       return dispatch(Object(_actions_video_actions__WEBPACK_IMPORTED_MODULE_2__["getVideo"])(videoId));
     },
@@ -2951,6 +2987,12 @@ var mDTP = function mDTP(dispatch) {
     },
     showSignup: function showSignup() {
       return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_5__["showModal"])(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_5__["SIGN_UP"]));
+    },
+    getComments: function getComments(comments) {
+      return dispatch(Object(_actions_comment_actions__WEBPACK_IMPORTED_MODULE_6__["getComments"])(comments));
+    },
+    clearComments: function clearComments() {
+      return dispatch(Object(_actions_comment_actions__WEBPACK_IMPORTED_MODULE_6__["clearComments"])());
     }
   };
 };
@@ -3190,9 +3232,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/store */ "./frontend/store/store.js");
 /* harmony import */ var _components_root__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/root */ "./frontend/components/root.jsx");
-/* harmony import */ var _util_video_util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./util/video_util */ "./frontend/util/video_util.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -3216,7 +3256,6 @@ document.addEventListener("DOMContentLoaded", function () {
   var store = Object(_store_store__WEBPACK_IMPORTED_MODULE_2__["default"])(preloadedState);
   window.getState = store.getState();
   window.dispatch = store.dispatch;
-  window.searchVideos = _util_video_util__WEBPACK_IMPORTED_MODULE_4__["searchVideos"];
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_root__WEBPACK_IMPORTED_MODULE_3__["default"], {
     store: store
   }), root);
@@ -3593,7 +3632,7 @@ var usersReducer = function usersReducer() {
 
   switch (action.type) {
     case _actions_users_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_USERS"]:
-      return action.users;
+      return Object(lodash__WEBPACK_IMPORTED_MODULE_0__["merge"])({}, old_state, action.users);
 
     case _actions_users_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_USER"]:
       return Object(lodash__WEBPACK_IMPORTED_MODULE_0__["merge"])({}, old_state, _defineProperty({}, action.user.id, action.user));
@@ -3692,7 +3731,9 @@ var getComments = function getComments(comments) {
   return $.ajax({
     method: "GET",
     url: "/api/comments",
-    data: comments
+    data: {
+      comments: comments
+    }
   });
 };
 var createComment = function createComment(comment) {

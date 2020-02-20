@@ -13,7 +13,6 @@ class VideoSearch extends React.Component{
         this.props.searchVideos(this.props.search_query).then(payload => {
             this.getVideos(payload.videos)
         });
-        console.log(this.props.search_query);
     }
     getVideos(videos){
         this.setState({videos: videos})
@@ -24,7 +23,6 @@ class VideoSearch extends React.Component{
             this.props.searchVideos(this.props.search_query).then(payload => {
                 this.getVideos(payload.videos)
             });
-            console.log(this.props.search_query);
         }
     }
     render(){
