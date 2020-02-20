@@ -29,7 +29,6 @@ class VideoCreate extends React.Component{
             reader.readAsDataURL(file);
             return;
         }
-        document.getElementById("video-upload-icon").classList = "";
         e.currentTarget.value = "";
         this.setState({ videoURL: "", videoFile: null });
     }
@@ -59,6 +58,8 @@ class VideoCreate extends React.Component{
         this.setState({ videoURL: "", videoFile: null, title: "", description: "" });
         document.getElementById("video-upload").value = null;
         document.getElementById("thumbnail-upload").value = null;
+        document.getElementById("thumbnail-upload-icon").classList = "";
+        document.getElementById("video-upload-icon").classList = "";
     }
 
     handleSubmit(e){

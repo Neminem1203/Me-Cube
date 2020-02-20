@@ -2043,7 +2043,6 @@ function (_React$Component) {
         return;
       }
 
-      document.getElementById("video-upload-icon").classList = "";
       e.currentTarget.value = "";
       this.setState({
         videoURL: "",
@@ -2097,6 +2096,8 @@ function (_React$Component) {
       });
       document.getElementById("video-upload").value = null;
       document.getElementById("thumbnail-upload").value = null;
+      document.getElementById("thumbnail-upload-icon").classList = "";
+      document.getElementById("video-upload-icon").classList = "";
     }
   }, {
     key: "handleSubmit",
