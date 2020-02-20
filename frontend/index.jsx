@@ -2,9 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import configureStore from "./store/store";
 import Root from "./components/root";
-
-import { getUsers, getUser, createUser, login } from "./actions/users_actions";
-import { showModal } from "./actions/modal_actions";
+import { searchVideos } from "./util/video_util";
 
 let preloadedState = {};
 document.addEventListener("DOMContentLoaded", ()=>{
@@ -23,10 +21,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
     const store = configureStore(preloadedState);
     window.getState = store.getState();
     window.dispatch = store.dispatch;
-    window.getUsers = getUsers;
-    window.getUser = getUser;
-    window.createUser = createUser;
-    window.login = login;
-    window.showModal = showModal;
+    window.searchVideos = searchVideos;
     ReactDOM.render(<Root store={store}/>, root);
 });

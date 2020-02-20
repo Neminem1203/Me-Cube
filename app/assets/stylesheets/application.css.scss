@@ -410,6 +410,9 @@ a:focus{outline:0;}
   // max-width: 700px;
   width: 100%;
 }
+.video-views{
+  white-space: nowrap;
+}
 .upload-video-btn{
   margin-right: 25px;
   text-decoration: none;
@@ -454,22 +457,62 @@ a:focus{outline:0;}
   padding: 10px;
   width: 300px;
   left: calc( 50% - 150px);
-  top: 15px;
+  top: -100px;
   border-radius: 5px;
   text-align: center;
   vertical-align: super;
   background-color: lightcoral;
-  opacity: 0;
+  // opacity: 0;
   transition: all 1s;
 }
 #error-window.active{
-  opacity: 100%;
+  top: 15px;
 }
 .error-window-close-btn{
   float: right;
 }
 .error-window-close-btn:hover{
   cursor: pointer;
+}
+@media only screen and (max-width: 800px){
+  #searchbar{
+    display: none !important;
+  }
+  #search-result .video-list li div a{
+    margin-left: 200px !important;
+  }
+}
+#searchbar{
+  position: absolute;
+  top: 15px;
+  left: calc( 30vw + 50px);
+  display: flex;
+  flex-wrap: nowrap;
+}
+#searchbar input, #searchbar{
+  height: 25px;
+  width: 30vw;
+  font-size: 20px;
+}
+#searchbar button{
+  height: 31px;
+  fill: gray;
+}
+#searchbar button:hover{
+  fill: black;
+}
+#search-result .video-list{
+  flex-direction: column;
+}
+#search-result .video-list li div a{
+  margin-left: 25vw;
+  display: block;
+}
+#search-result .video-list li div a:first-of-type{
+  display: inline !important;
+}
+#search-result .video-list li div img{
+  float: left;
 }
 body{
   margin: 0;

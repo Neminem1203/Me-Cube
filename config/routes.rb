@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
     resources :users, only: [:index, :create, :update, :show]
     resources :videos, only: [:index, :create, :update, :show]
+    get '/video_search/', to: 'videos#search', as: "videosearch"
     resources :comments, only: [:index, :create, :update, :show, :destroy]
     resource :likes, only: [:create, :update, :destroy]
     resource :session, only: [:create, :destroy]

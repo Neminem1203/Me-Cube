@@ -48,6 +48,12 @@ class Api::VideosController < ApplicationController
             render json: ["Error. Video not found"], status: 404
         end
     end
+
+    def search
+        search = "%" + params[:search].downcase + "%"
+        @videos = Video.where("LOWER(title) like ? OR LOWER(description) like ?", search, search)
+        render :index
+    end
     private
     def video_params
         params.require(:video).permit(:title, :description)

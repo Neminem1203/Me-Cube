@@ -7,7 +7,7 @@ const VideoThumb = ({vid, currentVideo}) => {
         <li>
             <div>
                 <a href={`/#/videos/${vid.id}`}>
-                    <img src={vid.thumbnail} /><br />
+                    <img src={vid.thumbnail} />
                 </a>
                 <a href={`/#/videos/${vid.id}`} style={{display: "block", height: 45}}>
                     <span className='video-title-span'>{vid.title}</span>
@@ -16,7 +16,9 @@ const VideoThumb = ({vid, currentVideo}) => {
                     <span className="video-creator-span">{vid.creator_username}</span>
                 </a>
                 <br />
-                <span>{vid.views} • {vid.created_at}</span>
+                <a>
+                    <span className="video-views">{vid.views + " • " + vid.created_at}</span>
+                </a>
             </div>
         </li>
     )}

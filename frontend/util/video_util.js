@@ -30,3 +30,11 @@ export const updateVideo = video =>{
         data: {video}
     })
 }
+
+export const searchVideos = search =>{
+    return $.ajax({
+        method: "GET",
+        url: "api/video_search",
+        data: {search}
+    })
+}

@@ -2,6 +2,8 @@ export const RECEIVE_VIDEOS = "RECEIVE_VIDEOS";
 export const RECEIVE_VIDEO = "RECEIVE_VIDEO";
 import * as VideoAPIUtil from "../util/video_util";
 import { receiveVideoError } from "./modal_actions";
+import { getUser } from "./users_actions";
+
 
 export const receiveVideos = videos =>{
     return{
@@ -36,5 +38,10 @@ export const createVideo = video => dispatch =>{
 
 export const updateVideo = video => dispatch =>{
     return VideoAPIUtil.updateVideo(video).then(payload => dispatch(receiveVideo(payload)),
-        () => dispatch(receiveVideoError(["Error occured when attempting to save"])))
+        () => dispatch(receiveVideoError(["Error occured when attempting to save"])));
+}
+
+export const searchVideos = search => dispatch =>{
+    return VideoAPIUtil.searchVideos(search).then(payload => dispatch(receiveVideos(payload)),
+        () => dispatch(receiveVideoError(["Error occured during search"])))
 }
