@@ -91,7 +91,7 @@ class VideoShow extends React.Component{
             const commentSection = document.getElementById("comment-section");
             if (e.target.scrollTop + commentSection.offsetParent.offsetHeight
                 > commentSection.offsetTop) {
-                if(this.state.video.video.comments !== undefined){
+                if(this.state.video.video.comments !== undefined && this.state.video.video.comments.length > 0){
                     // ajax request to get comments
                     // on dismount, should clear comments
                     this.props.getComments(this.state.video.video.comments).then(payload=>{
@@ -99,6 +99,9 @@ class VideoShow extends React.Component{
                             () => this.commentsLoaded()
                         )
                     });
+                }
+                else{
+                    this.setState({ commentsLoaded: true})
                 }
                 this.setState({showComments: true});
             }
@@ -141,7 +144,6 @@ class VideoShow extends React.Component{
         const mainContent = document.getElementsByClassName("main-content")[0];
         mainContent.classList.add("video-page");
         mainContent.addEventListener("scroll", this.showComments);
-
     }
 
     componentWillUnmount(){
@@ -204,7 +206,7 @@ class VideoShow extends React.Component{
         if(this.state.commentsLoaded){
             const comments = Object.values(this.props.comments).map(comment=>{
                 return (
-                    <li key={comment}>
+                    <li key={`comment-${comment.id}`}>
                         <h3>{this.props.users[comment.commenter_id].username}</h3>
                         <h5>{comment.comment}</h5>
                     </li>

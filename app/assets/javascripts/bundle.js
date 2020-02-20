@@ -2652,7 +2652,7 @@ function (_React$Component) {
         var commentSection = document.getElementById("comment-section");
 
         if (e.target.scrollTop + commentSection.offsetParent.offsetHeight > commentSection.offsetTop) {
-          if (this.state.video.video.comments !== undefined) {
+          if (this.state.video.video.comments !== undefined && this.state.video.video.comments.length > 0) {
             // ajax request to get comments
             // on dismount, should clear comments
             this.props.getComments(this.state.video.video.comments).then(function (payload) {
@@ -2661,6 +2661,10 @@ function (_React$Component) {
               })).then(function () {
                 return _this4.commentsLoaded();
               });
+            });
+          } else {
+            this.setState({
+              commentsLoaded: true
             });
           }
 
@@ -2840,7 +2844,7 @@ function (_React$Component) {
       if (this.state.commentsLoaded) {
         var comments = Object.values(this.props.comments).map(function (comment) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-            key: comment
+            key: "comment-".concat(comment.id)
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, _this5.props.users[comment.commenter_id].username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, comment.comment));
         });
         commentSection = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, " Comments "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
