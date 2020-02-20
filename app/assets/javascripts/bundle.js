@@ -1435,6 +1435,9 @@ function (_React$Component) {
       if (file.size > fileSizeLimit) {
         e.currentTarget.value = "";
         alert("Filesize can't be greater than ".concat(fileSizeLimit, " bytes"));
+      } else if (!file.type.match(/^image/)) {
+        e.currentTarget.value = "";
+        alert("Invalid File Type");
       } else if (file && file.size < fileSizeLimit) {
         reader.onloadend = function () {
           return _this2.setState({
