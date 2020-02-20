@@ -2735,6 +2735,8 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this5 = this;
+
       // if(this.props.error[0] === "Video Not Found"){this.props.history.push("/")}
       // return null if video doesn't have a creator (meaning video doesn't exist)
       if (this.props.video.creator === null) {
@@ -2830,19 +2832,24 @@ function (_React$Component) {
       } // comment section
 
 
-      var commentSection = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Comments "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      var commentSection = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, " Comments "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "comment-section",
         className: "comment"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Loading . . .")));
 
       if (this.state.commentsLoaded) {
-        // const comments 
         debugger;
-        var comments = Object.values(this.props.comments).map;
-        commentSection = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, " Comments "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        var comments = Object.values(this.props.comments).map(function (comment) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, _this5.props.users[comment.commenter_id].username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, comment.comment));
+        });
+        commentSection = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, " Comments "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           id: "comment-section",
           className: "comment"
-        }));
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+          style: {
+            listStyle: "none"
+          }
+        }, comments)));
       }
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {

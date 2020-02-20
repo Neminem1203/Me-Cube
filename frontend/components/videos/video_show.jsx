@@ -196,19 +196,28 @@ class VideoShow extends React.Component{
         // comment section
         let commentSection = (
             <>
-                <h3> Comments </h3>
+                <h1> Comments </h1>
                 <div id="comment-section" className="comment">
                     <h1>Loading . . .</h1>
                 </div>
             </>)
         if(this.state.commentsLoaded){
-            // const comments 
             debugger
-            const comments = Object.values(this.props.comments).map
+            const comments = Object.values(this.props.comments).map(comment=>{
+                return (
+                    <li>
+                        <h3>{this.props.users[comment.commenter_id].username}</h3>
+                        <h5>{comment.comment}</h5>
+                    </li>
+                )
+            })
             commentSection = (
             <>
-                <h3> Comments </h3>
+                <h1> Comments </h1>
                 <div id="comment-section" className="comment">
+                    <ul style={{listStyle: "none"}}>
+                        {comments}
+                    </ul>
 
                 </div>
             </>
