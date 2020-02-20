@@ -13,6 +13,9 @@ const Navbar = props => {
         if(props.modal === ACCOUNT_DETAILS){
             modal = (
             <>
+                <div className="navbar-background" onClick={()=>props.showModal("")} style={{opacity: "50%"}}>
+
+                </div>
                 <ul className="account-navbar">
                     <div style={{boxSizing: "border-box", margin: "0", padding:"6px", borderBottom: "1px solid gray"}}>
                         <a style={{paddingLeft: "5px", marginBottom: "0", fontSize: "25px",fontWeight: "700"}}>{props.user.username}</a>
@@ -56,10 +59,10 @@ const Navbar = props => {
                 </ul> </>)
             picture_function = () => props.showModal("");
         }
-        let imgSrc = <a id="profile-btn" onClick={picture_function}>{profileIcon()}</a>
+        let imgSrc = <a id="profile-btn" onClick={picture_function}>{profileIcon(40)}</a>
         if(props.user.profile_picture){imgSrc = <img src={props.user.profile_picture} style={{width: 60, height: 60}} onClick={picture_function}/>}
         return (<nav className="navbar">
-                    <a href="/#/video/new" className="upload-video-btn">{uploadIcon()}<br/>Upload</a>
+                    <a href="/#/video/new" className="upload-video-btn" style={{fontSize: 12, textAlign: "center"}}>{uploadIcon(25)}<br/>Upload</a>
                     {/* <img src={imgSrc} style={{ width: "60px", height: "60px" }} onClick={picture_function} /> */}
                     {imgSrc}
                     {modal}

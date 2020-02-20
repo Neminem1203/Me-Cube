@@ -555,7 +555,15 @@ var Navbar = function Navbar(props) {
     };
 
     if (props.modal === _actions_modal_actions__WEBPACK_IMPORTED_MODULE_3__["ACCOUNT_DETAILS"]) {
-      modal = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+      modal = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "navbar-background",
+        onClick: function onClick() {
+          return props.showModal("");
+        },
+        style: {
+          opacity: "50%"
+        }
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "account-navbar"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
@@ -618,7 +626,7 @@ var Navbar = function Navbar(props) {
     var imgSrc = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
       id: "profile-btn",
       onClick: picture_function
-    }, Object(_icons__WEBPACK_IMPORTED_MODULE_5__["profileIcon"])());
+    }, Object(_icons__WEBPACK_IMPORTED_MODULE_5__["profileIcon"])(40));
 
     if (props.user.profile_picture) {
       imgSrc = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
@@ -635,8 +643,12 @@ var Navbar = function Navbar(props) {
       className: "navbar"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
       href: "/#/video/new",
-      className: "upload-video-btn"
-    }, Object(_icons__WEBPACK_IMPORTED_MODULE_5__["uploadIcon"])(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Upload"), imgSrc, modal);
+      className: "upload-video-btn",
+      style: {
+        fontSize: 12,
+        textAlign: "center"
+      }
+    }, Object(_icons__WEBPACK_IMPORTED_MODULE_5__["uploadIcon"])(25), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Upload"), imgSrc, modal);
   }
 
   if (props.modal === _actions_modal_actions__WEBPACK_IMPORTED_MODULE_3__["SIGN_UP"]) {
@@ -1951,6 +1963,7 @@ var mDTP = function mDTP(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../icons */ "./frontend/icons.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -1970,6 +1983,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -2012,12 +2026,12 @@ function (_React$Component) {
       var file = e.currentTarget.files[0];
 
       if (file.size > fileSizeLimit) {
-        e.currentTarget.value = "";
         alert("Filesize can't be greater than ".concat(fileSizeLimit, " bytes"));
       } else if (!file.type.match(/^video/)) {
-        e.currentTarget.value = "";
         alert("Invalid File Type");
       } else if (file) {
+        document.getElementById("video-upload-icon").classList = "active";
+
         reader.onloadend = function () {
           return _this3.setState({
             videoURL: reader.result,
@@ -2026,12 +2040,15 @@ function (_React$Component) {
         };
 
         reader.readAsDataURL(file);
-      } else {
-        this.setState({
-          videoURL: "",
-          videoFile: null
-        });
+        return;
       }
+
+      document.getElementById("video-upload-icon").classList = "";
+      e.currentTarget.value = "";
+      this.setState({
+        videoURL: "",
+        videoFile: null
+      });
     }
   }, {
     key: "thumbnailPreview",
@@ -2046,9 +2063,10 @@ function (_React$Component) {
         e.currentTarget.value = "";
         alert("Filesize can't be greater than ".concat(fileSizeLimit, " bytes"));
       } else if (!file.type.match(/^image/)) {
-        e.currentTarget.value = "";
         alert("Invalid File Type");
       } else if (file) {
+        document.getElementById("thumbnail-upload-icon").classList = "active";
+
         reader.onloadend = function () {
           return _this4.setState({
             thumbnailURL: reader.result,
@@ -2057,12 +2075,15 @@ function (_React$Component) {
         };
 
         reader.readAsDataURL(file);
-      } else {
-        this.setState({
-          thumbnailURL: "",
-          thumbnailFile: null
-        });
+        return;
       }
+
+      document.getElementById("thumbnail-upload-icon").classList = "";
+      e.currentTarget.value = "";
+      this.setState({
+        thumbnailURL: "",
+        thumbnailFile: null
+      });
     }
   }, {
     key: "clearForm",
@@ -2092,9 +2113,38 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var uploadForm = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: {
+          "float": 'left'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Upload a Video"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        id: "video-upload-icon",
+        onClick: function onClick() {
+          document.getElementById("video-upload").click();
+        }
+      }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["uploadVideoIcon"])()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "video-upload",
+        type: "file",
+        onChange: this.videoPreview
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: {
+          marginLeft: 50,
+          "float": 'left'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Upload a Thumbnail"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        id: "thumbnail-upload-icon",
+        onClick: function onClick() {
+          document.getElementById("thumbnail-upload").click();
+        }
+      }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["uploadThumbnailIcon"])()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "thumbnail-upload",
+        type: "file",
+        onChange: this.thumbnailPreview
+      })));
       var videoForm = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null);
 
       if (this.state.id || this.state.videoURL && this.state.thumbnailURL) {
+        // uploadForm = <></>
         videoForm = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "publish-btns"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -2128,23 +2178,7 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Create New Video"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         className: "video-form",
         onSubmit: this.handleSubmit
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        style: {
-          "float": 'left'
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Video"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        id: "video-upload",
-        type: "file",
-        onChange: this.videoPreview
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        style: {
-          "float": 'left'
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Thumbnail"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        id: "thumbnail-upload",
-        type: "file",
-        onChange: this.thumbnailPreview
-      })), videoForm));
+      }, uploadForm, videoForm));
     }
   }]);
 
@@ -3009,7 +3043,7 @@ var mDTP = function mDTP(dispatch) {
 /*!***************************!*\
   !*** ./frontend/icons.js ***!
   \***************************/
-/*! exports provided: homeIcon, channelIcon, githubIcon, linkedInIcon, exitIcon, profileIcon, thumbsUpIcon, thumbsDownIcon, shareIcon, uploadIcon, menuIcon, searchIcon */
+/*! exports provided: homeIcon, channelIcon, githubIcon, linkedInIcon, exitIcon, profileIcon, thumbsUpIcon, thumbsDownIcon, shareIcon, uploadIcon, menuIcon, searchIcon, uploadThumbnailIcon, uploadVideoIcon */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3026,6 +3060,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "uploadIcon", function() { return uploadIcon; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "menuIcon", function() { return menuIcon; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "searchIcon", function() { return searchIcon; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "uploadThumbnailIcon", function() { return uploadThumbnailIcon; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "uploadVideoIcon", function() { return uploadVideoIcon; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -3217,6 +3253,43 @@ var searchIcon = function searchIcon() {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     d: "m378.344 332.78c25.37-34.645 40.545-77.2 40.545-123.333 0-115.484-93.961-209.445-209.445-209.445s-209.444  93.961-209.444 209.445 93.961 209.445 209.445 209.445c46.133 0 88.692-15.177 123.337-40.547l137.212 137.212  45.564-45.564c0-.001-137.214-137.213-137.214-137.213zm-168.899 21.667c-79.958 0-145-65.042-145-145s65.042-145  145-145 145 65.042 145 145-65.043 145-145 145z"
   }));
+};
+var uploadThumbnailIcon = function uploadThumbnailIcon() {
+  var dimension = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 50;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    height: dimension,
+    width: dimension,
+    viewBox: "0 -20 339.22533 339",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "m282.972656 64.425781h-226.945312c-3.136719 0-5.675782 2.542969-5.675782 5.675781v158.863282c0  3.132812 2.542969 5.671875 5.675782 5.671875h226.945312c3.132813 0 5.671875-2.539063  5.671875-5.671875v-158.863282c0-3.132812-2.539062-5.675781-5.671875-5.675781zm-215.921875 158.863281  45.710938-63.996093 25.023437 34.976562-16.929687 29.019531zm66.949219 0 69.539062-119.230468 69.554688  119.230468zm143.296875-147.515624v132.199218l-68.851563-118.015625c-1.820312-2.707031-5.492187-3.425781-8.199218 -1.605469-.632813.425782-1.179688.972657-1.605469 1.605469l-54.59375 93.617188-26.664063-37.292969c-1.058593 -1.507812-2.777343-2.414062-4.621093-2.421875-1.832031 0-3.550781.882813-4.617188 2.375l-46.441406  65.019531v-135.480468zm0 0"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "m338.4375 210.019531-15.75-58.785156v-103.828125c0-9.398438-7.621094-17.019531-17.019531-17.019531h -15.386719l-4.726562-17.726563c-2.472657-9.042968-11.785157-14.398437-20.84375-11.980468l-110.933594  29.707031h-120.445313c-9.398437 0-17.019531 7.621093-17.019531 17.019531v19.808594l-3.699219.984375c-9.050781  2.472656-14.425781 11.769531-12.050781 20.847656l15.75 58.785156v103.828125c0 9.398438 7.621094 17.019532  17.019531 17.019532h15.386719l4.726562 17.722656c2.441407 9.0625 11.765626 14.429687 20.828126  11.988281.003906-.003906.011718-.003906.015624-.003906l110.933594-29.707031h120.445313c9.398437 0  17.019531-7.621094 17.019531-17.023438v-19.804688l3.699219-.988281c9.050781-2.46875 14.425781-11.765625  12.050781-20.84375zm-70.785156-198.355469c3.011718-.804687 6.105468.96875 6.933594 3.96875l3.9375  14.753907h-80.882813zm-256.125 74.464844c-.789063-3.035156 1.007812-6.140625  4.027344-6.972656l.757812-.199219v25.03125zm59.816406 201.300782c-3.007812.804687-6.101562-.96875-6.933594 -3.96875l-3.945312-14.78125h80.894531zm239.996094-35.769532c0 3.132813-2.539063 5.671875-5.671875  5.671875h-272.335938c-3.132812 0-5.671875-2.539062-5.671875-5.671875v-204.253906c0-3.132812  2.539063-5.671875 5.671875-5.671875h272.335938c3.132812 0 5.671875 2.539063 5.671875  5.671875zm12.101562-31.773437-.753906.21875v-25.03125l4.785156 17.859375c.773438 3.027344-1.019531  6.121094-4.03125 6.953125zm0 0"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "m135.457031 138.183594c12.535157 0 22.695313-10.160156 22.695313-22.691406  0-12.535157-10.160156-22.695313-22.695313-22.695313-12.535156 0-22.695312 10.160156-22.695312  22.695313 0 12.53125 10.160156 22.691406 22.695312 22.691406zm0-34.039063c6.265625 0 11.347657  5.078125 11.347657 11.347657 0 6.265624-5.082032 11.34375-11.347657  11.34375s-11.347656-5.078126-11.347656-11.34375c0-6.269532 5.082031-11.347657 11.347656-11.347657zm0 0"
+  }));
+};
+var uploadVideoIcon = function uploadVideoIcon() {
+  var dimension = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 50;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    width: dimension,
+    height: dimension,
+    version: "1.1",
+    id: "Capa_1",
+    xmlns: "http://www.w3.org/2000/svg",
+    xmlnsXlink: "http://www.w3.org/1999/xlink",
+    x: "0px",
+    y: "0px",
+    viewBox: "0 0 512 512",
+    style: {
+      enableBackground: "new 0 0 512 512"
+    },
+    xmlSpace: "preserve"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("g", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("g", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "M451,0v30h-30V0H91v30H61V0H31v512h30v-31h30v31h330v-31h30v31h30V0H451z M91,451H61v-30h30V451z M91,391H61v-30h30V391z M91,331H61v-30h30V331z M91,271H61v-30h30V271z M91,211H61v-30h30V211z M91,151H61v-30h30V151z M91,91H61V60h30V91z M391,482H121 v-61h270V482z M391,391H121V121h270V391z M391,91H121V30h270V91z M451,451h-30v-30h30V451z M451,391h-30v-30h30V391z M451,331h-30 v-30h30V331z M451,271h-30v-30h30V271z M451,211h-30v-30h30V211z M451,151h-30v-30h30V151z M451,91h-30V60h30V91z"
+  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("g", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("g", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "M211,167.972v176.056L343.042,256L211,167.972z M241,224.028L288.958,256L241,287.972V224.028z"
+  }))));
 };
 
 /***/ }),

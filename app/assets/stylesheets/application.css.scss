@@ -70,7 +70,7 @@ a:focus{outline:0;}
   justify-content: center;
   border-radius: 5px;
 }
-.user-form-background{
+.user-form-background, .navbar-background{
   position: fixed;
   top: 0;
   bottom: 0;
@@ -368,7 +368,7 @@ a:focus{outline:0;}
   fill: blue;
 }
 .video-form{
-  min-width: 800px;
+  min-width: 870px;
   width: 100%;
 }
 .publish-btns {
@@ -395,9 +395,8 @@ a:focus{outline:0;}
   min-width: 350px;
   width: 58%;
 }
-.video-form  input, .video-form  textarea{
+.video-form input, .video-form textarea{
   font-family: Roboto, Arial, sans-serif;
-  border-radius: 5px;
   min-width: 350px;
   width: 35%;
   margin-bottom: 15px;
@@ -413,10 +412,24 @@ a:focus{outline:0;}
 .video-views{
   white-space: nowrap;
 }
+#video-upload, #thumbnail-upload{
+  display: none;
+}
+#video-upload-icon:hover , #thumbnail-upload-icon:hover{
+  cursor:pointer;
+  fill: gray;
+}
+#video-upload-icon.active, #thumbnail-upload-icon.active{
+  fill: green;
+}
+
 .upload-video-btn{
   margin-right: 25px;
   text-decoration: none;
   color: black;
+}
+.upload-video-btn:hover{
+  fill: #4ecac8;
 }
 [class^="col-"]{
   float: left;

@@ -1,4 +1,5 @@
 import React from "react";
+import { uploadVideoIcon, uploadThumbnailIcon } from "../../icons";
 class VideoCreate extends React.Component{
     constructor(props){
         super(props);
@@ -19,18 +20,18 @@ class VideoCreate extends React.Component{
         const reader = new FileReader();
         const file = e.currentTarget.files[0];
         if (file.size > fileSizeLimit) {
-            e.currentTarget.value = "";
             alert(`Filesize can't be greater than ${fileSizeLimit} bytes`);
         } else if (!file.type.match(/^video/)){
-            e.currentTarget.value = "";
             alert("Invalid File Type");
         } else if (file) {
+            document.getElementById("video-upload-icon").classList = "active";
             reader.onloadend = () => this.setState({ videoURL: reader.result, videoFile: file });
             reader.readAsDataURL(file);
+            return;
         }
-        else {
-            this.setState({ videoURL: "", videoFile: null });
-        }
+        document.getElementById("video-upload-icon").classList = "";
+        e.currentTarget.value = "";
+        this.setState({ videoURL: "", videoFile: null });
     }
     thumbnailPreview(e) {
         const fileSizeLimit = 5000000;
@@ -40,14 +41,16 @@ class VideoCreate extends React.Component{
             e.currentTarget.value = "";
             alert(`Filesize can't be greater than ${fileSizeLimit} bytes`);
         } else if (!file.type.match(/^image/)) {
-            e.currentTarget.value = "";
             alert("Invalid File Type");
         } else if (file) {
+            document.getElementById("thumbnail-upload-icon").classList = "active";
             reader.onloadend = () => this.setState({ thumbnailURL: reader.result, thumbnailFile: file });
             reader.readAsDataURL(file);
-        }else {
-            this.setState({ thumbnailURL: "", thumbnailFile: null });
+            return;
         }
+        document.getElementById("thumbnail-upload-icon").classList = "";
+        e.currentTarget.value = "";
+        this.setState({ thumbnailURL: "", thumbnailFile: null });
 
     }
 
@@ -70,8 +73,22 @@ class VideoCreate extends React.Component{
     }
     
     render(){
+        let uploadForm = (
+        <>
+            <div style={{ float: 'left' }}>
+                <h2>Upload a Video</h2>
+                <a id="video-upload-icon" onClick={()=>{document.getElementById("video-upload").click()}}>{uploadVideoIcon()}</a>
+                <input id="video-upload" type="file" onChange={this.videoPreview} />
+            </div>
+                <div style={{ marginLeft: 50, float: 'left' }} >
+                    <h2>Upload a Thumbnail</h2>
+                    <a id="thumbnail-upload-icon" onClick={()=>{document.getElementById("thumbnail-upload").click()}}>{uploadThumbnailIcon()}</a>
+                    <input id="thumbnail-upload" type="file" onChange={this.thumbnailPreview} />
+            </div>
+        </>);
         let videoForm = <></>
         if (this.state.id || (this.state.videoURL && this.state.thumbnailURL)){
+            // uploadForm = <></>
             videoForm = (
                 <>
                     <div className="publish-btns">
@@ -95,16 +112,7 @@ class VideoCreate extends React.Component{
         <div>
             <h1>Create New Video</h1>
             <form className="video-form" onSubmit={this.handleSubmit}>
-                <div style={{ float: 'left' }}>
-                        <h2>Video</h2>
-                        <input id="video-upload" type="file" onChange={this.videoPreview} />
-
-                </div>
-                <div style={{ float: 'left' }} >
-                    <h2>Thumbnail</h2>
-                    <input id="thumbnail-upload" type="file" onChange={this.thumbnailPreview} />
-
-                </div>
+                {uploadForm}
                 {videoForm}
             </form>
         </div>
