@@ -631,10 +631,7 @@ var Navbar = function Navbar(props) {
     if (props.user.profile_picture) {
       imgSrc = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: props.user.profile_picture,
-        style: {
-          width: 60,
-          height: 60
-        },
+        className: "current-user-icon",
         onClick: picture_function
       });
     }

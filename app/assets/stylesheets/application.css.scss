@@ -352,6 +352,13 @@ a:focus{outline:0;}
   float: left;
   margin-top: 14px;
 }
+.current-user-icon{
+  width: 45px;
+  height: 45px;
+}
+.current-user-icon:hover{
+  cursor: pointer;
+}
 .vid-info-btn{
   float: left;
   width: 75px;

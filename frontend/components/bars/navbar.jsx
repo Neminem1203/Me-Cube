@@ -60,7 +60,7 @@ const Navbar = props => {
             picture_function = () => props.showModal("");
         }
         let imgSrc = <a id="profile-btn" onClick={picture_function}>{profileIcon(40)}</a>
-        if(props.user.profile_picture){imgSrc = <img src={props.user.profile_picture} style={{width: 60, height: 60}} onClick={picture_function}/>}
+        if(props.user.profile_picture){imgSrc = <img src={props.user.profile_picture} className="current-user-icon" onClick={picture_function}/>}
         return (<nav className="navbar">
                     <a href="/#/video/new" className="upload-video-btn" style={{fontSize: 12, textAlign: "center"}}>{uploadIcon(25)}<br/>Upload</a>
                     {/* <img src={imgSrc} style={{ width: "60px", height: "60px" }} onClick={picture_function} /> */}
