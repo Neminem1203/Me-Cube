@@ -3983,7 +3983,7 @@ var videosReducer = function videosReducer() {
 
   switch (action.type) {
     case _actions_video_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_VIDEOS"]:
-      return action.videos;
+      return Object(lodash__WEBPACK_IMPORTED_MODULE_0__["merge"])({}, old_state, action.videos);
 
     case _actions_video_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_VIDEO"]:
       return Object(lodash__WEBPACK_IMPORTED_MODULE_0__["merge"])({}, old_state, _defineProperty({}, action.video.id, action.video));
