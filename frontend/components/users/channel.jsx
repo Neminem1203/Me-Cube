@@ -44,12 +44,16 @@ class Channel extends React.Component{
         //         </li>
         //     })
         // }
+        if (this.state.creatorId !== this.props.creator.id){
+            this.setState({ creator: this.props.creator, creatorId: this.props.creator.id, ready: false})
+            this.handleSetup();
+        }
         return (
             <div>
                 <h1>{this.state.creator.username}</h1>
                 <h2>Videos</h2>
                 <ul>
-                    <VideoList filter={Object.keys(this.props.videos)}/>
+                    <VideoList filter={this.state.creator.videos}/>
                 </ul>
             </div>)
         

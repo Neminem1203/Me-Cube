@@ -1483,8 +1483,17 @@ function (_React$Component) {
       // }
 
 
+      if (this.state.creatorId !== this.props.creator.id) {
+        this.setState({
+          creator: this.props.creator,
+          creatorId: this.props.creator.id,
+          ready: false
+        });
+        this.handleSetup();
+      }
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, this.state.creator.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Videos"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_videos_video_list_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        filter: Object.keys(this.props.videos)
+        filter: this.state.creator.videos
       })));
     }
   }]);
