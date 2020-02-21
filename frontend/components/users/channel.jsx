@@ -44,13 +44,13 @@ class Channel extends React.Component{
         //         </li>
         //     })
         // }
-
+        debugger
         return (
             <div>
                 <h1>{this.state.creator.username}</h1>
                 <h2>Videos</h2>
                 <ul>
-                    <VideoList filter={Object.keys(this.state.creator.videos)}/>
+                    <VideoList filter={this.props.creator.videos}/>
                 </ul>
             </div>)
         
