@@ -2655,6 +2655,7 @@ function (_React$Component) {
     _this.commentsLoaded = _this.commentsLoaded.bind(_assertThisInitialized(_this));
     _this.showCommentBtns = _this.showCommentBtns.bind(_assertThisInitialized(_this));
     _this.createComment = _this.createComment.bind(_assertThisInitialized(_this));
+    _this.loadComment = _this.loadComment.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -2827,6 +2828,36 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "loadComment",
+    value: function loadComment(comment) {
+      var commenter = this.props.users[comment.commenter_id];
+      var dim = 25;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        key: "comment-".concat(comment.id)
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "/#/channel/".concat(commenter.id),
+        style: {
+          textDecoration: "none"
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: {
+          display: "inline-block"
+        }
+      }, commenter.profile_picture === undefined ? Object(_icons__WEBPACK_IMPORTED_MODULE_1__["profileIcon"])(dim) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: commenter.profile_picture,
+        width: dim,
+        height: dim
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "user-span"
+      }, commenter.username))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+        style: {
+          marginLeft: dim,
+          fontWeight: 100,
+          marginTop: 0
+        }
+      }, comment.comment));
+    }
+  }, {
     key: "finishSetup",
     value: function finishSetup() {
       if (!this.props.video) {
@@ -2997,32 +3028,7 @@ function (_React$Component) {
 
       if (this.state.commentsLoaded) {
         var comments = Object.values(this.props.comments).map(function (comment) {
-          var commenter = _this6.props.users[comment.commenter_id];
-          var dim = 25;
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-            key: "comment-".concat(comment.id)
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-            href: "/#/channel/".concat(commenter.id),
-            style: {
-              textDecoration: "none"
-            }
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            style: {
-              display: "inline-block"
-            }
-          }, commenter.profile_picture === undefined ? Object(_icons__WEBPACK_IMPORTED_MODULE_1__["profileIcon"])(dim) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-            src: commenter.profile_picture,
-            width: dim,
-            height: dim
-          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-            className: "user-span"
-          }, commenter.username))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-            style: {
-              marginLeft: dim,
-              fontWeight: 100,
-              marginTop: 0
-            }
-          }, comment.comment));
+          return _this6.loadComment(comment);
         });
         var comment_btns = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null);
 
@@ -3045,7 +3051,12 @@ function (_React$Component) {
         }
 
         var numComments = this.state.video.video.comments.length;
-        var currentUsersPic = this.props.users[this.props.currentUser].profile_picture;
+        var currentUsersPic = undefined;
+
+        if (this.props.users[this.props.currentUser] !== undefined) {
+          currentUsersPic = this.props.users[this.props.currentUser].profile_picture;
+        }
+
         commentSection = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, numComments + " Comment".concat(numComments === 1 ? "" : "s")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           id: "comment-section",
           className: "comment",
@@ -3055,7 +3066,9 @@ function (_React$Component) {
             marginLeft: "-30px"
           }
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, currentUsersPic === undefined ? Object(_icons__WEBPACK_IMPORTED_MODULE_1__["profileIcon"])(35) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          src: currentUsersPic
+          src: currentUsersPic,
+          width: "35px",
+          height: "35px"
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
           className: "comment-ta",
           onFocus: this.showCommentBtns(true),

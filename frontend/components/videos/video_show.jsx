@@ -26,6 +26,7 @@ class VideoShow extends React.Component{
         this.commentsLoaded = this.commentsLoaded.bind(this);
         this.showCommentBtns = this.showCommentBtns.bind(this);
         this.createComment = this.createComment.bind(this);
+        this.loadComment = this.loadComment.bind(this);
     }
 
     copyShareUrl(e){
@@ -125,6 +126,22 @@ class VideoShow extends React.Component{
         });
         this.setState({comment: "", comment_btns: false})
     }
+    loadComment(comment){
+        const commenter = this.props.users[comment.commenter_id];
+        const dim = 25;
+        return (
+            <li key={`comment-${comment.id}`}>
+                <a href={`/#/channel/${commenter.id}`} style={{ textDecoration: "none" }}>
+                    <div style={{ display: "inline-block" }}>
+                        {(commenter.profile_picture === undefined)
+                            ? profileIcon(dim) : <img src={commenter.profile_picture} width={dim} height={dim} />}
+                        <span className="user-span">{commenter.username}</span>
+                    </div>
+                </a>
+                <h5 style={{ marginLeft: dim, fontWeight: 100, marginTop: 0 }}>{comment.comment}</h5>
+            </li>
+        )
+    }
     finishSetup() {
         if(!this.props.video){return;}
         const video = document.getElementById('video-player')
@@ -222,22 +239,7 @@ class VideoShow extends React.Component{
                 </div>
             </>)
         if(this.state.commentsLoaded){
-            const comments = Object.values(this.props.comments).map(comment=>{
-                const commenter = this.props.users[comment.commenter_id];
-                const dim = 25;
-                return (
-                    <li key={`comment-${comment.id}`}>
-                        <a href={`/#/channel/${commenter.id}`} style={{textDecoration: "none"}}>
-                           <div style={{display: "inline-block"}}>
-                            {(commenter.profile_picture===undefined) 
-                                ? profileIcon(dim) : <img src={commenter.profile_picture} width={dim} height={dim}/>  }
-                                <span className="user-span">{commenter.username}</span> 
-                            </div>
-                        </a>
-                        <h5 style={{marginLeft: dim, fontWeight: 100, marginTop: 0}}>{comment.comment}</h5>
-                    </li>
-                )
-            })
+            const comments = Object.values(this.props.comments).map(comment=>this.loadComment(comment))
             let comment_btns = <></>
             if (this.state.comment_btns) {
                 let btnClass = "disabled";
@@ -251,13 +253,16 @@ class VideoShow extends React.Component{
                 )
             }
             const numComments = this.state.video.video.comments.length;
-            const currentUsersPic = this.props.users[this.props.currentUser].profile_picture;
+            let currentUsersPic = undefined;
+            if (this.props.users[this.props.currentUser] !== undefined) {
+                currentUsersPic = this.props.users[this.props.currentUser].profile_picture;
+            }
             commentSection = (
             <>
                 <h3>{numComments+` Comment${(numComments === 1) ? "" : "s"}`}</h3>
                 <div id="comment-section" className="comment" style={{width: "62vw", minWidth: "550px", marginLeft: "-30px"}}>
                     <div>
-                        {(currentUsersPic === undefined) ? profileIcon(35) : <img src={currentUsersPic}/>}
+                        {(currentUsersPic === undefined) ? profileIcon(35) : <img src={currentUsersPic} width="35px" height="35px"/>}
                             <textarea 
                             className="comment-ta" 
                             onFocus={this.showCommentBtns(true)} 
