@@ -16,7 +16,7 @@ The Video Show Page was the most difficult because it has a bunch of different f
 
 # Code
 ### [VideoList](https://github.com/Neminem1203/Me-Cube/blob/master/frontend/components/videos/video_list.jsx)
-```
+```javascript
 if(this.props.filter === undefined){
 	const random_order = Object.values(this.props.videos);
 	const video_len = random_order.length;
@@ -52,7 +52,7 @@ If it's undefined, we would get all the videos inside `this.props.videos` (which
 
 
 ### [VideoShow](https://github.com/Neminem1203/Me-Cube/blob/master/frontend/components/videos/video_show.jsx)
-```
+```javascript
 // like and comment functionality for signed in users
 let likeFnc = this.thumbAction(true);
 let dislikeFnc = this.thumbAction(false);
