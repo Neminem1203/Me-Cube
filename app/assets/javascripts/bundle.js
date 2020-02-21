@@ -3017,7 +3017,7 @@ function (_React$Component) {
       if (this.props.currentUser === null) {
         likeFnc = this.props.showSignup;
         dislikeFnc = this.props.showSignup;
-        var _commentFnc = this.props.showSignup;
+        commentFnc = this.props.showSignup;
       } // comment section
 
 

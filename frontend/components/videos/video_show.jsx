@@ -222,12 +222,12 @@ class VideoShow extends React.Component{
         // like and comment functionality for signed in users
         let likeFnc = this.thumbAction(true);
         let dislikeFnc = this.thumbAction(false);
-        const commentFnc = this.createComment;
+        let commentFnc = this.createComment;
         // TODO: once add comment btn is done
         if (this.props.currentUser === null){
             likeFnc = this.props.showSignup;
             dislikeFnc = this.props.showSignup;
-            const commentFnc = this.props.showSignup;
+            commentFnc = this.props.showSignup;
         }
 
         // comment section
