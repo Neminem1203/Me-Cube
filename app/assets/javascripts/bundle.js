@@ -1484,7 +1484,7 @@ function (_React$Component) {
 
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, this.state.creator.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Videos"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_videos_video_list_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        filter: this.state.creator.videos
+        filter: Object.keys(this.state.creator.videos)
       })));
     }
   }]);
