@@ -8,7 +8,7 @@ class HomePage extends React.Component{
         return(
             <>
                 <h2>Recommended</h2>
-                <VideoList />
+                <VideoList limit="8"/>
                 <br />
                 </>
         );

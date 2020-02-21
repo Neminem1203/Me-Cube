@@ -6,6 +6,7 @@ const videosReducer = (state={}, action) =>{
     const old_state = Object.assign({}, state);
     switch(action.type){
         case RECEIVE_VIDEOS:
+            // TODO: undo this after presentation
             return merge({}, old_state, action.videos);
         case RECEIVE_VIDEO:
             return merge({}, old_state, {[action.video.id]: action.video});

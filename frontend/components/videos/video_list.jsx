@@ -38,9 +38,11 @@ class VideoList extends React.Component{
                 random_order[random_num] = random_order[i];
                 random_order[i] = temp;
             }
+            const theVideos = (this.props.limit) ? random_order.slice(0, this.props.limit) : random_order;
+
             return(
                 <ul className="video-list">
-                    {random_order.map(vid => <VideoThumb vid={vid} key={`video-${vid.id}`} currentVideo={this.props.currentVideo}/>)}
+                    {theVideos.map(vid => <VideoThumb vid={vid} key={`video-${vid.id}`} currentVideo={this.props.currentVideo}/>)}
                 </ul>
             )}
         else{

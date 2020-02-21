@@ -1188,7 +1188,9 @@ function (_React$Component) {
   _createClass(HomePage, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Recommended"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_videos_video_list_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Recommended"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_videos_video_list_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        limit: "8"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
     }
   }]);
 
@@ -2385,9 +2387,10 @@ function (_React$Component) {
           random_order[i] = temp;
         }
 
+        var theVideos = this.props.limit ? random_order.slice(0, this.props.limit) : random_order;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
           className: "video-list"
-        }, random_order.map(function (vid) {
+        }, theVideos.map(function (vid) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(VideoThumb, {
             vid: vid,
             key: "video-".concat(vid.id),
@@ -3983,6 +3986,7 @@ var videosReducer = function videosReducer() {
 
   switch (action.type) {
     case _actions_video_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_VIDEOS"]:
+      // TODO: undo this after presentation
       return Object(lodash__WEBPACK_IMPORTED_MODULE_0__["merge"])({}, old_state, action.videos);
 
     case _actions_video_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_VIDEO"]:
