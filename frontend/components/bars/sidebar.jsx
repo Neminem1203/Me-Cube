@@ -1,5 +1,5 @@
 import React from "react";
-import {homeIcon, channelIcon, githubIcon, linkedInIcon, menuIcon} from "../../icons";
+import {homeIcon, channelIcon, githubIcon, linkedInIcon, menuIcon, creditsIcon} from "../../icons";
 
 
 class Sidebar extends React.Component{
@@ -21,10 +21,13 @@ class Sidebar extends React.Component{
         
         let homeClass = "";
         let channelClass = "";
+        let creditClass = "";
         if(this.props.location.pathname === "/")
             {homeClass = "active";}
         if (this.props.location.pathname === "/channel/"+this.props.channelId)
             {channelClass = "active";}
+        if(this.props.location.pathname === "/credits")
+            {creditClass ="active";}
 
         let channelButton = <></>;
         if (this.props.channelId)
@@ -40,6 +43,7 @@ class Sidebar extends React.Component{
                     {channelButton}
                     <a target="_blank" href="https://github.com/Neminem1203/Me-Cube"><li>{githubIcon()}GitHub</li></a>
                     <a target="_blank" href="https://linkedin.com/in/tpaul1203"><li>{linkedInIcon()}LinkedIn</li></a>
+                    <a href="/#/credits"><li className={creditClass}>{creditsIcon()}Credits</li></a>
                 </ul>
             </div>
         )

@@ -2,7 +2,7 @@ import React from "react";
 
 export const homeIcon =(dimension=45)=>(
     <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xlinkHref="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	    viewBox="0 0 512.001 512.001" style={{enableBackground:"new 0 0 512.001 512.001"}} width={dimension}>
+	    viewBox="0 0 512.001 512.001" style={{enableBackground:"new 0 0 512.001 512.001"}} width={dimension} height={dimension}>
         <g>
 	        <path d="M503.402,228.885L273.684,19.567c-10.083-9.189-25.288-9.188-35.367-0.001L8.598,228.886
                 c-8.077,7.36-10.745,18.7-6.799,28.889c3.947,10.189,13.557,16.772,24.484,16.772h36.69v209.721
@@ -128,7 +128,7 @@ export const thumbsDownIcon=(dimension=45)=>(
     </svg>)
 
 export const shareIcon=(dimension=40)=>(
-    <svg viewBox="0 -22 512 511" style={{width: 40, height: dimension}} xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="0 -22 512 511" height={dimension} width={dimension} xmlns="http://www.w3.org/2000/svg">
         <path d="m512 233.820312-212.777344-233.320312v139.203125h-45.238281c-140.273437 0-253.984375 
         113.710937-253.984375 253.984375v73.769531l20.09375-22.019531c68.316406-74.851562 164.980469-117.5 
         266.324219-117.5h12.804687v139.203125zm0 0" />
@@ -217,4 +217,20 @@ export const uploadVideoIcon = (dimension=50) => (
         </g>
     </g>
 </svg>
+)
+
+export const creditsIcon = (dimension=45) => (
+    <svg id="bold" enableBackground="new 0 0 24 24" height={dimension} 
+      viewBox="0 0 24 24" width={dimension} xmlns="http://www.w3.org/2000/svg">
+        <path d="m21.25 2c.414 0 .75.336.75.75v18.5c0 .414-.336.75-.75.75h-18.5c-.414 
+        0-.75-.336-.75-.75v-18.5c0-.414.336-.75.75-.75zm0-2h-18.5c-1.52 0-2.75 1.23-2.75 
+        2.75v18.5c0 1.52 1.23 2.75 2.75 2.75h18.5c1.52 0 2.75-1.23 
+        2.75-2.75v-18.5c0-1.52-1.23-2.75-2.75-2.75z" /><path d="m7.96 14.29c.39.39.39 
+        1.03 0 1.42-.2.19-.45.29-.71.29s-.51-.1-.71-.29l-3-3c-.39-.39-.39-1.03 
+        0-1.42l3-3c.39-.39 1.03-.39 1.42 0s.39 1.03 0 1.42l-2.3 2.29z" />
+        <path d="m14.21 8.03-2.5 8.5c-.167.566-.768.837-1.24.68-.53-.16-.84-.71-.68-1.24l2.5-8.5c.16-.53.71-.83 
+        1.24-.68.53.16.84.71.68 1.24z" />
+        <path d="m20.46 12.71-3 3c-.2.19-.45.29-.71.29s-.51-.1-.71-.29c-.39-.39-.39-1.03 
+        0-1.42l2.3-2.29-2.3-2.29c-.39-.39-.39-1.03 0-1.42s1.03-.39 1.42 0l3 3c.39.39.39 1.03 0 1.42z" />
+    </svg>
 )

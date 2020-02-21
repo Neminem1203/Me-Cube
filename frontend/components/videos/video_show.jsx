@@ -13,8 +13,10 @@ class VideoShow extends React.Component{
             editMode: false,
             editTitle: "",
             editDescription: "",
+            comment: "",
             showComments: false,
             commentsLoaded: false,
+            comment_btns: false
         }
         this.finishSetup = this.finishSetup.bind(this);
         this.editField = this.editField.bind(this);
@@ -22,6 +24,8 @@ class VideoShow extends React.Component{
         this.saveChanges = this.saveChanges.bind(this);
         this.showComments = this.showComments.bind(this);
         this.commentsLoaded = this.commentsLoaded.bind(this);
+        this.showCommentBtns = this.showCommentBtns.bind(this);
+        this.createComment = this.createComment.bind(this);
     }
 
     copyShareUrl(e){
@@ -83,6 +87,9 @@ class VideoShow extends React.Component{
             });
         }
     }
+    showCommentBtns(bool){
+        return e => this.setState({comment_btns: bool});
+    }
     showComments(e){
         // console.log(e.target.scrollTop);
         // console.log(commentSection.offsetParent.offsetHeight);
@@ -92,8 +99,6 @@ class VideoShow extends React.Component{
             if (e.target.scrollTop + commentSection.offsetParent.offsetHeight
                 > commentSection.offsetTop) {
                 if(this.state.video.video.comments !== undefined && this.state.video.video.comments.length > 0){
-                    // ajax request to get comments
-                    // on dismount, should clear comments
                     this.props.getComments(this.state.video.video.comments).then(payload=>{
                         this.props.getUsers(Object.values(payload.comments).map(comment => comment.commenter_id)).then(
                             () => this.commentsLoaded()
@@ -109,6 +114,16 @@ class VideoShow extends React.Component{
     }
     commentsLoaded(){
         this.setState({commentsLoaded: true});
+    }
+    createComment(e){
+        e.preventDefault();
+        this.props.createComment({
+            comment: this.state.comment,
+            commenter_id: this.props.currentUser,
+            commentable_type: "Video",
+            commentable_id: this.state.videoId,
+        });
+        this.setState({comment: "", comment_btns: false})
     }
     finishSetup() {
         if(!this.props.video){return;}
@@ -127,6 +142,9 @@ class VideoShow extends React.Component{
             video.load();
             video.play();
         }
+    }
+    clearComment(){
+        this.setState({comment: "", comment_btns: false})
     }
     componentDidUpdate() {
         if (this.state.videoId != this.props.match.params.videoId){
@@ -187,12 +205,12 @@ class VideoShow extends React.Component{
         // like and comment functionality for signed in users
         let likeFnc = this.thumbAction(true);
         let dislikeFnc = this.thumbAction(false);
-        // const commentFnc = this.createComment;
+        const commentFnc = this.createComment;
         // TODO: once add comment btn is done
         if (this.props.currentUser === null){
             likeFnc = this.props.showSignup;
             dislikeFnc = this.props.showSignup;
-            // const commentFnc = this.props.showSignup;
+            const commentFnc = this.props.showSignup;
         }
 
         // comment section
@@ -205,26 +223,58 @@ class VideoShow extends React.Component{
             </>)
         if(this.state.commentsLoaded){
             const comments = Object.values(this.props.comments).map(comment=>{
+                const commenter = this.props.users[comment.commenter_id];
+                const dim = 25;
                 return (
                     <li key={`comment-${comment.id}`}>
-                        <h3>{this.props.users[comment.commenter_id].username}</h3>
-                        <h5>{comment.comment}</h5>
+                        <a href={`/#/channel/${commenter.id}`} style={{textDecoration: "none"}}>
+                           <div style={{display: "inline-block"}}>
+                            {(commenter.profile_picture===undefined) 
+                                ? profileIcon(dim) : <img src={commenter.profile_picture} width={dim} height={dim}/>  }
+                                <span className="user-span">{commenter.username}</span> 
+                            </div>
+                        </a>
+                        <h5 style={{marginLeft: dim, fontWeight: 100, marginTop: 0}}>{comment.comment}</h5>
                     </li>
                 )
             })
+            let comment_btns = <></>
+            if (this.state.comment_btns) {
+                let btnClass = "disabled";
+                if(this.state.comment.length > 0){btnClass=""}
+
+                comment_btns = (
+                    <div className="comment-btns">
+                        <button onClick={this.showCommentBtns(false)}>Cancel</button>
+                        <button className={btnClass} disabled={btnClass} onClick={commentFnc}>Submit</button>
+                    </div>
+                )
+            }
             const numComments = this.state.video.video.comments.length;
+            const currentUsersPic = this.props.users[this.props.currentUser].profile_picture;
             commentSection = (
             <>
-                    <h3>{numComments+` Comment${(numComments === 1) ? "" : "s"}`}</h3>
-                <div id="comment-section" className="comment">
-                    <ul style={{listStyle: "none"}}>
+                <h3>{numComments+` Comment${(numComments === 1) ? "" : "s"}`}</h3>
+                <div id="comment-section" className="comment" style={{width: "62vw", minWidth: "550px", marginLeft: "-30px"}}>
+                    <div>
+                        {(currentUsersPic === undefined) ? profileIcon(35) : <img src={currentUsersPic}/>}
+                            <textarea 
+                            className="comment-ta" 
+                            onFocus={this.showCommentBtns(true)} 
+                            placeholder="Add a public comment..."
+                            onChange={this.editField("comment")}
+                            value={this.state.comment}
+                            />
+                        {comment_btns}
+                   </div> 
+                    <ul style={{listStyle: "none", paddingLeft: 0}}>
                         {comments}
                     </ul>
-
                 </div>
             </>
             )
         }
+
         return (
         <div>
             <div className="video-container">
@@ -255,7 +305,7 @@ class VideoShow extends React.Component{
                 </div>
                 <div className="col-4-5" style={{marginTop: "14px"}}>
                     <a href={`/#/channel/${this.props.video.video.creator_id}`} style={{ textDecoration: "none", color: "black"}}>
-                        <h3 style={{fontSize: "18px", display: "inline"}}>{this.props.video.creator.username}</h3>
+                        <h3 style={{fontSize: "18px", display: "inline"}} className="user-span">{this.props.video.creator.username}</h3>
                     </a>
                     {editButton}
                     {description}

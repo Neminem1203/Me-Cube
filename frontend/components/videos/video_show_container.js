@@ -4,7 +4,7 @@ import { getVideo, updateVideo } from "../../actions/video_actions";
 import { getUser, getUsers } from "../../actions/users_actions";
 import {createLike, updateLike, destroyLike} from "../../actions/like_actions";
 import { showModal, SIGN_UP } from "../../actions/modal_actions";
-import { getComments, clearComments } from "../../actions/comment_actions";
+import { getComments, clearComments, createComment } from "../../actions/comment_actions";
 
 const mSTP = (state, ownProps) => {
     let video = state.entities.videos[ownProps.match.params.videoId];
@@ -38,7 +38,8 @@ const mDTP = dispatch =>{
         destroyLike: like => dispatch(destroyLike(like)),
         showSignup: () => dispatch(showModal(SIGN_UP)),
         getComments: comments => dispatch(getComments(comments)),
-        clearComments: () => dispatch(clearComments())
+        clearComments: () => dispatch(clearComments()),
+        createComment: comment=> dispatch(createComment(comment)),
     }
 }
 

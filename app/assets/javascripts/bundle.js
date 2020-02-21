@@ -865,6 +865,7 @@ function (_React$Component) {
       var sidebarClass = this.props.sidebar ? "sidebar" : "sidebar active";
       var homeClass = "";
       var channelClass = "";
+      var creditClass = "";
 
       if (this.props.location.pathname === "/") {
         homeClass = "active";
@@ -872,6 +873,10 @@ function (_React$Component) {
 
       if (this.props.location.pathname === "/channel/" + this.props.channelId) {
         channelClass = "active";
+      }
+
+      if (this.props.location.pathname === "/credits") {
+        creditClass = "active";
       }
 
       var channelButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null);
@@ -901,7 +906,11 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["githubIcon"])(), "GitHub")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         target: "_blank",
         href: "https://linkedin.com/in/tpaul1203"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["linkedInIcon"])(), "LinkedIn"))));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["linkedInIcon"])(), "LinkedIn")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "/#/credits"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: creditClass
+      }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["creditsIcon"])(), "Credits"))));
     }
   }]);
 
@@ -944,6 +953,73 @@ var mDTP = function mDTP(dispatch) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mSTP, mDTP)(_sidebar__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+/***/ }),
+
+/***/ "./frontend/components/credits.jsx":
+/*!*****************************************!*\
+  !*** ./frontend/components/credits.jsx ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../icons */ "./frontend/icons.js");
+// Home Icon made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+// Default Profile Picture Icon made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+// LinkedIn Icon made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+// Channel Icon made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+// Share Icon made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+// Film Reel Icon in Upload Page made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+// Credits Page Icon made by < a href = "https://www.flaticon.com/authors/pixel-perfect" title = "Pixel perfect" > Pixel perfect</a > from < a href = "https://www.flaticon.com/" title = "Flaticon" > www.flaticon.com</a >
+// GitHub Icon made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+// Menu Icon made by <a href="https://www.flaticon.com/authors/those-icons" title="Those Icons">Those Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+// Thumbs Up/Down Icon made by <a href="https://www.flaticon.com/authors/those-icons" title="Those Icons">Those Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+// Signout Icon made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+// Upload Thumbnail Icon made by <a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+// Magnifying Glass Icon made by <a href="https://www.flaticon.com/authors/those-icons" title="Those Icons">Those Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+// Pictures Icon made by <a href="https://www.flaticon.com/authors/srip" title="srip">srip</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+
+
+
+var CreditsPage = function CreditsPage(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    className: "credit-list"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "https://www.flaticon.com/authors/freepik"
+  }, _icons__WEBPACK_IMPORTED_MODULE_1__["homeIcon"](30), " Home Icon by Freepik")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "https://www.flaticon.com/authors/freepik"
+  }, _icons__WEBPACK_IMPORTED_MODULE_1__["profileIcon"](30), " Profile Icon by Freepik")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "https://www.flaticon.com/authors/freepik"
+  }, _icons__WEBPACK_IMPORTED_MODULE_1__["linkedInIcon"](30), " LinkedIn Icon by Freepik")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "https://www.flaticon.com/authors/freepik"
+  }, _icons__WEBPACK_IMPORTED_MODULE_1__["channelIcon"](30), " Channel Icon by Freepik")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "https://www.flaticon.com/authors/freepik"
+  }, _icons__WEBPACK_IMPORTED_MODULE_1__["shareIcon"](30), " Share Icon by Freepik")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "https://www.flaticon.com/authors/freepik"
+  }, _icons__WEBPACK_IMPORTED_MODULE_1__["uploadVideoIcon"](30), " Film Reel Icon by Freepik")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "https://www.flaticon.com/authors/pixel-perfect"
+  }, _icons__WEBPACK_IMPORTED_MODULE_1__["creditsIcon"](30), " Credits Icon by Pixel Perfect")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "https://www.flaticon.com/authors/pixel-perfect"
+  }, _icons__WEBPACK_IMPORTED_MODULE_1__["githubIcon"](30), " GitHub Icon by Pixel Perfect")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "https://www.flaticon.com/authors/those-icons"
+  }, _icons__WEBPACK_IMPORTED_MODULE_1__["menuIcon"](30), " Menu Icon by Those Icons")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "https://www.flaticon.com/authors/those-icons"
+  }, _icons__WEBPACK_IMPORTED_MODULE_1__["thumbsUpIcon"](30), " Thumb Icon by Those Icons")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "https://www.flaticon.com/authors/smashicons"
+  }, _icons__WEBPACK_IMPORTED_MODULE_1__["exitIcon"](30), " Signout Icon by Smashicons")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "https://www.flaticon.com/authors/kiranshastry"
+  }, _icons__WEBPACK_IMPORTED_MODULE_1__["uploadIcon"](30), " Upload Video Icon by Kiranshastry")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "https://www.flaticon.com/authors/those-icons"
+  }, _icons__WEBPACK_IMPORTED_MODULE_1__["searchIcon"](30), " Search Icon by Those Icons")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "https://www.flaticon.com/authors/srip"
+  }, _icons__WEBPACK_IMPORTED_MODULE_1__["uploadThumbnailIcon"](30), " Thumbnail Icon by Srip")));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (CreditsPage);
 
 /***/ }),
 
@@ -1142,6 +1218,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _videos_video_create_container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./videos/video_create_container */ "./frontend/components/videos/video_create_container.js");
 /* harmony import */ var _users_channel_container__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./users/channel_container */ "./frontend/components/users/channel_container.js");
 /* harmony import */ var _videos_video_search_container__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./videos/video_search_container */ "./frontend/components/videos/video_search_container.js");
+/* harmony import */ var _credits__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./credits */ "./frontend/components/credits.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1159,6 +1236,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -1216,6 +1294,10 @@ function (_React$Component) {
         exact: true,
         path: "/results",
         component: _videos_video_search_container__WEBPACK_IMPORTED_MODULE_8__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+        exact: true,
+        path: "/credits",
+        component: _credits__WEBPACK_IMPORTED_MODULE_9__["default"]
       }));
     }
   }]);
@@ -1850,9 +1932,12 @@ function (_React$Component) {
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
       }
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "user-form-background"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "user-form-background",
+        onClick: function onClick() {
+          return _this3.props.showModal("");
+        }
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "user-form"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
@@ -2557,8 +2642,10 @@ function (_React$Component) {
       editMode: false,
       editTitle: "",
       editDescription: "",
+      comment: "",
       showComments: false,
-      commentsLoaded: false
+      commentsLoaded: false,
+      comment_btns: false
     };
     _this.finishSetup = _this.finishSetup.bind(_assertThisInitialized(_this));
     _this.editField = _this.editField.bind(_assertThisInitialized(_this));
@@ -2566,6 +2653,8 @@ function (_React$Component) {
     _this.saveChanges = _this.saveChanges.bind(_assertThisInitialized(_this));
     _this.showComments = _this.showComments.bind(_assertThisInitialized(_this));
     _this.commentsLoaded = _this.commentsLoaded.bind(_assertThisInitialized(_this));
+    _this.showCommentBtns = _this.showCommentBtns.bind(_assertThisInitialized(_this));
+    _this.createComment = _this.createComment.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -2673,9 +2762,20 @@ function (_React$Component) {
       }
     }
   }, {
+    key: "showCommentBtns",
+    value: function showCommentBtns(bool) {
+      var _this4 = this;
+
+      return function (e) {
+        return _this4.setState({
+          comment_btns: bool
+        });
+      };
+    }
+  }, {
     key: "showComments",
     value: function showComments(e) {
-      var _this4 = this;
+      var _this5 = this;
 
       // console.log(e.target.scrollTop);
       // console.log(commentSection.offsetParent.offsetHeight);
@@ -2685,13 +2785,11 @@ function (_React$Component) {
 
         if (e.target.scrollTop + commentSection.offsetParent.offsetHeight > commentSection.offsetTop) {
           if (this.state.video.video.comments !== undefined && this.state.video.video.comments.length > 0) {
-            // ajax request to get comments
-            // on dismount, should clear comments
             this.props.getComments(this.state.video.video.comments).then(function (payload) {
-              _this4.props.getUsers(Object.values(payload.comments).map(function (comment) {
+              _this5.props.getUsers(Object.values(payload.comments).map(function (comment) {
                 return comment.commenter_id;
               })).then(function () {
-                return _this4.commentsLoaded();
+                return _this5.commentsLoaded();
               });
             });
           } else {
@@ -2711,6 +2809,21 @@ function (_React$Component) {
     value: function commentsLoaded() {
       this.setState({
         commentsLoaded: true
+      });
+    }
+  }, {
+    key: "createComment",
+    value: function createComment(e) {
+      e.preventDefault();
+      this.props.createComment({
+        comment: this.state.comment,
+        commenter_id: this.props.currentUser,
+        commentable_type: "Video",
+        commentable_id: this.state.videoId
+      });
+      this.setState({
+        comment: "",
+        comment_btns: false
       });
     }
   }, {
@@ -2742,6 +2855,14 @@ function (_React$Component) {
       }
     }
   }, {
+    key: "clearComment",
+    value: function clearComment() {
+      this.setState({
+        comment: "",
+        comment_btns: false
+      });
+    }
+  }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
       if (this.state.videoId != this.props.match.params.videoId) {
@@ -2771,7 +2892,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this5 = this;
+      var _this6 = this;
 
       // if(this.props.error[0] === "Video Not Found"){this.props.history.push("/")}
       // return null if video doesn't have a creator (meaning video doesn't exist)
@@ -2859,12 +2980,13 @@ function (_React$Component) {
 
 
       var likeFnc = this.thumbAction(true);
-      var dislikeFnc = this.thumbAction(false); // const commentFnc = this.createComment;
-      // TODO: once add comment btn is done
+      var dislikeFnc = this.thumbAction(false);
+      var commentFnc = this.createComment; // TODO: once add comment btn is done
 
       if (this.props.currentUser === null) {
         likeFnc = this.props.showSignup;
-        dislikeFnc = this.props.showSignup; // const commentFnc = this.props.showSignup;
+        dislikeFnc = this.props.showSignup;
+        var _commentFnc = this.props.showSignup;
       } // comment section
 
 
@@ -2875,17 +2997,75 @@ function (_React$Component) {
 
       if (this.state.commentsLoaded) {
         var comments = Object.values(this.props.comments).map(function (comment) {
+          var commenter = _this6.props.users[comment.commenter_id];
+          var dim = 25;
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
             key: "comment-".concat(comment.id)
-          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, _this5.props.users[comment.commenter_id].username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, comment.comment));
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+            href: "/#/channel/".concat(commenter.id),
+            style: {
+              textDecoration: "none"
+            }
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            style: {
+              display: "inline-block"
+            }
+          }, commenter.profile_picture === undefined ? Object(_icons__WEBPACK_IMPORTED_MODULE_1__["profileIcon"])(dim) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+            src: commenter.profile_picture,
+            width: dim,
+            height: dim
+          }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            className: "user-span"
+          }, commenter.username))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+            style: {
+              marginLeft: dim,
+              fontWeight: 100,
+              marginTop: 0
+            }
+          }, comment.comment));
         });
+        var comment_btns = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null);
+
+        if (this.state.comment_btns) {
+          var btnClass = "disabled";
+
+          if (this.state.comment.length > 0) {
+            btnClass = "";
+          }
+
+          comment_btns = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "comment-btns"
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+            onClick: this.showCommentBtns(false)
+          }, "Cancel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+            className: btnClass,
+            disabled: btnClass,
+            onClick: commentFnc
+          }, "Submit"));
+        }
+
         var numComments = this.state.video.video.comments.length;
+        var currentUsersPic = this.props.users[this.props.currentUser].profile_picture;
         commentSection = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, numComments + " Comment".concat(numComments === 1 ? "" : "s")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           id: "comment-section",
-          className: "comment"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+          className: "comment",
           style: {
-            listStyle: "none"
+            width: "62vw",
+            minWidth: "550px",
+            marginLeft: "-30px"
+          }
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, currentUsersPic === undefined ? Object(_icons__WEBPACK_IMPORTED_MODULE_1__["profileIcon"])(35) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: currentUsersPic
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+          className: "comment-ta",
+          onFocus: this.showCommentBtns(true),
+          placeholder: "Add a public comment...",
+          onChange: this.editField("comment"),
+          value: this.state.comment
+        }), comment_btns), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+          style: {
+            listStyle: "none",
+            paddingLeft: 0
           }
         }, comments)));
       }
@@ -2939,7 +3119,8 @@ function (_React$Component) {
         style: {
           fontSize: "18px",
           display: "inline"
-        }
+        },
+        className: "user-span"
       }, this.props.video.creator.username)), editButton, description, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
           width: "100%",
@@ -3038,6 +3219,9 @@ var mDTP = function mDTP(dispatch) {
     },
     clearComments: function clearComments() {
       return dispatch(Object(_actions_comment_actions__WEBPACK_IMPORTED_MODULE_6__["clearComments"])());
+    },
+    createComment: function createComment(comment) {
+      return dispatch(Object(_actions_comment_actions__WEBPACK_IMPORTED_MODULE_6__["createComment"])(comment));
     }
   };
 };
@@ -3050,7 +3234,7 @@ var mDTP = function mDTP(dispatch) {
 /*!***************************!*\
   !*** ./frontend/icons.js ***!
   \***************************/
-/*! exports provided: homeIcon, channelIcon, githubIcon, linkedInIcon, exitIcon, profileIcon, thumbsUpIcon, thumbsDownIcon, shareIcon, uploadIcon, menuIcon, searchIcon, uploadThumbnailIcon, uploadVideoIcon */
+/*! exports provided: homeIcon, channelIcon, githubIcon, linkedInIcon, exitIcon, profileIcon, thumbsUpIcon, thumbsDownIcon, shareIcon, uploadIcon, menuIcon, searchIcon, uploadThumbnailIcon, uploadVideoIcon, creditsIcon */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3069,6 +3253,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "searchIcon", function() { return searchIcon; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "uploadThumbnailIcon", function() { return uploadThumbnailIcon; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "uploadVideoIcon", function() { return uploadVideoIcon; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "creditsIcon", function() { return creditsIcon; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -3087,7 +3272,8 @@ var homeIcon = function homeIcon() {
     style: {
       enableBackground: "new 0 0 512.001 512.001"
     },
-    width: dimension
+    width: dimension,
+    height: dimension
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("g", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     d: "M503.402,228.885L273.684,19.567c-10.083-9.189-25.288-9.188-35.367-0.001L8.598,228.886 c-8.077,7.36-10.745,18.7-6.799,28.889c3.947,10.189,13.557,16.772,24.484,16.772h36.69v209.721 c0,8.315,6.742,15.057,15.057,15.057h125.914c8.315,0,15.057-6.741,15.057-15.057V356.932h74.002v127.337 c0,8.315,6.742,15.057,15.057,15.057h125.908c8.315,0,15.057-6.741,15.057-15.057V274.547h36.697 c10.926,0,20.537-6.584,24.484-16.772C514.147,247.585,511.479,236.246,503.402,228.885z"
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("g", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
@@ -3203,10 +3389,8 @@ var shareIcon = function shareIcon() {
   var dimension = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 40;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
     viewBox: "0 -22 512 511",
-    style: {
-      width: 40,
-      height: dimension
-    },
+    height: dimension,
+    width: dimension,
     xmlns: "http://www.w3.org/2000/svg"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     d: "m512 233.820312-212.777344-233.320312v139.203125h-45.238281c-140.273437 0-253.984375  113.710937-253.984375 253.984375v73.769531l20.09375-22.019531c68.316406-74.851562 164.980469-117.5  266.324219-117.5h12.804687v139.203125zm0 0"
@@ -3297,6 +3481,25 @@ var uploadVideoIcon = function uploadVideoIcon() {
   }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("g", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("g", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     d: "M211,167.972v176.056L343.042,256L211,167.972z M241,224.028L288.958,256L241,287.972V224.028z"
   }))));
+};
+var creditsIcon = function creditsIcon() {
+  var dimension = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 45;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    id: "bold",
+    enableBackground: "new 0 0 24 24",
+    height: dimension,
+    viewBox: "0 0 24 24",
+    width: dimension,
+    xmlns: "http://www.w3.org/2000/svg"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "m21.25 2c.414 0 .75.336.75.75v18.5c0 .414-.336.75-.75.75h-18.5c-.414  0-.75-.336-.75-.75v-18.5c0-.414.336-.75.75-.75zm0-2h-18.5c-1.52 0-2.75 1.23-2.75  2.75v18.5c0 1.52 1.23 2.75 2.75 2.75h18.5c1.52 0 2.75-1.23  2.75-2.75v-18.5c0-1.52-1.23-2.75-2.75-2.75z"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "m7.96 14.29c.39.39.39  1.03 0 1.42-.2.19-.45.29-.71.29s-.51-.1-.71-.29l-3-3c-.39-.39-.39-1.03  0-1.42l3-3c.39-.39 1.03-.39 1.42 0s.39 1.03 0 1.42l-2.3 2.29z"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "m14.21 8.03-2.5 8.5c-.167.566-.768.837-1.24.68-.53-.16-.84-.71-.68-1.24l2.5-8.5c.16-.53.71-.83  1.24-.68.53.16.84.71.68 1.24z"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "m20.46 12.71-3 3c-.2.19-.45.29-.71.29s-.51-.1-.71-.29c-.39-.39-.39-1.03  0-1.42l2.3-2.29-2.3-2.29c-.39-.39-.39-1.03 0-1.42s1.03-.39 1.42 0l3 3c.39.39.39 1.03 0 1.42z"
+  }));
 };
 
 /***/ }),
