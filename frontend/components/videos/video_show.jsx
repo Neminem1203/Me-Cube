@@ -16,7 +16,7 @@ class VideoShow extends React.Component{
             comment: "",
             showComments: false,
             commentsLoaded: false,
-            comment_btns: false
+            comment_btns: false,
         }
         this.finishSetup = this.finishSetup.bind(this);
         this.editField = this.editField.bind(this);
