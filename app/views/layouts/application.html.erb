@@ -4,7 +4,7 @@
     <title>Me-Cube</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <%= favicon_link_tag asset_path('sitelogo.png')%>
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
     <% if logged_in? %>
