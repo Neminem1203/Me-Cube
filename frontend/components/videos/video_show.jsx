@@ -157,6 +157,7 @@ class VideoShow extends React.Component{
         if (video !== null) {
             video_src.setAttribute('src', this.props.video.video.videoUrl);
             video.load();
+            video.volume = 0.5;
             video.play();
         }
     }
@@ -185,6 +186,7 @@ class VideoShow extends React.Component{
         document.getElementsByClassName("main-content")[0].classList.remove("video-page")
         this.props.clearComments();
     }
+
 
     render() {
         // if(this.props.error[0] === "Video Not Found"){this.props.history.push("/")}
@@ -279,12 +281,11 @@ class VideoShow extends React.Component{
             </>
             )
         }
-
         return (
         <div>
             <div className="video-container">
                 <video id='video-player' className="video-show" preload="auto" controls="controls" autoPlay="autoplay">
-                    <source id='video-src' src={this.props.video.video.videoUrl}/>
+                    <source id='video-src' src={this.props.video.video.videoUrl} />
                 </video>
                 {title}
                 <textarea id="current-video-url" className="hidden" defaultValue={window.location.href}/>
