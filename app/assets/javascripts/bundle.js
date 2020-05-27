@@ -2894,7 +2894,7 @@ function (_React$Component) {
       if (video !== null) {
         video_src.setAttribute('src', this.props.video.video.videoUrl);
         video.load();
-        video.volume = 0.5;
+        video.volume = 0.25;
         video.play();
       }
     }
