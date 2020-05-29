@@ -38,3 +38,10 @@ export const searchVideos = search =>{
         data: {search}
     })
 }
+
+export const incrementView = videoId =>{
+    return $.ajax({
+        method: "GET",
+        url: `api/view_video/${videoId}`
+    })
+}

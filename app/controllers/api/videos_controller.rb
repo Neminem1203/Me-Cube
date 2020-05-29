@@ -49,11 +49,22 @@ class Api::VideosController < ApplicationController
         end
     end
 
+    def viewcount
+        @video = Video.find_by(id: params[:videoId])
+        @video.views = @video.views + 1
+        if @video.save
+            render :show
+        else
+            render json: ["Error when incrementing view count"], status: 404
+        end
+    end
+
     def search
         search = "%" + params[:search].downcase + "%"
         @videos = Video.where("LOWER(title) like ? OR LOWER(description) like ?", search, search)
         render :index
     end
+
     private
     def video_params
         params.require(:video).permit(:title, :description)

@@ -396,7 +396,7 @@ var logout = function logout() {
 /*!*******************************************!*\
   !*** ./frontend/actions/video_actions.js ***!
   \*******************************************/
-/*! exports provided: RECEIVE_VIDEOS, RECEIVE_VIDEO, receiveVideos, receiveVideo, getVideos, getVideo, createVideo, updateVideo, searchVideos */
+/*! exports provided: RECEIVE_VIDEOS, RECEIVE_VIDEO, receiveVideos, receiveVideo, getVideos, getVideo, createVideo, updateVideo, searchVideos, addViewCount */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -410,6 +410,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createVideo", function() { return createVideo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateVideo", function() { return updateVideo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "searchVideos", function() { return searchVideos; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addViewCount", function() { return addViewCount; });
 /* harmony import */ var _util_video_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/video_util */ "./frontend/util/video_util.js");
 /* harmony import */ var _modal_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modal_actions */ "./frontend/actions/modal_actions.js");
 /* harmony import */ var _users_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./users_actions */ "./frontend/actions/users_actions.js");
@@ -473,6 +474,13 @@ var searchVideos = function searchVideos(search) {
       return dispatch(receiveVideos(payload));
     }, function () {
       return dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_1__["receiveVideoError"])(["Error occured during search"]));
+    });
+  };
+};
+var addViewCount = function addViewCount(videoId) {
+  return function (dispatch) {
+    return _util_video_util__WEBPACK_IMPORTED_MODULE_0__["incrementView"](videoId).then(function (payload) {
+      return dispatch(receiveVideo(payload));
     });
   };
 };
@@ -2348,7 +2356,7 @@ var VideoThumb = function VideoThumb(_ref) {
     className: "video-creator-span"
   }, vid.creator_username)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "video-views"
-  }, vid.views + " • " + vid.created_at))));
+  }, vid.views + " views • " + vid.created_at))));
 };
 
 var VideoList =
@@ -2610,6 +2618,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../icons */ "./frontend/icons.js");
 /* harmony import */ var _video_list_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./video_list_container */ "./frontend/components/videos/video_list_container.js");
+/* harmony import */ var _actions_video_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/video_actions */ "./frontend/actions/video_actions.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -2629,6 +2638,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -2896,6 +2906,7 @@ function (_React$Component) {
         video.load();
         video.volume = 0.25;
         video.play();
+        this.props.addViewCount(parseInt(this.state.videoId));
       }
     }
   }, {
@@ -3117,7 +3128,7 @@ function (_React$Component) {
         style: {
           color: "gray"
         }
-      }, "9.1M(fake) views \u2022 ", this.props.video.video.created_at), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, this.props.video.video.views, " views \u2022 ", this.props.video.video.created_at), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onClick: likeFnc,
         className: thumbsUpClass
       }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["thumbsUpIcon"])(20), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, this.state.likes)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -3248,6 +3259,9 @@ var mDTP = function mDTP(dispatch) {
     },
     createComment: function createComment(comment) {
       return dispatch(Object(_actions_comment_actions__WEBPACK_IMPORTED_MODULE_6__["createComment"])(comment));
+    },
+    addViewCount: function addViewCount(videoId) {
+      return dispatch(Object(_actions_video_actions__WEBPACK_IMPORTED_MODULE_2__["addViewCount"])(videoId));
     }
   };
 };
@@ -4239,7 +4253,7 @@ var updateUser = function updateUser(user) {
 /*!*************************************!*\
   !*** ./frontend/util/video_util.js ***!
   \*************************************/
-/*! exports provided: uploadVideo, getVideos, getVideo, updateVideo, searchVideos */
+/*! exports provided: uploadVideo, getVideos, getVideo, updateVideo, searchVideos, incrementView */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4249,6 +4263,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getVideo", function() { return getVideo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateVideo", function() { return updateVideo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "searchVideos", function() { return searchVideos; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "incrementView", function() { return incrementView; });
 var uploadVideo = function uploadVideo(video) {
   return $.ajax({
     method: "POST",
@@ -4289,6 +4304,12 @@ var searchVideos = function searchVideos(search) {
     data: {
       search: search
     }
+  });
+};
+var incrementView = function incrementView(videoId) {
+  return $.ajax({
+    method: "GET",
+    url: "api/view_video/".concat(videoId)
   });
 };
 

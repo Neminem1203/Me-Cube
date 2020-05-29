@@ -45,3 +45,7 @@ export const searchVideos = search => dispatch =>{
     return VideoAPIUtil.searchVideos(search).then(payload => dispatch(receiveVideos(payload)),
         () => dispatch(receiveVideoError(["Error occured during search"])))
 }
+
+export const addViewCount = videoId => dispatch => {
+    return VideoAPIUtil.incrementView(videoId).then(payload => dispatch(receiveVideo(payload)));
+}

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :create, :update, :show]
     resources :videos, only: [:index, :create, :update, :show]
     get '/video_search/', to: 'videos#search', as: "videosearch"
+    get '/view_video/:videoId', to: 'videos#viewcount', as: "viewcount"
     resources :comments, only: [:index, :create, :update, :show, :destroy]
     resource :likes, only: [:create, :update, :destroy]
     resource :session, only: [:create, :destroy]

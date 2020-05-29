@@ -17,7 +17,7 @@ const VideoThumb = ({vid, currentVideo}) => {
                 </a>
                 <br />
                 <a>
-                    <span className="video-views">{vid.views + " • " + vid.created_at}</span>
+                    <span className="video-views">{vid.views + " views • " + vid.created_at}</span>
                 </a>
             </div>
         </li>

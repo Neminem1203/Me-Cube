@@ -1,6 +1,7 @@
 import React from "react";
 import {profileIcon, thumbsUpIcon, thumbsDownIcon, shareIcon} from "../../icons";
 import VideoList from "./video_list_container";
+import { addViewCount } from "../../actions/video_actions";
 class VideoShow extends React.Component{
     constructor(props){
         super(props);
@@ -159,6 +160,7 @@ class VideoShow extends React.Component{
             video.load();
             video.volume = 0.25;
             video.play();
+            this.props.addViewCount(parseInt(this.state.videoId));
         }
     }
     clearComment(){
@@ -290,7 +292,7 @@ class VideoShow extends React.Component{
                 {title}
                 <textarea id="current-video-url" className="hidden" defaultValue={window.location.href}/>
                 <ul className="video-info">
-                    <li style={{color:"gray"}}>9.1M(fake) views • {this.props.video.video.created_at}</li>
+                    <li style={{color:"gray"}}>{this.props.video.video.views} views • {this.props.video.video.created_at}</li>
                     <li>
                         <div onClick={likeFnc} className={thumbsUpClass}>
                             {thumbsUpIcon(20)}

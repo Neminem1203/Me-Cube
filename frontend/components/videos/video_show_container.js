@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import VideoShow from "./video_show";
-import { getVideo, updateVideo } from "../../actions/video_actions";
+import { getVideo, updateVideo, addViewCount } from "../../actions/video_actions";
 import { getUser, getUsers } from "../../actions/users_actions";
 import {createLike, updateLike, destroyLike} from "../../actions/like_actions";
 import { showModal, SIGN_UP } from "../../actions/modal_actions";
@@ -40,6 +40,7 @@ const mDTP = dispatch =>{
         getComments: comments => dispatch(getComments(comments)),
         clearComments: () => dispatch(clearComments()),
         createComment: comment=> dispatch(createComment(comment)),
+        addViewCount: videoId=> dispatch(addViewCount(videoId)),
     }
 }
 
