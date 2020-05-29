@@ -144,7 +144,8 @@ class VideoShow extends React.Component{
         )
     }
     finishSetup() {
-        if(!this.props.video){return;}
+        if (!this.props.video) { return; }
+        this.props.addViewCount(this.props.video.video.id);
         const video = document.getElementById('video-player')
         const video_src = document.getElementById('video-src')
         if(video !== null){video.pause();}
@@ -160,7 +161,6 @@ class VideoShow extends React.Component{
             video.load();
             video.volume = 0.25;
             video.play();
-            this.props.addViewCount(parseInt(this.state.videoId));
         }
     }
     clearComment(){

@@ -2886,6 +2886,7 @@ function (_React$Component) {
         return;
       }
 
+      this.props.addViewCount(this.props.video.video.id);
       var video = document.getElementById('video-player');
       var video_src = document.getElementById('video-src');
 
@@ -2906,7 +2907,6 @@ function (_React$Component) {
         video.load();
         video.volume = 0.25;
         video.play();
-        this.props.addViewCount(parseInt(this.state.videoId));
       }
     }
   }, {
