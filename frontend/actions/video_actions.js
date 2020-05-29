@@ -47,7 +47,5 @@ export const searchVideos = search => dispatch =>{
 }
 
 export const addViewCount = videoId => dispatch => {
-    return VideoAPIUtil.incrementView(videoId).then(payload => {
-        dispatch(receiveVideo(payload))
-    });
+    return VideoAPIUtil.incrementView(videoId).then(payload => dispatch(receiveVideo(payload)));
 }

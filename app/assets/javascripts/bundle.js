@@ -480,7 +480,7 @@ var searchVideos = function searchVideos(search) {
 var addViewCount = function addViewCount(videoId) {
   return function (dispatch) {
     return _util_video_util__WEBPACK_IMPORTED_MODULE_0__["incrementView"](videoId).then(function (payload) {
-      dispatch(receiveVideo(payload));
+      return dispatch(receiveVideo(payload));
     });
   };
 };
