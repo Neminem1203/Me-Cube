@@ -51,7 +51,8 @@ class Api::VideosController < ApplicationController
 
     def viewcount
         @video = Video.find_by(id: params[:videoId])
-        @video.views = @video.views + 1
+        previous_view_count = @video.views
+        @video.views = previous_view_count + 1
         if @video.save
             render :show
         else
