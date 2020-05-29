@@ -3117,6 +3117,18 @@ function (_React$Component) {
         }, comments)));
       }
 
+      var creatorPFPDim = 50;
+      var creatorPFP = Object(_icons__WEBPACK_IMPORTED_MODULE_1__["profileIcon"])(creatorPFPDim);
+      var creator = this.props.users[this.state.video.video.creator_id];
+
+      if (creator && creator.profile_picture) {
+        creatorPFP = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: this.props.users[this.state.video.video.creator_id].profile_picture,
+          width: creatorPFPDim,
+          height: creatorPFPDim
+        });
+      }
+
       var viewOrViews = this.props.video.video.views == 1 ? "view" : "views";
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "video-container"
@@ -3152,7 +3164,7 @@ function (_React$Component) {
         className: "profile-pic"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         href: "/#/channel/".concat(this.props.video.video.creator_id)
-      }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["profileIcon"])("30px"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, creatorPFP)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-4-5",
         style: {
           marginTop: "14px"

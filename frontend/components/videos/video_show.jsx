@@ -291,6 +291,13 @@ class VideoShow extends React.Component{
             </>
             )
         }
+        let creatorPFPDim = 50;
+        let creatorPFP = profileIcon(creatorPFPDim);
+        let creator = this.props.users[this.state.video.video.creator_id];
+        if (creator && creator.profile_picture){
+            creatorPFP = <img src={this.props.users[this.state.video.video.creator_id].profile_picture} width={creatorPFPDim} height={creatorPFPDim}></img>;
+        }
+                            
         let viewOrViews = this.props.video.video.views == 1 ? "view" : "views";
         return (
         <div>
@@ -318,7 +325,7 @@ class VideoShow extends React.Component{
                     </li>
                 </ul>
                 <div className="profile-pic">
-                    <a href={`/#/channel/${this.props.video.video.creator_id}`}>{profileIcon("30px")}</a>
+                    <a href={`/#/channel/${this.props.video.video.creator_id}`}>{creatorPFP}</a>
                 </div>
                 <div className="col-4-5" style={{marginTop: "14px"}}>
                     <a href={`/#/channel/${this.props.video.video.creator_id}`} style={{ textDecoration: "none", color: "black"}}>
