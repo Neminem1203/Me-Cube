@@ -283,6 +283,7 @@ class VideoShow extends React.Component{
             </>
             )
         }
+        let viewOrViews = this.props.video.video.views == 1 ? "view" : "views";
         return (
         <div>
             <div className="video-container">
@@ -292,7 +293,7 @@ class VideoShow extends React.Component{
                 {title}
                 <textarea id="current-video-url" className="hidden" defaultValue={window.location.href}/>
                 <ul className="video-info">
-                    <li style={{color:"gray"}}>{this.props.video.video.views} views • {this.props.video.video.created_at}</li>
+                    <li style={{color:"gray"}}>{this.props.video.video.views} {viewOrViews} • {this.props.video.video.created_at}</li>
                     <li>
                         <div onClick={likeFnc} className={thumbsUpClass}>
                             {thumbsUpIcon(20)}

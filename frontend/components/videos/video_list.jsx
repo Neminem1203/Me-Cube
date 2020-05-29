@@ -2,6 +2,7 @@ import React from "react";
 
 const VideoThumb = ({vid, currentVideo}) => {
     if(vid === undefined || vid.id === parseInt(currentVideo)){return <></>;}
+    let viewOrViews = vid.views == 1 ? "view" : "views";
     return(
     
         <li>
@@ -17,7 +18,7 @@ const VideoThumb = ({vid, currentVideo}) => {
                 </a>
                 <br />
                 <a>
-                    <span className="video-views">{vid.views + " views • " + vid.created_at}</span>
+                    <span className="video-views">{vid.views + ` ${viewOrViews} • ` + vid.created_at}</span>
                 </a>
             </div>
         </li>

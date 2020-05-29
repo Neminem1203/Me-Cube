@@ -2338,6 +2338,7 @@ var VideoThumb = function VideoThumb(_ref) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null);
   }
 
+  var viewOrViews = vid.views == 1 ? "view" : "views";
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "/#/videos/".concat(vid.id)
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
@@ -2356,7 +2357,7 @@ var VideoThumb = function VideoThumb(_ref) {
     className: "video-creator-span"
   }, vid.creator_username)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "video-views"
-  }, vid.views + " views • " + vid.created_at))));
+  }, vid.views + " ".concat(viewOrViews, " \u2022 ") + vid.created_at))));
 };
 
 var VideoList =
@@ -3107,6 +3108,7 @@ function (_React$Component) {
         }, comments)));
       }
 
+      var viewOrViews = this.props.video.video.views == 1 ? "view" : "views";
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "video-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("video", {
@@ -3128,7 +3130,7 @@ function (_React$Component) {
         style: {
           color: "gray"
         }
-      }, this.props.video.video.views, " views \u2022 ", this.props.video.video.created_at), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, this.props.video.video.views, " ", viewOrViews, " \u2022 ", this.props.video.video.created_at), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onClick: likeFnc,
         className: thumbsUpClass
       }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["thumbsUpIcon"])(20), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, this.state.likes)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
