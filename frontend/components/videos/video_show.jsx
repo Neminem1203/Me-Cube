@@ -96,7 +96,7 @@ class VideoShow extends React.Component{
         // console.log(e.target.scrollTop);
         // console.log(commentSection.offsetParent.offsetHeight);
         // console.log(commentSection.offsetTop);
-        if (!this.state.showComments) {
+        if (!this.state.showComments && this.state.video.video.id === this.props.video.video.id) {
             const commentSection = document.getElementById("comment-section");
             if (e.target.scrollTop + commentSection.offsetParent.offsetHeight
                 > commentSection.offsetTop) {
@@ -115,7 +115,13 @@ class VideoShow extends React.Component{
         }
     }
     commentsLoaded(){
-        this.setState({commentsLoaded: true});
+        this.setState({ commentsLoaded: true });
+        const commentBox = document.getElementsByClassName("comment-ta")[0];
+
+        commentBox.oninput = function() {
+            commentBox.style.height = "";
+            commentBox.style.height = Math.min(commentBox.scrollHeight, 100) + "px";
+        }
     }
     createComment(e){
         e.preventDefault();
@@ -139,7 +145,7 @@ class VideoShow extends React.Component{
                         <span className="user-span">{commenter.username}</span>
                     </div>
                 </a>
-                <h5 style={{ marginLeft: dim, fontWeight: 100, marginTop: 0 }}>{comment.comment}</h5>
+                <h5 style={{ marginLeft: dim, fontWeight: 100, marginTop: 0, wordBreak: "break-all" }}>{comment.comment}</h5>
             </li>
         )
     }
@@ -155,6 +161,8 @@ class VideoShow extends React.Component{
             like_dislike: this.props.video.like_dislike, 
             likes: this.props.video.likes, 
             dislikes: this.props.video.dislikes,
+            showComments: false,
+            commentsLoaded: false
         });
         if (video !== null) {
             video_src.setAttribute('src', this.props.video.video.videoUrl);

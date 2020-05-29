@@ -2804,7 +2804,7 @@ function (_React$Component) {
       // console.log(e.target.scrollTop);
       // console.log(commentSection.offsetParent.offsetHeight);
       // console.log(commentSection.offsetTop);
-      if (!this.state.showComments) {
+      if (!this.state.showComments && this.state.video.video.id === this.props.video.video.id) {
         var commentSection = document.getElementById("comment-section");
 
         if (e.target.scrollTop + commentSection.offsetParent.offsetHeight > commentSection.offsetTop) {
@@ -2834,6 +2834,12 @@ function (_React$Component) {
       this.setState({
         commentsLoaded: true
       });
+      var commentBox = document.getElementsByClassName("comment-ta")[0];
+
+      commentBox.oninput = function () {
+        commentBox.style.height = "";
+        commentBox.style.height = Math.min(commentBox.scrollHeight, 100) + "px";
+      };
     }
   }, {
     key: "createComment",
@@ -2876,7 +2882,8 @@ function (_React$Component) {
         style: {
           marginLeft: dim,
           fontWeight: 100,
-          marginTop: 0
+          marginTop: 0,
+          wordBreak: "break-all"
         }
       }, comment.comment));
     }
@@ -2900,7 +2907,9 @@ function (_React$Component) {
         video: this.props.video,
         like_dislike: this.props.video.like_dislike,
         likes: this.props.video.likes,
-        dislikes: this.props.video.dislikes
+        dislikes: this.props.video.dislikes,
+        showComments: false,
+        commentsLoaded: false
       });
 
       if (video !== null) {
