@@ -90,18 +90,16 @@
 /*!*********************************************!*\
   !*** ./frontend/actions/comment_actions.js ***!
   \*********************************************/
-/*! exports provided: RECEIVE_COMMENTS, RECEIVE_COMMENT, RECEIVE_REPLIES, DELETE_COMMENT, CLEAR_COMMENTS, receiveComments, receiveComment, receiveReplies, deleteComment, clearComments, getComments, getReplies, createComment, destroyComment */
+/*! exports provided: RECEIVE_COMMENTS, RECEIVE_REPLIES, DELETE_COMMENT, CLEAR_COMMENTS, receiveComments, receiveReplies, deleteComment, clearComments, getComments, getReplies, createComment, destroyComment */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_COMMENTS", function() { return RECEIVE_COMMENTS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_COMMENT", function() { return RECEIVE_COMMENT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_REPLIES", function() { return RECEIVE_REPLIES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DELETE_COMMENT", function() { return DELETE_COMMENT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_COMMENTS", function() { return CLEAR_COMMENTS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveComments", function() { return receiveComments; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveComment", function() { return receiveComment; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveReplies", function() { return receiveReplies; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteComment", function() { return deleteComment; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearComments", function() { return clearComments; });
@@ -112,7 +110,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _util_comment_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/comment_util */ "./frontend/util/comment_util.js");
 
 var RECEIVE_COMMENTS = "RECEIVE_COMMENTS";
-var RECEIVE_COMMENT = "RECEIVE_COMMENT";
 var RECEIVE_REPLIES = "RECEIVE_REPLIES";
 var DELETE_COMMENT = "DELETE_COMMENT";
 var CLEAR_COMMENTS = "CLEAR_COMMENTS";
@@ -122,16 +119,10 @@ var receiveComments = function receiveComments(comments) {
     comments: comments
   };
 };
-var receiveComment = function receiveComment(comment) {
-  return {
-    type: RECEIVE_COMMENT,
-    comment: comment
-  };
-};
 var receiveReplies = function receiveReplies(comments) {
   return {
     type: RECEIVE_REPLIES,
-    comments: comments
+    commentsRECEIVE_COMMENT: commentsRECEIVE_COMMENT
   };
 };
 var deleteComment = function deleteComment(commentId) {
@@ -1024,7 +1015,11 @@ var CreditsPage = function CreditsPage(props) {
     href: "https://www.flaticon.com/authors/those-icons"
   }, _icons__WEBPACK_IMPORTED_MODULE_1__["searchIcon"](30), " Search Icon by Those Icons")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "https://www.flaticon.com/authors/srip"
-  }, _icons__WEBPACK_IMPORTED_MODULE_1__["uploadThumbnailIcon"](30), " Thumbnail Icon by Srip")));
+  }, _icons__WEBPACK_IMPORTED_MODULE_1__["uploadThumbnailIcon"](30), " Thumbnail Icon by Srip")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "https://www.flaticon.com/authors/roundicons"
+  }, _icons__WEBPACK_IMPORTED_MODULE_1__["downArrowIcon"](30), " Down Arrow Icon by Roundicons ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "https://www.flaticon.com/authors/roundicons"
+  }, _icons__WEBPACK_IMPORTED_MODULE_1__["upArrowIcon"](30), " Roundicon from Roundicons"), " "));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (CreditsPage);
@@ -2619,7 +2614,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../icons */ "./frontend/icons.js");
 /* harmony import */ var _video_list_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./video_list_container */ "./frontend/components/videos/video_list_container.js");
-/* harmony import */ var _actions_video_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/video_actions */ "./frontend/actions/video_actions.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -2639,7 +2633,6 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 
 
 
@@ -2668,7 +2661,8 @@ function (_React$Component) {
       comment: "",
       showComments: false,
       commentsLoaded: false,
-      comment_btns: false
+      comment_btns: false,
+      view_replies: []
     };
     _this.finishSetup = _this.finishSetup.bind(_assertThisInitialized(_this));
     _this.editField = _this.editField.bind(_assertThisInitialized(_this));
@@ -2679,6 +2673,7 @@ function (_React$Component) {
     _this.showCommentBtns = _this.showCommentBtns.bind(_assertThisInitialized(_this));
     _this.createComment = _this.createComment.bind(_assertThisInitialized(_this));
     _this.loadComment = _this.loadComment.bind(_assertThisInitialized(_this));
+    _this.toggleReply = _this.toggleReply.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -2832,7 +2827,8 @@ function (_React$Component) {
     key: "commentsLoaded",
     value: function commentsLoaded() {
       this.setState({
-        commentsLoaded: true
+        commentsLoaded: true,
+        comment: ""
       });
       var commentBox = document.getElementsByClassName("comment-ta")[0];
 
@@ -2859,8 +2855,30 @@ function (_React$Component) {
   }, {
     key: "loadComment",
     value: function loadComment(comment) {
+      var _this6 = this;
+
       var commenter = this.props.users[comment.commenter_id];
       var dim = 25;
+      var replies = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null);
+
+      if (comment.replies.length > 0) {
+        if (this.state.view_replies.includes(comment.id)) {
+          replies = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+            onClick: function onClick() {
+              return _this6.toggleReply(comment.id);
+            },
+            id: "viewReplyButtons"
+          }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["upArrowIcon"])(13), "Hide ", comment.replies.length, " ", comment.replies.length === 1 ? "reply" : "replies");
+        } else {
+          replies = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+            onClick: function onClick() {
+              return _this6.toggleReply(comment.id);
+            },
+            id: "viewReplyButtons"
+          }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["downArrowIcon"])(13), "View ", comment.replies.length, " ", comment.replies.length === 1 ? "reply" : "replies");
+        }
+      }
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         key: "comment-".concat(comment.id)
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
@@ -2885,7 +2903,22 @@ function (_React$Component) {
           marginTop: 0,
           wordBreak: "break-all"
         }
-      }, comment.comment));
+      }, comment.comment), replies);
+    }
+  }, {
+    key: "toggleReply",
+    value: function toggleReply(commentId) {
+      var new_replies = this.state.view_replies;
+
+      if (new_replies.includes(commentId)) {
+        new_replies.splice(new_replies.indexOf(commentId), 1);
+      } else {
+        new_replies.push(commentId);
+      }
+
+      this.setState({
+        view_replies: new_replies
+      });
     }
   }, {
     key: "finishSetup",
@@ -2957,7 +2990,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this6 = this;
+      var _this7 = this;
 
       // if(this.props.error[0] === "Video Not Found"){this.props.history.push("/")}
       // return null if video doesn't have a creator (meaning video doesn't exist)
@@ -3062,7 +3095,7 @@ function (_React$Component) {
 
       if (this.state.commentsLoaded) {
         var comments = Object.values(this.props.comments).map(function (comment) {
-          return _this6.loadComment(comment);
+          return _this7.loadComment(comment);
         });
         var comment_btns = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null);
 
@@ -3297,7 +3330,7 @@ var mDTP = function mDTP(dispatch) {
 /*!***************************!*\
   !*** ./frontend/icons.js ***!
   \***************************/
-/*! exports provided: homeIcon, channelIcon, githubIcon, linkedInIcon, exitIcon, profileIcon, thumbsUpIcon, thumbsDownIcon, shareIcon, uploadIcon, menuIcon, searchIcon, uploadThumbnailIcon, uploadVideoIcon, creditsIcon */
+/*! exports provided: homeIcon, channelIcon, githubIcon, linkedInIcon, exitIcon, profileIcon, thumbsUpIcon, thumbsDownIcon, shareIcon, uploadIcon, menuIcon, searchIcon, uploadThumbnailIcon, uploadVideoIcon, creditsIcon, downArrowIcon, upArrowIcon */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3317,6 +3350,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "uploadThumbnailIcon", function() { return uploadThumbnailIcon; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "uploadVideoIcon", function() { return uploadVideoIcon; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "creditsIcon", function() { return creditsIcon; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "downArrowIcon", function() { return downArrowIcon; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "upArrowIcon", function() { return upArrowIcon; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -3564,6 +3599,42 @@ var creditsIcon = function creditsIcon() {
     d: "m20.46 12.71-3 3c-.2.19-.45.29-.71.29s-.51-.1-.71-.29c-.39-.39-.39-1.03  0-1.42l2.3-2.29-2.3-2.29c-.39-.39-.39-1.03 0-1.42s1.03-.39 1.42 0l3 3c.39.39.39 1.03 0 1.42z"
   }));
 };
+var downArrowIcon = function downArrowIcon() {
+  var dimension = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 45;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    id: "downarrow",
+    xmlns: "http://www.w3.org/2000/svg",
+    xlink: "http://www.w3.org/1999/xlink",
+    x: "0px",
+    y: "0px",
+    viewBox: "0 0 491.996 491.996",
+    space: "preserve",
+    width: dimension,
+    height: dimension,
+    style: {
+      marginRight: 10
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("g", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "M484.132,124.986l-16.116-16.228c-5.072-5.068-11.82-7.86-19.032-7.86c-7.208,0-13.964,2.792-19.036,7.86l-183.84,183.848 L62.056,108.554c-5.064-5.068-11.82-7.856-19.028-7.856s-13.968,2.788-19.036,7.856l-16.12,16.128 c-10.496,10.488-10.496,27.572,0,38.06l219.136,219.924c5.064,5.064,11.812,8.632,19.084,8.632h0.084 c7.212,0,13.96-3.572,19.024-8.632l218.932-219.328c5.072-5.064,7.856-12.016,7.864-19.224 C491.996,136.902,489.204,130.046,484.132,124.986z"
+  })));
+};
+var upArrowIcon = function upArrowIcon() {
+  var dimension = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 45;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", _defineProperty({
+    xmlns: "http://www.w3.org/2000/svg",
+    xlink: "http://www.w3.org/1999/xlink",
+    x: "0px",
+    y: "0px",
+    viewBox: "0 0 492.002 492.002",
+    style: "enable-background:new 0 0 492.002 492.002;",
+    width: dimension,
+    height: dimension
+  }, "style", {
+    marginRight: 10
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("g", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "M484.136,328.473L264.988,109.329c-5.064-5.064-11.816-7.844-19.172-7.844c-7.208,0-13.964,2.78-19.02,7.844 L7.852,328.265C2.788,333.333,0,340.089,0,347.297c0,7.208,2.784,13.968,7.852,19.032l16.124,16.124 c5.064,5.064,11.824,7.86,19.032,7.86s13.964-2.796,19.032-7.86l183.852-183.852l184.056,184.064 c5.064,5.06,11.82,7.852,19.032,7.852c7.208,0,13.96-2.792,19.028-7.852l16.128-16.132 C494.624,356.041,494.624,338.965,484.136,328.473z"
+  })));
+};
 
 /***/ }),
 
@@ -3637,9 +3708,6 @@ var commentReducer = function commentReducer() {
   switch (action.type) {
     case _actions_comment_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_COMMENTS"]:
       return action.comments;
-
-    case _actions_comment_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_COMMENT"]:
-      return Object(lodash__WEBPACK_IMPORTED_MODULE_0__["merge"])({}, old_state, action.comment);
 
     case _actions_comment_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_REPLIES"]:
       return Object(lodash__WEBPACK_IMPORTED_MODULE_0__["merge"])({}, old_state, action.comments);

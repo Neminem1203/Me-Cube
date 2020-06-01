@@ -22,6 +22,6 @@ class Comment < ApplicationRecord
         class_name: "User",
         primary_key: :id,
         foreign_key: :commenter_id
-
+    
 
 end

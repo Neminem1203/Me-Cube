@@ -458,6 +458,16 @@ a:focus{outline:0;}
 .video-views{
   white-space: nowrap;
 }
+#downarrow:hover, #viewReplyButtons:hover{
+  cursor: pointer;
+}
+#viewReplyButtons{
+  margin-left: 15; 
+  fill: #3EA6FF;
+  color: #3EA6FF;
+  width: 20%;
+  user-select: none; 
+}
 #video-upload, #thumbnail-upload{
   display: none;
 }

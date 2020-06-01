@@ -1,7 +1,6 @@
 import React from "react";
-import {profileIcon, thumbsUpIcon, thumbsDownIcon, shareIcon} from "../../icons";
+import {profileIcon, thumbsUpIcon, thumbsDownIcon, shareIcon, downArrowIcon, upArrowIcon} from "../../icons";
 import VideoList from "./video_list_container";
-import { addViewCount } from "../../actions/video_actions";
 class VideoShow extends React.Component{
     constructor(props){
         super(props);
@@ -18,6 +17,7 @@ class VideoShow extends React.Component{
             showComments: false,
             commentsLoaded: false,
             comment_btns: false,
+            view_replies: [],
         }
         this.finishSetup = this.finishSetup.bind(this);
         this.editField = this.editField.bind(this);
@@ -28,6 +28,7 @@ class VideoShow extends React.Component{
         this.showCommentBtns = this.showCommentBtns.bind(this);
         this.createComment = this.createComment.bind(this);
         this.loadComment = this.loadComment.bind(this);
+        this.toggleReply = this.toggleReply.bind(this);
     }
 
     copyShareUrl(e){
@@ -115,8 +116,8 @@ class VideoShow extends React.Component{
         }
     }
     commentsLoaded(){
-        this.setState({ commentsLoaded: true });
-        const commentBox = document.getElementsByClassName("comment-ta")[0];
+        this.setState({ commentsLoaded: true, comment: "" });
+        let commentBox = document.getElementsByClassName("comment-ta")[0];
 
         commentBox.oninput = function() {
             commentBox.style.height = "";
@@ -136,6 +137,14 @@ class VideoShow extends React.Component{
     loadComment(comment){
         const commenter = this.props.users[comment.commenter_id];
         const dim = 25;
+        let replies = <></>
+        if(comment.replies.length > 0){
+            if(this.state.view_replies.includes(comment.id)){
+                replies = <h5 onClick={() => this.toggleReply(comment.id)} id="viewReplyButtons">{upArrowIcon(13)}Hide {comment.replies.length} {comment.replies.length === 1 ? `reply` : `replies`}</h5>
+            } else {
+                replies = <h5 onClick={() => this.toggleReply(comment.id)} id="viewReplyButtons">{downArrowIcon(13)}View {comment.replies.length} {comment.replies.length === 1 ? `reply` : `replies`}</h5>
+            }
+        }
         return (
             <li key={`comment-${comment.id}`}>
                 <a href={`/#/channel/${commenter.id}`} style={{ textDecoration: "none" }}>
@@ -146,8 +155,18 @@ class VideoShow extends React.Component{
                     </div>
                 </a>
                 <h5 style={{ marginLeft: dim, fontWeight: 100, marginTop: 0, wordBreak: "break-all" }}>{comment.comment}</h5>
+                {replies}
             </li>
         )
+    }
+    toggleReply(commentId){
+        let new_replies = this.state.view_replies;
+        if (new_replies.includes(commentId)){
+            new_replies.splice(new_replies.indexOf(commentId),1)
+        } else {
+            new_replies.push(commentId);
+        }
+        this.setState({view_replies: new_replies})
     }
     finishSetup() {
         if (!this.props.video) { return; }

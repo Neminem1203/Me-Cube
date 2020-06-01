@@ -38,6 +38,8 @@ const CreditsPage = props => {
             <li><a href="https://www.flaticon.com/authors/kiranshastry">{Icon.uploadIcon(30)} Upload Video Icon by Kiranshastry</a></li>
             <li><a href="https://www.flaticon.com/authors/those-icons">{Icon.searchIcon(30)} Search Icon by Those Icons</a></li>
             <li><a href="https://www.flaticon.com/authors/srip">{Icon.uploadThumbnailIcon(30)} Thumbnail Icon by Srip</a></li>
+            <li><a href="https://www.flaticon.com/authors/roundicons">{Icon.downArrowIcon(30)} Down Arrow Icon by Roundicons </a></li>
+            <li><a href="https://www.flaticon.com/authors/roundicons">{Icon.upArrowIcon(30)} Roundicon from Roundicons</a> </li>
         </ul>
     )
 }
