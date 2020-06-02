@@ -2717,6 +2717,10 @@ function (_React$Component) {
 
       return function (e) {
         e.preventDefault();
+        console.log("Current User: ", _this2.props.currentUser);
+        console.log("Comment Id: ", likeable_id);
+        console.log(_this2.props.liked_comments);
+        console.log(_this2.props.disliked_comments);
 
         var like = function like(bool) {
           return {

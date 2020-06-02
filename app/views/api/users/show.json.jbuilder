@@ -7,9 +7,9 @@ json.videos do
     # end
 end
 json.liked_comments do
-    json.array! @user.likes.where(likeable_type: "Comment", like_dislike: true).map{|comment| comment.id}
+    json.array! @user.likes.where(likeable_type: "Comment", like_dislike: true).map{|comment| comment.likeable_id}
 end
 
 json.disliked_comments do
-    json.array! @user.likes.where(likeable_type: "Comment", like_dislike: false).map{|comment| comment.id}
+    json.array! @user.likes.where(likeable_type: "Comment", like_dislike: false).map{|comment| comment.likeable_id}
 end
