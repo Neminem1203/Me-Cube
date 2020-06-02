@@ -157,7 +157,7 @@ var getReplies = function getReplies(comments) {
 var createComment = function createComment(comment) {
   return function (dispatch) {
     return _util_comment_util__WEBPACK_IMPORTED_MODULE_0__["createComment"](comment).then(function (payload) {
-      return dispatch(receiveComment(payload));
+      return dispatch(receiveComments(payload));
     }, function (e) {
       /* errorsCommentReducer required */
     });
@@ -2901,7 +2901,7 @@ function (_React$Component) {
 
       var commenter = this.props.users[comment.commenter_id];
       var dim = 25;
-      var replies = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null);
+      var replies = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null);
 
       if (comment.replies.length > 0) {
         if (this.state.view_replies.includes(comment.id)) {
@@ -2934,7 +2934,6 @@ function (_React$Component) {
       var thumbsDownClass = "dislike vid-info-btn";
 
       if (this.props.currentUser) {
-        debugger;
         thumbsUpClass = this.props.liked_comments.includes(comment.id) ? "active like vid-info-btn" : "like vid-info-btn";
         thumbsDownClass = this.props.disliked_comments.includes(comment.id) ? "active dislike vid-info-btn" : "dislike vid-info-btn";
       }

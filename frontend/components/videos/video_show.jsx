@@ -155,7 +155,7 @@ class VideoShow extends React.Component{
     loadComment(comment){
         const commenter = this.props.users[comment.commenter_id];
         const dim = 25;
-        let replies = <></>
+        let replies = <h5></h5>
         if(comment.replies.length > 0){
             if(this.state.view_replies.includes(comment.id)){
                 replies = <h5 onClick={() => this.toggleReply(comment.id)} id="viewReplyButtons">{upArrowIcon(13)}Hide {comment.replies.length} {comment.replies.length === 1 ? `reply` : `replies`}</h5>
@@ -173,7 +173,6 @@ class VideoShow extends React.Component{
         let thumbsUpClass = "like vid-info-btn";
         let thumbsDownClass = "dislike vid-info-btn";
         if (this.props.currentUser) {
-            debugger
             thumbsUpClass = (this.props.liked_comments.includes(comment.id)) ? "active like vid-info-btn" : "like vid-info-btn";
             thumbsDownClass = (this.props.disliked_comments.includes(comment.id)) ? "active dislike vid-info-btn" : "dislike vid-info-btn";
         }
