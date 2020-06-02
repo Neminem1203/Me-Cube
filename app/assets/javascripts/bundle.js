@@ -90,16 +90,18 @@
 /*!*********************************************!*\
   !*** ./frontend/actions/comment_actions.js ***!
   \*********************************************/
-/*! exports provided: RECEIVE_COMMENTS, RECEIVE_REPLIES, DELETE_COMMENT, CLEAR_COMMENTS, receiveComments, receiveReplies, deleteComment, clearComments, getComments, getReplies, createComment, destroyComment */
+/*! exports provided: RECEIVE_COMMENTS, RECEIVE_COMMENT, RECEIVE_REPLIES, DELETE_COMMENT, CLEAR_COMMENTS, receiveComments, receiveComment, receiveReplies, deleteComment, clearComments, getComments, getReplies, createComment, destroyComment */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_COMMENTS", function() { return RECEIVE_COMMENTS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_COMMENT", function() { return RECEIVE_COMMENT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_REPLIES", function() { return RECEIVE_REPLIES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DELETE_COMMENT", function() { return DELETE_COMMENT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_COMMENTS", function() { return CLEAR_COMMENTS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveComments", function() { return receiveComments; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveComment", function() { return receiveComment; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveReplies", function() { return receiveReplies; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteComment", function() { return deleteComment; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearComments", function() { return clearComments; });
@@ -110,6 +112,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _util_comment_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/comment_util */ "./frontend/util/comment_util.js");
 
 var RECEIVE_COMMENTS = "RECEIVE_COMMENTS";
+var RECEIVE_COMMENT = "RECEIVE_COMMENT";
 var RECEIVE_REPLIES = "RECEIVE_REPLIES";
 var DELETE_COMMENT = "DELETE_COMMENT";
 var CLEAR_COMMENTS = "CLEAR_COMMENTS";
@@ -119,10 +122,16 @@ var receiveComments = function receiveComments(comments) {
     comments: comments
   };
 };
+var receiveComment = function receiveComment(comment) {
+  return {
+    type: RECEIVE_COMMENT,
+    comment: comment
+  };
+};
 var receiveReplies = function receiveReplies(comments) {
   return {
     type: RECEIVE_REPLIES,
-    commentsRECEIVE_COMMENT: commentsRECEIVE_COMMENT
+    comments: comments
   };
 };
 var deleteComment = function deleteComment(commentId) {
@@ -157,7 +166,7 @@ var getReplies = function getReplies(comments) {
 var createComment = function createComment(comment) {
   return function (dispatch) {
     return _util_comment_util__WEBPACK_IMPORTED_MODULE_0__["createComment"](comment).then(function (payload) {
-      return dispatch(receiveComments(payload));
+      return dispatch(receiveComment(payload));
     }, function (e) {
       /* errorsCommentReducer required */
     });
@@ -2902,7 +2911,7 @@ function (_React$Component) {
 
       var commenter = this.props.users[comment.commenter_id];
       var dim = 25;
-      var replies = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null);
+      var replies = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null);
 
       if (comment.replies.length > 0) {
         if (this.state.view_replies.includes(comment.id)) {
@@ -3784,6 +3793,9 @@ var commentReducer = function commentReducer() {
   switch (action.type) {
     case _actions_comment_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_COMMENTS"]:
       return action.comments;
+
+    case _actions_comment_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_COMMENT"]:
+      return Object(lodash__WEBPACK_IMPORTED_MODULE_0__["merge"])({}, old_state, action.comment);
 
     case _actions_comment_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_REPLIES"]:
       return Object(lodash__WEBPACK_IMPORTED_MODULE_0__["merge"])({}, old_state, action.comments);

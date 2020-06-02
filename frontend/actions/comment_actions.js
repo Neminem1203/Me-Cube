@@ -1,5 +1,6 @@
 import * as CommentAPIUtil from "../util/comment_util";
 export const RECEIVE_COMMENTS = "RECEIVE_COMMENTS";
+export const RECEIVE_COMMENT = "RECEIVE_COMMENT";
 export const RECEIVE_REPLIES = "RECEIVE_REPLIES";
 export const DELETE_COMMENT = "DELETE_COMMENT";
 export const CLEAR_COMMENTS = "CLEAR_COMMENTS";
@@ -10,11 +11,16 @@ export const receiveComments = comments => {
         comments
     }
 }
-
+export const receiveComment = comment => {
+    return {
+        type: RECEIVE_COMMENT,
+        comment
+    }
+}
 export const receiveReplies = comments => {
     return{
         type: RECEIVE_REPLIES,
-        commentsRECEIVE_COMMENT
+        comments
     }
 }
 
@@ -39,7 +45,7 @@ export const getReplies = comments => dispatch => {
 }
 
 export const createComment = comment => dispatch => {
-    return CommentAPIUtil.createComment(comment).then(payload => dispatch(receiveComments(payload)), e => {/* errorsCommentReducer required */ });
+    return CommentAPIUtil.createComment(comment).then(payload => dispatch(receiveComment(payload)), e => {/* errorsCommentReducer required */ });
 }
 
 export const destroyComment = commentId => dispatch=>{

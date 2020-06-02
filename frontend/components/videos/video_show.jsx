@@ -156,7 +156,7 @@ class VideoShow extends React.Component{
     loadComment(comment){
         const commenter = this.props.users[comment.commenter_id];
         const dim = 25;
-        let replies = <h5></h5>
+        let replies = <br />
         if(comment.replies.length > 0){
             if(this.state.view_replies.includes(comment.id)){
                 replies = <h5 onClick={() => this.toggleReply(comment.id)} id="viewReplyButtons">{upArrowIcon(13)}Hide {comment.replies.length} {comment.replies.length === 1 ? `reply` : `replies`}</h5>

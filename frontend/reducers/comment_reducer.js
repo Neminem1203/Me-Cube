@@ -1,5 +1,5 @@
 import { merge } from "lodash";
-import { RECEIVE_COMMENTS, RECEIVE_REPLIES, CLEAR_COMMENTS, DELETE_COMMENT } from "../actions/comment_actions";
+import { RECEIVE_COMMENTS, RECEIVE_REPLIES, CLEAR_COMMENTS, DELETE_COMMENT, RECEIVE_COMMENT } from "../actions/comment_actions";
 import { RECEIVE_USER_LIKES } from "../actions/like_actions"
 
 const commentReducer = (state={}, action) => {
@@ -8,6 +8,8 @@ const commentReducer = (state={}, action) => {
     switch(action.type){
         case RECEIVE_COMMENTS:
             return action.comments;
+        case RECEIVE_COMMENT:
+            return merge({}, old_state, action.comment);
         case RECEIVE_REPLIES:
             return merge({}, old_state, action.comments);
         case DELETE_COMMENT:
