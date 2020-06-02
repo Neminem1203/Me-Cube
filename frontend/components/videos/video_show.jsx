@@ -43,10 +43,6 @@ class VideoShow extends React.Component{
     thumbAction(bool, likeable_type, likeable_id){
         return e=>{
             e.preventDefault();
-            console.log("Current User: ",this.props.currentUser)
-            console.log("Comment Id: ",likeable_id)
-            console.log(this.props.liked_comments)
-            console.log(this.props.disliked_comments)
             const like = (bool) => ({ likeable_type: likeable_type, likeable_id: likeable_id, user_id: this.props.currentUser, like_dislike: bool });
             if (likeable_type === "Video") {
                 const field = (bool) ? "likes" : "dislikes";
@@ -131,6 +127,7 @@ class VideoShow extends React.Component{
                     });
                 }
                 else{
+                    this.props.clearComments();
                     this.setState({ commentsLoaded: true})
                 }
                 this.setState({showComments: true});
