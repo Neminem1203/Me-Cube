@@ -6,3 +6,6 @@ json.videos do
     #     json.extract! video, :id, :title
     # end
 end
+json.liked_comments do
+    json.array! @user.likes.where(likeable_type: "Comment").map{|comment| comment.id}
+end

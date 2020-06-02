@@ -5,7 +5,6 @@ class Api::CommentsController < ApplicationController
         elsif params[:comments].class == Array
             @comments = Comment.find(params[:comments])
         else
-            # TODO: Remove Comment.all
             @comments = Comment.all
         end
     end

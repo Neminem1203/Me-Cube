@@ -40,34 +40,52 @@ class VideoShow extends React.Component{
         video_url.classList.add("hidden");
     }
 
-    thumbAction(bool){
+    thumbAction(bool, likeable_type, likeable_id){
         return e=>{
             e.preventDefault();
-            const like =(bool) => ({ likeable_type: "Video", likeable_id: this.state.videoId, user_id: this.props.currentUser , like_dislike: bool});
-            const field = (bool) ? "likes" : "dislikes";
-            const fieldVal = this.state[field];
-            const otherField = (bool) ? "dislikes" : "likes";
-            const otherFieldVal = this.state[otherField];
-            if (this.state.like_dislike === bool) { //Destroy the like/dislike
-                this.setState({ like_dislike: undefined, [field]: (fieldVal-1)})
-                // Call Destroy on like_dislike where video_id is this video and user_id is current_user.id
-                this.props.destroyLike(like())
-            } 
-            else { // Increment field the decrement otherField
-                let method = "create";
-                if (this.state.like_dislike !== undefined) { //Decrement otherField
-                    this.setState({ [otherField]: otherFieldVal - 1  });
-                    method = "update";// UPDATE
+            const like = (bool) => ({ likeable_type: likeable_type, likeable_id: likeable_id, user_id: this.props.currentUser, like_dislike: bool });
+            if (likeable_type === "Video") {
+                const field = (bool) ? "likes" : "dislikes";
+                const fieldVal = this.state[field];
+                const otherField = (bool) ? "dislikes" : "likes";
+                const otherFieldVal = this.state[otherField];
+                if (this.state.like_dislike === bool) { //Destroy the like/dislike
+                    this.setState({ like_dislike: undefined, [field]: (fieldVal - 1) })
+                    // Call Destroy on like_dislike where video_id is this video and user_id is current_user.id
+                    this.props.destroyLike(like())
                 }
-                this.setState({ like_dislike: bool, [field]: fieldVal + 1 })
-                if(method === "create"){
+                else { // Increment field the decrement otherField
+                    let method = "create";
+                    if (this.state.like_dislike !== undefined) { //Decrement otherField
+                        this.setState({ [otherField]: otherFieldVal - 1 });
+                        method = "update";// UPDATE
+                    }
+                    this.setState({ like_dislike: bool, [field]: fieldVal + 1 })
+                    if (method === "create") {
+                        this.props.createLike(like(bool))
+                    } else {
+                        this.props.updateLike(like(bool))
+                    }
+                    // likeable_type: "Video", likeable_id: video.id, like_dislike = bool, user_id: current_user.id
+                    // sets value at where likeable_id+type = video_id+type and user_id is current_user.id
+                } 
+            } else {
+                if(this.props.liked_comments.includes(likeable_id)){
+                    if (bool === true) {
+                        this.props.destroyLike(like())
+                    } else {
+                        this.props.updateLike(like(bool))
+                    }
+                } else if (this.props.disliked_comments.includes(likeable_id)){ 
+                    if (bool === false) {
+                        this.props.destroyLike(like())
+                    } else {
+                        this.props.updateLike(like(bool))
+                    }
+                } else { // just create 
                     this.props.createLike(like(bool))
-                } else {
-                    this.props.updateLike(like(bool))
                 }
-                // likeable_type: "Video", likeable_id: video.id, like_dislike = bool, user_id: current_user.id
-                // sets value at where likeable_id+type = video_id+type and user_id is current_user.id
-            } 
+            }
         }
     }
     toggleEdit(e){
@@ -145,6 +163,20 @@ class VideoShow extends React.Component{
                 replies = <h5 onClick={() => this.toggleReply(comment.id)} id="viewReplyButtons">{downArrowIcon(13)}View {comment.replies.length} {comment.replies.length === 1 ? `reply` : `replies`}</h5>
             }
         }
+        // like functionality for signed in users
+        let likeFnc = this.thumbAction(true, "Comment", comment.id);
+        let dislikeFnc = this.thumbAction(false, "Comment", comment.id);
+        if (this.props.currentUser === null) {
+            likeFnc = this.props.showSignup;
+            dislikeFnc = this.props.showSignup;
+        }
+        let thumbsUpClass = "like vid-info-btn";
+        let thumbsDownClass = "dislike vid-info-btn";
+        if (this.props.currentUser) {
+            debugger
+            thumbsUpClass = (this.props.liked_comments.includes(comment.id)) ? "active like vid-info-btn" : "like vid-info-btn";
+            thumbsDownClass = (this.props.disliked_comments.includes(comment.id)) ? "active dislike vid-info-btn" : "dislike vid-info-btn";
+        }
         return (
             <li key={`comment-${comment.id}`}>
                 <a href={`/#/channel/${commenter.id}`} style={{ textDecoration: "none" }}>
@@ -154,7 +186,15 @@ class VideoShow extends React.Component{
                         <span className="user-span">{commenter.username}</span>
                     </div>
                 </a>
-                <h5 style={{ marginLeft: dim, fontWeight: 100, marginTop: 0, wordBreak: "break-all" }}>{comment.comment}</h5>
+                <h5 style={{ marginLeft: dim, fontWeight: 100, marginTop: 0, wordBreak: "break-all", marginBottom: 5 }}>{comment.comment}</h5>
+                <div onClick={likeFnc} className={thumbsUpClass}>
+                    {thumbsUpIcon(13)}
+                    <span>{comment.likes}</span>
+                </div>
+                <div onClick={dislikeFnc} className={thumbsDownClass}>
+                    {thumbsDownIcon(13)}
+                    <span>{comment.dislikes}</span>
+                </div>
                 {replies}
             </li>
         )
@@ -209,6 +249,7 @@ class VideoShow extends React.Component{
         const mainContent = document.getElementsByClassName("main-content")[0];
         mainContent.classList.add("video-page");
         mainContent.addEventListener("scroll", this.showComments);
+        this.props.getUserCommentLikes(this.props.currentUser)
     }
 
     componentWillUnmount(){
@@ -251,10 +292,9 @@ class VideoShow extends React.Component{
         }
 
         // like and comment functionality for signed in users
-        let likeFnc = this.thumbAction(true);
-        let dislikeFnc = this.thumbAction(false);
+        let likeFnc = this.thumbAction(true, "Video", this.state.videoId);
+        let dislikeFnc = this.thumbAction(false, "Video", this.state.videoId);
         let commentFnc = this.createComment;
-        // TODO: once add comment btn is done
         if (this.props.currentUser === null){
             likeFnc = this.props.showSignup;
             dislikeFnc = this.props.showSignup;

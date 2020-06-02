@@ -5,5 +5,7 @@ json.set! comment.id do
             json.array! comment.comments.map{|reply| reply.id}
         end
     end
+    json.likes comment.likes.where(like_dislike: true).length
+    json.dislikes comment.likes.where(like_dislike: false).length
     json.created_at comment.created_at.httpdate.split(" ")[1..3].join(" ")
 end

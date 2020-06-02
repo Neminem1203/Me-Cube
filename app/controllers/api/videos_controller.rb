@@ -4,7 +4,6 @@ class Api::VideosController < ApplicationController
         if(params[:video_list] && params[:video_list].class == Array)
             @videos = Video.find(params[:video_list]).limit(8)
         else
-            # TODO: Experimental Random Videos
             vid_count = Video.count
             random_videos = Video.all.map{|vid| vid.id}
             if(vid_count > 8)

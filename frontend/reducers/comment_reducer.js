@@ -1,6 +1,6 @@
 import { merge } from "lodash";
 import { RECEIVE_COMMENTS, RECEIVE_REPLIES, CLEAR_COMMENTS, DELETE_COMMENT } from "../actions/comment_actions";
-
+import { RECEIVE_USER_LIKES } from "../actions/like_actions"
 
 const commentReducer = (state={}, action) => {
     Object.freeze(state);
@@ -13,6 +13,12 @@ const commentReducer = (state={}, action) => {
         case DELETE_COMMENT:
             delete old_state[action.commentId]
             return old_state;
+        case RECEIVE_USER_LIKES:
+            if (action.likes.comment) {
+                return merge({}, old_state, action.likes.comment)
+            } else{
+                return state;
+            }
         case CLEAR_COMMENTS:
             return {};
         default:

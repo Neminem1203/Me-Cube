@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     get '/view_video/:videoId', to: 'videos#viewcount', as: "viewcount"
     resources :comments, only: [:index, :create, :update, :show, :destroy]
     resource :likes, only: [:create, :update, :destroy]
+    get '/comments_likes/:user_id', to: 'likes#comment_likes', as: "usercommentlikes"
     resource :session, only: [:create, :destroy]
   end
   root to: "static_pages#root"

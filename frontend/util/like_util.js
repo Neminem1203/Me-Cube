@@ -22,3 +22,10 @@ export const destroyLike = like => {
         data: like
     })
 }
+
+export const getUserCommentLikes = userId =>{
+    return $.ajax({
+        method: "GET",
+        url: `/api/comments_likes/${userId}`
+    })
+}
