@@ -2911,7 +2911,7 @@ function (_React$Component) {
 
       var commenter = this.props.users[comment.commenter_id];
       var dim = 25;
-      var replies = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null);
+      var replies = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
 
       if (comment.replies.length > 0) {
         if (this.state.view_replies.includes(comment.id)) {
