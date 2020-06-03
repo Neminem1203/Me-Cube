@@ -41,7 +41,7 @@ export const getComments = comments => dispatch => {
 }
 
 export const getReplies = comments => dispatch => {
-    return CommentAPIUtil.getComments(comments).then(payload => dispatch(receiveReplies(payload)), e => {/* errorsCommentReducer required */ });
+    return CommentAPIUtil.getReplies(comments).then(payload => dispatch(receiveReplies(payload)), e => {/* errorsCommentReducer required */ });
 }
 
 export const createComment = comment => dispatch => {

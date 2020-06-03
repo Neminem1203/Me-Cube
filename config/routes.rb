@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     get '/video_search/', to: 'videos#search', as: "videosearch"
     get '/view_video/:videoId', to: 'videos#viewcount', as: "viewcount"
     resources :comments, only: [:index, :create, :update, :show, :destroy]
+    get '/get_replies/:comment_id', to: 'comments#replies', as: 'getreplies'
     resource :likes, only: [:create, :update, :destroy]
     get '/comments_likes/:user_id', to: 'likes#comment_likes', as: "usercommentlikes"
     resource :session, only: [:create, :destroy]

@@ -4,7 +4,7 @@ import { getVideo, updateVideo, addViewCount } from "../../actions/video_actions
 import { getUser, getUsers } from "../../actions/users_actions";
 import {createLike, updateLike, destroyLike} from "../../actions/like_actions";
 import { showModal, SIGN_UP } from "../../actions/modal_actions";
-import { getComments, clearComments, createComment, updateComment, destroyComment } from "../../actions/comment_actions";
+import { getComments, getReplies, clearComments, createComment, updateComment, destroyComment } from "../../actions/comment_actions";
 import { getUserCommentLikes } from "../../actions/like_actions"
 
 const mSTP = (state, ownProps) => {
@@ -39,6 +39,7 @@ const mDTP = dispatch =>{
         createComment: comment => dispatch(createComment(comment)),
         createLike: like => dispatch(createLike(like)),
         getComments: comments => dispatch(getComments(comments)),
+        getReplies: commentId => dispatch(getReplies(commentId)),
         getUser: userId => dispatch(getUser(userId)),
         getUserCommentLikes: userId => dispatch(getUserCommentLikes(userId)),
         getUsers: userList => dispatch(getUsers(userList)),

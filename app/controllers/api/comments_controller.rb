@@ -37,6 +37,15 @@ class Api::CommentsController < ApplicationController
         end
     end
 
+    def replies
+        @comments = Comment.where(commentable_type: "Comment", commentable_id: params[:comment_id])
+        if @comments
+            render :index
+        else
+            render json: ["Error. Can't get replies"], status: 404
+        end
+    end
+
 
     def destroy
         @comment = Comment.find(params[:id])

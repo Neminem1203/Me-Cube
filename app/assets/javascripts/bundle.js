@@ -157,7 +157,7 @@ var getComments = function getComments(comments) {
 };
 var getReplies = function getReplies(comments) {
   return function (dispatch) {
-    return _util_comment_util__WEBPACK_IMPORTED_MODULE_0__["getComments"](comments).then(function (payload) {
+    return _util_comment_util__WEBPACK_IMPORTED_MODULE_0__["getReplies"](comments).then(function (payload) {
       return dispatch(receiveReplies(payload));
     }, function (e) {
       /* errorsCommentReducer required */
@@ -2815,16 +2815,26 @@ function (_React$Component) {
 
       if (comment.replies.length > 0) {
         if (this.state.view_replies.includes(comment.id)) {
-          replies = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+          replies = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
             onClick: function onClick() {
               return _this3.toggleReply(comment.id);
             },
             id: "viewReplyButtons"
-          }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["upArrowIcon"])(13), "Hide ", comment.replies.length, " ", comment.replies.length === 1 ? "reply" : "replies");
+          }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["upArrowIcon"])(13), "Hide ", comment.replies.length, " ", comment.replies.length === 1 ? "reply" : "replies"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            id: "comment-replies"
+          }, Object.values(this.props.comments).map(function (c) {
+            if (c.commentable_type == "Comment" && c.commentable_id == comment.id) {
+              return _this3.loadComment(c);
+            } else {
+              return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null);
+            }
+          })));
         } else {
           replies = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
             onClick: function onClick() {
-              return _this3.toggleReply(comment.id);
+              _this3.props.getReplies(comment.id);
+
+              _this3.toggleReply(comment.id);
             },
             id: "viewReplyButtons"
           }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["downArrowIcon"])(13), "View ", comment.replies.length, " ", comment.replies.length === 1 ? "reply" : "replies");
@@ -3467,6 +3477,9 @@ var mDTP = function mDTP(dispatch) {
     },
     getComments: function getComments(comments) {
       return dispatch(Object(_actions_comment_actions__WEBPACK_IMPORTED_MODULE_6__["getComments"])(comments));
+    },
+    getReplies: function getReplies(commentId) {
+      return dispatch(Object(_actions_comment_actions__WEBPACK_IMPORTED_MODULE_6__["getReplies"])(commentId));
     },
     getUser: function getUser(userId) {
       return dispatch(Object(_actions_users_actions__WEBPACK_IMPORTED_MODULE_3__["getUser"])(userId));
@@ -4403,12 +4416,13 @@ __webpack_require__.r(__webpack_exports__);
 /*!***************************************!*\
   !*** ./frontend/util/comment_util.js ***!
   \***************************************/
-/*! exports provided: getComments, createComment, updateComment, destroyComment */
+/*! exports provided: getComments, getReplies, createComment, updateComment, destroyComment */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getComments", function() { return getComments; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getReplies", function() { return getReplies; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createComment", function() { return createComment; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateComment", function() { return updateComment; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "destroyComment", function() { return destroyComment; });
@@ -4419,6 +4433,12 @@ var getComments = function getComments(comments) {
     data: {
       comments: comments
     }
+  });
+};
+var getReplies = function getReplies(commentId) {
+  return $.ajax({
+    method: "GET",
+    url: "/api/get_replies/".concat(commentId)
   });
 };
 var createComment = function createComment(comment) {

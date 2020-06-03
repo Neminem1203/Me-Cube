@@ -102,9 +102,23 @@ class VideoShow extends React.Component{
         let replies = <><br /><br /></>
         if (comment.replies.length > 0) {
             if (this.state.view_replies.includes(comment.id)) {
-                replies = <h5 onClick={() => this.toggleReply(comment.id)} id="viewReplyButtons">{upArrowIcon(13)}Hide {comment.replies.length} {comment.replies.length === 1 ? `reply` : `replies`}</h5>
+                replies = <>
+                <h5 onClick={() => this.toggleReply(comment.id)} id="viewReplyButtons">{upArrowIcon(13)}Hide {comment.replies.length} {comment.replies.length === 1 ? `reply` : `replies`}</h5>
+                <div id="comment-replies">
+                    {Object.values(this.props.comments).map(c => {
+                        if(c.commentable_type == "Comment" && c.commentable_id == comment.id){
+                            return this.loadComment(c);
+                        } else {
+                            return <></>
+                        }
+                    })}
+                </div>
+                </>
             } else {
-                replies = <h5 onClick={() => this.toggleReply(comment.id)} id="viewReplyButtons">{downArrowIcon(13)}View {comment.replies.length} {comment.replies.length === 1 ? `reply` : `replies`}</h5>
+                replies = <h5 onClick={() => {
+                    this.props.getReplies(comment.id);
+                    this.toggleReply(comment.id);
+                }} id="viewReplyButtons">{downArrowIcon(13)}View {comment.replies.length} {comment.replies.length === 1 ? `reply` : `replies`}</h5>
             }
         }
         // like functionality for signed in users
@@ -127,6 +141,7 @@ class VideoShow extends React.Component{
                 <div id="edit-comment-buttons">
                     <button onClick={e => {this.toggleEditComment(e, comment.id, comment.comment)}} id="edit-button">Edit</button>
                     <button onClick={(e) => {e.preventDefault();this.props.destroyComment(comment.id)}} id="delete-button">Delete</button>
+
                 </div>;
         }
 

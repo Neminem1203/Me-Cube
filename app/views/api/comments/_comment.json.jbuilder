@@ -4,6 +4,10 @@ json.set! comment.id do
         json.replies do
             json.array! comment.comments.map{|reply| reply.id}
         end
+    else
+        json.replies do
+            json.array! []
+        end
     end
     json.likes comment.likes.where(like_dislike: true).length
     json.dislikes comment.likes.where(like_dislike: false).length

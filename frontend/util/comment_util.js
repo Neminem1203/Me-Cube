@@ -6,6 +6,13 @@ export const getComments = comments =>{
     })
 }
 
+export const getReplies = commentId =>{
+    return $.ajax({
+        method: "GET",
+        url: `/api/get_replies/${commentId}`
+    })
+}
+
 export const createComment = comment =>{
     return $.ajax({
         method: "POST",
