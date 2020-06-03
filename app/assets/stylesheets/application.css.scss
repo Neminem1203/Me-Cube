@@ -80,7 +80,8 @@ a:focus{outline:0;}
   
 }
 #comment-section ul{
-  margin-top: 50px;
+  margin-top: 15px;
+  list-style: none;
 }
 .user-form{
   z-index: 3;
@@ -547,9 +548,6 @@ a:focus{outline:0;}
 }
 #edit-comment-buttons{
   float: right;
-}
-#comment-replies{
-  margin-left: 30px;
 }
 #comment-text{
   display: block;

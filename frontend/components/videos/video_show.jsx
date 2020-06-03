@@ -105,18 +105,17 @@ class VideoShow extends React.Component{
                 replies = <>
                 <br />
                 <h5 onClick={() => this.toggleReply(comment.id)} id="viewReplyButtons">{upArrowIcon(13)}Hide {comment.replies.length} {comment.replies.length === 1 ? `reply` : `replies`}</h5>
-                <div id="comment-replies">
+                <ul id="comment-replies">
                     {Object.values(this.props.comments).map(c => {
                         if(c.commentable_type == "Comment" && c.commentable_id == comment.id){
                             return this.loadComment(c);
-                        } else {
-                            return <></>
                         }
                     })}
-                </div>
+                </ul>
                 </>
             } else {
-                replies = <>
+                replies = 
+<>
                 <br />
                 <h5 onClick={() => {
                     this.props.getReplies(comment.id);
@@ -389,8 +388,6 @@ class VideoShow extends React.Component{
             const comments = Object.values(this.props.comments).map(comment=>{
                 if (comment.commentable_type === "Video") {
                     return this.loadComment(comment)
-                } else {
-                    return <></>
                 }
             })
             let comment_btns = <></>

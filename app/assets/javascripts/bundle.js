@@ -2820,13 +2820,11 @@ function (_React$Component) {
               return _this3.toggleReply(comment.id);
             },
             id: "viewReplyButtons"
-          }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["upArrowIcon"])(13), "Hide ", comment.replies.length, " ", comment.replies.length === 1 ? "reply" : "replies"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["upArrowIcon"])(13), "Hide ", comment.replies.length, " ", comment.replies.length === 1 ? "reply" : "replies"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
             id: "comment-replies"
           }, Object.values(this.props.comments).map(function (c) {
             if (c.commentable_type == "Comment" && c.commentable_id == comment.id) {
               return _this3.loadComment(c);
-            } else {
-              return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null);
             }
           })));
         } else {
@@ -3264,8 +3262,6 @@ function (_React$Component) {
         var comments = Object.values(this.props.comments).map(function (comment) {
           if (comment.commentable_type === "Video") {
             return _this8.loadComment(comment);
-          } else {
-            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null);
           }
         });
         var comment_btns = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null);
