@@ -322,6 +322,7 @@ class VideoShow extends React.Component{
                 showComments: false,
                 commentsLoaded: false,
             })
+            this.props.clearComments();
             this.props.getVideo(this.props.match.params.videoId).then(this.finishSetup);
         }
     }
