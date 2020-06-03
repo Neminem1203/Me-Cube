@@ -113,14 +113,19 @@ class VideoShow extends React.Component{
                 </ul>
                 </>
             } else {
+                
                 replies = 
                 <>
                 <br />
                 <h5 onClick={() => {
-                    this.props.getReplies(comment.id).then(payload =>{
-                        let users = Object.values(payload.comments).map(comment => comment.commenter_id)
-                        this.props.getUsers(users).then(payload => this.toggleReply(comment.id));;
-                    })
+                    if (!comment.replies.every(c_id => Object.keys(this.props.comments).includes(c_id.toString()))){
+                        this.props.getReplies(comment.id).then(payload => {
+                            let users = Object.values(payload.comments).map(comment => comment.commenter_id)
+                            this.props.getUsers(users).then(payload => this.toggleReply(comment.id));;
+                        })
+                    } else {
+                        this.toggleReply(comment.id)
+                    }
                 }} id="viewReplyButtons">{downArrowIcon(13)}View {comment.replies.length} {comment.replies.length === 1 ? `reply` : `replies`}</h5>
                 </>
             }
