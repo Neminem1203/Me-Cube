@@ -90,7 +90,7 @@
 /*!*********************************************!*\
   !*** ./frontend/actions/comment_actions.js ***!
   \*********************************************/
-/*! exports provided: RECEIVE_COMMENTS, RECEIVE_COMMENT, RECEIVE_REPLIES, DELETE_COMMENT, CLEAR_COMMENTS, receiveComments, receiveComment, receiveReplies, deleteComment, clearComments, getComments, getReplies, createComment, destroyComment */
+/*! exports provided: RECEIVE_COMMENTS, RECEIVE_COMMENT, RECEIVE_REPLIES, DELETE_COMMENT, CLEAR_COMMENTS, receiveComments, receiveComment, receiveReplies, deleteComment, clearComments, getComments, getReplies, createComment, destroyComment, updateComment */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -109,6 +109,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getReplies", function() { return getReplies; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createComment", function() { return createComment; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "destroyComment", function() { return destroyComment; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateComment", function() { return updateComment; });
 /* harmony import */ var _util_comment_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/comment_util */ "./frontend/util/comment_util.js");
 
 var RECEIVE_COMMENTS = "RECEIVE_COMMENTS";
@@ -176,6 +177,15 @@ var destroyComment = function destroyComment(commentId) {
   return function (dispatch) {
     return _util_comment_util__WEBPACK_IMPORTED_MODULE_0__["destroyComment"](commentId).then(function (payload) {
       return dispatch(deleteComment(payload));
+    }, function (e) {
+      /* errorsCommentReducer required*/
+    });
+  };
+};
+var updateComment = function updateComment(comment) {
+  return function (dispatch) {
+    return _util_comment_util__WEBPACK_IMPORTED_MODULE_0__["updateComment"](comment).then(function (payload) {
+      return dispatch(receiveComment(payload));
     }, function (e) {
       /* errorsCommentReducer required*/
     });
@@ -2696,6 +2706,7 @@ function (_React$Component) {
     _this.editField = _this.editField.bind(_assertThisInitialized(_this));
     _this.finishSetup = _this.finishSetup.bind(_assertThisInitialized(_this));
     _this.loadComment = _this.loadComment.bind(_assertThisInitialized(_this));
+    _this.saveCommentChanges = _this.saveCommentChanges.bind(_assertThisInitialized(_this));
     _this.saveVideoChanges = _this.saveVideoChanges.bind(_assertThisInitialized(_this));
     _this.showComments = _this.showComments.bind(_assertThisInitialized(_this));
     _this.showCommentBtns = _this.showCommentBtns.bind(_assertThisInitialized(_this));
@@ -2850,7 +2861,8 @@ function (_React$Component) {
         }, "Edit"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: function onClick(e) {
             e.preventDefault();
-            console.log("Delete");
+
+            _this3.props.destroyComment(comment.id);
           },
           id: "delete-button"
         }, "Delete"));
@@ -2874,6 +2886,7 @@ function (_React$Component) {
           },
           id: "delete-button"
         }, "Cancel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: this.saveCommentChanges,
           id: "edit-button"
         }, "Save"));
       }
@@ -2917,8 +2930,6 @@ function (_React$Component) {
           id: this.state.edit_comment_id,
           comment: this.state.edit_comment_text
         }).then(function (payload) {
-          debugger;
-
           _this4.setState({
             edit_comment_id: null,
             edit_comment_text: null
@@ -3436,32 +3447,14 @@ var mSTP = function mSTP(state, ownProps) {
 
 var mDTP = function mDTP(dispatch) {
   return {
-    getUser: function getUser(userId) {
-      return dispatch(Object(_actions_users_actions__WEBPACK_IMPORTED_MODULE_3__["getUser"])(userId));
+    addViewCount: function addViewCount(videoId) {
+      return dispatch(Object(_actions_video_actions__WEBPACK_IMPORTED_MODULE_2__["addViewCount"])(videoId));
     },
-    getUsers: function getUsers(userList) {
-      return dispatch(Object(_actions_users_actions__WEBPACK_IMPORTED_MODULE_3__["getUsers"])(userList));
-    },
-    getVideo: function getVideo(videoId) {
-      return dispatch(Object(_actions_video_actions__WEBPACK_IMPORTED_MODULE_2__["getVideo"])(videoId));
-    },
-    updateVideo: function updateVideo(video) {
-      return dispatch(Object(_actions_video_actions__WEBPACK_IMPORTED_MODULE_2__["updateVideo"])(video));
-    },
-    createLike: function createLike(like) {
-      return dispatch(Object(_actions_like_actions__WEBPACK_IMPORTED_MODULE_4__["createLike"])(like));
-    },
-    updateLike: function updateLike(like) {
-      return dispatch(Object(_actions_like_actions__WEBPACK_IMPORTED_MODULE_4__["updateLike"])(like));
+    destroyComment: function destroyComment(commentId) {
+      return dispatch(Object(_actions_comment_actions__WEBPACK_IMPORTED_MODULE_6__["destroyComment"])(commentId));
     },
     destroyLike: function destroyLike(like) {
       return dispatch(Object(_actions_like_actions__WEBPACK_IMPORTED_MODULE_4__["destroyLike"])(like));
-    },
-    showSignup: function showSignup() {
-      return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_5__["showModal"])(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_5__["SIGN_UP"]));
-    },
-    getComments: function getComments(comments) {
-      return dispatch(Object(_actions_comment_actions__WEBPACK_IMPORTED_MODULE_6__["getComments"])(comments));
     },
     clearComments: function clearComments() {
       return dispatch(Object(_actions_comment_actions__WEBPACK_IMPORTED_MODULE_6__["clearComments"])());
@@ -3469,13 +3462,36 @@ var mDTP = function mDTP(dispatch) {
     createComment: function createComment(comment) {
       return dispatch(Object(_actions_comment_actions__WEBPACK_IMPORTED_MODULE_6__["createComment"])(comment));
     },
-    addViewCount: function addViewCount(videoId) {
-      return dispatch(Object(_actions_video_actions__WEBPACK_IMPORTED_MODULE_2__["addViewCount"])(videoId));
+    createLike: function createLike(like) {
+      return dispatch(Object(_actions_like_actions__WEBPACK_IMPORTED_MODULE_4__["createLike"])(like));
+    },
+    getComments: function getComments(comments) {
+      return dispatch(Object(_actions_comment_actions__WEBPACK_IMPORTED_MODULE_6__["getComments"])(comments));
+    },
+    getUser: function getUser(userId) {
+      return dispatch(Object(_actions_users_actions__WEBPACK_IMPORTED_MODULE_3__["getUser"])(userId));
     },
     getUserCommentLikes: function getUserCommentLikes(userId) {
       return dispatch(Object(_actions_like_actions__WEBPACK_IMPORTED_MODULE_4__["getUserCommentLikes"])(userId));
-    } // updateComment: comment => dispatch(updateComment(comment)),
-
+    },
+    getUsers: function getUsers(userList) {
+      return dispatch(Object(_actions_users_actions__WEBPACK_IMPORTED_MODULE_3__["getUsers"])(userList));
+    },
+    getVideo: function getVideo(videoId) {
+      return dispatch(Object(_actions_video_actions__WEBPACK_IMPORTED_MODULE_2__["getVideo"])(videoId));
+    },
+    showSignup: function showSignup() {
+      return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_5__["showModal"])(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_5__["SIGN_UP"]));
+    },
+    updateComment: function updateComment(comment) {
+      return dispatch(Object(_actions_comment_actions__WEBPACK_IMPORTED_MODULE_6__["updateComment"])(comment));
+    },
+    updateLike: function updateLike(like) {
+      return dispatch(Object(_actions_like_actions__WEBPACK_IMPORTED_MODULE_4__["updateLike"])(like));
+    },
+    updateVideo: function updateVideo(video) {
+      return dispatch(Object(_actions_video_actions__WEBPACK_IMPORTED_MODULE_2__["updateVideo"])(video));
+    }
   };
 };
 

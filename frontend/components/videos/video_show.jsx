@@ -26,6 +26,7 @@ class VideoShow extends React.Component{
         this.editField = this.editField.bind(this);
         this.finishSetup = this.finishSetup.bind(this);
         this.loadComment = this.loadComment.bind(this);
+        this.saveCommentChanges = this.saveCommentChanges.bind(this);
         this.saveVideoChanges = this.saveVideoChanges.bind(this);
         this.showComments = this.showComments.bind(this);
         this.showCommentBtns = this.showCommentBtns.bind(this);
@@ -125,7 +126,7 @@ class VideoShow extends React.Component{
             commentBtns =
                 <div id="edit-comment-buttons">
                     <button onClick={e => {this.toggleEditComment(e, comment.id, comment.comment)}} id="edit-button">Edit</button>
-                    <button onClick={(e) => { e.preventDefault(); console.log("Delete") }} id="delete-button">Delete</button>
+                    <button onClick={(e) => {e.preventDefault();this.props.destroyComment(comment.id)}} id="delete-button">Delete</button>
                 </div>;
         }
 
@@ -135,7 +136,7 @@ class VideoShow extends React.Component{
             commentBtns = 
                 <div id="edit-comment-buttons">
                     <button onClick={e => { this.toggleEditComment(e, comment.id, comment.comment) }} id="delete-button">Cancel</button>
-                    <button id="edit-button">Save</button>
+                    <button onClick={this.saveCommentChanges}id="edit-button">Save</button>
                 </div>;
         }
         return (
@@ -170,10 +171,8 @@ class VideoShow extends React.Component{
                 id: this.state.edit_comment_id,
                 comment: this.state.edit_comment_text,
             }).then(payload => {
-                debugger
                 this.setState({ edit_comment_id: null, edit_comment_text: null });
             });
-            
         }
     }
 

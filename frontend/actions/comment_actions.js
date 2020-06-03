@@ -48,6 +48,10 @@ export const createComment = comment => dispatch => {
     return CommentAPIUtil.createComment(comment).then(payload => dispatch(receiveComment(payload)), e => {/* errorsCommentReducer required */ });
 }
 
-export const destroyComment = commentId => dispatch=>{
+export const destroyComment = commentId => dispatch => {
     return CommentAPIUtil.destroyComment(commentId).then(payload => dispatch(deleteComment(payload)), e => {/* errorsCommentReducer required*/});
+}
+
+export const updateComment = comment => dispatch => {
+    return CommentAPIUtil.updateComment(comment).then(payload => dispatch(receiveComment(payload)), e => {/* errorsCommentReducer required*/ });
 }

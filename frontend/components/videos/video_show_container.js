@@ -4,7 +4,7 @@ import { getVideo, updateVideo, addViewCount } from "../../actions/video_actions
 import { getUser, getUsers } from "../../actions/users_actions";
 import {createLike, updateLike, destroyLike} from "../../actions/like_actions";
 import { showModal, SIGN_UP } from "../../actions/modal_actions";
-import { getComments, clearComments, createComment } from "../../actions/comment_actions";
+import { getComments, clearComments, createComment, updateComment, destroyComment } from "../../actions/comment_actions";
 import { getUserCommentLikes } from "../../actions/like_actions"
 
 const mSTP = (state, ownProps) => {
@@ -31,21 +31,22 @@ const mSTP = (state, ownProps) => {
 }
 
 const mDTP = dispatch =>{
-    return{
+    return {
+        addViewCount: videoId => dispatch(addViewCount(videoId)),
+        destroyComment: commentId => dispatch(destroyComment(commentId)),
+        destroyLike: like => dispatch(destroyLike(like)),
+        clearComments: () => dispatch(clearComments()),
+        createComment: comment => dispatch(createComment(comment)),
+        createLike: like => dispatch(createLike(like)),
+        getComments: comments => dispatch(getComments(comments)),
         getUser: userId => dispatch(getUser(userId)),
+        getUserCommentLikes: userId => dispatch(getUserCommentLikes(userId)),
         getUsers: userList => dispatch(getUsers(userList)),
         getVideo: videoId => dispatch(getVideo(videoId)),
-        updateVideo: video => dispatch(updateVideo(video)),
-        createLike: like => dispatch(createLike(like)),
-        updateLike: like => dispatch(updateLike(like)),
-        destroyLike: like => dispatch(destroyLike(like)),
         showSignup: () => dispatch(showModal(SIGN_UP)),
-        getComments: comments => dispatch(getComments(comments)),
-        clearComments: () => dispatch(clearComments()),
-        createComment: comment=> dispatch(createComment(comment)),
-        addViewCount: videoId=> dispatch(addViewCount(videoId)),
-        getUserCommentLikes: userId => dispatch(getUserCommentLikes(userId)),
-        // updateComment: comment => dispatch(updateComment(comment)),
+        updateComment: comment => dispatch(updateComment(comment)),
+        updateLike: like => dispatch(updateLike(like)),
+        updateVideo: video => dispatch(updateVideo(video)),
     }
 }
 

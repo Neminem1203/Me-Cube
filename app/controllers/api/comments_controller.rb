@@ -20,7 +20,7 @@ class Api::CommentsController < ApplicationController
     end
 
     def update
-        @comment = Comment.find_by(comment_params)
+        @comment = Comment.find(params[:id])
         if @comment.update(comment: params[:comment])
             render :show
         else
@@ -39,14 +39,9 @@ class Api::CommentsController < ApplicationController
 
 
     def destroy
-        @comment = Comment.find_by(comment_params)
-        if @comment.destroy
-            if params[:commentable_type] == "Video"
-                @comments = Video.find_by(id: params[:commentable_id]).comments
-            else
-                @comments = Comment.find_by(id: params[:commentable_id])
-            end
-            render :index
+        @comment = Comment.find(params[:id])
+        if current_user.id == @comment.commenter_id and @comment.destroy
+            render json: @comment.id
         else
             render json: ["Couldn't delete comment at this time"], status: 404
         end
@@ -54,6 +49,6 @@ class Api::CommentsController < ApplicationController
 
     private
     def comment_params
-        params.permit(:commenter_id, :commentable_type, :commentable_id)
+        params.permit(:commenter_id, :commentable_type, :commentable_id, :comment)
     end
 end
