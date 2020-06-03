@@ -100,13 +100,15 @@ a:focus{outline:0;}
 }
 .user-form-background, .navbar-background{
   position: fixed;
-  opacity: 50%;
   top: 0;
   bottom: 0;
   right: 0;
   left: 0;
   background: white;
   z-index: 2;
+}
+.navbar-background{
+  opacity: 50%;
 }
 .user-form > div{
   width: 100%;
