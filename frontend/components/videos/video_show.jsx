@@ -223,7 +223,6 @@ class VideoShow extends React.Component{
                     });
                 }
                 else {
-                    this.props.clearComments();
                     this.setState({ commentsLoaded: true })
                 }
                 this.setState({ showComments: true });

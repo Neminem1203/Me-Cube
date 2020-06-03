@@ -2984,7 +2984,6 @@ function (_React$Component) {
               });
             });
           } else {
-            this.props.clearComments();
             this.setState({
               commentsLoaded: true
             });
