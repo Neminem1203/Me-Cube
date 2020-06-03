@@ -106,20 +106,21 @@ class VideoShow extends React.Component{
                 <br />
                 <h5 onClick={() => this.toggleReply(comment.id)} id="viewReplyButtons">{upArrowIcon(13)}Hide {comment.replies.length} {comment.replies.length === 1 ? `reply` : `replies`}</h5>
                 <ul id="comment-replies">
-                    {Object.values(this.props.comments).map(c => {
-                        if(c.commentable_type == "Comment" && c.commentable_id == comment.id){
-                            return this.loadComment(c);
-                        }
+                    {comment.replies.map(c_id => {
+
+                        return this.loadComment(this.props.comments[c_id])
                     })}
                 </ul>
                 </>
             } else {
                 replies = 
-<>
+                <>
                 <br />
                 <h5 onClick={() => {
-                    this.props.getReplies(comment.id);
-                    this.toggleReply(comment.id);
+                    this.props.getReplies(comment.id).then(payload =>{
+                        let users = Object.values(payload.comments).map(comment => comment.commenter_id)
+                        this.props.getUsers(users).then(payload => this.toggleReply(comment.id));;
+                    })
                 }} id="viewReplyButtons">{downArrowIcon(13)}View {comment.replies.length} {comment.replies.length === 1 ? `reply` : `replies`}</h5>
                 </>
             }
@@ -139,7 +140,7 @@ class VideoShow extends React.Component{
         }
 
         let commentBtns = <></>
-        if (this.props.currentUser == commenter.id) {
+        if (commenter && this.props.currentUser == commenter.id) {
             commentBtns =
                 <div id="edit-comment-buttons">
                     <button onClick={e => {this.toggleEditComment(e, comment.id, comment.comment)}} id="edit-button">Edit</button>
@@ -387,6 +388,8 @@ class VideoShow extends React.Component{
             const comments = Object.values(this.props.comments).map(comment=>{
                 if (comment.commentable_type === "Video") {
                     return this.loadComment(comment)
+                } else {
+                    return <></>;
                 }
             })
             let comment_btns = <></>

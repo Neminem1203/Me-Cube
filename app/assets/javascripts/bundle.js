@@ -2822,17 +2822,23 @@ function (_React$Component) {
             id: "viewReplyButtons"
           }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["upArrowIcon"])(13), "Hide ", comment.replies.length, " ", comment.replies.length === 1 ? "reply" : "replies"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
             id: "comment-replies"
-          }, Object.values(this.props.comments).map(function (c) {
-            if (c.commentable_type == "Comment" && c.commentable_id == comment.id) {
-              return _this3.loadComment(c);
-            }
+          }, comment.replies.map(function (c_id) {
+            return _this3.loadComment(_this3.props.comments[c_id]);
           })));
         } else {
           replies = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
             onClick: function onClick() {
-              _this3.props.getReplies(comment.id);
+              _this3.props.getReplies(comment.id).then(function (payload) {
+                var users = Object.values(payload.comments).map(function (comment) {
+                  return comment.commenter_id;
+                });
 
-              _this3.toggleReply(comment.id);
+                _this3.props.getUsers(users).then(function (payload) {
+                  return _this3.toggleReply(comment.id);
+                });
+
+                ;
+              });
             },
             id: "viewReplyButtons"
           }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["downArrowIcon"])(13), "View ", comment.replies.length, " ", comment.replies.length === 1 ? "reply" : "replies"));
@@ -2858,7 +2864,7 @@ function (_React$Component) {
 
       var commentBtns = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null);
 
-      if (this.props.currentUser == commenter.id) {
+      if (commenter && this.props.currentUser == commenter.id) {
         commentBtns = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           id: "edit-comment-buttons"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -3261,6 +3267,8 @@ function (_React$Component) {
         var comments = Object.values(this.props.comments).map(function (comment) {
           if (comment.commentable_type === "Video") {
             return _this8.loadComment(comment);
+          } else {
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null);
           }
         });
         var comment_btns = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null);
