@@ -18,20 +18,37 @@ class VideoShow extends React.Component{
             commentsLoaded: false,
             comment_btns: false,
             view_replies: [],
+            edit_comment_id: null,
+            edit_comment_text: "",
         }
-        this.finishSetup = this.finishSetup.bind(this);
-        this.editField = this.editField.bind(this);
-        this.toggleEdit = this.toggleEdit.bind(this);
-        this.saveChanges = this.saveChanges.bind(this);
-        this.showComments = this.showComments.bind(this);
         this.commentsLoaded = this.commentsLoaded.bind(this);
-        this.showCommentBtns = this.showCommentBtns.bind(this);
         this.createComment = this.createComment.bind(this);
+        this.editField = this.editField.bind(this);
+        this.finishSetup = this.finishSetup.bind(this);
         this.loadComment = this.loadComment.bind(this);
+        this.saveVideoChanges = this.saveVideoChanges.bind(this);
+        this.showComments = this.showComments.bind(this);
+        this.showCommentBtns = this.showCommentBtns.bind(this);
+        this.toggleEdit = this.toggleEdit.bind(this);
+        this.toggleEditComment = this.toggleEditComment.bind(this);
         this.toggleReply = this.toggleReply.bind(this);
     }
 
-    copyShareUrl(e){
+    clearComment() {
+        this.setState({ comment: "", comment_btns: false })
+    }
+
+    commentsLoaded() {
+        this.setState({ commentsLoaded: true, comment: "" });
+        let commentBox = document.getElementsByClassName("comment-ta")[0];
+
+        commentBox.oninput = function () {
+            commentBox.style.height = "";
+            commentBox.style.height = Math.min(commentBox.scrollHeight, 100) + "px";
+        }
+    }
+
+    copyShareUrl(e) {
         e.preventDefault();
         const video_url = document.getElementById("current-video-url");
         video_url.classList.remove("hidden");
@@ -39,9 +56,170 @@ class VideoShow extends React.Component{
         document.execCommand("copy");
         video_url.classList.add("hidden");
     }
+    
+    createComment(e) {
+        e.preventDefault();
+        this.props.createComment({
+            comment: this.state.comment,
+            commenter_id: this.props.currentUser,
+            commentable_type: "Video",
+            commentable_id: this.state.videoId,
+        });
+        this.setState({ comment: "", comment_btns: false })
+    }
 
-    thumbAction(bool, likeable_type, likeable_id){
-        return e=>{
+    editField(field) {
+        return e => this.setState({ [field]: e.target.value });
+    }
+
+    finishSetup() {
+        if (!this.props.video) { return; }
+        this.props.addViewCount(this.props.video.video.id);
+        const video = document.getElementById('video-player')
+        const video_src = document.getElementById('video-src')
+        if(video !== null){video.pause();}
+        this.props.getUser(this.props.video.video.creator_id);
+        this.setState({ 
+            video: this.props.video, 
+            like_dislike: this.props.video.like_dislike, 
+            likes: this.props.video.likes, 
+            dislikes: this.props.video.dislikes,
+            showComments: false,
+            commentsLoaded: false
+        });
+        if (video !== null) {
+            video_src.setAttribute('src', this.props.video.video.videoUrl);
+            video.load();
+            video.volume = 0.25;
+            video.play();
+        }
+    }
+
+    loadComment(comment) {
+        const commenter = this.props.users[comment.commenter_id];
+        const dim = 25;
+        let replies = <><br /><br /></>
+        if (comment.replies.length > 0) {
+            if (this.state.view_replies.includes(comment.id)) {
+                replies = <h5 onClick={() => this.toggleReply(comment.id)} id="viewReplyButtons">{upArrowIcon(13)}Hide {comment.replies.length} {comment.replies.length === 1 ? `reply` : `replies`}</h5>
+            } else {
+                replies = <h5 onClick={() => this.toggleReply(comment.id)} id="viewReplyButtons">{downArrowIcon(13)}View {comment.replies.length} {comment.replies.length === 1 ? `reply` : `replies`}</h5>
+            }
+        }
+        // like functionality for signed in users
+        let likeFnc = this.thumbAction(true, "Comment", comment.id);
+        let dislikeFnc = this.thumbAction(false, "Comment", comment.id);
+        if (this.props.currentUser === null) {
+            likeFnc = this.props.showSignup;
+            dislikeFnc = this.props.showSignup;
+        }
+        let thumbsUpClass = "like vid-info-btn";
+        let thumbsDownClass = "dislike vid-info-btn";
+        if (this.props.currentUser) {
+            thumbsUpClass = (this.props.liked_comments.includes(comment.id)) ? "active like vid-info-btn" : "like vid-info-btn";
+            thumbsDownClass = (this.props.disliked_comments.includes(comment.id)) ? "active dislike vid-info-btn" : "dislike vid-info-btn";
+        }
+
+        let commentBtns = <></>
+        if (this.props.currentUser == commenter.id) {
+            commentBtns =
+                <div id="edit-comment-buttons">
+                    <button onClick={e => {this.toggleEditComment(e, comment.id, comment.comment)}} id="edit-button">Edit</button>
+                    <button onClick={(e) => { e.preventDefault(); console.log("Delete") }} id="delete-button">Delete</button>
+                </div>;
+        }
+
+        let commentText = <h5 id="comment-text">{comment.comment}</h5>
+        if (comment.id === this.state.edit_comment_id) {
+            commentText = <input id="comment-text" onChange={this.editField("edit_comment_text")} value={this.state.edit_comment_text}></input>
+            commentBtns = 
+                <div id="edit-comment-buttons">
+                    <button onClick={e => { this.toggleEditComment(e, comment.id, comment.comment) }} id="delete-button">Cancel</button>
+                    <button id="edit-button">Save</button>
+                </div>;
+        }
+        return (
+            <li key={`comment-${comment.id}`}>
+                <a href={`/#/channel/${commenter.id}`} style={{ textDecoration: "none" }}>
+                    <div style={{ display: "inline-block" }}>
+                        {(commenter.profile_picture === undefined)
+                            ? profileIcon(dim) : <img src={commenter.profile_picture} width={dim} height={dim} />}
+                        <span className="user-span">{commenter.username}</span>
+                    </div>
+                    {commentBtns}
+                </a>
+                {commentText}
+                <div onClick={likeFnc} className={thumbsUpClass}>
+                    {thumbsUpIcon(13)}
+                    <span>{comment.likes}</span>
+                </div>
+                <div onClick={dislikeFnc} className={thumbsDownClass}>
+                    {thumbsDownIcon(13)}
+                    <span>{comment.dislikes}</span>
+                </div>
+                {replies}
+            </li>
+        )
+    }
+
+    saveCommentChanges(e){
+        e.preventDefault();
+        if (this.props.comments[this.state.edit_comment_id].commenter_id !== this.props.currentUser) { return; }
+        else {
+            this.props.updateComment({
+                id: this.state.edit_comment_id,
+                comment: this.state.edit_comment_text,
+            }).then(payload => {
+                debugger
+                this.setState({ edit_comment_id: null, edit_comment_text: null });
+            });
+            
+        }
+    }
+
+    saveVideoChanges(e) {
+        e.preventDefault();
+        this.setState({ editMode: false });
+        if (this.props.video.creator.id !== this.props.currentUser) { return; }
+        else {
+            this.props.updateVideo({
+                id: this.state.videoId,
+                title: this.state.editTitle,
+                description: this.state.editDescription
+            });
+        }
+    }
+
+    showComments(e) {
+        // console.log(e.target.scrollTop);
+        // console.log(commentSection.offsetParent.offsetHeight);
+        // console.log(commentSection.offsetTop);
+        if (!this.state.showComments && this.state.video.video.id === this.props.video.video.id) {
+            const commentSection = document.getElementById("comment-section");
+            if (e.target.scrollTop + commentSection.offsetParent.offsetHeight
+                > commentSection.offsetTop) {
+                if (this.state.video.video.comments !== undefined && this.state.video.video.comments.length > 0) {
+                    this.props.getComments(this.state.video.video.comments).then(payload => {
+                        this.props.getUsers(Object.values(payload.comments).map(comment => comment.commenter_id)).then(
+                            () => this.commentsLoaded()
+                        )
+                    });
+                }
+                else {
+                    this.props.clearComments();
+                    this.setState({ commentsLoaded: true })
+                }
+                this.setState({ showComments: true });
+            }
+        }
+    }
+
+    showCommentBtns(bool) {
+        return e => this.setState({ comment_btns: bool });
+    }
+
+    thumbAction(bool, likeable_type, likeable_id) {
+        return e => {
             e.preventDefault();
             const like = (bool) => ({ likeable_type: likeable_type, likeable_id: likeable_id, user_id: this.props.currentUser, like_dislike: bool });
             if (likeable_type === "Video") {
@@ -68,15 +246,15 @@ class VideoShow extends React.Component{
                     }
                     // likeable_type: "Video", likeable_id: video.id, like_dislike = bool, user_id: current_user.id
                     // sets value at where likeable_id+type = video_id+type and user_id is current_user.id
-                } 
+                }
             } else {
-                if(this.props.liked_comments.includes(likeable_id)){
+                if (this.props.liked_comments.includes(likeable_id)) {
                     if (bool === true) {
                         this.props.destroyLike(like())
                     } else {
                         this.props.updateLike(like(bool))
                     }
-                } else if (this.props.disliked_comments.includes(likeable_id)){ 
+                } else if (this.props.disliked_comments.includes(likeable_id)) {
                     if (bool === false) {
                         this.props.destroyLike(like())
                     } else {
@@ -88,151 +266,32 @@ class VideoShow extends React.Component{
             }
         }
     }
-    toggleEdit(e){
+
+    toggleEdit(e) {
         e.preventDefault();
         const newState = (this.state.editMode) ? false : true
-        this.setState({editMode: newState, editTitle: this.props.video.video.title, editDescription: this.props.video.video.description})
+        this.setState({ editMode: newState, editTitle: this.props.video.video.title, editDescription: this.props.video.video.description })
     }
-    editField(field){
-        return e => this.setState({[field]: e.target.value});
-    }
-    saveChanges(e){
-        e.preventDefault();
-        this.setState({ editMode: false });
-        if(this.props.video.creator.id !== this.props.currentUser){return;}
-        else {
-            this.props.updateVideo({
-                id: this.state.videoId,
-                title: this.state.editTitle,
-                description: this.state.editDescription
-            });
-        }
-    }
-    showCommentBtns(bool){
-        return e => this.setState({comment_btns: bool});
-    }
-    showComments(e){
-        // console.log(e.target.scrollTop);
-        // console.log(commentSection.offsetParent.offsetHeight);
-        // console.log(commentSection.offsetTop);
-        if (!this.state.showComments && this.state.video.video.id === this.props.video.video.id) {
-            const commentSection = document.getElementById("comment-section");
-            if (e.target.scrollTop + commentSection.offsetParent.offsetHeight
-                > commentSection.offsetTop) {
-                if(this.state.video.video.comments !== undefined && this.state.video.video.comments.length > 0){
-                    this.props.getComments(this.state.video.video.comments).then(payload=>{
-                        this.props.getUsers(Object.values(payload.comments).map(comment => comment.commenter_id)).then(
-                            () => this.commentsLoaded()
-                        )
-                    });
-                }
-                else{
-                    this.props.clearComments();
-                    this.setState({ commentsLoaded: true})
-                }
-                this.setState({showComments: true});
-            }
-        }
-    }
-    commentsLoaded(){
-        this.setState({ commentsLoaded: true, comment: "" });
-        let commentBox = document.getElementsByClassName("comment-ta")[0];
 
-        commentBox.oninput = function() {
-            commentBox.style.height = "";
-            commentBox.style.height = Math.min(commentBox.scrollHeight, 100) + "px";
-        }
-    }
-    createComment(e){
+    toggleEditComment(e, id, comment) {
         e.preventDefault();
-        this.props.createComment({
-            comment: this.state.comment,
-            commenter_id: this.props.currentUser,
-            commentable_type: "Video",
-            commentable_id: this.state.videoId,
-        });
-        this.setState({comment: "", comment_btns: false})
+        if (this.state.edit_comment_id === id) {
+            this.setState({ edit_comment_id: null, edit_comment_text: "" })
+        } else {
+            this.setState({ edit_comment_id: id, edit_comment_text: comment })
+        }
     }
-    loadComment(comment){
-        const commenter = this.props.users[comment.commenter_id];
-        const dim = 25;
-        let replies = <><br /><br /></>
-        if(comment.replies.length > 0){
-            if(this.state.view_replies.includes(comment.id)){
-                replies = <h5 onClick={() => this.toggleReply(comment.id)} id="viewReplyButtons">{upArrowIcon(13)}Hide {comment.replies.length} {comment.replies.length === 1 ? `reply` : `replies`}</h5>
-            } else {
-                replies = <h5 onClick={() => this.toggleReply(comment.id)} id="viewReplyButtons">{downArrowIcon(13)}View {comment.replies.length} {comment.replies.length === 1 ? `reply` : `replies`}</h5>
-            }
-        }
-        // like functionality for signed in users
-        let likeFnc = this.thumbAction(true, "Comment", comment.id);
-        let dislikeFnc = this.thumbAction(false, "Comment", comment.id);
-        if (this.props.currentUser === null) {
-            likeFnc = this.props.showSignup;
-            dislikeFnc = this.props.showSignup;
-        }
-        let thumbsUpClass = "like vid-info-btn";
-        let thumbsDownClass = "dislike vid-info-btn";
-        if (this.props.currentUser) {
-            thumbsUpClass = (this.props.liked_comments.includes(comment.id)) ? "active like vid-info-btn" : "like vid-info-btn";
-            thumbsDownClass = (this.props.disliked_comments.includes(comment.id)) ? "active dislike vid-info-btn" : "dislike vid-info-btn";
-        }
-        return (
-            <li key={`comment-${comment.id}`}>
-                <a href={`/#/channel/${commenter.id}`} style={{ textDecoration: "none" }}>
-                    <div style={{ display: "inline-block" }}>
-                        {(commenter.profile_picture === undefined)
-                            ? profileIcon(dim) : <img src={commenter.profile_picture} width={dim} height={dim} />}
-                        <span className="user-span">{commenter.username}</span>
-                    </div>
-                </a>
-                <h5 style={{ marginLeft: dim, fontWeight: 100, marginTop: 0, wordBreak: "break-all", marginBottom: 5 }}>{comment.comment}</h5>
-                <div onClick={likeFnc} className={thumbsUpClass}>
-                    {thumbsUpIcon(13)}
-                    <span>{comment.likes}</span>
-                </div>
-                <div onClick={dislikeFnc} className={thumbsDownClass}>
-                    {thumbsDownIcon(13)}
-                    <span>{comment.dislikes}</span>
-                </div>
-                {replies}
-            </li>
-        )
-    }
-    toggleReply(commentId){
+
+    toggleReply(commentId) {
         let new_replies = this.state.view_replies;
-        if (new_replies.includes(commentId)){
-            new_replies.splice(new_replies.indexOf(commentId),1)
+        if (new_replies.includes(commentId)) {
+            new_replies.splice(new_replies.indexOf(commentId), 1)
         } else {
             new_replies.push(commentId);
         }
-        this.setState({view_replies: new_replies})
+        this.setState({ view_replies: new_replies })
     }
-    finishSetup() {
-        if (!this.props.video) { return; }
-        this.props.addViewCount(this.props.video.video.id);
-        const video = document.getElementById('video-player')
-        const video_src = document.getElementById('video-src')
-        if(video !== null){video.pause();}
-        this.props.getUser(this.props.video.video.creator_id);
-        this.setState({ 
-            video: this.props.video, 
-            like_dislike: this.props.video.like_dislike, 
-            likes: this.props.video.likes, 
-            dislikes: this.props.video.dislikes,
-            showComments: false,
-            commentsLoaded: false
-        });
-        if (video !== null) {
-            video_src.setAttribute('src', this.props.video.video.videoUrl);
-            video.load();
-            video.volume = 0.25;
-            video.play();
-        }
-    }
-    clearComment(){
-        this.setState({comment: "", comment_btns: false})
-    }
+
     componentDidUpdate() {
         if (this.state.videoId != this.props.match.params.videoId){
             this.setState({
@@ -256,7 +315,6 @@ class VideoShow extends React.Component{
         document.getElementsByClassName("main-content")[0].classList.remove("video-page")
         this.props.clearComments();
     }
-
 
     render() {
         // if(this.props.error[0] === "Video Not Found"){this.props.history.push("/")}
@@ -285,7 +343,7 @@ class VideoShow extends React.Component{
         if(this.state.editMode){
             editButton = (<>
                     <button onClick={this.toggleEdit} style={{marginLeft: 10}}>Cancel</button>
-                    <button onClick={this.saveChanges} style={{marginLeft: 10}}>Save</button>
+                    <button onClick={this.saveVideoChanges} style={{marginLeft: 10}}>Save</button>
             </>)
             title = <input style={{ marginTop: "16px", marginBottom: "8px", fontSize: "1.5em", width: "100%" }} value={this.state.editTitle} onChange={this.editField("editTitle")}/>
             description = <textarea style={{ fontWeight: "400", marginTop: 10, display: "block", width: "100%", height: 50, resize: "vertical"}} value={this.state.editDescription} onChange={this.editField("editDescription")} />
@@ -310,7 +368,13 @@ class VideoShow extends React.Component{
                 </div>
             </>)
         if(this.state.commentsLoaded){
-            const comments = Object.values(this.props.comments).map(comment=>this.loadComment(comment))
+            const comments = Object.values(this.props.comments).map(comment=>{
+                if (comment.commentable_type === "Video") {
+                    return this.loadComment(comment)
+                } else {
+                    return <></>
+                }
+            })
             let comment_btns = <></>
             if (this.state.comment_btns) {
                 let btnClass = "disabled";

@@ -51,4 +51,3 @@ export const createComment = comment => dispatch => {
 export const destroyComment = commentId => dispatch=>{
     return CommentAPIUtil.destroyComment(commentId).then(payload => dispatch(deleteComment(payload)), e => {/* errorsCommentReducer required*/});
 }
-

@@ -45,6 +45,7 @@ const mDTP = dispatch =>{
         createComment: comment=> dispatch(createComment(comment)),
         addViewCount: videoId=> dispatch(addViewCount(videoId)),
         getUserCommentLikes: userId => dispatch(getUserCommentLikes(userId)),
+        // updateComment: comment => dispatch(updateComment(comment)),
     }
 }
 

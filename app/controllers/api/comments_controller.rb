@@ -41,7 +41,12 @@ class Api::CommentsController < ApplicationController
     def destroy
         @comment = Comment.find_by(comment_params)
         if @comment.destroy
-            render json: ["Comment Destroyed"]
+            if params[:commentable_type] == "Video"
+                @comments = Video.find_by(id: params[:commentable_id]).comments
+            else
+                @comments = Comment.find_by(id: params[:commentable_id])
+            end
+            render :index
         else
             render json: ["Couldn't delete comment at this time"], status: 404
         end

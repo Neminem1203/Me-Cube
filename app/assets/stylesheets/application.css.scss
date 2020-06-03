@@ -100,6 +100,7 @@ a:focus{outline:0;}
 }
 .user-form-background, .navbar-background{
   position: fixed;
+  opacity: 50%;
   top: 0;
   bottom: 0;
   right: 0;
@@ -483,6 +484,8 @@ a:focus{outline:0;}
   margin-right: 25px;
   text-decoration: none;
   color: black;
+  font-size: 12; 
+  text-align: "center";
 }
 .upload-video-btn:hover{
   fill: #4ecac8;
@@ -533,6 +536,23 @@ a:focus{outline:0;}
   background-color: lightcoral;
   // opacity: 0;
   transition: all 1s;
+}
+#edit-button, #delete-button{
+  width: 60px;
+  height:23px;
+  margin-left: 10px;
+}
+#edit-comment-buttons{
+  float: right;
+}
+#comment-text{
+  display: block;
+  width: 100%;
+  font-weight: 100;
+  margin-left: 25px;
+  margin-bottom: 15px;
+  margin-top: 0;
+  word-break: break-all;
 }
 #error-window.active{
   top: 15px;
