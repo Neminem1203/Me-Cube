@@ -2815,7 +2815,7 @@ function (_React$Component) {
 
       if (comment.replies.length > 0) {
         if (this.state.view_replies.includes(comment.id)) {
-          replies = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+          replies = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
             onClick: function onClick() {
               return _this3.toggleReply(comment.id);
             },
@@ -2830,14 +2830,14 @@ function (_React$Component) {
             }
           })));
         } else {
-          replies = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+          replies = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
             onClick: function onClick() {
               _this3.props.getReplies(comment.id);
 
               _this3.toggleReply(comment.id);
             },
             id: "viewReplyButtons"
-          }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["downArrowIcon"])(13), "View ", comment.replies.length, " ", comment.replies.length === 1 ? "reply" : "replies");
+          }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["downArrowIcon"])(13), "View ", comment.replies.length, " ", comment.replies.length === 1 ? "reply" : "replies"));
         }
       } // like functionality for signed in users
 

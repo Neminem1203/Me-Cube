@@ -103,6 +103,7 @@ class VideoShow extends React.Component{
         if (comment.replies.length > 0) {
             if (this.state.view_replies.includes(comment.id)) {
                 replies = <>
+                <br />
                 <h5 onClick={() => this.toggleReply(comment.id)} id="viewReplyButtons">{upArrowIcon(13)}Hide {comment.replies.length} {comment.replies.length === 1 ? `reply` : `replies`}</h5>
                 <div id="comment-replies">
                     {Object.values(this.props.comments).map(c => {
@@ -115,10 +116,13 @@ class VideoShow extends React.Component{
                 </div>
                 </>
             } else {
-                replies = <h5 onClick={() => {
+                replies = <>
+                <br />
+                <h5 onClick={() => {
                     this.props.getReplies(comment.id);
                     this.toggleReply(comment.id);
                 }} id="viewReplyButtons">{downArrowIcon(13)}View {comment.replies.length} {comment.replies.length === 1 ? `reply` : `replies`}</h5>
+                </>
             }
         }
         // like functionality for signed in users
