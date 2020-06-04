@@ -325,6 +325,7 @@ a:focus{outline:0;}
   margin-right: 15px;
 }
 .user-span{
+  margin-left: 5px;
   color: gray;
 }
 .user-span:hover{
@@ -554,9 +555,9 @@ a:focus{outline:0;}
 }
 #comment-text{
   display: block;
-  width: 100%;
+  width: 95%;
   font-weight: 100;
-  margin-left: 25px;
+  margin-left: 30px;
   margin-bottom: 15px;
   margin-top: 0;
   word-break: break-all;
