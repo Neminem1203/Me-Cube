@@ -2929,12 +2929,16 @@ function (_React$Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "user-span"
       }, commenter.username)), commentBtns), commentText, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "comment-features"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onClick: likeFnc,
         className: thumbsUpClass
-      }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["thumbsUpIcon"])(13), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, comment.likes)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["thumbsUpIcon"])(17), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, comment.likes)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onClick: dislikeFnc,
         className: thumbsDownClass
-      }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["thumbsDownIcon"])(13), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, comment.dislikes)), replies);
+      }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["thumbsDownIcon"])(17), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, comment.dislikes)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "reply-button"
+      }, "REPLY")), replies);
     }
   }, {
     key: "saveCommentChanges",

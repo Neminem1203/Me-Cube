@@ -44,7 +44,7 @@ a:focus{outline:0;}
 }
 .comment-ta{
   border: 0;
-  background-color: rgb(250, 250, 250);
+  background-color: rgb(255, 255, 255);
   border-bottom: 1px solid lightgray;
   font-size: 14px;
   height: 18px;
@@ -561,6 +561,22 @@ a:focus{outline:0;}
   margin-bottom: 15px;
   margin-top: 0;
   word-break: break-all;
+}
+.reply-button{
+  font-size: 10px;
+  background-color: rgb(250,250,250);
+  color: darkgray;
+  height: 35px;
+  width: 70px;
+  border: 0;
+
+}
+.reply-button:hover{
+  background-color: rgb(230, 230, 230);
+}
+.comment-features{
+  display: flex;
+  align-items: center;
 }
 #error-window.active{
   top: 15px;

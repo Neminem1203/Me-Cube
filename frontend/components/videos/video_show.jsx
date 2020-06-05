@@ -174,13 +174,17 @@ class VideoShow extends React.Component{
                     {commentBtns}
                 </a>
                 {commentText}
-                <div onClick={likeFnc} className={thumbsUpClass}>
-                    {thumbsUpIcon(13)}
-                    <span>{comment.likes}</span>
-                </div>
-                <div onClick={dislikeFnc} className={thumbsDownClass}>
-                    {thumbsDownIcon(13)}
-                    <span>{comment.dislikes}</span>
+                <div className="comment-features">
+                    <div onClick={likeFnc} className={thumbsUpClass}>
+                        {thumbsUpIcon(17)}
+                        <span>{comment.likes}</span>
+                    </div>
+                    <div onClick={dislikeFnc} className={thumbsDownClass}>
+                        {thumbsDownIcon(17)}
+                        <span>{comment.dislikes}</span>
+                    </div>
+                    <button className="reply-button">REPLY</button>
+                    {/* TODO: Reply Input Box Here */}
                 </div>
                 {replies}
             </li>
