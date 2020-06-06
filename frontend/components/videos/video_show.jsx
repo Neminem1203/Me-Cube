@@ -17,6 +17,7 @@ class VideoShow extends React.Component{
             showComments: false,
             commentsLoaded: false,
             comment_btns: false,
+            reply_input_box: [],
             view_replies: [],
             edit_comment_id: null,
             edit_comment_text: "",
@@ -98,7 +99,7 @@ class VideoShow extends React.Component{
 
     loadComment(comment) {
         const commenter = this.props.users[comment.commenter_id];
-        const dim = 25;
+        // Replies to comments will be shown if available
         let replies = <><br /><br /></>
         if (comment.replies.length > 0) {
             if (this.state.view_replies.includes(comment.id)) {
@@ -143,7 +144,7 @@ class VideoShow extends React.Component{
             thumbsUpClass = (this.props.liked_comments.includes(comment.id)) ? "active like vid-info-btn" : "like vid-info-btn";
             thumbsDownClass = (this.props.disliked_comments.includes(comment.id)) ? "active dislike vid-info-btn" : "dislike vid-info-btn";
         }
-
+        // Edit Delete Buttons
         let commentBtns = <></>
         if (commenter && this.props.currentUser == commenter.id) {
             commentBtns =
@@ -153,7 +154,7 @@ class VideoShow extends React.Component{
 
                 </div>;
         }
-
+        // Edit Mode Functionality
         let commentText = <h5 id="comment-text">{comment.comment}</h5>
         if (comment.id === this.state.edit_comment_id) {
             commentText = <input id="comment-text" onChange={this.editField("edit_comment_text")} value={this.state.edit_comment_text}></input>
@@ -163,6 +164,7 @@ class VideoShow extends React.Component{
                     <button onClick={this.saveCommentChanges}id="edit-button">Save</button>
                 </div>;
         }
+        const dim = 25;
         return (
             <li key={`comment-${comment.id}`}>
                 <a href={`/#/channel/${commenter.id}`} style={{ textDecoration: "none" }}>
@@ -325,6 +327,11 @@ class VideoShow extends React.Component{
                 editMode: false, 
                 showComments: false,
                 commentsLoaded: false,
+                comment_btns: false,
+                reply_input_box: [],
+                view_replies: [],
+                edit_comment_id: null,
+                edit_comment_text: "",
             })
             this.props.clearComments();
             this.props.getVideo(this.props.match.params.videoId).then(this.finishSetup);

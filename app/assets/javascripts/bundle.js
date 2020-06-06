@@ -2697,6 +2697,7 @@ function (_React$Component) {
       showComments: false,
       commentsLoaded: false,
       comment_btns: false,
+      reply_input_box: [],
       view_replies: [],
       edit_comment_id: null,
       edit_comment_text: ""
@@ -2809,8 +2810,8 @@ function (_React$Component) {
     value: function loadComment(comment) {
       var _this3 = this;
 
-      var commenter = this.props.users[comment.commenter_id];
-      var dim = 25;
+      var commenter = this.props.users[comment.commenter_id]; // Replies to comments will be shown if available
+
       var replies = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
 
       if (comment.replies.length > 0) {
@@ -2866,7 +2867,8 @@ function (_React$Component) {
       if (this.props.currentUser) {
         thumbsUpClass = this.props.liked_comments.includes(comment.id) ? "active like vid-info-btn" : "like vid-info-btn";
         thumbsDownClass = this.props.disliked_comments.includes(comment.id) ? "active dislike vid-info-btn" : "dislike vid-info-btn";
-      }
+      } // Edit Delete Buttons
+
 
       var commentBtns = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null);
 
@@ -2886,7 +2888,8 @@ function (_React$Component) {
           },
           id: "delete-button"
         }, "Delete"));
-      }
+      } // Edit Mode Functionality
+
 
       var commentText = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
         id: "comment-text"
@@ -2911,6 +2914,7 @@ function (_React$Component) {
         }, "Save"));
       }
 
+      var dim = 25;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         key: "comment-".concat(comment.id)
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
@@ -3147,7 +3151,12 @@ function (_React$Component) {
           videoId: this.props.match.params.videoId,
           editMode: false,
           showComments: false,
-          commentsLoaded: false
+          commentsLoaded: false,
+          comment_btns: false,
+          reply_input_box: [],
+          view_replies: [],
+          edit_comment_id: null,
+          edit_comment_text: ""
         });
         this.props.clearComments();
         this.props.getVideo(this.props.match.params.videoId).then(this.finishSetup);
