@@ -2799,6 +2799,8 @@ function (_React$Component) {
         _this2.setState({
           new_replies: new_replies
         });
+
+        _this2.props.getComments(Object.keys(_this2.props.comments));
       });
       var newReplyBox = this.state.reply_input_box.splice(this.state.reply_input_box.indexOf(comment_id), 1);
       this.setState({
@@ -2855,8 +2857,7 @@ function (_React$Component) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null);
       }
 
-      var commenter = this.props.users[comment.commenter_id];
-      var tempComments = []; // Replies to comments will be shown if available
+      var commenter = this.props.users[comment.commenter_id]; // Replies to comments will be shown if available
 
       var replies = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
 
@@ -2871,16 +2872,15 @@ function (_React$Component) {
             id: "comment-replies"
           }, comment.replies.map(function (c_id) {
             return _this4.loadComment(_this4.props.comments[c_id]);
-          }), tempComments));
+          })));
         } else {
+          var tempComments = [];
           this.state.new_replies.forEach(function (reply_id) {
             var thisReply = _this4.props.comments[reply_id];
 
             if (thisReply !== undefined && thisReply.commentable_id === comment.id && thisReply.commentable_type === "Comment") {
               tempComments = tempComments.concat(_this4.loadComment(thisReply));
             }
-
-            console.log(_this4.props.comments);
           });
           replies = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
             onClick: function onClick() {

@@ -93,6 +93,7 @@ class VideoShow extends React.Component{
             let new_comment_id = Object.values(payload.comment)[0].id;
             let new_replies = this.state.new_replies.concat(new_comment_id);
             this.setState({new_replies: new_replies});
+            this.props.getComments(Object.keys(this.props.comments));
         })
         let newReplyBox = this.state.reply_input_box.splice(this.state.reply_input_box.indexOf(comment_id), 1);
         this.setState({reply_input_box: newReplyBox});
@@ -130,7 +131,7 @@ class VideoShow extends React.Component{
             return <></>
         }
         const commenter = this.props.users[comment.commenter_id];
-        let tempComments = [];
+
         // Replies to comments will be shown if available
         let replies = <><br /><br /></>
         if (comment.replies.length > 0) {
@@ -142,16 +143,15 @@ class VideoShow extends React.Component{
                     {comment.replies.map(c_id => {
                         return this.loadComment(this.props.comments[c_id])
                     })}
-                    {tempComments}
                 </ul>
                 </>
             } else {
-                this.state.new_replies.forEach(reply_id =>{
+                let tempComments = [];
+                this.state.new_replies.forEach(reply_id => {
                     let thisReply = this.props.comments[reply_id];
-                    if(thisReply !== undefined && thisReply.commentable_id === comment.id && thisReply.commentable_type === "Comment"){
+                    if (thisReply !== undefined && thisReply.commentable_id === comment.id && thisReply.commentable_type === "Comment") {
                         tempComments = tempComments.concat(this.loadComment(thisReply))
                     }
-                    console.log(this.props.comments);
                 })
                 replies = 
                 <>
