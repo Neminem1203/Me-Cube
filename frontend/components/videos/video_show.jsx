@@ -21,9 +21,12 @@ class VideoShow extends React.Component{
             view_replies: [],
             edit_comment_id: null,
             edit_comment_text: "",
+            new_replies: [],
         }
+        this.addReplyBox = this.addReplyBox.bind(this);
         this.commentsLoaded = this.commentsLoaded.bind(this);
         this.createComment = this.createComment.bind(this);
+        this.createReply = this.createReply.bind(this);
         this.editField = this.editField.bind(this);
         this.finishSetup = this.finishSetup.bind(this);
         this.loadComment = this.loadComment.bind(this);
@@ -36,6 +39,12 @@ class VideoShow extends React.Component{
         this.toggleReply = this.toggleReply.bind(this);
     }
 
+    addReplyBox(comment_id){
+        if (!this.state.reply_input_box.includes(comment_id)) {
+            let newReplyBox = this.state.reply_input_box.concat(comment_id);
+            this.setState({ reply_input_box: newReplyBox });
+        }
+    }
     clearComment() {
         this.setState({ comment: "", comment_btns: false })
     }
@@ -70,6 +79,25 @@ class VideoShow extends React.Component{
         this.setState({ comment: "", comment_btns: false })
     }
 
+    createReply(e) {
+        e.preventDefault();
+        let parent = e.target.parentNode;
+        let comment_id = parseInt(parent.elements[0].value);
+        let comment = parent.elements[1].value;
+        this.props.createComment({
+            comment: comment,
+            commenter_id: this.props.currentUser,
+            commentable_type: "Comment",
+            commentable_id: comment_id,
+        }).then(payload => {
+            let new_comment_id = Object.values(payload.comment)[0].id;
+            let new_replies = this.state.new_replies.concat(new_comment_id);
+            this.setState({new_replies: new_replies});
+        })
+        let newReplyBox = this.state.reply_input_box.splice(this.state.reply_input_box.indexOf(comment_id), 1);
+        this.setState({reply_input_box: newReplyBox});
+    }
+    
     editField(field) {
         return e => this.setState({ [field]: e.target.value });
     }
@@ -98,7 +126,11 @@ class VideoShow extends React.Component{
     }
 
     loadComment(comment) {
+        if(comment === undefined){
+            return <></>
+        }
         const commenter = this.props.users[comment.commenter_id];
+        let tempComments = [];
         // Replies to comments will be shown if available
         let replies = <><br /><br /></>
         if (comment.replies.length > 0) {
@@ -108,26 +140,35 @@ class VideoShow extends React.Component{
                 <h5 onClick={() => this.toggleReply(comment.id)} id="viewReplyButtons">{upArrowIcon(13)}Hide {comment.replies.length} {comment.replies.length === 1 ? `reply` : `replies`}</h5>
                 <ul id="comment-replies">
                     {comment.replies.map(c_id => {
-
                         return this.loadComment(this.props.comments[c_id])
                     })}
+                    {tempComments}
                 </ul>
                 </>
             } else {
-                
+                this.state.new_replies.forEach(reply_id =>{
+                    let thisReply = this.props.comments[reply_id];
+                    if(thisReply !== undefined && thisReply.commentable_id === comment.id && thisReply.commentable_type === "Comment"){
+                        tempComments = tempComments.concat(this.loadComment(thisReply))
+                    }
+                    console.log(this.props.comments);
+                })
                 replies = 
                 <>
                 <br />
                 <h5 onClick={() => {
                     if (!comment.replies.every(c_id => Object.keys(this.props.comments).includes(c_id.toString()))){
                         this.props.getReplies(comment.id).then(payload => {
-                            let users = Object.values(payload.comments).map(comment => comment.commenter_id)
-                            this.props.getUsers(users).then(payload => this.toggleReply(comment.id));;
+                            let users = Object.values(payload.comments).map(comment => comment.commenter_id);
+                            this.props.getUsers(users).then(payload => this.toggleReply(comment.id));
                         })
                     } else {
                         this.toggleReply(comment.id)
                     }
                 }} id="viewReplyButtons">{downArrowIcon(13)}View {comment.replies.length} {comment.replies.length === 1 ? `reply` : `replies`}</h5>
+                    <ul id="comment-replies">
+                        {tempComments}
+                    </ul>
                 </>
             }
         }
@@ -164,6 +205,15 @@ class VideoShow extends React.Component{
                     <button onClick={this.saveCommentChanges}id="edit-button">Save</button>
                 </div>;
         }
+        // Reply Box Functionality
+        let replyBox = <></>
+        if(this.state.reply_input_box.includes(comment.id)){
+            replyBox = <form>
+                <input hidden readOnly id="reply-to-comment" value={comment.id}></input>
+                <input id="reply-box"></input>
+                <button onClick={this.createReply}>Reply</button>
+            </form>
+        }
         const dim = 25;
         return (
             <li key={`comment-${comment.id}`}>
@@ -185,8 +235,8 @@ class VideoShow extends React.Component{
                         {thumbsDownIcon(17)}
                         <span>{comment.dislikes}</span>
                     </div>
-                    <button className="reply-button">REPLY</button>
-                    {/* TODO: Reply Input Box Here */}
+                    <button className="reply-button" onClick={e=>{e.preventDefault();this.addReplyBox(comment.id);}}>REPLY</button>
+                    {replyBox}
                 </div>
                 {replies}
             </li>
@@ -416,8 +466,8 @@ class VideoShow extends React.Component{
 
                 comment_btns = (
                     <div className="comment-btns">
-                        <button onClick={this.showCommentBtns(false)}>Cancel</button>
-                        <button className={btnClass} disabled={btnClass} onClick={commentFnc}>Submit</button>
+                        <button onClick={this.showCommentBtns(false)}>CANCEL</button>
+                        <button className={btnClass} disabled={btnClass} onClick={commentFnc}>COMMENT</button>
                     </div>
                 )
             }

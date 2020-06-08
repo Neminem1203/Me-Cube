@@ -2700,10 +2700,13 @@ function (_React$Component) {
       reply_input_box: [],
       view_replies: [],
       edit_comment_id: null,
-      edit_comment_text: ""
+      edit_comment_text: "",
+      new_replies: []
     };
+    _this.addReplyBox = _this.addReplyBox.bind(_assertThisInitialized(_this));
     _this.commentsLoaded = _this.commentsLoaded.bind(_assertThisInitialized(_this));
     _this.createComment = _this.createComment.bind(_assertThisInitialized(_this));
+    _this.createReply = _this.createReply.bind(_assertThisInitialized(_this));
     _this.editField = _this.editField.bind(_assertThisInitialized(_this));
     _this.finishSetup = _this.finishSetup.bind(_assertThisInitialized(_this));
     _this.loadComment = _this.loadComment.bind(_assertThisInitialized(_this));
@@ -2718,6 +2721,16 @@ function (_React$Component) {
   }
 
   _createClass(VideoShow, [{
+    key: "addReplyBox",
+    value: function addReplyBox(comment_id) {
+      if (!this.state.reply_input_box.includes(comment_id)) {
+        var newReplyBox = this.state.reply_input_box.concat(comment_id);
+        this.setState({
+          reply_input_box: newReplyBox
+        });
+      }
+    }
+  }, {
     key: "clearComment",
     value: function clearComment() {
       this.setState({
@@ -2765,12 +2778,40 @@ function (_React$Component) {
       });
     }
   }, {
-    key: "editField",
-    value: function editField(field) {
+    key: "createReply",
+    value: function createReply(e) {
       var _this2 = this;
 
+      e.preventDefault();
+      var parent = e.target.parentNode;
+      var comment_id = parseInt(parent.elements[0].value);
+      var comment = parent.elements[1].value;
+      this.props.createComment({
+        comment: comment,
+        commenter_id: this.props.currentUser,
+        commentable_type: "Comment",
+        commentable_id: comment_id
+      }).then(function (payload) {
+        var new_comment_id = Object.values(payload.comment)[0].id;
+
+        var new_replies = _this2.state.new_replies.concat(new_comment_id);
+
+        _this2.setState({
+          new_replies: new_replies
+        });
+      });
+      var newReplyBox = this.state.reply_input_box.splice(this.state.reply_input_box.indexOf(comment_id), 1);
+      this.setState({
+        reply_input_box: newReplyBox
+      });
+    }
+  }, {
+    key: "editField",
+    value: function editField(field) {
+      var _this3 = this;
+
       return function (e) {
-        return _this2.setState(_defineProperty({}, field, e.target.value));
+        return _this3.setState(_defineProperty({}, field, e.target.value));
       };
     }
   }, {
@@ -2808,9 +2849,14 @@ function (_React$Component) {
   }, {
     key: "loadComment",
     value: function loadComment(comment) {
-      var _this3 = this;
+      var _this4 = this;
 
-      var commenter = this.props.users[comment.commenter_id]; // Replies to comments will be shown if available
+      if (comment === undefined) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null);
+      }
+
+      var commenter = this.props.users[comment.commenter_id];
+      var tempComments = []; // Replies to comments will be shown if available
 
       var replies = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
 
@@ -2818,37 +2864,46 @@ function (_React$Component) {
         if (this.state.view_replies.includes(comment.id)) {
           replies = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
             onClick: function onClick() {
-              return _this3.toggleReply(comment.id);
+              return _this4.toggleReply(comment.id);
             },
             id: "viewReplyButtons"
           }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["upArrowIcon"])(13), "Hide ", comment.replies.length, " ", comment.replies.length === 1 ? "reply" : "replies"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
             id: "comment-replies"
           }, comment.replies.map(function (c_id) {
-            return _this3.loadComment(_this3.props.comments[c_id]);
-          })));
+            return _this4.loadComment(_this4.props.comments[c_id]);
+          }), tempComments));
         } else {
+          this.state.new_replies.forEach(function (reply_id) {
+            var thisReply = _this4.props.comments[reply_id];
+
+            if (thisReply !== undefined && thisReply.commentable_id === comment.id && thisReply.commentable_type === "Comment") {
+              tempComments = tempComments.concat(_this4.loadComment(thisReply));
+            }
+
+            console.log(_this4.props.comments);
+          });
           replies = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
             onClick: function onClick() {
               if (!comment.replies.every(function (c_id) {
-                return Object.keys(_this3.props.comments).includes(c_id.toString());
+                return Object.keys(_this4.props.comments).includes(c_id.toString());
               })) {
-                _this3.props.getReplies(comment.id).then(function (payload) {
+                _this4.props.getReplies(comment.id).then(function (payload) {
                   var users = Object.values(payload.comments).map(function (comment) {
                     return comment.commenter_id;
                   });
 
-                  _this3.props.getUsers(users).then(function (payload) {
-                    return _this3.toggleReply(comment.id);
+                  _this4.props.getUsers(users).then(function (payload) {
+                    return _this4.toggleReply(comment.id);
                   });
-
-                  ;
                 });
               } else {
-                _this3.toggleReply(comment.id);
+                _this4.toggleReply(comment.id);
               }
             },
             id: "viewReplyButtons"
-          }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["downArrowIcon"])(13), "View ", comment.replies.length, " ", comment.replies.length === 1 ? "reply" : "replies"));
+          }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["downArrowIcon"])(13), "View ", comment.replies.length, " ", comment.replies.length === 1 ? "reply" : "replies"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+            id: "comment-replies"
+          }, tempComments));
         }
       } // like functionality for signed in users
 
@@ -2877,14 +2932,14 @@ function (_React$Component) {
           id: "edit-comment-buttons"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: function onClick(e) {
-            _this3.toggleEditComment(e, comment.id, comment.comment);
+            _this4.toggleEditComment(e, comment.id, comment.comment);
           },
           id: "edit-button"
         }, "Edit"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: function onClick(e) {
             e.preventDefault();
 
-            _this3.props.destroyComment(comment.id);
+            _this4.props.destroyComment(comment.id);
           },
           id: "delete-button"
         }, "Delete"));
@@ -2905,13 +2960,29 @@ function (_React$Component) {
           id: "edit-comment-buttons"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: function onClick(e) {
-            _this3.toggleEditComment(e, comment.id, comment.comment);
+            _this4.toggleEditComment(e, comment.id, comment.comment);
           },
           id: "delete-button"
         }, "Cancel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: this.saveCommentChanges,
           id: "edit-button"
         }, "Save"));
+      } // Reply Box Functionality
+
+
+      var replyBox = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null);
+
+      if (this.state.reply_input_box.includes(comment.id)) {
+        replyBox = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          hidden: true,
+          readOnly: true,
+          id: "reply-to-comment",
+          value: comment.id
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          id: "reply-box"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: this.createReply
+        }, "Reply"));
       }
 
       var dim = 25;
@@ -2941,13 +3012,18 @@ function (_React$Component) {
         onClick: dislikeFnc,
         className: thumbsDownClass
       }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["thumbsDownIcon"])(17), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, comment.dislikes)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "reply-button"
-      }, "REPLY")), replies);
+        className: "reply-button",
+        onClick: function onClick(e) {
+          e.preventDefault();
+
+          _this4.addReplyBox(comment.id);
+        }
+      }, "REPLY"), replyBox), replies);
     }
   }, {
     key: "saveCommentChanges",
     value: function saveCommentChanges(e) {
-      var _this4 = this;
+      var _this5 = this;
 
       e.preventDefault();
 
@@ -2958,7 +3034,7 @@ function (_React$Component) {
           id: this.state.edit_comment_id,
           comment: this.state.edit_comment_text
         }).then(function (payload) {
-          _this4.setState({
+          _this5.setState({
             edit_comment_id: null,
             edit_comment_text: null
           });
@@ -2986,7 +3062,7 @@ function (_React$Component) {
   }, {
     key: "showComments",
     value: function showComments(e) {
-      var _this5 = this;
+      var _this6 = this;
 
       // console.log(e.target.scrollTop);
       // console.log(commentSection.offsetParent.offsetHeight);
@@ -2997,10 +3073,10 @@ function (_React$Component) {
         if (e.target.scrollTop + commentSection.offsetParent.offsetHeight > commentSection.offsetTop) {
           if (this.state.video.video.comments !== undefined && this.state.video.video.comments.length > 0) {
             this.props.getComments(this.state.video.video.comments).then(function (payload) {
-              _this5.props.getUsers(Object.values(payload.comments).map(function (comment) {
+              _this6.props.getUsers(Object.values(payload.comments).map(function (comment) {
                 return comment.commenter_id;
               })).then(function () {
-                return _this5.commentsLoaded();
+                return _this6.commentsLoaded();
               });
             });
           } else {
@@ -3018,10 +3094,10 @@ function (_React$Component) {
   }, {
     key: "showCommentBtns",
     value: function showCommentBtns(bool) {
-      var _this6 = this;
+      var _this7 = this;
 
       return function (e) {
-        return _this6.setState({
+        return _this7.setState({
           comment_btns: bool
         });
       };
@@ -3029,7 +3105,7 @@ function (_React$Component) {
   }, {
     key: "thumbAction",
     value: function thumbAction(bool, likeable_type, likeable_id) {
-      var _this7 = this;
+      var _this8 = this;
 
       return function (e) {
         e.preventDefault();
@@ -3038,64 +3114,64 @@ function (_React$Component) {
           return {
             likeable_type: likeable_type,
             likeable_id: likeable_id,
-            user_id: _this7.props.currentUser,
+            user_id: _this8.props.currentUser,
             like_dislike: bool
           };
         };
 
         if (likeable_type === "Video") {
           var field = bool ? "likes" : "dislikes";
-          var fieldVal = _this7.state[field];
+          var fieldVal = _this8.state[field];
           var otherField = bool ? "dislikes" : "likes";
-          var otherFieldVal = _this7.state[otherField];
+          var otherFieldVal = _this8.state[otherField];
 
-          if (_this7.state.like_dislike === bool) {
+          if (_this8.state.like_dislike === bool) {
             //Destroy the like/dislike
-            _this7.setState(_defineProperty({
+            _this8.setState(_defineProperty({
               like_dislike: undefined
             }, field, fieldVal - 1)); // Call Destroy on like_dislike where video_id is this video and user_id is current_user.id
 
 
-            _this7.props.destroyLike(like());
+            _this8.props.destroyLike(like());
           } else {
             // Increment field the decrement otherField
             var method = "create";
 
-            if (_this7.state.like_dislike !== undefined) {
+            if (_this8.state.like_dislike !== undefined) {
               //Decrement otherField
-              _this7.setState(_defineProperty({}, otherField, otherFieldVal - 1));
+              _this8.setState(_defineProperty({}, otherField, otherFieldVal - 1));
 
               method = "update"; // UPDATE
             }
 
-            _this7.setState(_defineProperty({
+            _this8.setState(_defineProperty({
               like_dislike: bool
             }, field, fieldVal + 1));
 
             if (method === "create") {
-              _this7.props.createLike(like(bool));
+              _this8.props.createLike(like(bool));
             } else {
-              _this7.props.updateLike(like(bool));
+              _this8.props.updateLike(like(bool));
             } // likeable_type: "Video", likeable_id: video.id, like_dislike = bool, user_id: current_user.id
             // sets value at where likeable_id+type = video_id+type and user_id is current_user.id
 
           }
         } else {
-          if (_this7.props.liked_comments.includes(likeable_id)) {
+          if (_this8.props.liked_comments.includes(likeable_id)) {
             if (bool === true) {
-              _this7.props.destroyLike(like());
+              _this8.props.destroyLike(like());
             } else {
-              _this7.props.updateLike(like(bool));
+              _this8.props.updateLike(like(bool));
             }
-          } else if (_this7.props.disliked_comments.includes(likeable_id)) {
+          } else if (_this8.props.disliked_comments.includes(likeable_id)) {
             if (bool === false) {
-              _this7.props.destroyLike(like());
+              _this8.props.destroyLike(like());
             } else {
-              _this7.props.updateLike(like(bool));
+              _this8.props.updateLike(like(bool));
             }
           } else {
             // just create 
-            _this7.props.createLike(like(bool));
+            _this8.props.createLike(like(bool));
           }
         }
       };
@@ -3180,7 +3256,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this8 = this;
+      var _this9 = this;
 
       // if(this.props.error[0] === "Video Not Found"){this.props.history.push("/")}
       // return null if video doesn't have a creator (meaning video doesn't exist)
@@ -3286,7 +3362,7 @@ function (_React$Component) {
       if (this.state.commentsLoaded) {
         var comments = Object.values(this.props.comments).map(function (comment) {
           if (comment.commentable_type === "Video") {
-            return _this8.loadComment(comment);
+            return _this9.loadComment(comment);
           } else {
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null);
           }
@@ -3304,11 +3380,11 @@ function (_React$Component) {
             className: "comment-btns"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
             onClick: this.showCommentBtns(false)
-          }, "Cancel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          }, "CANCEL"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
             className: btnClass,
             disabled: btnClass,
             onClick: commentFnc
-          }, "Submit"));
+          }, "COMMENT"));
         }
 
         var numComments = this.state.video.video.comments.length;
