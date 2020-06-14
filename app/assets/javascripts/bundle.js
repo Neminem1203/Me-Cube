@@ -2985,6 +2985,16 @@ function (_React$Component) {
         }, "Reply"));
       }
 
+      var replyBtnFnc = function replyBtnFnc() {
+        return _this4.addReplyBox(comment.id);
+      };
+
+      if (this.props.currentUser === null) {
+        replyBtnFnc = function replyBtnFnc() {
+          return _this4.props.showSignup();
+        };
+      }
+
       var dim = 25;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         key: "comment-".concat(comment.id)
@@ -3015,8 +3025,7 @@ function (_React$Component) {
         className: "reply-button",
         onClick: function onClick(e) {
           e.preventDefault();
-
-          _this4.addReplyBox(comment.id);
+          replyBtnFnc();
         }
       }, "REPLY"), replyBox), replies);
     }

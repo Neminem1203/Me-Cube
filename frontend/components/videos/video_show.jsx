@@ -214,6 +214,11 @@ class VideoShow extends React.Component{
                 <button onClick={this.createReply}>Reply</button>
             </form>
         }
+
+        let replyBtnFnc = () => this.addReplyBox(comment.id);
+        if(this.props.currentUser === null){
+            replyBtnFnc = () => this.props.showSignup();
+        }
         const dim = 25;
         return (
             <li key={`comment-${comment.id}`}>
@@ -235,7 +240,7 @@ class VideoShow extends React.Component{
                         {thumbsDownIcon(17)}
                         <span>{comment.dislikes}</span>
                     </div>
-                    <button className="reply-button" onClick={e=>{e.preventDefault();this.addReplyBox(comment.id);}}>REPLY</button>
+                    <button className="reply-button" onClick={e => { e.preventDefault(); replyBtnFnc();}}>REPLY</button>
                     {replyBox}
                 </div>
                 {replies}
