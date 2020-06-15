@@ -30,6 +30,7 @@ class VideoShow extends React.Component{
         this.editField = this.editField.bind(this);
         this.finishSetup = this.finishSetup.bind(this);
         this.loadComment = this.loadComment.bind(this);
+        this.removeReplyBox = this.removeReplyBox.bind(this);
         this.saveCommentChanges = this.saveCommentChanges.bind(this);
         this.saveVideoChanges = this.saveVideoChanges.bind(this);
         this.showComments = this.showComments.bind(this);
@@ -45,6 +46,7 @@ class VideoShow extends React.Component{
             this.setState({ reply_input_box: newReplyBox });
         }
     }
+
     clearComment() {
         this.setState({ comment: "", comment_btns: false })
     }
@@ -81,9 +83,9 @@ class VideoShow extends React.Component{
 
     createReply(e) {
         e.preventDefault();
-        let parent = e.target.parentNode;
-        let comment_id = parseInt(parent.elements[0].value);
-        let comment = parent.elements[1].value;
+        let targ = e.target.parentElement.parentElement;
+        let comment_id = parseInt(targ.elements[0].value);
+        let comment = targ.elements[1].value;
         this.props.createComment({
             comment: comment,
             commenter_id: this.props.currentUser,
@@ -95,8 +97,10 @@ class VideoShow extends React.Component{
             this.setState({new_replies: new_replies});
             this.props.getComments(Object.keys(this.props.comments));
         })
-        let newReplyBox = this.state.reply_input_box.splice(this.state.reply_input_box.indexOf(comment_id), 1);
-        this.setState({reply_input_box: newReplyBox});
+        // let new_view_replies = this.state.view_replies;
+        // new_view_replies.splice(new_view_replies.indexOf(comment_id), 1);
+        // this.setState({ view_replies: new_view_replies });
+        this.removeReplyBox(comment_id);
     }
     
     editField(field) {
@@ -208,11 +212,21 @@ class VideoShow extends React.Component{
         // Reply Box Functionality
         let replyBox = <></>
         if(this.state.reply_input_box.includes(comment.id)){
-            replyBox = <form>
+            replyBox = <>
+            <br />
+            <form>
                 <input hidden readOnly id="reply-to-comment" value={comment.id}></input>
-                <input id="reply-box"></input>
-                <button onClick={this.createReply}>Reply</button>
+                <textarea
+                    id="reply-box"
+                    className="comment-ta"
+                    placeholder="Add a reply..."
+                />
+                <div className="comment-btns">
+                    <button onClick={e => {e.preventDefault();this.removeReplyBox(comment.id)}}>CANCEL</button>
+                    <button onClick={this.createReply}>REPLY</button>
+                </div>
             </form>
+            </>
         }
 
         let replyBtnFnc = () => this.addReplyBox(comment.id);
@@ -241,11 +255,20 @@ class VideoShow extends React.Component{
                         <span>{comment.dislikes}</span>
                     </div>
                     <button className="reply-button" onClick={e => { e.preventDefault(); replyBtnFnc();}}>REPLY</button>
-                    {replyBox}
                 </div>
+                {replyBox}
                 {replies}
             </li>
         )
+        
+    }
+
+    removeReplyBox(comment_id){
+        let new_replies = this.state.reply_input_box;
+        if(new_replies.includes(comment_id)){
+            new_replies.splice(new_replies.indexOf(comment_id),1);
+            this.setState({reply_input_box: new_replies});
+        }
     }
 
     saveCommentChanges(e){
@@ -298,7 +321,7 @@ class VideoShow extends React.Component{
     }
 
     showCommentBtns(bool) {
-        return e => this.setState({ comment_btns: bool });
+        return e => this.setState({ comment_btns: bool, comment: "" });
     }
 
     thumbAction(bool, likeable_type, likeable_id) {

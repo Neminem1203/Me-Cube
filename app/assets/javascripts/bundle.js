@@ -2710,6 +2710,7 @@ function (_React$Component) {
     _this.editField = _this.editField.bind(_assertThisInitialized(_this));
     _this.finishSetup = _this.finishSetup.bind(_assertThisInitialized(_this));
     _this.loadComment = _this.loadComment.bind(_assertThisInitialized(_this));
+    _this.removeReplyBox = _this.removeReplyBox.bind(_assertThisInitialized(_this));
     _this.saveCommentChanges = _this.saveCommentChanges.bind(_assertThisInitialized(_this));
     _this.saveVideoChanges = _this.saveVideoChanges.bind(_assertThisInitialized(_this));
     _this.showComments = _this.showComments.bind(_assertThisInitialized(_this));
@@ -2783,9 +2784,9 @@ function (_React$Component) {
       var _this2 = this;
 
       e.preventDefault();
-      var parent = e.target.parentNode;
-      var comment_id = parseInt(parent.elements[0].value);
-      var comment = parent.elements[1].value;
+      var targ = e.target.parentElement.parentElement;
+      var comment_id = parseInt(targ.elements[0].value);
+      var comment = targ.elements[1].value;
       this.props.createComment({
         comment: comment,
         commenter_id: this.props.currentUser,
@@ -2801,11 +2802,11 @@ function (_React$Component) {
         });
 
         _this2.props.getComments(Object.keys(_this2.props.comments));
-      });
-      var newReplyBox = this.state.reply_input_box.splice(this.state.reply_input_box.indexOf(comment_id), 1);
-      this.setState({
-        reply_input_box: newReplyBox
-      });
+      }); // let new_view_replies = this.state.view_replies;
+      // new_view_replies.splice(new_view_replies.indexOf(comment_id), 1);
+      // this.setState({ view_replies: new_view_replies });
+
+      this.removeReplyBox(comment_id);
     }
   }, {
     key: "editField",
@@ -2973,16 +2974,26 @@ function (_React$Component) {
       var replyBox = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null);
 
       if (this.state.reply_input_box.includes(comment.id)) {
-        replyBox = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        replyBox = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           hidden: true,
           readOnly: true,
           id: "reply-to-comment",
           value: comment.id
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-          id: "reply-box"
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+          id: "reply-box",
+          className: "comment-ta",
+          placeholder: "Add a reply..."
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "comment-btns"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: function onClick(e) {
+            e.preventDefault();
+
+            _this4.removeReplyBox(comment.id);
+          }
+        }, "CANCEL"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: this.createReply
-        }, "Reply"));
+        }, "REPLY"))));
       }
 
       var replyBtnFnc = function replyBtnFnc() {
@@ -3027,7 +3038,19 @@ function (_React$Component) {
           e.preventDefault();
           replyBtnFnc();
         }
-      }, "REPLY"), replyBox), replies);
+      }, "REPLY")), replyBox, replies);
+    }
+  }, {
+    key: "removeReplyBox",
+    value: function removeReplyBox(comment_id) {
+      var new_replies = this.state.reply_input_box;
+
+      if (new_replies.includes(comment_id)) {
+        new_replies.splice(new_replies.indexOf(comment_id), 1);
+        this.setState({
+          reply_input_box: new_replies
+        });
+      }
     }
   }, {
     key: "saveCommentChanges",
@@ -3107,7 +3130,8 @@ function (_React$Component) {
 
       return function (e) {
         return _this7.setState({
-          comment_btns: bool
+          comment_btns: bool,
+          comment: ""
         });
       };
     }
