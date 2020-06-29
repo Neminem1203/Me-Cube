@@ -18,6 +18,7 @@ class Channel extends React.Component{
         this.handleSetup = this.handleSetup.bind(this);
     }
     handleSetup() {
+        this.props.clearError();
         this.props.getUser(this.props.match.params.channelId).then(test => {
             test.user.videos.forEach(vidId => {
                 this.props.getVideo(vidId)
@@ -26,19 +27,17 @@ class Channel extends React.Component{
         });
     }
     componentDidMount() {
-        this.props.clearError();
         this.handleSetup();
     }
 
-    componentDidUpdate(){
+    componentDidUpdate() {
         if (this.state.ready && this.state.creator_id !== this.props.match.params.channelId){
             this.setState({creator_id: this.props.match.params.channelId, ready: false})
             this.handleSetup();
         }
     }
     render() {
-        if( this.props.error !== null){this.props.history.push("/");}
-        if (!this.state.ready) {return <h1>Loading... </h1>}
+        if (this.props.error !== null || !this.state.ready) {return <h1>Loading...</h1>}
         // let userVideos = <></>;
         // if (Object.keys(this.state.videos).length !== 0){
         //      userVideos = this.state.creator.videos.map(vidId=>{

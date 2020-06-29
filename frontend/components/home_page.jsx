@@ -4,13 +4,18 @@ class HomePage extends React.Component{
     constructor(props){
         super(props);
     }
+
+    componentDidMount(){
+        this.props.clearError();
+    }
+
     render(){
         return(
             <>
                 <h2>Recommended</h2>
                 <VideoList limit="8"/>
                 <br />
-                </>
+            </>
         );
     }
 }

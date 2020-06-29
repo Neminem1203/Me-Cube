@@ -416,11 +416,12 @@ class VideoShow extends React.Component{
         }
     }
     componentDidMount(){
+        this.props.clearError();
         this.props.getVideo(this.props.match.params.videoId).then(this.finishSetup);
         const mainContent = document.getElementsByClassName("main-content")[0];
         mainContent.classList.add("video-page");
         mainContent.addEventListener("scroll", this.showComments);
-        this.props.getUserCommentLikes(this.props.currentUser)
+        this.props.getUserCommentLikes(this.props.currentUser);
     }
 
     componentWillUnmount(){

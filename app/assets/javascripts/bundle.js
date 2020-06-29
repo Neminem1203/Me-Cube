@@ -1224,6 +1224,11 @@ function (_React$Component) {
   }
 
   _createClass(HomePage, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.clearError();
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Recommended"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_videos_video_list_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -1236,6 +1241,38 @@ function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (HomePage);
+
+/***/ }),
+
+/***/ "./frontend/components/home_page_container.js":
+/*!****************************************************!*\
+  !*** ./frontend/components/home_page_container.js ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _home_page__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./home_page */ "./frontend/components/home_page.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/modal_actions */ "./frontend/actions/modal_actions.js");
+
+
+
+
+var mSTP = function mSTP(state, ownProps) {
+  return {};
+};
+
+var mDTP = function mDTP(dispatch) {
+  return {
+    clearError: function clearError() {
+      return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_2__["clearError"])());
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mSTP, mDTP)(_home_page__WEBPACK_IMPORTED_MODULE_0__["default"]));
 
 /***/ }),
 
@@ -1252,7 +1289,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _util_route_util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../util/route_util */ "./frontend/util/route_util.jsx");
-/* harmony import */ var _home_page__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./home_page */ "./frontend/components/home_page.jsx");
+/* harmony import */ var _home_page_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./home_page_container */ "./frontend/components/home_page_container.js");
 /* harmony import */ var _users_edit_user_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./users/edit_user_container */ "./frontend/components/users/edit_user_container.js");
 /* harmony import */ var _videos_video_show_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./videos/video_show_container */ "./frontend/components/videos/video_show_container.js");
 /* harmony import */ var _videos_video_create_container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./videos/video_create_container */ "./frontend/components/videos/video_create_container.js");
@@ -1313,7 +1350,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
         exact: true,
         path: "/",
-        component: _home_page__WEBPACK_IMPORTED_MODULE_3__["default"]
+        component: _home_page_container__WEBPACK_IMPORTED_MODULE_3__["default"]
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_2__["ProtectedRoute"], {
         exact: true,
         path: "/user/edit",
@@ -1479,6 +1516,7 @@ function (_React$Component) {
     value: function handleSetup() {
       var _this2 = this;
 
+      this.props.clearError();
       this.props.getUser(this.props.match.params.channelId).then(function (test) {
         test.user.videos.forEach(function (vidId) {
           _this2.props.getVideo(vidId);
@@ -1494,7 +1532,6 @@ function (_React$Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.clearError();
       this.handleSetup();
     }
   }, {
@@ -1511,12 +1548,8 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      if (this.props.error !== null) {
-        this.props.history.push("/");
-      }
-
-      if (!this.state.ready) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Loading... ");
+      if (this.props.error !== null || !this.state.ready) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Loading...");
       } // let userVideos = <></>;
       // if (Object.keys(this.state.videos).length !== 0){
       //      userVideos = this.state.creator.videos.map(vidId=>{
@@ -3278,6 +3311,7 @@ function (_React$Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
+      this.props.clearError();
       this.props.getVideo(this.props.match.params.videoId).then(this.finishSetup);
       var mainContent = document.getElementsByClassName("main-content")[0];
       mainContent.classList.add("video-page");
@@ -3566,6 +3600,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var mSTP = function mSTP(state, ownProps) {
   var video = state.entities.videos[ownProps.match.params.videoId];
 
@@ -3604,6 +3639,9 @@ var mDTP = function mDTP(dispatch) {
     },
     clearComments: function clearComments() {
       return dispatch(Object(_actions_comment_actions__WEBPACK_IMPORTED_MODULE_6__["clearComments"])());
+    },
+    clearError: function clearError() {
+      return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_5__["clearError"])());
     },
     createComment: function createComment(comment) {
       return dispatch(Object(_actions_comment_actions__WEBPACK_IMPORTED_MODULE_6__["createComment"])(comment));

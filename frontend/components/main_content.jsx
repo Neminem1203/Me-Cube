@@ -2,7 +2,7 @@ import React from "react";
 import { Route } from "react-router-dom";
 import { ProtectedRoute } from "../util/route_util";
 
-import HomePage from "./home_page";
+import HomePage from "./home_page_container";
 import EditUser from "./users/edit_user_container";
 import VideoShow from "./videos/video_show_container";
 import VideoCreate from "./videos/video_create_container";

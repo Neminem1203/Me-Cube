@@ -5,7 +5,7 @@ import { getUser } from "../../actions/users_actions";
 import { clearError } from "../../actions/modal_actions";
 
 
-const mSTP = (state, ownProps)=> {
+const mSTP = (state, ownProps) => {
     return {
         yourId: state.session.userId,
         creator: state.entities.users[ownProps.match.params.channelId],

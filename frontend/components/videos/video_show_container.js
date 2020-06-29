@@ -6,6 +6,7 @@ import {createLike, updateLike, destroyLike} from "../../actions/like_actions";
 import { showModal, SIGN_UP } from "../../actions/modal_actions";
 import { getComments, getReplies, clearComments, createComment, updateComment, destroyComment } from "../../actions/comment_actions";
 import { getUserCommentLikes } from "../../actions/like_actions"
+import { clearError } from "../../actions/modal_actions"
 
 const mSTP = (state, ownProps) => {
     let video = state.entities.videos[ownProps.match.params.videoId];
@@ -36,6 +37,7 @@ const mDTP = dispatch =>{
         destroyComment: commentId => dispatch(destroyComment(commentId)),
         destroyLike: like => dispatch(destroyLike(like)),
         clearComments: () => dispatch(clearComments()),
+        clearError: () => dispatch(clearError()),
         createComment: comment => dispatch(createComment(comment)),
         createLike: like => dispatch(createLike(like)),
         getComments: comments => dispatch(getComments(comments)),
