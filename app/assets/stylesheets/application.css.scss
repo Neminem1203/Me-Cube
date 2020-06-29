@@ -491,6 +491,10 @@ a:focus{outline:0;}
   display: flex;
   justify-content: space-between;
 }
+#profile-picture-username{
+  display: flex;
+  justify-content: flex-start;
+}
 .upload-video-btn{
   margin-right: 25px;
   text-decoration: none;

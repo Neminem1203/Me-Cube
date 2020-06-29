@@ -1,5 +1,7 @@
 import React from "react";
 import VideoList from "../videos/video_list_container";
+import { profileIcon } from "../../icons";
+const dim = 100;
 class Channel extends React.Component{
     constructor(props){
         super(props);
@@ -51,7 +53,16 @@ class Channel extends React.Component{
         return (    
             <div>
                 <div id="username-subscribe">
-                    <h1>{this.state.creator.username}</h1>
+                    <div id="profile-picture-username">
+                        
+                        {(this.state.creator.profile_picture === undefined)
+                            ? profileIcon(dim) : <img src={this.state.creator.profile_picture} width={dim} height={dim} />}
+                        <div style={{marginLeft: 10}}>
+                            <h1>{this.state.creator.username}</h1>
+                            <h5>{this.state.creator.subscribers} Subscibers</h5>
+                        </div>
+                    </div>
+
                     <button>Subscribe</button>
                 </div>
                 <h2>Videos</h2>

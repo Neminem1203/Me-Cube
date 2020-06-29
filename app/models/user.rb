@@ -39,6 +39,16 @@ class User < ApplicationRecord
     primary_key: :id,
     foreign_key: :creator_id,
     dependent: :destroy
+
+    has_many :subscriptions,
+        class_name: "Subscription",
+        primary_key: :id,
+        foreign_key: :subscriber_id
+
+    has_many :subscribers,
+        class_name: "Subscription",
+        primary_key: :id,
+        foreign_key: :channel_id
     
     after_initialize :ensure_session_token
     attr_reader :password

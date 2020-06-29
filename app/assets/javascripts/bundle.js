@@ -1423,6 +1423,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _videos_video_list_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../videos/video_list_container */ "./frontend/components/videos/video_list_container.js");
+/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../icons */ "./frontend/icons.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1443,6 +1444,8 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
+var dim = 100;
 
 var Channel =
 /*#__PURE__*/
@@ -1534,7 +1537,17 @@ function (_React$Component) {
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "username-subscribe"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, this.state.creator.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Subscribe")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Videos"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_videos_video_list_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "profile-picture-username"
+      }, this.state.creator.profile_picture === undefined ? Object(_icons__WEBPACK_IMPORTED_MODULE_2__["profileIcon"])(dim) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: this.state.creator.profile_picture,
+        width: dim,
+        height: dim
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: {
+          marginLeft: 10
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, this.state.creator.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, this.state.creator.subscribers, " Subscibers"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Subscribe")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Videos"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_videos_video_list_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
         filter: this.state.creator.videos
       })));
     }
