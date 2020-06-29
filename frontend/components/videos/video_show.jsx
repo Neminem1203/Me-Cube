@@ -493,7 +493,7 @@ class VideoShow extends React.Component{
                 if(this.state.comment.length > 0){btnClass=""}
 
                 comment_btns = (
-                    <div className="comment-btns">
+                    <div className="comment-btns"> 
                         <button onClick={this.showCommentBtns(false)}>CANCEL</button>
                         <button className={btnClass} disabled={btnClass} onClick={commentFnc}>COMMENT</button>
                     </div>

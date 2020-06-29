@@ -48,9 +48,12 @@ class Channel extends React.Component{
             this.setState({ creator: this.props.creator, creatorId: this.props.creator.id, ready: false})
             this.handleSetup();
         }
-        return (
+        return (    
             <div>
-                <h1>{this.state.creator.username}</h1>
+                <div id="username-subscribe">
+                    <h1>{this.state.creator.username}</h1>
+                    <button>Subscribe</button>
+                </div>
                 <h2>Videos</h2>
                 <ul>
                     <VideoList filter={this.state.creator.videos}/>

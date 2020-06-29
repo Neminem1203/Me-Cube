@@ -487,7 +487,10 @@ a:focus{outline:0;}
 #video-upload-icon.active, #thumbnail-upload-icon.active{
   fill: green;
 }
-
+#username-subscribe{
+  display: flex;
+  justify-content: space-between;
+}
 .upload-video-btn{
   margin-right: 25px;
   text-decoration: none;
