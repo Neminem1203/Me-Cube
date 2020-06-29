@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import VideoForm from "./video_form";
 import { createVideo } from "../../actions/video_actions";
+import { clearError } from "../../actions/modal_actions";
 
 const mSTP = state =>{
     return{

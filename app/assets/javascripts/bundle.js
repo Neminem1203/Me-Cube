@@ -1494,6 +1494,7 @@ function (_React$Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
+      this.props.clearError();
       this.handleSetup();
     }
   }, {
@@ -1525,15 +1526,6 @@ function (_React$Component) {
       //     })
       // }
 
-
-      if (this.state.creatorId !== this.props.creator.id) {
-        this.setState({
-          creator: this.props.creator,
-          creatorId: this.props.creator.id,
-          ready: false
-        });
-        this.handleSetup();
-      }
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "username-subscribe"
@@ -1573,6 +1565,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _channel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./channel */ "./frontend/components/users/channel.jsx");
 /* harmony import */ var _actions_video_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/video_actions */ "./frontend/actions/video_actions.js");
 /* harmony import */ var _actions_users_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/users_actions */ "./frontend/actions/users_actions.js");
+/* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
+
 
 
 
@@ -1594,6 +1588,9 @@ var mDTP = function mDTP(dispatch) {
     },
     getVideo: function getVideo(videoId) {
       return dispatch(Object(_actions_video_actions__WEBPACK_IMPORTED_MODULE_2__["getVideo"])(videoId));
+    },
+    clearError: function clearError() {
+      return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__["clearError"])());
     }
   };
 };
@@ -2061,6 +2058,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _video_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./video_form */ "./frontend/components/videos/video_form.jsx");
 /* harmony import */ var _actions_video_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/video_actions */ "./frontend/actions/video_actions.js");
+/* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
+
 
 
 
@@ -2086,19 +2085,9 @@ var mDTP = function mDTP(dispatch) {
     action: function action(video) {
       return dispatch(Object(_actions_video_actions__WEBPACK_IMPORTED_MODULE_2__["createVideo"])(video));
     },
-    clearError: function (_clearError) {
-      function clearError() {
-        return _clearError.apply(this, arguments);
-      }
-
-      clearError.toString = function () {
-        return _clearError.toString();
-      };
-
-      return clearError;
-    }(function () {
-      return dispatch(clearError());
-    })
+    clearError: function clearError() {
+      return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_3__["clearError"])());
+    }
   };
 };
 

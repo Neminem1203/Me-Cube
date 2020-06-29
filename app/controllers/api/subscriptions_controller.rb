@@ -1,7 +1,5 @@
 class Api::SubscriptionsController < ApplicationController
     def index
-
-        
     end
     
     def create

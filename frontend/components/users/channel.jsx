@@ -17,7 +17,7 @@ class Channel extends React.Component{
         }
         this.handleSetup = this.handleSetup.bind(this);
     }
-    handleSetup(){
+    handleSetup() {
         this.props.getUser(this.props.match.params.channelId).then(test => {
             test.user.videos.forEach(vidId => {
                 this.props.getVideo(vidId)
@@ -25,7 +25,8 @@ class Channel extends React.Component{
             this.setState({ creator: this.props.creator, videos: this.props.videos, ready: true });
         });
     }
-    componentDidMount(){
+    componentDidMount() {
+        this.props.clearError();
         this.handleSetup();
     }
 
@@ -36,7 +37,7 @@ class Channel extends React.Component{
         }
     }
     render() {
-        if( this.props.error !== null){this.props.history.push("/")}
+        if( this.props.error !== null){this.props.history.push("/");}
         if (!this.state.ready) {return <h1>Loading... </h1>}
         // let userVideos = <></>;
         // if (Object.keys(this.state.videos).length !== 0){
@@ -46,10 +47,6 @@ class Channel extends React.Component{
         //         </li>
         //     })
         // }
-        if (this.state.creatorId !== this.props.creator.id){
-            this.setState({ creator: this.props.creator, creatorId: this.props.creator.id, ready: false})
-            this.handleSetup();
-        }
         return (    
             <div>
                 <div id="username-subscribe">
@@ -62,7 +59,7 @@ class Channel extends React.Component{
                             <h5>{this.state.creator.subscribers} Subscibers</h5>
                         </div>
                     </div>
-
+                    
                     <button>Subscribe</button>
                 </div>
                 <h2>Videos</h2>

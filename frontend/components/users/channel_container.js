@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import Channel from "./channel";
 import { getVideo } from "../../actions/video_actions";
 import { getUser } from "../../actions/users_actions";
+import { clearError } from "../../actions/modal_actions";
 
 
 const mSTP = (state, ownProps)=> {
@@ -17,7 +18,8 @@ const mSTP = (state, ownProps)=> {
 const mDTP = dispatch => {
     return{
         getUser: userId => dispatch(getUser(userId)),
-        getVideo: videoId => dispatch(getVideo(videoId))
+        getVideo: videoId => dispatch(getVideo(videoId)),
+        clearError: () => dispatch(clearError())
     }
 }
 
