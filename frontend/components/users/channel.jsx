@@ -74,6 +74,9 @@ class Channel extends React.Component{
             }
         }
 
+        if(this.props.yourId == this.state.creator_id){
+            subscribeButton = <></>
+        }
 
         return (
             <div>

@@ -1659,6 +1659,10 @@ function (_React$Component) {
         }
       }
 
+      if (this.props.yourId == this.state.creator_id) {
+        subscribeButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null);
+      }
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "username-subscribe"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
