@@ -19,7 +19,7 @@ const mSTP = (state, ownProps) => {
 const mDTP = dispatch => {
     return{
         getUser: userId => dispatch(getUser(userId)),
-        getVideo: videoId => dispatch(getVideo(videoId)),
+        getVideo: videoId => dispatch(getVideo(videoId)), 
         clearError: () => dispatch(clearError()),
         newSubscription: subscription => dispatch(newSubscription(subscription)),
         removeSubscription: subscription => dispatch(removeSubscription(subscription)),
