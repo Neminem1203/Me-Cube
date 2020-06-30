@@ -7,6 +7,7 @@ import { clearError } from "../../actions/modal_actions";
 
 const mSTP = (state, ownProps) => {
     return {
+        users: state.entities.users,
         yourId: state.session.userId,
         creator: state.entities.users[ownProps.match.params.channelId],
         videos: state.entities.videos,

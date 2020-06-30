@@ -46,7 +46,13 @@ class Channel extends React.Component{
         //         </li>
         //     })
         // }
-        return (    
+        let subscribeButton = <button id="subscribe-button">Subscribe</button>;
+        debugger
+        if(this.props.yourId && this.props.users[this.props.yourId].subscriptions.includes(parseInt(this.state.creator_id))){
+            subscribeButton = <button id="subscribe-button" class="active">Subscribed</button>
+        }
+
+        return (
             <div>
                 <div id="username-subscribe">
                     <div id="profile-picture-username">
@@ -59,7 +65,7 @@ class Channel extends React.Component{
                         </div>
                     </div>
                     
-                    <button>Subscribe</button>
+                    {subscribeButton}
                 </div>
                 <h2>Videos</h2>
                 <ul>

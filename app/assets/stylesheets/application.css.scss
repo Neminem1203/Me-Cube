@@ -493,6 +493,13 @@ a:focus{outline:0;}
   width: 94%;
   margin: auto;
 }
+#subscribe-button{
+  background-color: red;
+  border: 0;
+}
+#subscribe-button.active{
+  background-color: gray;
+}
 #profile-picture-username{
   display: flex;
   justify-content: flex-start;

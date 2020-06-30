@@ -1560,6 +1560,18 @@ function (_React$Component) {
       // }
 
 
+      var subscribeButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        id: "subscribe-button"
+      }, "Subscribe");
+      debugger;
+
+      if (this.props.yourId && this.props.users[this.props.yourId].subscriptions.includes(parseInt(this.state.creator_id))) {
+        subscribeButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          id: "subscribe-button",
+          "class": "active"
+        }, "Subscribed");
+      }
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "username-subscribe"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1572,7 +1584,7 @@ function (_React$Component) {
         style: {
           marginLeft: 10
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, this.state.creator.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, this.state.creator.subscribers, " Subscibers"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Subscribe")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Videos"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_videos_video_list_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, this.state.creator.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, this.state.creator.subscribers, " Subscibers"))), subscribeButton), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Videos"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_videos_video_list_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
         filter: this.state.creator.videos
       })));
     }
@@ -1607,6 +1619,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var mSTP = function mSTP(state, ownProps) {
   return {
+    users: state.entities.users,
     yourId: state.session.userId,
     creator: state.entities.users[ownProps.match.params.channelId],
     videos: state.entities.videos,
