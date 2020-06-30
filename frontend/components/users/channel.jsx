@@ -13,10 +13,25 @@ class Channel extends React.Component{
             creator: this.props.creator,
             creator_id: creator_id,
             videos: this.props.videos,
-            ready: false
+            ready: false,
+            subscribed: false
         }
         this.handleSetup = this.handleSetup.bind(this);
     }
+
+    toggleSubscription(bool){
+        // True bool == create subscription, false bool == delete subscription
+        return e => {
+            e.preventDefault();
+            if (bool) {
+                this.props.newSubscription({ channel_id: this.state.creator_id, subscriber_id: this.props.yourId }).then(() => { this.setState({ subscribed: true })})
+            } else {
+                this.props.removeSubscription({ channel_id: this.state.creator_id, subscriber_id: this.props.yourId }).then(() => { this.setState({ subscribed: false }) })
+            }
+
+        }
+    }
+
     handleSetup() {
         this.props.clearError();
         this.props.getUser(this.props.match.params.channelId).then(test => {
@@ -24,10 +39,14 @@ class Channel extends React.Component{
                 this.props.getVideo(vidId)
             });
             this.setState({ creator: this.props.creator, videos: this.props.videos, ready: true });
+            if (this.props.yourId && this.props.users[this.props.yourId].subscriptions.includes(parseInt(this.state.creator_id))) {
+                this.setState({ subscribed: true })
+            }
         });
     }
     componentDidMount() {
         this.handleSetup();
+        
     }
 
     componentDidUpdate() {
@@ -46,11 +65,15 @@ class Channel extends React.Component{
         //         </li>
         //     })
         // }
-        let subscribeButton = <button id="subscribe-button">Subscribe</button>;
-        debugger
-        if(this.props.yourId && this.props.users[this.props.yourId].subscriptions.includes(parseInt(this.state.creator_id))){
-            subscribeButton = <button id="subscribe-button" class="active">Subscribed</button>
+        let subscribeButton = <button id="subscribe-button" onClick={e => this.props.showSignup()}>Subscribe</button>;
+        if(this.props.yourId){
+            if(this.state.subscribed){
+                subscribeButton = <button id="subscribe-button" className="active" onClick={this.toggleSubscription(false)}>Subscribed</button>
+            } else {
+                subscribeButton = <button id="subscribe-button" onClick={this.toggleSubscription(true)}>Subscribe</button>;
+            }
         }
+
 
         return (
             <div>

@@ -15,7 +15,8 @@ Rails.application.routes.draw do
 
     resource :session, only: [:create, :destroy]
 
-    resource :subscription, only: [:index, :create, :destroy]
+    resource :subscription, only: [:create, :destroy]
   end
+  
   root to: "static_pages#root"
 end

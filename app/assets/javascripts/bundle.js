@@ -310,6 +310,44 @@ var clearError = function clearError() {
 
 /***/ }),
 
+/***/ "./frontend/actions/subscription_actions.js":
+/*!**************************************************!*\
+  !*** ./frontend/actions/subscription_actions.js ***!
+  \**************************************************/
+/*! exports provided: newSubscription, removeSubscription */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "newSubscription", function() { return newSubscription; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeSubscription", function() { return removeSubscription; });
+/* harmony import */ var _util_subscription_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/subscription_util */ "./frontend/util/subscription_util.js");
+/* harmony import */ var _users_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./users_actions */ "./frontend/actions/users_actions.js");
+/* harmony import */ var _modal_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modal_actions */ "./frontend/actions/modal_actions.js");
+
+
+
+var newSubscription = function newSubscription(subscription) {
+  return function (dispatch) {
+    return _util_subscription_util__WEBPACK_IMPORTED_MODULE_0__["createSubscription"](subscription).then(function (user) {
+      return dispatch(Object(_users_actions__WEBPACK_IMPORTED_MODULE_1__["loginUser"])(user));
+    }, function (error) {
+      return dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_2__["receiveUserError"])(error.responseJSON));
+    });
+  };
+};
+var removeSubscription = function removeSubscription(subscription) {
+  return function (dispatch) {
+    return _util_subscription_util__WEBPACK_IMPORTED_MODULE_0__["deleteSubscription"](subscription).then(function (user) {
+      return dispatch(Object(_users_actions__WEBPACK_IMPORTED_MODULE_1__["loginUser"])(user));
+    }, function (error) {
+      return dispatch(Object(_modal_actions__WEBPACK_IMPORTED_MODULE_2__["receiveUserError"])(error.responseJSON));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/users_actions.js":
 /*!*******************************************!*\
   !*** ./frontend/actions/users_actions.js ***!
@@ -1505,28 +1543,65 @@ function (_React$Component) {
       creator: _this.props.creator,
       creator_id: creator_id,
       videos: _this.props.videos,
-      ready: false
+      ready: false,
+      subscribed: false
     };
     _this.handleSetup = _this.handleSetup.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(Channel, [{
+    key: "toggleSubscription",
+    value: function toggleSubscription(bool) {
+      var _this2 = this;
+
+      // True bool == create subscription, false bool == delete subscription
+      return function (e) {
+        e.preventDefault();
+
+        if (bool) {
+          _this2.props.newSubscription({
+            channel_id: _this2.state.creator_id,
+            subscriber_id: _this2.props.yourId
+          }).then(function () {
+            _this2.setState({
+              subscribed: true
+            });
+          });
+        } else {
+          _this2.props.removeSubscription({
+            channel_id: _this2.state.creator_id,
+            subscriber_id: _this2.props.yourId
+          }).then(function () {
+            _this2.setState({
+              subscribed: false
+            });
+          });
+        }
+      };
+    }
+  }, {
     key: "handleSetup",
     value: function handleSetup() {
-      var _this2 = this;
+      var _this3 = this;
 
       this.props.clearError();
       this.props.getUser(this.props.match.params.channelId).then(function (test) {
         test.user.videos.forEach(function (vidId) {
-          _this2.props.getVideo(vidId);
+          _this3.props.getVideo(vidId);
         });
 
-        _this2.setState({
-          creator: _this2.props.creator,
-          videos: _this2.props.videos,
+        _this3.setState({
+          creator: _this3.props.creator,
+          videos: _this3.props.videos,
           ready: true
         });
+
+        if (_this3.props.yourId && _this3.props.users[_this3.props.yourId].subscriptions.includes(parseInt(_this3.state.creator_id))) {
+          _this3.setState({
+            subscribed: true
+          });
+        }
       });
     }
   }, {
@@ -1548,6 +1623,8 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this4 = this;
+
       if (this.props.error !== null || !this.state.ready) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Loading...");
       } // let userVideos = <></>;
@@ -1561,15 +1638,25 @@ function (_React$Component) {
 
 
       var subscribeButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        id: "subscribe-button"
+        id: "subscribe-button",
+        onClick: function onClick(e) {
+          return _this4.props.showSignup();
+        }
       }, "Subscribe");
-      debugger;
 
-      if (this.props.yourId && this.props.users[this.props.yourId].subscriptions.includes(parseInt(this.state.creator_id))) {
-        subscribeButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          id: "subscribe-button",
-          "class": "active"
-        }, "Subscribed");
+      if (this.props.yourId) {
+        if (this.state.subscribed) {
+          subscribeButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+            id: "subscribe-button",
+            className: "active",
+            onClick: this.toggleSubscription(false)
+          }, "Subscribed");
+        } else {
+          subscribeButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+            id: "subscribe-button",
+            onClick: this.toggleSubscription(true)
+          }, "Subscribe");
+        }
       }
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1611,6 +1698,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_video_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/video_actions */ "./frontend/actions/video_actions.js");
 /* harmony import */ var _actions_users_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/users_actions */ "./frontend/actions/users_actions.js");
 /* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
+/* harmony import */ var _actions_subscription_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/subscription_actions */ "./frontend/actions/subscription_actions.js");
+
 
 
 
@@ -1637,6 +1726,15 @@ var mDTP = function mDTP(dispatch) {
     },
     clearError: function clearError() {
       return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__["clearError"])());
+    },
+    newSubscription: function newSubscription(subscription) {
+      return dispatch(Object(_actions_subscription_actions__WEBPACK_IMPORTED_MODULE_5__["newSubscription"])(subscription));
+    },
+    removeSubscription: function removeSubscription(subscription) {
+      return dispatch(Object(_actions_subscription_actions__WEBPACK_IMPORTED_MODULE_5__["removeSubscription"])(subscription));
+    },
+    showSignup: function showSignup() {
+      return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__["showModal"])(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__["SIGN_UP"]));
     }
   };
 };
@@ -4753,6 +4851,34 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var AuthRoute = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, null)(Auth));
 var ProtectedRoute = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, null)(Protected));
+
+/***/ }),
+
+/***/ "./frontend/util/subscription_util.js":
+/*!********************************************!*\
+  !*** ./frontend/util/subscription_util.js ***!
+  \********************************************/
+/*! exports provided: createSubscription, deleteSubscription */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createSubscription", function() { return createSubscription; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteSubscription", function() { return deleteSubscription; });
+var createSubscription = function createSubscription(data) {
+  return $.ajax({
+    method: "POST",
+    url: "/api/subscription",
+    data: data
+  });
+};
+var deleteSubscription = function deleteSubscription(data) {
+  return $.ajax({
+    method: "DELETE",
+    url: "/api/subscription",
+    data: data
+  });
+};
 
 /***/ }),
 
