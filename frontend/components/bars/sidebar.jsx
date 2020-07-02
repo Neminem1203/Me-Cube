@@ -1,5 +1,5 @@
 import React from "react";
-import {homeIcon, channelIcon, githubIcon, linkedInIcon, menuIcon, creditsIcon} from "../../icons";
+import {homeIcon, channelIcon, githubIcon, linkedInIcon, menuIcon, creditsIcon, subscriptionIcon} from "../../icons";
 
 
 class Sidebar extends React.Component{
@@ -21,17 +21,23 @@ class Sidebar extends React.Component{
         
         let homeClass = "";
         let channelClass = "";
+        let subscriptionClass = "";
         let creditClass = "";
         if(this.props.location.pathname === "/")
             {homeClass = "active";}
-        if (this.props.location.pathname === "/channel/"+this.props.channelId)
+        else if (this.props.location.pathname === "/channel/"+this.props.channelId)
             {channelClass = "active";}
-        if(this.props.location.pathname === "/credits")
+        else if (this.props.location.pathname === "/subscriptions/")
+            {subscriptionClass = "active";}
+        else if (this.props.location.pathname === "/credits/")
             {creditClass ="active";}
 
         let channelButton = <></>;
-        if (this.props.channelId)
-            {channelButton = <a href={`/#/channel/${this.props.channelId}`}><li className={channelClass}>{channelIcon()} Channel</li></a>}
+        let subscriptions = <></>;
+        if (this.props.channelId){
+            channelButton = <a href={`/#/channel/${this.props.channelId}`}><li className={channelClass}>{channelIcon()} Channel</li></a>
+        subscriptions = <a href='/#/subscriptions/'><li className={subscriptionClass}>{subscriptionIcon()} Subscription</li></a>
+        }
         
         return (
             <div className={sidebarClass}>
@@ -41,9 +47,10 @@ class Sidebar extends React.Component{
                         {homeIcon()}Home
                     </li></a>
                     {channelButton}
+                    {subscriptions}
                     <a target="_blank" href="https://github.com/Neminem1203/Me-Cube"><li>{githubIcon()}GitHub</li></a>
                     <a target="_blank" href="https://linkedin.com/in/tpaul1203"><li>{linkedInIcon()}LinkedIn</li></a>
-                    <a href="/#/credits"><li className={creditClass}>{creditsIcon()}Credits</li></a>
+                    <a href="/#/credits/"><li className={creditClass}>{creditsIcon()}Credits</li></a>
                 </ul>
             </div>
         )

@@ -937,21 +937,21 @@ function (_React$Component) {
       var sidebarClass = this.props.sidebar ? "sidebar" : "sidebar active";
       var homeClass = "";
       var channelClass = "";
+      var subscriptionClass = "";
       var creditClass = "";
 
       if (this.props.location.pathname === "/") {
         homeClass = "active";
-      }
-
-      if (this.props.location.pathname === "/channel/" + this.props.channelId) {
+      } else if (this.props.location.pathname === "/channel/" + this.props.channelId) {
         channelClass = "active";
-      }
-
-      if (this.props.location.pathname === "/credits") {
+      } else if (this.props.location.pathname === "/subscriptions/") {
+        subscriptionClass = "active";
+      } else if (this.props.location.pathname === "/credits/") {
         creditClass = "active";
       }
 
       var channelButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null);
+      var subscriptions = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null);
 
       if (this.props.channelId) {
         channelButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
@@ -959,6 +959,11 @@ function (_React$Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           className: channelClass
         }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["channelIcon"])(), " Channel"));
+        subscriptions = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+          href: "/#/subscriptions/"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          className: subscriptionClass
+        }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["subscriptionIcon"])(), " Subscription"));
       }
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -972,14 +977,14 @@ function (_React$Component) {
         href: "/#/"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: homeClass
-      }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["homeIcon"])(), "Home")), channelButton, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["homeIcon"])(), "Home")), channelButton, subscriptions, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         target: "_blank",
         href: "https://github.com/Neminem1203/Me-Cube"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["githubIcon"])(), "GitHub")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         target: "_blank",
         href: "https://linkedin.com/in/tpaul1203"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["linkedInIcon"])(), "LinkedIn")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "/#/credits"
+        href: "/#/credits/"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: creditClass
       }, Object(_icons__WEBPACK_IMPORTED_MODULE_1__["creditsIcon"])(), "Credits"))));
@@ -1062,37 +1067,39 @@ var CreditsPage = function CreditsPage(props) {
     className: "credit-list"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "https://www.flaticon.com/authors/freepik"
-  }, _icons__WEBPACK_IMPORTED_MODULE_1__["homeIcon"](30), " Home Icon by Freepik")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, _icons__WEBPACK_IMPORTED_MODULE_1__["homeIcon"](30), "Home Icon by Freepik")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "https://www.flaticon.com/authors/freepik"
-  }, _icons__WEBPACK_IMPORTED_MODULE_1__["profileIcon"](30), " Profile Icon by Freepik")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, _icons__WEBPACK_IMPORTED_MODULE_1__["profileIcon"](30), "Profile Icon by Freepik")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "https://www.flaticon.com/authors/freepik"
-  }, _icons__WEBPACK_IMPORTED_MODULE_1__["linkedInIcon"](30), " LinkedIn Icon by Freepik")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, _icons__WEBPACK_IMPORTED_MODULE_1__["linkedInIcon"](30), "LinkedIn Icon by Freepik")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "https://www.flaticon.com/authors/freepik"
-  }, _icons__WEBPACK_IMPORTED_MODULE_1__["channelIcon"](30), " Channel Icon by Freepik")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, _icons__WEBPACK_IMPORTED_MODULE_1__["channelIcon"](30), "Channel Icon by Freepik")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "https://www.flaticon.com/authors/freepik"
-  }, _icons__WEBPACK_IMPORTED_MODULE_1__["shareIcon"](30), " Share Icon by Freepik")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, _icons__WEBPACK_IMPORTED_MODULE_1__["shareIcon"](30), "Share Icon by Freepik")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "https://www.flaticon.com/authors/freepik"
-  }, _icons__WEBPACK_IMPORTED_MODULE_1__["uploadVideoIcon"](30), " Film Reel Icon by Freepik")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, _icons__WEBPACK_IMPORTED_MODULE_1__["uploadVideoIcon"](30), "Film Reel Icon by Freepik")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "https://www.flaticon.com/authors/pixel-perfect"
-  }, _icons__WEBPACK_IMPORTED_MODULE_1__["creditsIcon"](30), " Credits Icon by Pixel Perfect")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, _icons__WEBPACK_IMPORTED_MODULE_1__["creditsIcon"](30), "Credits Icon by Pixel Perfect")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "https://www.flaticon.com/authors/pixel-perfect"
-  }, _icons__WEBPACK_IMPORTED_MODULE_1__["githubIcon"](30), " GitHub Icon by Pixel Perfect")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, _icons__WEBPACK_IMPORTED_MODULE_1__["githubIcon"](30), "GitHub Icon by Pixel Perfect")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "https://www.flaticon.com/authors/those-icons"
-  }, _icons__WEBPACK_IMPORTED_MODULE_1__["menuIcon"](30), " Menu Icon by Those Icons")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, _icons__WEBPACK_IMPORTED_MODULE_1__["menuIcon"](30), "Menu Icon by Those Icons")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "https://www.flaticon.com/authors/those-icons"
-  }, _icons__WEBPACK_IMPORTED_MODULE_1__["thumbsUpIcon"](30), " Thumb Icon by Those Icons")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, _icons__WEBPACK_IMPORTED_MODULE_1__["thumbsUpIcon"](30), "Thumb Icon by Those Icons")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "https://www.flaticon.com/authors/smashicons"
-  }, _icons__WEBPACK_IMPORTED_MODULE_1__["exitIcon"](30), " Signout Icon by Smashicons")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, _icons__WEBPACK_IMPORTED_MODULE_1__["exitIcon"](30), "Signout Icon by Smashicons")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "https://www.flaticon.com/authors/kiranshastry"
-  }, _icons__WEBPACK_IMPORTED_MODULE_1__["uploadIcon"](30), " Upload Video Icon by Kiranshastry")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, _icons__WEBPACK_IMPORTED_MODULE_1__["uploadIcon"](30), "Upload Video Icon by Kiranshastry")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "https://www.flaticon.com/authors/those-icons"
-  }, _icons__WEBPACK_IMPORTED_MODULE_1__["searchIcon"](30), " Search Icon by Those Icons")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, _icons__WEBPACK_IMPORTED_MODULE_1__["searchIcon"](30), "Search Icon by Those Icons")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "https://www.flaticon.com/authors/srip"
-  }, _icons__WEBPACK_IMPORTED_MODULE_1__["uploadThumbnailIcon"](30), " Thumbnail Icon by Srip")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, _icons__WEBPACK_IMPORTED_MODULE_1__["uploadThumbnailIcon"](30), "Thumbnail Icon by Srip")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "https://www.flaticon.com/authors/roundicons"
-  }, _icons__WEBPACK_IMPORTED_MODULE_1__["downArrowIcon"](30), " Down Arrow Icon by Roundicons ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, _icons__WEBPACK_IMPORTED_MODULE_1__["downArrowIcon"](30), "Down Arrow Icon by Roundicons ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "https://www.flaticon.com/authors/roundicons"
-  }, _icons__WEBPACK_IMPORTED_MODULE_1__["upArrowIcon"](30), " Roundicon from Roundicons"), " "));
+  }, _icons__WEBPACK_IMPORTED_MODULE_1__["upArrowIcon"](30), "Up Arrow Icon from Roundicons"), " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "https://www.flaticon.com/authors/google"
+  }, _icons__WEBPACK_IMPORTED_MODULE_1__["subscriptionIcon"](30), "Subscription Icon from Google"), " "));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (CreditsPage);
@@ -3812,7 +3819,7 @@ var mDTP = function mDTP(dispatch) {
 /*!***************************!*\
   !*** ./frontend/icons.js ***!
   \***************************/
-/*! exports provided: homeIcon, channelIcon, githubIcon, linkedInIcon, exitIcon, profileIcon, thumbsUpIcon, thumbsDownIcon, shareIcon, uploadIcon, menuIcon, searchIcon, uploadThumbnailIcon, uploadVideoIcon, creditsIcon, downArrowIcon, upArrowIcon */
+/*! exports provided: homeIcon, channelIcon, githubIcon, linkedInIcon, exitIcon, profileIcon, thumbsUpIcon, thumbsDownIcon, shareIcon, uploadIcon, menuIcon, searchIcon, uploadThumbnailIcon, uploadVideoIcon, creditsIcon, downArrowIcon, upArrowIcon, subscriptionIcon */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3834,6 +3841,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "creditsIcon", function() { return creditsIcon; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "downArrowIcon", function() { return downArrowIcon; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "upArrowIcon", function() { return upArrowIcon; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "subscriptionIcon", function() { return subscriptionIcon; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -4115,6 +4123,31 @@ var upArrowIcon = function upArrowIcon() {
     marginRight: 10
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("g", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     d: "M484.136,328.473L264.988,109.329c-5.064-5.064-11.816-7.844-19.172-7.844c-7.208,0-13.964,2.78-19.02,7.844 L7.852,328.265C2.788,333.333,0,340.089,0,347.297c0,7.208,2.784,13.968,7.852,19.032l16.124,16.124 c5.064,5.064,11.824,7.86,19.032,7.86s13.964-2.796,19.032-7.86l183.852-183.852l184.056,184.064 c5.064,5.06,11.82,7.852,19.032,7.852c7.208,0,13.96-2.792,19.028-7.852l16.128-16.132 C494.624,356.041,494.624,338.965,484.136,328.473z"
+  })));
+};
+var subscriptionIcon = function subscriptionIcon() {
+  var dimension = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 45;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    version: "1.1",
+    id: "Capa_1",
+    xmlns: "http://www.w3.org/2000/svg",
+    x: "0px",
+    y: "0px",
+    width: dimension,
+    height: dimension,
+    viewBox: "0 0 426.667 426.667"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("g", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("rect", {
+    x: "85.333",
+    y: "0",
+    width: "256",
+    height: "42.667"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "M384,170.667H42.667C19.093,170.667,0,189.76,0,213.333V384c0,23.573,19.093,42.667,42.667,42.667H384 c23.573,0,42.667-19.093,42.667-42.667V213.333C426.667,189.76,407.573,170.667,384,170.667z M170.667,368.32V229.013l128,69.653 L170.667,368.32z"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("rect", {
+    x: "42.667",
+    y: "85.333",
+    width: "341.333",
+    height: "42.667"
   })));
 };
 
