@@ -1603,6 +1603,18 @@ function (_React$Component) {
           videos: _this3.props.videos,
           ready: true
         });
+
+        if (!_this3.state.subscribed && _this3.props.yourId && _this3.props.users[_this3.props.yourId].subscriptions.includes(parseInt(_this3.state.creator_id))) {
+          _this3.setState({
+            subscribed: true
+          });
+        }
+
+        if (_this3.state.subscribed && !_this3.props.yourId) {
+          _this3.setState({
+            subscribed: false
+          });
+        }
       });
     }
   }, {
@@ -1638,18 +1650,6 @@ function (_React$Component) {
       //     })
       // }
 
-
-      if (this.state.subscribed && !this.props.yourId) {
-        this.setState({
-          subscribed: false
-        });
-      }
-
-      if (!this.state.subscribed && this.props.yourId && this.props.users[this.props.yourId].subscriptions.includes(parseInt(this.state.creator_id))) {
-        this.setState({
-          subscribed: true
-        });
-      }
 
       var subscribeButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         id: "subscribe-button",

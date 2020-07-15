@@ -39,6 +39,12 @@ class Channel extends React.Component{
                 this.props.getVideo(vidId)
             });
             this.setState({ creator: this.props.creator, videos: this.props.videos, ready: true });
+            if (!this.state.subscribed && this.props.yourId && this.props.users[this.props.yourId].subscriptions.includes(parseInt(this.state.creator_id))) {
+                this.setState({ subscribed: true })
+            }
+            if (this.state.subscribed && !this.props.yourId) {
+                this.setState({ subscribed: false })
+            }
         });
     }
     componentDidMount() {
@@ -62,14 +68,7 @@ class Channel extends React.Component{
         //         </li>
         //     })
         // }
-
-        if (this.state.subscribed && !this.props.yourId) {
-            this.setState({ subscribed: false })
-        }
         
-        if (!this.state.subscribed && this.props.yourId && this.props.users[this.props.yourId].subscriptions.includes(parseInt(this.state.creator_id))) {
-            this.setState({ subscribed: true })
-        }
 
         let subscribeButton = <button id="subscribe-button" onClick={e => this.props.showSignup()}>Subscribe</button>;
         if(this.props.yourId){
