@@ -3,6 +3,8 @@ class Api::VideosController < ApplicationController
         # @videos = Video.all
         if(params[:video_list] && params[:video_list].class == Array)
             @videos = Video.find(params[:video_list]).limit(8)
+        elsif (params[:subscription_list] && params[:subscription_list].class == Array)
+            pass
         else
             vid_count = Video.count
             random_videos = Video.all.map{|vid| vid.id}

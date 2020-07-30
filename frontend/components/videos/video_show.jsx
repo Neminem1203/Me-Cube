@@ -425,8 +425,11 @@ class VideoShow extends React.Component{
     }
 
     componentWillUnmount(){
-        document.getElementsByClassName("main-content")[0].classList.remove("video-page")
+        const mainContent = document.getElementsByClassName("main-content")[0];
+        mainContent.classList.remove("video-page");
+        mainContent.removeEventListener("scroll", this.showComments);
         this.props.clearComments();
+        
     }
 
     render() {
